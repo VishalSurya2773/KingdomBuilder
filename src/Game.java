@@ -19,8 +19,15 @@ public class Game {
         deck = new ArrayList<Card>();
         // add cards into deck:
         for (int i = 0; i < 5; i++) {
-
+            deck.add(new Card("grass"));
+            deck.add(new Card("flower"));
+            deck.add(new Card("forest"));
+            deck.add(new Card("canyon"));
+            deck.add(new Card("desert"));
         }
+        Collections.shuffle(deck);
+        Collections.shuffle(deck);
+
     }
 
     public ArrayList<Player> getPlayers() {
@@ -43,8 +50,6 @@ public class Game {
     }
 
     public void reshuffle() {
-        Collections.shuffle(deck);
-        Collections.shuffle(deck);
         Collections.shuffle(deck);
     }
 
