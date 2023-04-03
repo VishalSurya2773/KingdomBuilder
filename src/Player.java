@@ -30,6 +30,10 @@ public class Player {
     }
 
     public void calculateScore() {
+        // find all cards
+        // check each card for score of player ex: farmer method returns int for that
+        // score
+        // add all scores together
     }
 
     public void pullCard() {
