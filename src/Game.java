@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-
+import java.util.*;
+import java.io.*;
 public class Game {
     private ArrayList<Player> players;
     private ArrayList<Card> deck;
@@ -13,7 +14,11 @@ public class Game {
     public ArrayList<Player> getPlayers() {
         return players;
     }
-
+    public Card getCard(){ // deck has to reset when it's empty - account for it later
+        Card ans = deck.get(0);    
+        deck.remove(0);
+        return ans;
+    }
     public void startGame() {
     }
 
@@ -24,6 +29,7 @@ public class Game {
     }
 
     public void reshuffle() {
+        Collections.shuffle(deck);
     }
 
     public void initializeHex() {

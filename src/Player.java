@@ -15,6 +15,7 @@ public class Player {
     }
 
     public void addSettlementToBoard() {
+
     }
 
     public void findAdjacentSettlements() {
@@ -26,13 +27,15 @@ public class Player {
     }
 
     public int getScore() {
-        return 0;
+        return score;
     }
 
     public void calculateScore() {
+
     }
 
     public void pullCard() {
+        Game.get
     }
 
     public void useSpecialHexTile() {
