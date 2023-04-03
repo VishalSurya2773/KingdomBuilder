@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed;
+    private Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
 
@@ -35,7 +36,7 @@ public class Player {
     }
 
     public void pullCard() {
-        Game.get
+        terrainCard = Game.getCard();
     }
 
     public void useSpecialHexTile() {
