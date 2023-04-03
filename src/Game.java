@@ -1,24 +1,38 @@
 import java.util.ArrayList;
 import java.util.*;
 import java.io.*;
+
 public class Game {
     private ArrayList<Player> players;
-    private ArrayList<Card> deck;
+    private static ArrayList<Card> deck;
     private ArrayList<Card> discard;
     private ArrayList<ObjectiveCard> objectives;
     private int playerTurn;
 
     public Game() {
+        players = new ArrayList<Player>();
+        players.add(new Player(false));
+        players.add(new Player(false));
+        players.add(new Player(false));
+        players.add(new Player(false));
+
+        deck = new ArrayList<Card>();
+        // add cards into deck:
+        for (int i = 0; i < 5; i++) {
+
+        }
     }
 
     public ArrayList<Player> getPlayers() {
         return players;
     }
-    public Card getCard(){ // deck has to reset when it's empty - account for it later
-        Card ans = deck.get(0);    
+
+    public static Card getCard() { // deck has to reset when it's empty - account for it later
+        Card ans = deck.get(0);
         deck.remove(0);
         return ans;
     }
+
     public void startGame() {
     }
 
@@ -29,6 +43,8 @@ public class Game {
     }
 
     public void reshuffle() {
+        Collections.shuffle(deck);
+        Collections.shuffle(deck);
         Collections.shuffle(deck);
     }
 
