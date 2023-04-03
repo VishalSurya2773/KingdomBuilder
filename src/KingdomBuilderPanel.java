@@ -14,6 +14,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             t_barn, t_farm,
             t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
+    private int clickedX, clickedY;
+    private ArrayList<Hex> chosenHex; // ??
+    private boolean pickHex; // ???
 
     public KingdomBuilderPanel() {
         // p1 = new Player(1);
@@ -84,6 +87,30 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void paint(Graphics g) {
+    }
+
+    public void drawStartScreen(Graphics g) {
+    }
+
+    public void drawEndScreen(Graphics g) {
+    }
+
+    public void drawBoard(Graphics g) {
+    }
+
+    public void drawSpecialCard(Graphics g) {
+    }
+
+    public void drawCard(Graphics g) {
+    }
+
+    public void drawScore(Graphics g) {
+    }
+
+    public void drawSettlement(Graphics g) {
+    }
+
+    public void drawSpecialHex(Graphics g) {
     }
 
     public void mouseClicked(java.awt.event.MouseEvent e) {
