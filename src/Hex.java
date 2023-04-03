@@ -1,9 +1,12 @@
 public class Hex {
     private Hex left, right, topLeft, topRight, bottomLeft, bottomRight;
-    private int x, y;
+    private int x1, y1;
     private String terrain;
 
-    public Hex() {
+    public Hex(int horizontal, int vertical,  String t) {
+        x1 = horizontal;
+        y1 = vertical;
+        terrain = t;
     }
 
     public int getCenterX() {
