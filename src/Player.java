@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed;
+    private Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
 
@@ -15,6 +16,7 @@ public class Player {
     }
 
     public void addSettlementToBoard() {
+
     }
 
     public void findAdjacentSettlements() {
@@ -26,17 +28,15 @@ public class Player {
     }
 
     public int getScore() {
-        return 0;
+        return score;
     }
 
     public void calculateScore() {
-        // find all cards
-        // check each card for score of player ex: farmer method returns int for that
-        // score
-        // add all scores together
+
     }
 
     public void pullCard() {
+        terrainCard = Game.getCard();
     }
 
     public void useSpecialHexTile() {
