@@ -44,7 +44,7 @@ public class Player {
 
     }
 
-    public void pullCard() {
+    public void drawCard() {
         terrainCard = Game.getCard();
     }
 
