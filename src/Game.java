@@ -5,7 +5,7 @@ import java.io.*;
 public class Game {
     private ArrayList<Player> players;
     private static ArrayList<Card> deck;
-    private ArrayList<Card> discard;
+    private static ArrayList<Card> discard;
     private ArrayList<ObjectiveCard> objectives;
     private int playerTurn;
 
@@ -17,6 +17,7 @@ public class Game {
         players.add(new Player(false));
 
         deck = new ArrayList<Card>();
+        discard = new ArrayList<Card>();
         // add cards into deck:
         for (int i = 0; i < 5; i++) {
             deck.add(new Card("grass"));
@@ -35,8 +36,12 @@ public class Game {
     }
 
     public static Card getCard() { // deck has to reset when it's empty - account for it later
+        if (deck.size() == 0) {
+            deck = discard;
+            Collections.shuffle(deck);
+        }
         Card ans = deck.get(0);
-        deck.remove(0);
+        discard.add(deck.remove(0));
         return ans;
     }
 
@@ -54,6 +59,7 @@ public class Game {
     }
 
     public void initializeHex() {
+
     }
 
     public void chooseStartingPlayer() {
@@ -67,5 +73,9 @@ public class Game {
         } else {
             players.get(3).setFirst();
         }
+    }
+
+    public Player getWinner() {
+        return new Player(false);
     }
 }
