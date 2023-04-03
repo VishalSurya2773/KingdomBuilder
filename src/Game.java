@@ -11,10 +11,10 @@ public class Game {
 
     public Game() {
         players = new ArrayList<Player>();
+        for (int i = 0; i < 4; i++) {
+        }
         players.add(new Player(false));
-        players.add(new Player(false));
-        players.add(new Player(false));
-        players.add(new Player(false));
+        Collections.shuffle(players);
 
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
@@ -63,16 +63,7 @@ public class Game {
     }
 
     public void chooseStartingPlayer() {
-        int rand = (int) (Math.random() * 4);
-        if (rand == 1) {
-            players.get(0).setFirst();
-        } else if (rand == 2) {
-            players.get(1).setFirst();
-        } else if (rand == 3) {
-            players.get(2).setFirst();
-        } else {
-            players.get(3).setFirst();
-        }
+        players.get(0).setFirst();
     }
 
     public Player getWinner() {
