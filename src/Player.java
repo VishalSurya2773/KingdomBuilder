@@ -15,6 +15,7 @@ public class Player {
     }
 
     public void addSettlementToBoard() {
+
     }
 
     public void findAdjacentSettlements() {
@@ -26,17 +27,15 @@ public class Player {
     }
 
     public int getScore() {
-        return 0;
+        return score;
     }
 
     public void calculateScore() {
-        // find all cards
-        // check each card for score of player ex: farmer method returns int for that
-        // score
-        // add all scores together
+
     }
 
     public void pullCard() {
+        Game.get
     }
 
     public void useSpecialHexTile() {
