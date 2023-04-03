@@ -6,7 +6,7 @@ public class Player {
     private Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
-
+    private int order;
     public Player(boolean first) {
         isFirst = first;
     }
@@ -14,19 +14,28 @@ public class Player {
     public void setFirst() {
         isFirst = true;
     }
+    public void placedSettlement(Settlement s){
+        if(possibleSettlement(s)){
+            addSettlementToBoard();
 
+        }
+    }
     public void addSettlementToBoard() {
 
     }
 
-    public void findAdjacentSettlements() {
+    public boolean possibleSettlement(Settlement s) {
+        //checks if the player can place a settlement there
+        return false;
     }
 
     public Settlement getSettlement() {
         // random return filler
         return placed.get(0);
     }
-
+    public int getOrder(){
+        return order;
+    }
     public int getScore() {
         return score;
     }
