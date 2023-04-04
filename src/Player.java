@@ -64,7 +64,8 @@ public class Player {
     }
 
     public void useSpecialHexTile(SpecialHex sh) { // should be clicked
-        sh.
+        String type = sh.getType();
+        if(type.equals())
     }
 
     public void addSpecialHexTile(SpecialHex x) {
