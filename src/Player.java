@@ -9,9 +9,10 @@ public class Player {
     private int order;
     private String color;
 
-    public Player(boolean first, String clr) {
+    public Player(boolean first, String clr, int or) {
         isFirst = first;
         color = clr;
+        order = or;
     }
 
     public void setFirst() {
