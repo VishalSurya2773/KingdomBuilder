@@ -21,13 +21,9 @@ public class Player {
 
     public void placeSettlement(Settlement s, Hex h) {
         if (canPlace(s, h)) {
-            addSettlementToBoard(s, h);
-
+            placeSettlement(s, h); // places it logically on the board
+            // then place it graphically on the board
         }
-    }
-
-    public void addSettlementToBoard(Settlement s, Hex h) {
-
     }
 
     public boolean canPlace(Settlement s, Hex h) {
