@@ -18,7 +18,9 @@ public class SpecialHex {
         }
         return this;
     }
-
+    public boolean isCastle(){
+        return isCastle;
+    }
     public int getCenterX() {
         return x;
     }
