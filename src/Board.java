@@ -28,7 +28,7 @@ public class Board {
     }
 
     public void makeGraph() {
-        
+
     }
 
     public Hex[][] getGraph() {
@@ -38,7 +38,7 @@ public class Board {
     public void colorGraph() {
     }
 
-    public void placeSettlement(Settlement t) {
+    public void placeSettlement(Settlement t, Hex h) {
     }
 
 }
