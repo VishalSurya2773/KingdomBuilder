@@ -4,8 +4,8 @@ import java.io.*;
 
 public class Game {
     private ArrayList<Player> players;
-    private static ArrayList<Card> deck;
-    private static ArrayList<Card> discard;
+    private static ArrayList<Card> deck; // should be displayed
+    private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objectives;
     public Board gameBoard;
     private int playerTurn;
@@ -41,11 +41,13 @@ public class Game {
         }
 
     }
-
+    public void addDiscardPile(Card c){
+        discard.add(c);
+    }
     public ArrayList<Player> getPlayers() {
         return players;
     }
-
+    
     public static Card getCard() { // deck has to reset when it's empty - account for it later
         if (deck.size() == 0) {
             deck = discard;
