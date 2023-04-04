@@ -5,14 +5,14 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener {
-    private BufferedImage background, b_endgame, b_guide, b_home, b_restart, b1, b2, b3, b4, b5, b6, b7, b8, citizen,
-            discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue, settleGreen,
-            settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert, cardFlower,
-            cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern, sumTower,
-            t_barn, t_farm,
-            t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
+    private BufferedImage background, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2, b3, b4, b5, b6, b7, b8,
+            citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
+            settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
+            cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
+            sumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
     private int clickedX, clickedY;
     private ArrayList<Hex> chosenHex; // ??
@@ -22,6 +22,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         // p1 = new Player(1);
         try {
             // background and buttons
+            mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main_menu.png"));
             background = ImageIO.read(KingdomBuilderPanel.class.getResource("images/background.jpg"));
             b_endgame = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_endgame.png"));
             b_guide = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_guide.png"));
