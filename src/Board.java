@@ -5,6 +5,7 @@ import java.io.*;
 public class Board {
     private Hex[][] Graph;
     private TreeMap<String, Hex> map;
+    private ArrayList<Scanner> boardScanners;
 
     public Board() {
         Graph = new Hex[40][40]; // tentative values
@@ -25,10 +26,30 @@ public class Board {
         map.set(13, new SpecialHex("paddock"));
         map.set(14, new SpecialHex("castle"));
         map.set(15, new SpecialHex("oasis"));
+        boardScanners = new ArrayList<Scanner>();
     }
 
-    public void makeGraph() {
+    public void makeGraph() throws IOException {
+       boardScanners.add(new Scanner(new File("RandomBoard1.txt")));
+       boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
+       boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
+       boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
 
+       Collections.shuffle(boardScanners);
+        for(int i = 0; i<3; i++){
+            for(int r = 0; r < Graph.length; r++){
+                for(int c = 0; c<Graph[r].length; c++){
+                    if(r % 2== 0 && c %2 == 1){
+                        Graph[r][c] = new Hex("");
+                    }
+                    else
+                        Graph[r][c] = map.get(boardScanners.get(i).nextInt());
+                    
+                }
+            }
+        }
+       
+       
     }
 
     public Hex[][] getGraph() {
