@@ -8,7 +8,7 @@ public class Player {
     private boolean isFirst;
     private int order;
     private String color;
-    
+
     public Player(boolean first, String clr, int or) {
         isFirst = first;
         color = clr;
@@ -65,10 +65,10 @@ public class Player {
 
     public void useSpecialHexTile(SpecialHex sh) { // should be clicked
         String type = sh.getType();
-        if(type.equals("barn")){
+        if(type.equals("barn")){ // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
             
         }
-        else if(type.equals("paddock")){
+        else if(type.equals("paddock")){ 
 
         }
         else if(type.equals("oasis")){
