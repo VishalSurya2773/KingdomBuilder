@@ -26,7 +26,9 @@ public class SpecialHex {
     public int getCenterY() {
         return y;
     }
-
+    public String getType(){
+        return powerType;
+    }
     public void barnAction(Player p, Hex h, Settlement s) {
     }
 

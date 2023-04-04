@@ -64,7 +64,7 @@ public class Player {
     }
 
     public void useSpecialHexTile(SpecialHex sh) { // should be clicked
-        
+        sh.
     }
 
     public void addSpecialHexTile(SpecialHex x) {
