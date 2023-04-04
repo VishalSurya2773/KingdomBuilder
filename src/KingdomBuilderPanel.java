@@ -87,6 +87,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void paint(Graphics g) {
+
     }
 
     public void drawStartScreen(Graphics g) {
