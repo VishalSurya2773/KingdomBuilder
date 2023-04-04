@@ -5,10 +5,14 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
 import java.awt.event.MouseListener;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener {
-    private BufferedImage background, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2, b3, b4, b5, b6, b7, b8,
+    private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
+            b3, b4, b5, b6, b7, b8,
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
@@ -17,12 +21,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private int clickedX, clickedY;
     private ArrayList<Hex> chosenHex; // ??
     private boolean pickHex; // ???
+    private JButton playButton, guideButton;
 
     public KingdomBuilderPanel() {
         // p1 = new Player(1);
         try {
             // background and buttons
             mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main_menu.png"));
+            b_play = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_template.png"));
+            b_guide_start = ImageIO.read(KingdomBuilderPanel.class.getResource("images/guide_template.png"));
             background = ImageIO.read(KingdomBuilderPanel.class.getResource("images/background.jpg"));
             b_endgame = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_endgame.png"));
             b_guide = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_guide.png"));
@@ -84,10 +91,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         } catch (Exception e) {
             System.out.println("failure");
         }
+
+        // jbutton stuff for start panel
+        Icon play = new ImageIcon(b_play);
+        playButton = new JButton("PLAY", play);
         addMouseListener(this);
     }
 
     public void paint(Graphics g) {
+        // if()
+        playButton.setVisible(true);
 
     }
 
