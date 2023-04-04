@@ -11,25 +11,25 @@ public class ObjectiveCard {
     }
 
     public int getScore(String settlementColor) {
-        if (type == "citizen") {
+        if (type.equals("citizen")) {
             return citizen(settlementColor);
-        } else if (type == "discoverer") {
+        } else if (type.equals("discoverer")) {
             return discoverer(settlementColor);
-        } else if (type == "farmer") {
+        } else if (type.equals("farmer")) {
             return farmer(settlementColor);
-        } else if (type == "fisherman") {
+        } else if (type.equals("fisherman")) {
             return fisherman(settlementColor);
-        } else if (type == "hermit") {
+        } else if (type.equals("hermit")) {
             return hermit(settlementColor);
-        } else if (type == "knight") {
+        } else if (type.equals("knight")) {
             return knight(settlementColor);
-        } else if (type == "lord") {
+        } else if (type.equals("lord")) {
             return lord(settlementColor);
-        } else if (type == "merchant") {
+        } else if (type.equals("merchant")) {
             return merchant(settlementColor);
-        } else if (type == "miner") {
+        } else if (type.equals("miner")) {
             return miner(settlementColor);
-        } else if (type == "worker") {
+        } else if (type.equals("worker")) {
             return worker(settlementColor);
         }
         return 0;
