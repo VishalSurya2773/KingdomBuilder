@@ -89,9 +89,13 @@ public class Board {
     }
 
     public void colorGraph() {
+        // low key this thing doesnt do anything
     }
 
     public void placeSettlement(Settlement t, Hex h) {
+        // I don't think we need this here, it makes more sense for this to be in the hex class and in the player class where the person iterates through the 
+        // board from the player class and then calls it from the hex class directly
+        
     }
 
 }
