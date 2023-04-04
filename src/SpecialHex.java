@@ -53,6 +53,7 @@ public class SpecialHex {
     }
 
     public void towerAction(Player p, Hex h) {
+        
     }
 
 }
