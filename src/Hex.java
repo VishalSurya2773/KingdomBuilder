@@ -8,10 +8,22 @@ public class Hex {
         x = xComp;
         y = yComp;
         terrain = terrainComp;
+        playerSettlement = null;
     }
 
     public void setSettlement(Settlement s) {
         playerSettlement = s;
+    }
+
+    public void removeSettlement() {
+        playerSettlement = null;
+    }
+
+    public boolean isEmpty() {
+        if (playerSettlement == null) {
+            return true;
+        }
+        return false;
     }
 
     public int getCenterX() {
