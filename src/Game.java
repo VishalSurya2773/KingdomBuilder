@@ -7,13 +7,16 @@ public class Game {
     private static ArrayList<Card> deck;
     private static ArrayList<Card> discard;
     public static ArrayList<ObjectiveCard> objectives;
+    public Board gameBoard;
     private int playerTurn;
 
     public Game() {
+        gameBoard = new Board();
+
         players = new ArrayList<Player>();
         for (int i = 0; i < 4; i++) {
         }
-        players.add(new Player(false, null));
+        players.add(new Player(false, null, 0));
         Collections.shuffle(players);
 
         deck = new ArrayList<Card>();
@@ -61,6 +64,7 @@ public class Game {
 
     public void clearBoard() {
         // traverse through each hex and clear it
+
     }
 
     public void reshuffle() {
@@ -90,6 +94,6 @@ public class Game {
 
     public Player getWinner() {
 
-        return new Player(false, null);
+        return new Player(false, null, 0);
     }
 }
