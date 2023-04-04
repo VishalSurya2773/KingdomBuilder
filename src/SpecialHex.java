@@ -1,5 +1,5 @@
 public class SpecialHex {
-    private String powerType;
+    private String powerType; // lowercase strings
     private int tilesLeft, x, y;
     private boolean isCastle;
 

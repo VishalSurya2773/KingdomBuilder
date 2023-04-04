@@ -63,7 +63,8 @@ public class Player {
         terrainCard = Game.getCard();
     }
 
-    public void useSpecialHexTile(SpecialHex sh) {
+    public void useSpecialHexTile(SpecialHex sh) { // should be clicked
+        
     }
 
     public void addSpecialHexTile(SpecialHex x) {
