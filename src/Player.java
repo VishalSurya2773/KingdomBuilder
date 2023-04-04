@@ -7,25 +7,34 @@ public class Player {
     private int score;
     private boolean isFirst;
     private int order;
-    public Player(boolean first) {
+    private String color;
+
+    public Player(boolean first, String clr, int or) {
         isFirst = first;
+        color = clr;
+        order = or;
     }
 
     public void setFirst() {
         isFirst = true;
     }
-    public void placedSettlement(Settlement s){
-        if(possibleSettlement(s)){
-            addSettlementToBoard();
+
+    public void placeSettlement(Settlement s, Hex h) {
+        if (canPlace(s, h)) {
+            addSettlementToBoard(s, h);
 
         }
     }
-    public void addSettlementToBoard() {
+
+    public void addSettlementToBoard(Settlement s, Hex h) {
 
     }
 
-    public boolean possibleSettlement(Settlement s) {
-        //checks if the player can place a settlement there
+    public boolean canPlace(Settlement s, Hex h) {
+        // checks if the player can place a settlement there
+        if (h.isEmpty()) {
+            // check possible adjacency
+        }
         return false;
     }
 
@@ -33,22 +42,32 @@ public class Player {
         // random return filler
         return placed.get(0);
     }
-    public int getOrder(){
+
+    public int getOrder() {
         return order;
     }
+
     public int getScore() {
         return score;
     }
 
     public void calculateScore() {
+        int total = 0;
+        ObjectiveCard first = Game.objectives.get(0);
+        ObjectiveCard scnd = Game.objectives.get(1);
+        ObjectiveCard thrd = Game.objectives.get(2);
 
+        total += first.getScore(color);
+        total += scnd.getScore(color);
+        total += thrd.getScore(color);
+        score = total;
     }
 
     public void drawCard() {
         terrainCard = Game.getCard();
     }
 
-    public void useSpecialHexTile() {
+    public void useSpecialHexTile(SpecialHex sh) {
     }
 
     public void addSpecialHexTile(SpecialHex x) {

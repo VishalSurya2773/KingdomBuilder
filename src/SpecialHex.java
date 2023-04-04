@@ -1,14 +1,30 @@
-public class SpecialHex extends Hex {
+public class SpecialHex {
     private String powerType;
-    private int tilesLeft;
+    private int tilesLeft, x, y;
+    private boolean isCastle;
 
-    public SpecialHex(String type) {
+    public SpecialHex(int xComp, int yComp, String type, boolean castle) {
         powerType = type;
         tilesLeft = 2;
+        x = xComp;
+        y = yComp;
+        isCastle = castle;
     }
 
     public SpecialHex giveSpecialTile(Player p) {
+        tilesLeft--;
+        if (tilesLeft < 0) {
+            return null;
+        }
         return this;
+    }
+
+    public int getCenterX() {
+        return x;
+    }
+
+    public int getCenterY() {
+        return y;
     }
 
     public void barnAction(Player p, Hex h, Settlement s) {

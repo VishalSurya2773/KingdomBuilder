@@ -6,14 +6,17 @@ public class Game {
     private ArrayList<Player> players;
     private static ArrayList<Card> deck;
     private static ArrayList<Card> discard;
-    private ArrayList<ObjectiveCard> objectives;
+    public static ArrayList<ObjectiveCard> objectives;
+    public Board gameBoard;
     private int playerTurn;
 
     public Game() {
+        gameBoard = new Board();
+
         players = new ArrayList<Player>();
         for (int i = 0; i < 4; i++) {
         }
-        players.add(new Player(false));
+        players.add(new Player(false, null, 0));
         Collections.shuffle(players);
 
         deck = new ArrayList<Card>();
@@ -28,6 +31,14 @@ public class Game {
         }
         Collections.shuffle(deck);
         Collections.shuffle(deck);
+
+        objectives = new ArrayList<ObjectiveCard>();
+        String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
+                "miner", "worker" };
+        for (int i = 0; i < 3; i++) {
+            int r = (int) (Math.random() * 9);
+            objectives.add(new ObjectiveCard(objs[r]));
+        }
 
     }
 
@@ -51,7 +62,9 @@ public class Game {
     public void endGame() {
     }
 
-    public void clearBoard() { // wont do anything unless we do the 4 random boards thingy - but we are doing a fixed board rn
+    public void clearBoard() {
+        // traverse through each hex and clear it
+
     }
 
     public void reshuffle() {
@@ -66,7 +79,21 @@ public class Game {
         players.get(0).setFirst();
     }
 
+    public Set<Integer> rankings() {
+        // this prolly doesnt work
+        Map<Integer, Integer> rankings = new HashMap<Integer, Integer>();
+        for (int i = 0; i < 4; i++) {
+            rankings.put(i, players.get(i).getScore());
+        }
+        Map<Integer, Integer> sorted = new TreeMap<>(Comparator.reverseOrder());
+        sorted.putAll(rankings);
+        Set<Integer> ranks = sorted.keySet();
+        return ranks;
+
+    }
+
     public Player getWinner() {
-        return new Player(false);
+
+        return new Player(false, null, 0);
     }
 }
