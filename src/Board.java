@@ -36,18 +36,29 @@ public class Board {
        boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
 
        Collections.shuffle(boardScanners);
-        for(int i = 0; i<3; i++){
-            for(int r = 0; r < Graph.length; r++){
-                for(int c = 0; c<Graph[r].length; c++){
-                    if(r % 2== 0 && c %2 == 1){
-                        Graph[r][c] = new Hex("");
-                    }
-                    else
-                        Graph[r][c] = map.get(boardScanners.get(i).nextInt());
-                    
+
+        for(int r = 0; r<Graph.length; r++){
+            for(int c = 0; c<Graph[r].length; c++){
+                if(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0){
+                    Graph[r][c]= new Hex("");
                 }
             }
         }
+        
+        for(int i = 0; i<4; i++){
+            for(int r = i * 10; r< (i+1) * 10; r++){
+                for(int c = i * 10; c< (i+1) * 10; c++){
+                    if(!(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0)){
+                        Hex[r][c] = boardScanners.get(i).nextInt();
+                    }
+                }
+            }
+        }
+
+       
+
+
+      
        
        
     }
