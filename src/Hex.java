@@ -3,12 +3,13 @@ public class Hex {
     private int x, y;
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
-
+    private int radius; 
     public Hex(int xComp, int yComp, String terrainComp) {
         x = xComp;
         y = yComp;
         terrain = terrainComp;
         playerSettlement = null;
+        // declare the variable of radius
     }
 
     public void setSettlement(Settlement s) {
@@ -33,7 +34,9 @@ public class Hex {
     public int getCenterY() {
         return y;
     }
-
+    public int getRadius(){
+        return radius;
+    }
     public String getTerrain() {
         return terrain;
     }
