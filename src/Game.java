@@ -51,7 +51,7 @@ public class Game {
     public void endGame() {
     }
 
-    public void clearBoard() {
+    public void clearBoard() { // wont do anything unless we do the 4 random boards thingy - but we are doing a fixed board rn
     }
 
     public void reshuffle() {
