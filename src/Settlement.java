@@ -10,5 +10,8 @@ public class Settlement {
     public int getY() {
         return y;
     }
+    public Player getPlayer(){
+        return p;
+    }
 
 }
