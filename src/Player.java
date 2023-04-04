@@ -63,7 +63,37 @@ public class Player {
         terrainCard = Game.getCard();
     }
 
-    public void useSpecialHexTile(SpecialHex sh) {
+    public void useSpecialHexTile(SpecialHex sh) { // should be clicked
+        String type = sh.getType();
+        if(type.equals("barn")){
+
+        }
+        else if(type.equals("paddock")){
+
+        }
+        else if(type.equals("oasis")){
+
+        }
+        else if(type.equals("oracle")){
+
+        }
+        else if(type.equals("farm")){
+
+        }
+        else if(type.equals("tower")){
+
+        }
+        else if(type.equals("tavern")){
+
+        }
+        else if(type.equals("harbor")){
+
+        }
+        else if(sh.isCastle()){
+
+        }
+
+        
     }
 
     public void addSpecialHexTile(SpecialHex x) {
