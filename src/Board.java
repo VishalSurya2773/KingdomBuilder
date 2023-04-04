@@ -49,7 +49,7 @@ public class Board {
             for(int r = i * 10; r< (i+1) * 10; r++){
                 for(int c = i * 10; c< (i+1) * 10; c++){
                     if(!(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0)){
-                        Hex[r][c] = boardScanners.get(i).nextInt();
+                        Graph[r][c] = map.get(boardScanners.get(i).nextInt());
                     }
                 }
             }
