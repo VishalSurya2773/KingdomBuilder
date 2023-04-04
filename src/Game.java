@@ -75,13 +75,15 @@ public class Game {
         players.get(0).setFirst();
     }
 
-    public Player[] rankings() {
-        Player[] ranks = new Player[4];
-        ArrayList<Integer> scores = ArrayList<Integer>();
-        for(int i = 0; i<4; i++){
-            scores.add(players.get(i).getScore);
+    public Set<Integer> rankings() {
+        // this prolly doesnt work
+        Map<Integer, Integer> rankings = new HashMap<Integer, Integer>();
+        for (int i = 0; i < 4; i++) {
+            rankings.put(i, players.get(i).getScore());
         }
-        Collections.sort(scores, Collections.reverseOrder());
+        Map<Integer, Integer> sorted = new TreeMap<>(Comparator.reverseOrder());
+        sorted.putAll(rankings);
+        Set<Integer> ranks = sorted.keySet();
         return ranks;
 
     }
