@@ -16,9 +16,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
+import java.awt.Dimension;
 
-public class KingdomBuilderPanel extends JPanel implements MouseListener {
+public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
             b3, b4, b5, b6, b7, b8,
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
@@ -28,7 +28,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     public Player p1, p2, p3, p4;
     private int clickedX, clickedY;
     private ArrayList<Hex> chosenHex; // ??
-    private boolean pickHex; // ???
+    private boolean pickHex, startPhase, gamePhase, scoringPhase; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
 
@@ -36,7 +36,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         // p1 = new Player(1);
         try {
             // background and buttons
-            mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main_menu.png"));
+            mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main.png"));
             b_play = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_template.png"));
             b_guide_start = ImageIO.read(KingdomBuilderPanel.class.getResource("images/guide_template.png"));
             background = ImageIO.read(KingdomBuilderPanel.class.getResource("images/background.jpg"));
@@ -103,27 +103,32 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
         // jbutton stuff for start panel
         Icon play = new ImageIcon(b_play);
-        playButton = new JButton("PLAY", play);
-        // playButton.addActionListener(this);
+        playButton = new JButton(play);
+        playButton.addActionListener(this);
+        playButton.setBounds(800, 500, 10, 10);
+        playButton.setSize(new Dimension(100, 100));
 
-        // textField = new JTextField();
-        // textField.setPreferredSize(new Dimension(100, 40));
-        // textField.setFont(new Font("Times New Roman", Font.BOLD, 20));
-        // textField.setForeground(new Color(123, 24, 50));
-        // textField.setBackground(Color.black);
-        // textField.setCaretColor(Color.white);
-        // textField.setText("Value");
+        Icon guide = new ImageIcon(b_guide_start);
+        guideButton = new JButton(guide);
+        playButton.addActionListener(this);
 
         this.add(playButton);
-        this.setVisible(true);
+        this.add(guideButton);
+        playButton.setVisible(false);
+        guideButton.setVisible(false);
 
+        startPhase = true;
+        gamePhase = false;
+        scoringPhase = false;
         addMouseListener(this);
     }
 
     public void paint(Graphics g) {
-        // if()
-        playButton.setVisible(true);
-        // g.drawImage();
+        if (startPhase) {
+            g.drawImage(mainmenu, 0, 0, 1600, 900, null);
+            playButton.setVisible(true);
+            guideButton.setVisible(true);
+        }
 
     }
 
@@ -149,6 +154,20 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void drawSpecialHex(Graphics g) {
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == playButton) {
+            System.out.println("game started");
+            startPhase = false;
+            gamePhase = true;
+        }
+        if (e.getSource() == guideButton) {
+            System.out.println("guide button clicked");
+            // open up pdf of guidebook, have the ability to come back to start screen
+        }
+        repaint();
     }
 
     public void mouseClicked(java.awt.event.MouseEvent e) {
