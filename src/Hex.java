@@ -4,6 +4,10 @@ public class Hex {
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
     private int radius; 
+
+    public Hex(){
+        // default constructor
+    }
     public Hex(int xComp, int yComp, String terrainComp) {
         x = xComp;
         y = yComp;

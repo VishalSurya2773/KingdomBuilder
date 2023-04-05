@@ -65,10 +65,10 @@ public class Player {
 
     public void useSpecialHexTile(SpecialHex sh) { // should be clicked
         String type = sh.getType();
-        if(type.equals("barn")){
-
+        if(type.equals("barn")){ // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
+            
         }
-        else if(type.equals("paddock")){
+        else if(type.equals("paddock")){ 
 
         }
         else if(type.equals("oasis")){
