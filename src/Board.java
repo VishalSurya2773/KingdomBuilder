@@ -1,10 +1,11 @@
 import java.util.TreeMap;
+import java.util.zip.ZipInputStream;
 import java.util.*;
 import java.io.*;
 
 public class Board {
     private Hex[][] Graph;
-    private TreeMap<String, Hex> map;
+    private TreeMap<ZipInputStream, Hex> map;
     private ArrayList<Scanner> boardScanners;
 
     public Board() {
@@ -30,58 +31,52 @@ public class Board {
     }
 
     public void makeGraph() throws IOException {
-       boardScanners.add(new Scanner(new File("RandomBoard1.txt")));
-       boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
-       boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
-       boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
+        boardScanners.add(new Scanner(new File("RandomBoard1.txt")));
+        boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
+        boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
+        boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
 
-       Collections.shuffle(boardScanners);
+        Collections.shuffle(boardScanners);
 
-        for(int r = 0; r<Graph.length; r++){
-            for(int c = 0; c<Graph[r].length; c++){
-                if(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0){
-                    Graph[r][c]= new Hex();
+        for (int r = 0; r < Graph.length; r++) {
+            for (int c = 0; c < Graph[r].length; c++) {
+                if (r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0) {
+                    Graph[r][c] = new Hex();
                 }
             }
         }
 
-        for(int r = 0; r< 20; r++){
-            for(int c = 0; c<20; c++){
-                if(!(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0)){
+        for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 20; c++) {
+                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = map.get(boardScanners.get(0).nextInt());
                 }
             }
         }
 
-        for(int r = 0; r< 20; r++){
-            for(int c = 20; c<40; c++){
-                if(!(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0)){
+        for (int r = 0; r < 20; r++) {
+            for (int c = 20; c < 40; c++) {
+                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = map.get(boardScanners.get(1).nextInt());
                 }
             }
         }
-        for(int r =20; r< 40; r++){
-            for(int c = 0; c<20; c++){
-                if(!(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0)){
+        for (int r = 20; r < 40; r++) {
+            for (int c = 0; c < 20; c++) {
+                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = map.get(boardScanners.get(2).nextInt());
                 }
             }
         }
 
-        for(int r =20; r< 40; r++){
-            for(int c = 20; c<40; c++){
-                if(!(r%2 == 0 && c%2 == 1 || r%2== 1 && c%2 == 0)){
+        for (int r = 20; r < 40; r++) {
+            for (int c = 20; c < 40; c++) {
+                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = map.get(boardScanners.get(3).nextInt());
                 }
             }
         }
 
-       
-
-
-      
-       
-       
     }
 
     public Hex[][] getGraph() {
@@ -93,9 +88,10 @@ public class Board {
     }
 
     public void placeSettlement(Settlement t, Hex h) {
-        // I don't think we need this here, it makes more sense for this to be in the hex class and in the player class where the person iterates through the 
+        // I don't think we need this here, it makes more sense for this to be in the
+        // hex class and in the player class where the person iterates through the
         // board from the player class and then calls it from the hex class directly
-        
+
     }
 
 }

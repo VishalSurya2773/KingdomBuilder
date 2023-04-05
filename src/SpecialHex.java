@@ -18,9 +18,11 @@ public class SpecialHex {
         }
         return this;
     }
-    public boolean isCastle(){
+
+    public boolean isCastle() {
         return isCastle;
     }
+
     public int getCenterX() {
         return x;
     }
@@ -28,9 +30,11 @@ public class SpecialHex {
     public int getCenterY() {
         return y;
     }
-    public String getType(){
+
+    public String getType() {
         return powerType;
     }
+
     public void barnAction(Player p, Hex h, Settlement s) {
     }
 
@@ -53,7 +57,7 @@ public class SpecialHex {
     }
 
     public void towerAction(Player p, Hex h) {
-        
+
     }
 
 }
