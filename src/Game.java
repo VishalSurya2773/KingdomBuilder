@@ -59,6 +59,7 @@ public class Game {
     }
 
     public void startGame() {
+        // connect 4 boards - 
     }
 
     public void endGame() {
@@ -66,6 +67,7 @@ public class Game {
 
     public void clearBoard() {
         // traverse through each hex and clear it
+
 
     }
 
