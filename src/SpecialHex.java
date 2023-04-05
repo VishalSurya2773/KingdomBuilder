@@ -1,9 +1,10 @@
-public class SpecialHex {
+public class SpecialHex extends Hex {
     private String powerType; // lowercase strings
     private int tilesLeft, x, y;
     private boolean isCastle;
 
     public SpecialHex(int xComp, int yComp, String type, boolean castle) {
+        super(xComp, yComp, type);
         powerType = type;
         tilesLeft = 2;
         x = xComp;
