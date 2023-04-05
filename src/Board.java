@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class Board {
-    private Hex[][] Graph;
+    private static Hex[][] Graph;
     private TreeMap<Integer, Hex> map;
     private ArrayList<Scanner> boardScanners;
 
@@ -23,7 +23,7 @@ public class Board {
         map.put(9, new SpecialHex("tower"));
         map.put(10, new SpecialHex("tavern"));
         map.put(11, new SpecialHex("barn"));
-        map.set(12, new Specialhex("harbor"));
+        map.put(12, new SpecialHex("harbor"));
         map.put(13, new SpecialHex("paddock"));
         map.put(14, new SpecialHex("castle"));
         map.put(15, new SpecialHex("oasis"));
@@ -40,7 +40,7 @@ public class Board {
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
-                if (r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0) {
+                if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = new Hex();
                 }
             }
@@ -48,7 +48,7 @@ public class Board {
 
         for (int r = 0; r < 20; r++) {
             for (int c = 0; c < 20; c++) {
-                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(0).nextInt());
                 }
             }
@@ -56,14 +56,14 @@ public class Board {
 
         for (int r = 0; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
-                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(1).nextInt());
                 }
             }
         }
         for (int r = 20; r < 40; r++) {
             for (int c = 0; c < 20; c++) {
-                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(2).nextInt());
                 }
             }
@@ -71,7 +71,7 @@ public class Board {
 
         for (int r = 20; r < 40; r++) {
             for (int c = 20; c < 40; c++) {
-                if (!(r % 2 == 0 && c % 2 == 1 || r % 2 == 1 && c % 2 == 0)) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(3).nextInt());
                 }
             }
@@ -79,7 +79,7 @@ public class Board {
 
     }
 
-    public Hex[][] getGraph() {
+    public static Hex[][] getGraph() {
         return Graph;
     }
 
