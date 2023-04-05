@@ -65,9 +65,14 @@ public class Game {
     }
 
     public void turn(Player p){
-        p.drawCard(deck.remove(0));
-        
+        p.drawCard();
+        if(p.chooseHex().getType().equals("barn")){
+            p.barnAction();
+        }
     }
+
+   
+
 
     public void endGame() {
     }
