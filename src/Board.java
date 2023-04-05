@@ -41,7 +41,7 @@ public class Board {
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
-                    Graph[r][c] = new Hex();
+                    Graph[r][c] = new Hex(""); // basically just a null pointer
                 }
             }
         }
