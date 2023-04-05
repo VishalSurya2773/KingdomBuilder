@@ -15,7 +15,14 @@ public class Hex {
         playerSettlement = null;
         // declare the variable of radius
     }
+    public void setAdjacent(){
+        Hex[][] board = Board.getGraph();
 
+    }
+
+    public Hex(String string) {
+        terrain = string;
+    }
     public void setSettlement(Settlement s) {
         playerSettlement = s;
     }

@@ -7,12 +7,13 @@ public class Game {
     private static ArrayList<Card> deck; // should be displayed
     private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objectives;
+    int amtOfSettlements;
     public Board gameBoard;
     private int playerTurn;
 
-    public Game() {
+    public Game() { // remember to show the discard pile
         gameBoard = new Board();
-
+        amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets to 0
         players = new ArrayList<Player>();
         for (int i = 0; i < 4; i++) {
         }
@@ -59,18 +60,34 @@ public class Game {
     }
 
     public void startGame() {
+        // connect 4 boards - not doing that yet
+        reshuffle(); // dont need to add anything 
     }
+
+    public void turn(Player p){
+        p.drawCard();
+        if(p.chooseHex().getType().equals("barn")){
+            p.barnAction();
+        }
+    }
+
+   
+
 
     public void endGame() {
     }
 
+
+
     public void clearBoard() {
         // traverse through each hex and clear it
+
 
     }
 
     public void reshuffle() {
         Collections.shuffle(deck);
+        Collections.shuffle(objectives);
     }
 
     public void initializeHex() {
