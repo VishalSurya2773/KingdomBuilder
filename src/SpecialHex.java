@@ -11,7 +11,9 @@ public class SpecialHex extends Hex {
         y = yComp;
         isCastle = castle;
     }
-
+    public  SpecialHex(String s){
+        super(s);
+    }
     public SpecialHex giveSpecialTile(Player p) {
         tilesLeft--;
         if (tilesLeft < 0) {
