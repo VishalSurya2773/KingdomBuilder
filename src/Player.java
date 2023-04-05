@@ -3,16 +3,26 @@ import java.util.ArrayList;
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed;
+    private ArrayList<Settlement> stored; 
     private Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
     private int order;
     private String color;
+    private Hex chosenLocationForNewHex; 
 
     public Player(boolean first, String clr, int or) {
         isFirst = first;
         color = clr;
         order = or;
+        stored = new ArrayList<Settlement>();
+        fillStored();
+    }
+
+    public void fillStored(){
+        for(int i = 0; i<40; i++){
+            stored.add(new Settlement(color));
+        }
     }
 
     public void setFirst() {
@@ -34,9 +44,15 @@ public class Player {
         return false;
     }
 
-    public Settlement getSettlement() {
+    public Settlement getSettlementFromBoard() {
         // random return filler
         return placed.get(0);
+    }
+
+    public Settlement getSettlementFromStore(){
+        if(stored.length() > 0){
+            return stored.remove();
+        }
     }
 
     public int getOrder() {
@@ -45,6 +61,20 @@ public class Player {
 
     public int getScore() {
         return score;
+    }
+     
+    public Card getTerrain(){
+        return terrainCard;
+    }
+
+    public SpecialHex chooseHex(){
+        return new SpecialHex("barn");
+    }
+    public void chooseTerrainHex(Hex x){
+        chosenLocationForNewHex = x;
+    }
+    public Hex  chosenTerrainHex(){
+        return chosenLocationForNewHex;
     }
 
     public void calculateScore() {
@@ -98,6 +128,9 @@ public class Player {
 
     public void addSpecialHexTile(SpecialHex x) {
         hand.add(x);
+        if(x.getTerrain().equals("barn")){
+            
+        }
     }
 
     public void removeSpecialHexTile(SpecialHex x) {
@@ -109,5 +142,37 @@ public class Player {
     public void getColor() {
         return color;
     }
+
+    public void barnAction( ) {
+        placeSettlement()
+    }
+
+    public void farmAction( Hex h) {
+    }
+
+    public void harborAction( Hex h, Settlement s) {
+    }
+
+    public void paddockAction( Hex h, Settlement s) {
+    }
+
+    public void oasisAction( Hex h) {
+    }
+
+    public void oracleAction( Hex h) {
+    }
+
+    public void tavernAction( Hex h) {
+    }
+
+    public void towerAction(, Hex h) {
+
+    }
+
+    public int findNumAdjacents(){
+
+    }
+
+
 
 }
