@@ -1,16 +1,19 @@
-public class SpecialHex {
+public class SpecialHex extends Hex {
     private String powerType; // lowercase strings
     private int tilesLeft, x, y;
     private boolean isCastle;
 
     public SpecialHex(int xComp, int yComp, String type, boolean castle) {
+        super(xComp, yComp, type);
         powerType = type;
         tilesLeft = 2;
         x = xComp;
         y = yComp;
         isCastle = castle;
     }
-
+    public  SpecialHex(String s){
+        super(s);
+    }
     public SpecialHex giveSpecialTile(Player p) {
         tilesLeft--;
         if (tilesLeft < 0) {
@@ -18,9 +21,11 @@ public class SpecialHex {
         }
         return this;
     }
-    public boolean isCastle(){
+
+    public boolean isCastle() {
         return isCastle;
     }
+
     public int getCenterX() {
         return x;
     }
@@ -28,9 +33,11 @@ public class SpecialHex {
     public int getCenterY() {
         return y;
     }
-    public String getType(){
+
+    public String getType() {
         return powerType;
     }
+
     public void barnAction(Player p, Hex h, Settlement s) {
     }
 
@@ -53,7 +60,7 @@ public class SpecialHex {
     }
 
     public void towerAction(Player p, Hex h) {
-        
+
     }
 
 }
