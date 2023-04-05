@@ -35,15 +35,18 @@ public class ObjectiveCard {
         return 0;
     }
 
-    public int citizen(String settlementColor) {
-        // find largest cluster of adjacent settlements
-        // add 2 points for
-
-        return 0;
+    public int citizen(Player p) {
+        int numofadajancies =  p.findAdjacentSettlements(p.getColor()) / 2;
+        int points = 1 * numofadajancies;
+        return points;
     }
 
     public int discoverer(String settlementColor) {
-        return 0;
+        for(int r = 0; r<40; r++) {
+            for(int c = 0; c<40; c++) {
+
+            }
+        }
     }
 
     public int farmer(String settlementColor) {
