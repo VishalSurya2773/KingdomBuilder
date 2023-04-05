@@ -9,6 +9,14 @@ import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
@@ -22,6 +30,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private ArrayList<Hex> chosenHex; // ??
     private boolean pickHex; // ???
     private JButton playButton, guideButton;
+    private JTextField textField;
 
     public KingdomBuilderPanel() {
         // p1 = new Player(1);
@@ -95,12 +104,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         // jbutton stuff for start panel
         Icon play = new ImageIcon(b_play);
         playButton = new JButton("PLAY", play);
+        // playButton.addActionListener(this);
+
+        // textField = new JTextField();
+        // textField.setPreferredSize(new Dimension(100, 40));
+        // textField.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        // textField.setForeground(new Color(123, 24, 50));
+        // textField.setBackground(Color.black);
+        // textField.setCaretColor(Color.white);
+        // textField.setText("Value");
+
+        this.add(playButton);
+        this.setVisible(true);
+
         addMouseListener(this);
     }
 
     public void paint(Graphics g) {
         // if()
         playButton.setVisible(true);
+        // g.drawImage();
 
     }
 
