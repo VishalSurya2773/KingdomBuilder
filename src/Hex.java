@@ -16,6 +16,9 @@ public class Hex {
         // declare the variable of radius
     }
 
+    public Hex(String string) {
+        type  = string;
+    }
     public void setSettlement(Settlement s) {
         playerSettlement = s;
     }
