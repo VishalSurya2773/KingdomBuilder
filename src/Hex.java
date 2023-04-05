@@ -17,7 +17,7 @@ public class Hex {
     }
 
     public Hex(String string) {
-        type  = string;
+        terrain  = string;
     }
     public void setSettlement(Settlement s) {
         playerSettlement = s;

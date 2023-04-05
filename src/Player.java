@@ -98,6 +98,9 @@ public class Player {
 
     public void addSpecialHexTile(SpecialHex x) {
         hand.add(x);
+        if(x.getTerrain().equals("barn")){
+            
+        }
     }
 
     public void removeSpecialHexTile(SpecialHex x) {
@@ -106,5 +109,33 @@ public class Player {
             hand.remove(pl);
         }
     }
+
+    public void barnAction( Hex h, Settlement s) {
+        h.setSettlement(s);
+    }
+
+    public void farmAction( Hex h) {
+    }
+
+    public void harborAction( Hex h, Settlement s) {
+    }
+
+    public void paddockAction( Hex h, Settlement s) {
+    }
+
+    public void oasisAction( Hex h) {
+    }
+
+    public void oracleAction( Hex h) {
+    }
+
+    public void tavernAction( Hex h) {
+    }
+
+    public void towerAction(, Hex h) {
+
+    }
+
+
 
 }
