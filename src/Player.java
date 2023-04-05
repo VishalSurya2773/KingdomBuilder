@@ -66,7 +66,7 @@ public class Player {
     public void useSpecialHexTile(SpecialHex sh) { // should be clicked
         String type = sh.getType();
         if(type.equals("barn")){ // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
-            
+            // code after you find out which settlement they choose
         }
         else if(type.equals("paddock")){ 
 
@@ -89,9 +89,9 @@ public class Player {
         else if(type.equals("harbor")){
 
         }
-        else if(sh.isCastle()){
-
-        }
+        // else if(sh.isCastle()){
+            
+        // } 
 
         
     }
