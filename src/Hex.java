@@ -16,7 +16,8 @@ public class Hex {
         // declare the variable of radius
     }
     public void setAdjacent(){
-        
+        Hex[][] board = Board.getGraph();
+
     }
 
     public Hex(String string) {
