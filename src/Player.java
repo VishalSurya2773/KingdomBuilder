@@ -106,5 +106,8 @@ public class Player {
             hand.remove(pl);
         }
     }
+    public void getColor() {
+        return color;
+    }
 
 }
