@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -117,8 +117,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         playButton.setVisible(false);
         guideButton.setVisible(false);
 
-        startPhase = true;
-        gamePhase = false;
+        startPhase = false;
+        gamePhase = true;
         scoringPhase = false;
         addMouseListener(this);
     }
@@ -128,6 +128,28 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawImage(mainmenu, 0, 0, 1600, 900, null);
             playButton.setVisible(true);
             guideButton.setVisible(true);
+        } else if (gamePhase) {
+            g.drawImage(background, 0, 0, 1600, 900, null);
+            g.setColor(Color.WHITE);
+            Font ps = new Font("Abril Fatface", Font.BOLD, 40);
+            g.setFont(ps);
+            g.drawString("PLAYER 1", 0, 75);
+            g.drawString("PLAYER 2", 1400, 75);
+            g.drawString("PLAYER 3", 1400, 525);
+            g.drawString("PLAYER 4", 0, 525);
+            Color burgundy = new Color(128, 0, 32);
+            g.setColor(burgundy);
+            g.drawRect(0, 100, 300, 300);
+            g.drawRect(1350, 100, 300, 300);
+            g.drawRect(1350, 540, 300, 300);
+            g.drawRect(0, 540, 300, 300);
+
+            g.drawRect(0, 850, 1600, 50);
+            g.fillRect(0, 850, 1600, 50);
+            g.drawImage(b_home, 50, 850, 50, 50, null);
+            g.drawImage(b_guide, 125, 850, 50, 50, null);
+            g.drawImage(b_endgame, 200, 850, 50, 50, null);
+
         }
 
     }
