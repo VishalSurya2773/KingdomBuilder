@@ -16,8 +16,36 @@ public class Hex {
         // declare the variable of radius
     }
     public void setAdjacent(){
-        Hex[][] board = Board.getGraph();
+        /*
+         * OXOXOX
+         * XOXOXO
+         */
 
+        Hex[][] board = Board.getGraph();
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++){
+                if(!board[i][j].equals("")){
+                    if(i == 0){
+                        topLeft = null; topRight = null;
+                        
+                    }
+                    else if(j == 0){
+                        left = null;
+                        topLeft = null;
+                        bottomLeft = null; 
+                    }
+                    else if(i == 39){
+
+                    }
+                    else if(j == 39){
+
+                    }
+                    else{
+
+                    }
+                }
+            }
+        }
     }
 
     public Hex(String string) {
