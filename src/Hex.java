@@ -15,6 +15,9 @@ public class Hex {
         playerSettlement = null;
         // declare the variable of radius
     }
+    public void setAdjacent(){
+        
+    }
 
     public Hex(String string) {
         terrain = string;

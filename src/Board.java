@@ -23,7 +23,7 @@ public class Board {
         map.put(9, new SpecialHex("tower"));
         map.put(10, new SpecialHex("tavern"));
         map.put(11, new SpecialHex("barn"));
-        map.set(12, new Specialhex("harbor"));
+        map.set(12, new SpecialHex("harbor"));
         map.put(13, new SpecialHex("paddock"));
         map.put(14, new SpecialHex("castle"));
         map.put(15, new SpecialHex("oasis"));
