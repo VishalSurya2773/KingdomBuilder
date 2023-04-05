@@ -64,8 +64,15 @@ public class Game {
         reshuffle(); // dont need to add anything 
     }
 
+    public void turn(Player p){
+        p.drawCard(deck.remove(0));
+        
+    }
+
     public void endGame() {
     }
+
+
 
     public void clearBoard() {
         // traverse through each hex and clear it
