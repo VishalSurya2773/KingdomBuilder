@@ -26,8 +26,8 @@ public class Hex {
             for(int j = 0; j < board[i].length; j++){
                 if(!board[i][j].equals("")){
                     if(i == 0){
-                        topLeft = null; topRight = null;
-                        
+                        topLeft = null; 
+                        topRight = null;
                     }
                     else if(j == 0){
                         left = null;
@@ -35,13 +35,16 @@ public class Hex {
                         bottomLeft = null; 
                     }
                     else if(i == 39){
-
+                        bottomLeft = null;
+                        bottomRight = null;
                     }
                     else if(j == 39){
-
+                        right = null;
+                        topRight = null;
+                        bottomRight = null;
                     }
                     else{
-
+                        
                     }
                 }
             }
