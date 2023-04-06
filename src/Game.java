@@ -74,7 +74,6 @@ public class Game {
         if(p.chooseHex().getType().equals("barn")){
             p.barnAction();
         }
-        
     }
 
 
