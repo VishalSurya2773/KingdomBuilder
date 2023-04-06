@@ -173,8 +173,11 @@ public class Player {
    public void barnAction( ) {
        Settlement s = getSettlementFromStore();
        if(canPlace(s, chosenTerrainHex())){
-           placeSettlement(x, chosenTerrainHex());
+           placeSettlement(s, chosenTerrainHex());
            System.out.println("Success");
+       }
+       else{
+        System.out.println("failed");
        }
       
    }
