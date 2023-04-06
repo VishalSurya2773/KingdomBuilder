@@ -70,11 +70,27 @@ public class Game {
             endGame();
             return;
         }
-        p.drawCard();
+        
+       
+        
+    }
+    public void useSpecialHex(Player p){
         if(p.chooseHex().getType().equals("barn")){
             p.barnAction();
         }
+        if(p.chooseHex().getType().equals("farm")){
+            Hex[][] map = gameBoard.getGraph();
+            for(int r = 0; r< map.length; r++){
+                for(int c = 0; c<map[0].length; c++){
+                    
+                }
+            }
+        }
     }
+
+ 
+
+
 
 
 
