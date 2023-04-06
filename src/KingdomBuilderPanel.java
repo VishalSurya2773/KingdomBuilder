@@ -150,6 +150,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawImage(b_guide, 125, 850, 50, 50, null);
             g.drawImage(b_endgame, 200, 850, 50, 50, null);
 
+            // draw board
+
         }
 
     }
