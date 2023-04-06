@@ -41,6 +41,7 @@ public class Board {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = new Hex(""); // basically just a null pointer
+                    Graph[r][c].setAdjacent();
                 }
             }
         }
@@ -49,6 +50,7 @@ public class Board {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(0).nextInt());
+                    Graph[r][c].setAdjacent();
                 }
             }
         }
@@ -57,6 +59,7 @@ public class Board {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(1).nextInt());
+                    Graph[r][c].setAdjacent();
                 }
             }
         }
@@ -64,6 +67,7 @@ public class Board {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(2).nextInt());
+                    Graph[r][c].setAdjacent();
                 }
             }
         }
@@ -72,6 +76,7 @@ public class Board {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     Graph[r][c] = map.get(boardScanners.get(3).nextInt());
+                    Graph[r][c].setAdjacent();
                 }
             }
         }
