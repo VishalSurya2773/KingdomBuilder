@@ -61,7 +61,18 @@ public class Player {
        if(stored.size() > 0){
            return stored.remove(0);
        }
+       else{
+            Game.gameOver = true; 
+       }
    }
+
+   
+
+   public int numSettlements(){
+    return stored.size();
+   }
+
+
 
 
    public int getOrder() {
@@ -184,6 +195,7 @@ public class Player {
 
 
    public void farmAction( Hex h) {
+
    }
 
 

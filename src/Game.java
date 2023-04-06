@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.*;
 
 public class Game {
+    public static boolean gameOver = false;
     private ArrayList<Player> players;
     private static ArrayList<Card> deck; // should be displayed
     private static ArrayList<Card> discard; // should be displayed
@@ -65,13 +66,18 @@ public class Game {
     }
 
     public void turn(Player p){
+        if(gameOver){
+            endGame();
+            return;
+        }
         p.drawCard();
         if(p.chooseHex().getType().equals("barn")){
             p.barnAction();
         }
+        
     }
 
-   
+
 
 
     public void endGame() {
