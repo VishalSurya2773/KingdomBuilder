@@ -4,6 +4,7 @@ public class Hex {
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
     private int radius; 
+    private boolean isAvail;
 
     public Hex(){
         // default constructor
@@ -13,24 +14,6 @@ public class Hex {
         y = yComp;
         playerSettlement = null;
         // declare the variable of radius
-    }
-    public Hex(int xCmp, int yCmp, String terrainCmp){
-        x = xCmp;
-        y = yCmp;
-        terrain = terrainCmp;
-    }
-    public Hex(String terrainCmp){
-        terrain = terrainCmp;
-        left = new Hex("");
-        right = new Hex("");
-        topLeft = new Hex("");
-        topRight = new Hex("");
-        bottomLeft = new Hex("");
-        bottomRight = new Hex("");
-    }
-    public int compareTo(Hex compare){
-        if(compare.getCenterX() == x) return y - compare.getCenterY();
-        return x - compare.getCenterX();
     }
     public void setAdjacent(){
         /*
