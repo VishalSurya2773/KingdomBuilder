@@ -33,8 +33,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private boolean pickHex, startPhase, gamePhase, scoringPhase; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
+    private Board b;
+    private Hex[][] board;
 
-    public KingdomBuilderPanel() {
+    public KingdomBuilderPanel() throws IOException {
         // p1 = new Player(1);
         try {
             // background and buttons
@@ -123,6 +125,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         gamePhase = true;
         scoringPhase = false;
         addMouseListener(this);
+        b = new Board();
+        board = b.getGraph();
     }
 
     public void paint(Graphics g) {
@@ -139,9 +143,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 2", 1400, 75);
             g.drawString("PLAYER 3", 1400, 525);
             g.drawString("PLAYER 4", 0, 525);
-            double thickness = 2;
-            Stroke oldStroke = g.getStroke();
-            g.setStroke(new BasicStroke(thickness));
+
             Color burgundy = new Color(128, 0, 32);
             g.setColor(burgundy);
             g.drawRect(0, 100, 300, 300);
