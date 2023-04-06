@@ -4,6 +4,7 @@ public class Hex {
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
     private int radius; 
+    private boolean isAvail;
 
     public Hex(){
         // default constructor
@@ -15,6 +16,14 @@ public class Hex {
         playerSettlement = null;
         // declare the variable of radius
     }
+
+    public void setAvailability(boolean b){
+        isAvail = b;
+    }
+    public boolean isAvail(){
+        return isAvail;
+    }
+    
     public void setAdjacent(){
         /*
          * OXOXOX
