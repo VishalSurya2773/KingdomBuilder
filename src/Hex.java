@@ -9,21 +9,12 @@ public class Hex {
     public Hex(){
         // default constructor
     }
-    public Hex(int xComp, int yComp, String terrainComp) {
+    public Hex(int xComp, int yComp) {
         x = xComp;
         y = yComp;
-        terrain = terrainComp;
         playerSettlement = null;
         // declare the variable of radius
     }
-
-    public void setAvailability(boolean b){
-        isAvail = b;
-    }
-    public boolean isAvail(){
-        return isAvail;
-    }
-    
     public void setAdjacent(){
         /*
          * OXOXOX
@@ -33,7 +24,7 @@ public class Hex {
         Hex[][] board = Board.getGraph();
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[i].length; j++){
-                if(!board[i][j].equals("")){
+                if(compareTo(board[i][j]) == 0){
                     if(i == 0){
                         topLeft = null; 
                         topRight = null;
@@ -52,17 +43,32 @@ public class Hex {
                         topRight = null;
                         bottomRight = null;
                     }
-                    else{
-                        
+
+                    if(left != null){
+                        left = board[i][j-2];
                     }
+                    else if(right != null){
+                        right = board[i][j+2];
+                    }
+                    else if(topLeft != null){
+                        topLeft = board[i-1][j-1];
+                    }
+                    else if(topRight != null){
+                        topRight = board[i-1][j+1];
+                    }
+                    else if(bottomLeft != null){
+                        bottomLeft = board[i+1][j-1];
+                    }
+                    else if(bottomRight != null){
+                        bottomRight = board[i+1][j+1];
+                    }
+
+                    break;
                 }
             }
         }
     }
 
-    public Hex(String string) {
-        terrain = string;
-    }
     public void setSettlement(Settlement s) {
         playerSettlement = s;
     }
