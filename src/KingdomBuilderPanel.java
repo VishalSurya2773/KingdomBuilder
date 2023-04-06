@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
@@ -137,6 +139,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 2", 1400, 75);
             g.drawString("PLAYER 3", 1400, 525);
             g.drawString("PLAYER 4", 0, 525);
+            double thickness = 2;
+            Stroke oldStroke = g.getStroke();
+            g.setStroke(new BasicStroke(thickness));
             Color burgundy = new Color(128, 0, 32);
             g.setColor(burgundy);
             g.drawRect(0, 100, 300, 300);
