@@ -14,6 +14,11 @@ public class Hex {
         playerSettlement = null;
         // declare the variable of radius
     }
+    public Hex(int xCmp, int yCmp, String terrainCmp){
+        x = xCmp;
+        y = yCmp;
+        terrain = terrainCmp;
+    }
     public Hex(String terrainCmp){
         terrain = terrainCmp;
         left = new Hex("");
