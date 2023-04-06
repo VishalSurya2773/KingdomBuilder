@@ -126,7 +126,6 @@ public class Player {
        }
        else if(type.equals("paddock")){
 
-
        }
        else if(type.equals("oasis")){
 
