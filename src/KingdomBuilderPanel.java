@@ -139,9 +139,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 2", 1400, 75);
             g.drawString("PLAYER 3", 1400, 525);
             g.drawString("PLAYER 4", 0, 525);
-            double thickness = 2;
+            int thickness = 2; // changed to int instead of double
             Stroke oldStroke = ((Graphics2D) g).getStroke();
-            g.setStroke(new BasicStroke(thickness));
+            ((Graphics2D) g).setStroke(new BasicStroke(thickness));
             Color burgundy = new Color(128, 0, 32);
             g.setColor(burgundy);
             g.drawRect(0, 100, 300, 300);
