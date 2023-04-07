@@ -1,6 +1,7 @@
 public class ObjectiveCard {
 
     private String type;
+    private Player p;
 
     public ObjectiveCard(String t) {
         type = t;
@@ -11,6 +12,15 @@ public class ObjectiveCard {
     }
 
     public int getScore(String settlementColor) {
+        if (settlementColor.equals(Game.players.get(0).getColor())) {
+            p = Game.players.get(0);
+        } else if (settlementColor.equals(Game.players.get(1).getColor())) {
+            p = Game.players.get(1);
+        } else if (settlementColor.equals(Game.players.get(2).getColor())) {
+            p = Game.players.get(2);
+        } else if (settlementColor.equals(Game.players.get(3).getColor())) {
+            p = Game.players.get(3);
+        }
         if (type.equals("citizen")) {
             return citizen(settlementColor);
         } else if (type.equals("discoverer")) {
@@ -35,18 +45,19 @@ public class ObjectiveCard {
         return 0;
     }
 
-    public int citizen(Player p) {
-        int numofadajancies =  p.findAdjacentSettlements(p.getColor()) / 2;
+    public int citizen(String settlementColor) {
+        int numofadajancies = p.findAdjacentSettlements(p.getColor()) / 2;
         int points = 1 * numofadajancies;
         return points;
     }
 
     public int discoverer(String settlementColor) {
-        for(int r = 0; r<40; r++) {
-            for(int c = 0; c<40; c++) {
+        for (int r = 0; r < 40; r++) {
+            for (int c = 0; c < 40; c++) {
 
             }
         }
+        return -5;
     }
 
     public int farmer(String settlementColor) {
