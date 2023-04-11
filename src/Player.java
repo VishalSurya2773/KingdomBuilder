@@ -182,6 +182,8 @@ public class Player {
     }
 
     public void harborAction(Hex h, Settlement s) {
+        h.setSettlement(s);
+        return;
     }
 
     public void paddockAction(Hex h, Settlement s) {
