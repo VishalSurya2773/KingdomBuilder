@@ -158,7 +158,7 @@ public class Player {
 
     }
 
-    public ArrayList<Hex> farmAction(Hex h) {
+    public ArrayList<Hex> showAvailForFarmAction(Hex h) {
         ArrayList<Hex> availableHexList = new ArrayList<Hex>();
         // edge case where 0 adjecent hexes
         for(int i = 0; i<placed.size(); i++){
@@ -181,15 +181,34 @@ public class Player {
         return availableHexList;
     }
 
+    public void farmAction(Hex h){
+        h.setSettlement(getSettlementFromStore());
+    }
+    public ArrayList<Hex> showAvailForHarborAction(){
+        ArrayList<Hex> avail = new ArrayList<Hex>();
+        for(int r = 0; r< Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+                if(Game.gameBoard.getGraph()[r][c].getTerrain().equals("water") &&
+                Game.gameBoard.getGraph()[r][c].isEmpty()){
+                    avail.add(Game.gameBoard.getGraph()[r][c]);
+                }
+            }
+        }
+        return avail;
+
+    }
     public void harborAction(Hex h, Settlement s) {
-        h.setSettlement(s);
+        h.setSettlement(s));
         return;
     }
 
     public void paddockAction(Hex h, Settlement s) {
+        h.setSettlement(s);
+        return;
     }
 
-    public void oasisAction(Hex h) {
+    public ArrayList oasisAction(Hex h) {
+
     }
 
     public void oracleAction(Hex h) {

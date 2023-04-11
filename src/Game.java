@@ -95,7 +95,12 @@ public class Game {
     }
 
     public void endGame() {
-        Set<Integer> playerRankings = rankings();
+        ArrayList<ArrayList<Integer>> playerRankings = rankings(); // make sure to check for ties
+        //scores everything
+        
+        for(int i = 0; i < objectives.size(); i++){
+            
+        }
         
     }
 
@@ -117,24 +122,38 @@ public class Game {
         players.get(0).setFirst();
     }
 
-    public Set<Integer> rankings() {
+    public ArrayList<ArrayList<Integer>> rankings() {
         // this prolly doesnt work
+        
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
-            ArrayList<Integer> arr;
+            ArrayList<Integer> arr = new ArrayList<>();
             arr.add(i);
             arr.add(players.get(i).getScore());
-            rankings.add(i, players.get(i).getScore());
+            rankings.add(arr);
         }
-        Map<Integer, Integer> sorted = new TreeMap<>(Comparator.reverseOrder());
-        sorted.putAll(rankings);
-        Set<Integer> ranks = sorted.keySet();
-        return ranks;
+
+        Collections.sort(rankings, new rankingComparator());
+        return rankings;
 
     }
 
     public Player getWinner() {
 
         return new Player(false, null, 0);
+    }
+    
+}
+class rankingComparator implements Comparator<ArrayList<Integer>> {
+  
+    // override the compare() method
+    public int compare(ArrayList<Integer> s1, ArrayList<Integer> s2)
+    {
+        if (s1.get(1) == s2.get(1))
+            return 0;
+        else if (s1.get(1) > s2.get(1))
+            return 1;
+        else
+            return -1;
     }
 }
