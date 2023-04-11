@@ -9,7 +9,7 @@ public class Game {
     private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objectives;
     int amtOfSettlements;
-    public Board gameBoard;
+    public static Board gameBoard;
     private int playerTurn;
 
     public Game() { // remember to show the discard pile
@@ -95,9 +95,11 @@ public class Game {
     }
 
     public void endGame() {
+        Set<Integer> playerRankings = rankings();
+        
     }
 
-    public void clearBoard() {
+    public void clearBoard(){ // only if we do 4 random boards 
         // traverse through each hex and clear it
 
     }
@@ -117,9 +119,12 @@ public class Game {
 
     public Set<Integer> rankings() {
         // this prolly doesnt work
-        Map<Integer, Integer> rankings = new HashMap<Integer, Integer>();
+        ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
-            rankings.put(i, players.get(i).getScore());
+            ArrayList<Integer> arr;
+            arr.add(i);
+            arr.add(players.get(i).getScore());
+            rankings.add(i, players.get(i).getScore());
         }
         Map<Integer, Integer> sorted = new TreeMap<>(Comparator.reverseOrder());
         sorted.putAll(rankings);
