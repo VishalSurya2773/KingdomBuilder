@@ -46,7 +46,7 @@ public class Settlement {
     }
 
     public void findAdjacents() {
-        if (board[x + 1][y].getColor()) {
+        if (board[x + 1][y].playerSettlement() == null) {
 
         }
     }
