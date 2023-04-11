@@ -159,7 +159,8 @@ public class Player {
     }
 
     public void farmAction(Hex h) {
-
+        // edge case where 0 adjecent hexes
+        
     }
 
     public void harborAction(Hex h, Settlement s) {
