@@ -170,7 +170,7 @@ public class Player {
             }
         }
         if(availableHexList.size() == 0){
-            for(Hex[] hList : )
+            for(Hex[] hList : Game.Bo )
         }
         return availableHexList;
     }

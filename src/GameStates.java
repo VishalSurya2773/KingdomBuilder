@@ -3,4 +3,4 @@ enum GameStates{
     turnStart,
     chooseSettlement,
     gameOver
-}
+} 
