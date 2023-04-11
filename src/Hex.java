@@ -94,8 +94,14 @@ public class Hex {
         }
     }
 
+    public Hex[] adjacents() {
+        Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
+        return out;
+    }
+
     public void setSettlement(Settlement s) {
         playerSettlement = s;
+        playerSettlement.setHex(this);
         isAvail = false;
     }
 

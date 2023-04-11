@@ -160,7 +160,7 @@ public class Player {
         ArrayList<Hex> availableHexList = new ArrayList<Hex>();
         // edge case where 0 adjecent hexes
         for (int i = 0; i < placed.size(); i++) {
-            Hex[] adj = placed.get(i).adjacents();
+            Hex[] adj = placed.get(i).placedOn().adjacents();
             for (int j = 0; j < adj.length; j++) {
                 if (adj[j].isEmpty() && adj[j].getTerrain().equals("grass")) {
                     availableHexList.add(adj[j]);

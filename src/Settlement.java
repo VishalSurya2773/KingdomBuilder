@@ -2,6 +2,7 @@ public class Settlement {
     private int x, y;
     private String color;
     private Player p;
+    private Hex placedOn;
     private Settlement left, right, topLeft, topRight, bottomLeft, bottomRight;
     private Board board;
     private Hex[][] hexes;
@@ -46,6 +47,14 @@ public class Settlement {
 
     public String getColor() {
         return color;
+    }
+
+    public void setHex(Hex x) {
+        placedOn = x;
+    }
+
+    public Hex placedOn() {
+        return placedOn;
     }
 
     public void findAdjacents() {
