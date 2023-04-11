@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Game {
     public static boolean gameOver = false;
-    private ArrayList<Player> players;
+    public static ArrayList<Player> players;
     private static ArrayList<Card> deck; // should be displayed
     private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objectives;
@@ -14,7 +14,8 @@ public class Game {
 
     public Game() { // remember to show the discard pile
         gameBoard = new Board();
-        amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets to 0
+        amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
+                               // to 0
         players = new ArrayList<Player>();
         for (int i = 0; i < 4; i++) {
         }
@@ -43,13 +44,15 @@ public class Game {
         }
 
     }
-    public void addDiscardPile(Card c){
+
+    public void addDiscardPile(Card c) {
         discard.add(c);
     }
+
     public ArrayList<Player> getPlayers() {
         return players;
     }
-    
+
     public static Card getCard() { // deck has to reset when it's empty - account for it later
         if (deck.size() == 0) {
             deck = discard;
@@ -62,29 +65,28 @@ public class Game {
 
     public void startGame() {
         // connect 4 boards - not doing that yet
-        reshuffle(); // dont need to add anything 
+        reshuffle(); // dont need to add anything
     }
 
-    public void turn(Player p){
-        if(gameOver){
+    public void turn(Player p) {
+        if (gameOver) {
             endGame();
             return;
         }
-        
-       
-        
+
     }
-    public void useSpecialHex(Player p){
-        if(p.chooseHex().getType().equals("barn")){
+
+    public void useSpecialHex(Player p) {
+        if (p.chooseHex().getType().equals("barn")) {
             p.barnAction();
         }
 
-        if(p.chooseHex().getType().equals("farm")){
+        if (p.chooseHex().getType().equals("farm")) {
             Hex[][] map = gameBoard.getGraph();
-            for(int r = 0; r< map.length; r++){
-                for(int c = 0; c<map[0].length; c++){
-                    if(map[r][c].getTerrain().equals("grass") && map[r][c].isEmpty()){
-                        p.farmA
+            for (int r = 0; r < map.length; r++) {
+                for (int c = 0; c < map[0].length; c++) {
+                    if (map[r][c].getTerrain().equals("grass") && map[r][c].isEmpty()) {
+                        // p.farmA
                     }
                 }
             }
@@ -92,21 +94,11 @@ public class Game {
 
     }
 
- 
-
-
-
-
-
-
     public void endGame() {
     }
 
-
-
     public void clearBoard() {
         // traverse through each hex and clear it
-
 
     }
 

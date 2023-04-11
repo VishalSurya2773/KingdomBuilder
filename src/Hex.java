@@ -15,6 +15,31 @@ public class Hex {
         playerSettlement = null;
         // declare the variable of radius
     }
+    public Hex(int xComp, int yComp, String terrainType){
+        x = xComp;
+        y = yComp;
+        terrain = terrainType;
+    }
+    public Hex(String terrainType){
+        terrain = terrainType;
+        left = new Hex("");
+        right = new Hex("");
+        topRight = new Hex("");
+        topLeft = new Hex("");
+        bottomRight = new Hex("");
+        bottomLeft = new Hex("");
+    }
+    public int compareTo(Hex cmp){
+        if(cmp.getCenterX() == x) return cmp.getCenterY() - y;
+        return cmp.getCenterX() - x;
+    }
+    public void setAvail(boolean x){
+        isAvail = x;
+
+    }
+    public boolean getAvail(){
+        return isAvail;
+    }
     public void setAdjacent(){
         /*
          * OXOXOX
