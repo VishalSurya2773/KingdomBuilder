@@ -170,7 +170,13 @@ public class Player {
             }
         }
         if(availableHexList.size() == 0){
-            for(Hex[] hList : Game.Bo )
+            for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
+                for(int c = 0; c<Game.gameBoard.getGraph([r].length; c++){
+                    if(Game.gameBoard.getGraph().[r][c].getTerrain().equals("grass")){
+                        availableHexList.add(Game.gameBoard.getGraph()[r][c]);
+                    }
+                }
+            }
         }
         return availableHexList;
     }
