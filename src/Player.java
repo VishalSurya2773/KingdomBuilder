@@ -160,7 +160,9 @@ public class Player {
 
     public void farmAction(Hex h) {
         // edge case where 0 adjecent hexes
-        
+        for(int i = 0; i<placed.size(); i++){
+            Hex[] adj = placed.get(i).adjacents();
+        }
     }
 
     public void harborAction(Hex h, Settlement s) {
