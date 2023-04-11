@@ -95,12 +95,14 @@ public class Game {
     }
 
     public void endGame() {
-        ArrayList<ArrayList<Integer>> playerRankings = rankings(); // make sure to check for ties
         //scores everything
-        
-        for(int i = 0; i < objectives.size(); i++){
-            
+        for(int i = 0; i < players.size(); i++){
+            players.get(i).calculateScore();
         }
+        ArrayList<ArrayList<Integer>> playerRankings = rankings(); // make sure to check for ties
+        
+        
+        
         
     }
 
