@@ -86,4 +86,11 @@ public class Board {
         return Graph;
     }
 
+    public boolean isValid(int r, int c){
+        if( r>=0 && r<Graph.length && c >=0 && c <= Graph[0].length){
+            return !Graph[r][c].getTerrain().equals("");
+        }
+        return false;
+    }
+
 }

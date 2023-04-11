@@ -158,11 +158,21 @@ public class Player {
 
     }
 
-    public void farmAction(Hex h) {
+    public ArrayList<Hex> farmAction(Hex h) {
+        ArrayList<Hex> availableHexList = new ArrayList<Hex>();
         // edge case where 0 adjecent hexes
         for(int i = 0; i<placed.size(); i++){
             Hex[] adj = placed.get(i).adjacents();
+            for(int j = 0; j<adj.length; j++){
+                if(adj[j].isEmpty() && adj[j].getTerrain().equals("grass")){
+                    availableHexList.add(adj[j]);
+                }
+            }
         }
+        if(availableHexList.size() == 0){
+            for(Hex[] hList : )
+        }
+        return availableHexList;
     }
 
     public void harborAction(Hex h, Settlement s) {
