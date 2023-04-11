@@ -82,7 +82,7 @@ public class Game {
         }
 
         if (p.chooseHex().getType().equals("farm")) {
-            Hex[][] map = gameBoard.getGraph();
+            Hex[][] map = Board.Graph;
             for (int r = 0; r < map.length; r++) {
                 for (int c = 0; c < map[0].length; c++) {
                     if (map[r][c].getTerrain().equals("grass") && map[r][c].isEmpty()) {

@@ -46,9 +46,7 @@ public class ObjectiveCard {
     }
 
     public int citizen(String settlementColor) {
-        int numofadajancies = p.findAdjacentSettlements(p.getColor()) / 2;
-        int points = 1 * numofadajancies;
-        return points;
+        return 0;
     }
 
     public int discoverer(String settlementColor) {
