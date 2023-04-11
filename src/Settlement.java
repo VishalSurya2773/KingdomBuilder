@@ -8,11 +8,13 @@ public class Settlement {
 
     public Settlement(String color) {
         this.color = color;
-        right = null;
-        topLeft = null;
-        topRight = null;
-        bottomLeft = null;
-        bottomRight = null;
+        right = new Settlement("");
+        left = new Settlement("");
+        topRight = new Settlement("");
+        topLeft = new Settlement("");
+        bottomRight = new Settlement("");
+        bottomLeft = new Settlement("");
+
         board = Game.gameBoard;
         hexes = board.Graph;
     }
@@ -67,23 +69,33 @@ public class Settlement {
                         topRight = null;
                     }
 
-                    if (left == null) {
-
+                    if (left != null) {
+                        left = hexes[r][c - 2].getSettlement();
+                    }
+                    if (right != null) {
+                        right = hexes[r][c + 2].getSettlement();
+                    }
+                    if (topLeft != null) {
+                        topLeft = hexes[r - 1][c - 1].getSettlement();
+                    }
+                    if (bottomLeft != null) {
+                        bottomLeft = hexes[r + 1][c - 1].getSettlement();
+                    }
+                    if (topRight != null) {
+                        topRight = hexes[r - 1][c + 1].getSettlement();
+                    }
+                    if (bottomRight != null) {
+                        bottomRight = hexes[r + 1][c + 1].getSettlement();
                     }
 
                 }
             }
         }
-
-        if (board.isValid(x - 2, y) && hexes[x - 2][y].getSettlement() == null) {
-            left = null;
-        } else {
-            left = hexes[x - 2][y].getSettlement();
-        }
     }
 
-    public Hex[] adjacents() {
-        return new Hex[6];
+    public Settlement[] adjacents() {
+        Settlement[] adj = { left, topLeft, bottomLeft, right, topRight, bottomRight };
+        return adj;
     }
 
 }

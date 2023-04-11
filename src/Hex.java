@@ -97,10 +97,10 @@ public class Hex {
     public void setSettlement(Settlement s) {
         playerSettlement = s;
         isAvail = false;
-    } 
+    }
 
     public void removeSettlement() {
-        
+
     }
 
     public Settlement getSettlement() {
