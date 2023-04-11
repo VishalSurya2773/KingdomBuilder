@@ -4,6 +4,7 @@ public class Settlement {
     private Player p;
     private Settlement left, right, topLeft, topRight, bottomLeft, bottomRight;
     private Board board;
+    private Hex[][] hexes;
 
     public Settlement(String color) {
         this.color = color;
@@ -12,7 +13,8 @@ public class Settlement {
         topRight = null;
         bottomLeft = null;
         bottomRight = null;
-        board = = Game.gameBoard;
+        board = Game.gameBoard;
+        hexes = board.Graph;
     }
 
     public Settlement(Player player) {
@@ -45,24 +47,39 @@ public class Settlement {
     }
 
     public void findAdjacents() {
-        if (board.isValid(x - 2, y) && board[x - 2][y].getSettlement() == null) {
+        for (int r = 0; r < hexes.length; r++) {
+            for (int c = 0; c < hexes[r].length; c++) {
+                // if(compareTo(hexes[r][c]) == 0); try to do opp
+                if (board.isValid(r, c)) {
+                    if (r == 0) {
+                        topLeft = null;
+                        topRight = null;
+                    } else if (c == 0) {
+                        bottomLeft = null;
+                        left = null;
+                        topLeft = null;
+                    } else if (r == 39) {
+                        bottomLeft = null;
+                        bottomRight = null;
+                    } else if (c == 39) {
+                        bottomRight = null;
+                        right = null;
+                        topRight = null;
+                    }
+
+                    if (left == null) {
+
+                    }
+
+                }
+            }
+        }
+
+        if (board.isValid(x - 2, y) && hexes[x - 2][y].getSettlement() == null) {
             left = null;
         } else {
-            left = board[x - 2][y].getSettlement();
+            left = hexes[x - 2][y].getSettlement();
         }
-
-        if (board[x + 2][y].getSettlement().isValid() && board[x + 2][y].getSettlement() == null) {
-            right = null;
-        } else {
-            right = board[x + 2][y].getSettlement();
-        }
-
-        if (board[x - 2][y - 2].getSettlement().isValid() && board[x - 2][y - 2].getSettlement() == null) {
-            topLeft = null;
-        } else {
-            topLeft = board[x - 2][y - 2].getSettlement();
-        }
-
     }
 
     public Hex[] adjacents() {
