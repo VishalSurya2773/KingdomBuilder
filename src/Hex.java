@@ -3,24 +3,27 @@ public class Hex {
     private int x, y;
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
-    private int radius; 
+    private int radius;
     private boolean isAvail;
 
-    public Hex(){
+    public Hex() {
         // default constructor
     }
+
     public Hex(int xComp, int yComp) {
         x = xComp;
         y = yComp;
         playerSettlement = null;
         // declare the variable of radius
     }
-    public Hex(int xComp, int yComp, String terrainType){
+
+    public Hex(int xComp, int yComp, String terrainType) {
         x = xComp;
         y = yComp;
         terrain = terrainType;
     }
-    public Hex(String terrainType){
+
+    public Hex(String terrainType) {
         terrain = terrainType;
         left = new Hex("");
         right = new Hex("");
@@ -29,63 +32,60 @@ public class Hex {
         bottomRight = new Hex("");
         bottomLeft = new Hex("");
     }
-    public int compareTo(Hex cmp){
-        if(cmp.getCenterX() == x) return cmp.getCenterY() - y;
+
+    public int compareTo(Hex cmp) {
+        if (cmp.getCenterX() == x)
+            return cmp.getCenterY() - y;
         return cmp.getCenterX() - x;
     }
-    public void setAvail(boolean x){
+
+    public void setAvail(boolean x) {
         isAvail = x;
 
     }
-    public boolean getAvail(){
+
+    public boolean getAvail() {
         return isAvail;
     }
-    public void setAdjacent(){
+
+    public void setAdjacent() {
         /*
          * OXOXOX
          * XOXOXO
          */
 
         Hex[][] board = Board.getGraph();
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board[i].length; j++){
-                if(compareTo(board[i][j]) == 0){
-                    if(i == 0){
-                        topLeft = null; 
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (compareTo(board[i][j]) == 0) {
+                    if (i == 0) {
+                        topLeft = null;
                         topRight = null;
-                    }
-                    else if(j == 0){
+                    } else if (j == 0) {
                         left = null;
                         topLeft = null;
-                        bottomLeft = null; 
-                    }
-                    else if(i == 39){
+                        bottomLeft = null;
+                    } else if (i == 39) {
                         bottomLeft = null;
                         bottomRight = null;
-                    }
-                    else if(j == 39){
+                    } else if (j == 39) {
                         right = null;
                         topRight = null;
                         bottomRight = null;
                     }
 
-                    if(left != null){
-                        left = board[i][j-2];
-                    }
-                    else if(right != null){
-                        right = board[i][j+2];
-                    }
-                    else if(topLeft != null){
-                        topLeft = board[i-1][j-1];
-                    }
-                    else if(topRight != null){
-                        topRight = board[i-1][j+1];
-                    }
-                    else if(bottomLeft != null){
-                        bottomLeft = board[i+1][j-1];
-                    }
-                    else if(bottomRight != null){
-                        bottomRight = board[i+1][j+1];
+                    if (left != null) {
+                        left = board[i][j - 2];
+                    } else if (right != null) {
+                        right = board[i][j + 2];
+                    } else if (topLeft != null) {
+                        topLeft = board[i - 1][j - 1];
+                    } else if (topRight != null) {
+                        topRight = board[i - 1][j + 1];
+                    } else if (bottomLeft != null) {
+                        bottomLeft = board[i + 1][j - 1];
+                    } else if (bottomRight != null) {
+                        bottomRight = board[i + 1][j + 1];
                     }
 
                     break;
@@ -116,9 +116,11 @@ public class Hex {
     public int getCenterY() {
         return y;
     }
-    public int getRadius(){
+
+    public int getRadius() {
         return radius;
     }
+
     public String getTerrain() {
         return terrain;
     }

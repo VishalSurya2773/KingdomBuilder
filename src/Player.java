@@ -105,13 +105,13 @@ public class Player {
         terrainCard = Game.getCard();
     }
 
-    public void useSpecialHexTile(SpecialHex sh) { // should be clicked
-        String type = sh.getType();
-        if (type.equals("barn")) { // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
-            // code after you find out which settlement they choose
-        } else if (type.equals("paddock")) {
+   public void useSpecialHexTile(SpecialHex sh) { // should be clicked
+       String type = sh.getType();
+       if(type.equals("barn")){ // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
+           // code after you find out which settlement they choose
+       }
+       else if(type.equals("paddock")){
 
-        } else if (type.equals("oasis")) {
 
         } else if (type.equals("oracle")) {
 
@@ -158,8 +158,21 @@ public class Player {
 
     }
 
-    public void farmAction(Hex h) {
-
+    public ArrayList<Hex> farmAction(Hex h) {
+        ArrayList<Hex> availableHexList = new ArrayList<Hex>();
+        // edge case where 0 adjecent hexes
+        for(int i = 0; i<placed.size(); i++){
+            Hex[] adj = placed.get(i).adjacents();
+            for(int j = 0; j<adj.length; j++){
+                if(adj[j].isEmpty() && adj[j].getTerrain().equals("grass")){
+                    availableHexList.add(adj[j]);
+                }
+            }
+        }
+        if(availableHexList.size() == 0){
+            for(Hex[] hList : )
+        }
+        return availableHexList;
     }
 
     public void harborAction(Hex h, Settlement s) {

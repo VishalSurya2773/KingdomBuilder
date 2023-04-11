@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class Board {
-    private static Hex[][] Graph;
+    public static Hex[][] Graph;
     private TreeMap<Integer, Hex> map;
     private ArrayList<Scanner> boardScanners;
 
@@ -35,7 +35,6 @@ public class Board {
         boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
-
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
@@ -85,6 +84,13 @@ public class Board {
 
     public static Hex[][] getGraph() {
         return Graph;
+    }
+
+    public boolean isValid(int r, int c){
+        if( r>=0 && r<Graph.length && c >=0 && c <= Graph[0].length){
+            return !Graph[r][c].getTerrain().equals("");
+        }
+        return false;
     }
 
 }
