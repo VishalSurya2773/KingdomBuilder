@@ -25,12 +25,12 @@ public class Hex {
 
     public Hex(String terrainType) {
         terrain = terrainType;
-        left = new Hex("");
-        right = new Hex("");
-        topRight = new Hex("");
-        topLeft = new Hex("");
-        bottomRight = new Hex("");
-        bottomLeft = new Hex("");
+        // left = null;
+        // right = new Hex("");
+        // topRight = new Hex("");
+        // topLeft = new Hex("");
+        // bottomRight = new Hex("");
+        // bottomLeft = new Hex("");
     }
 
     public int compareTo(Hex cmp) {
