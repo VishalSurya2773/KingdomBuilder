@@ -3,17 +3,16 @@ public class Settlement {
     private String color;
     private Player p;
     private Settlement left, right, topLeft, topRight, bottomLeft, bottomRight;
-    private Hex[][] board;
+    private Board board;
 
     public Settlement(String color) {
         this.color = color;
-        left = null;
         right = null;
         topLeft = null;
         topRight = null;
         bottomLeft = null;
         bottomRight = null;
-        board = Board.Graph;
+        board = = Game.gameBoard;
     }
 
     public Settlement(Player player) {
@@ -46,9 +45,24 @@ public class Settlement {
     }
 
     public void findAdjacents() {
-        if (board[x + 1][y].playerSettlement() == null) {
-
+        if (board.isValid(x - 2, y) && board[x - 2][y].getSettlement() == null) {
+            left = null;
+        } else {
+            left = board[x - 2][y].getSettlement();
         }
+
+        if (board[x + 2][y].getSettlement().isValid() && board[x + 2][y].getSettlement() == null) {
+            right = null;
+        } else {
+            right = board[x + 2][y].getSettlement();
+        }
+
+        if (board[x - 2][y - 2].getSettlement().isValid() && board[x - 2][y - 2].getSettlement() == null) {
+            topLeft = null;
+        } else {
+            topLeft = board[x - 2][y - 2].getSettlement();
+        }
+
     }
 
     public Hex[] adjacents() {

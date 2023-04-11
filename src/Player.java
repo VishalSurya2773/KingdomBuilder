@@ -170,12 +170,20 @@ public class Player {
             }
         }
         if(availableHexList.size() == 0){
-            for(Hex[] hList : )
+            for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
+                for(int c = 0; c<Game.gameBoard.getGraph([r].length; c++){
+                    if(Game.gameBoard.getGraph().[r][c].getTerrain().equals("grass")){
+                        availableHexList.add(Game.gameBoard.getGraph()[r][c]);
+                    }
+                }
+            }
         }
         return availableHexList;
     }
 
     public void harborAction(Hex h, Settlement s) {
+        h.setSettlement(s);
+        return;
     }
 
     public void paddockAction(Hex h, Settlement s) {
