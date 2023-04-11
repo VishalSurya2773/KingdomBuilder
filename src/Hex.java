@@ -103,6 +103,10 @@ public class Hex {
         
     }
 
+    public Settlement getSettlement() {
+        return playerSettlement;
+    }
+
     public boolean isEmpty() {
         if (playerSettlement == null) {
             return true;
