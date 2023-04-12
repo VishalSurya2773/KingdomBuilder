@@ -18,8 +18,9 @@ public class Game {
                                // to 0
         players = new ArrayList<Player>();
         for (int i = 0; i < 4; i++) {
+            players.add(new Player(false, null, i + 1));
         }
-        players.add(new Player(false, null, 0));
+        
         Collections.shuffle(players);
 
         deck = new ArrayList<Card>();
@@ -32,7 +33,6 @@ public class Game {
             deck.add(new Card("canyon"));
             deck.add(new Card("desert"));
         }
-        Collections.shuffle(deck);
         Collections.shuffle(deck);
 
         objectives = new ArrayList<ObjectiveCard>();
