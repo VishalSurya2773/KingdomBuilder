@@ -153,12 +153,12 @@ public class Game {
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
             arr.add(i);
-            arr.add(players.get(i).getScore()); // descending order
+            arr.add(players.get(i).getScore());
             rankings.add(arr);
         }
 
-        Collections.sort(rankings, new rankingComparator());
-        Collections.reverse(rankings);
+        Collections.sort(rankings, new rankingComparator());  // ascending order
+        Collections.reverse(rankings); // becomes descending order
         return rankings;
 
     }
