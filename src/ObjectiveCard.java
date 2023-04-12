@@ -46,28 +46,59 @@ public class ObjectiveCard {
     }
 
     public int citizen(String settlementColor) {
-        return 0;
-    }
-
-    public int discoverer(String settlementColor) {
-        for (int r = 0; r < 40; r++) {
-            for (int c = 0; c < 40; c++) {
-
+        int s = 0;
+        int temp = 0;
+        int max =0;
+        for(int r = 0; r<40; r++) {
+            for(int c = 0; c<40; c++) {
+                if(Board.getGraph()[r][c].getSettlement().equals(settlementColor) ) {
+                    Board.getGraph()[r][c].getSettlement().findAdjacents();
+                    Settlement[] adjs = Board.getGraph()[r][c].getSettlement().adjacents();
+                    temp = adjs.length;
+                    if(temp>max) {
+                        max = temp;
+                    }
+                }
             }
         }
-        return -5;
+        s = max / 2 * 1;
+        return s;
+    }
+
+    public int discoverer(String settlementColor, Board graph) {
+        int s = 0;
+        for (int r = 0; r < 40; r++) {
+            for (int c = 0; c < 40; c++) {
+                if(Board.getGraph()[r][c]!= null) {
+                    if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                        s++;
+                        r++;
+                    }
+                } 
+            }
+        }
+        return s;
     }
 
     public int farmer(String settlementColor) {
         return 0;
     }
-
     public int fisherman(String settlementColor) {
         return 0;
     }
 
-    public int hermit(String settlementColor) {
-        return 0;
+    public int hermit(String settlementColor, Board b) {
+        int s = 0;
+        for(int r = 0; r<40; r++) {
+            for(int c = 0; c<40; c++) {
+                if(b.getGraph()[r][c] != null) {
+                    if(b.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                              s++;
+                    }
+                }
+            }
+        }
+        return s;
     }
 
     public int knight(String settlementColor) {

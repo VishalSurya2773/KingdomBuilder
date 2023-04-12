@@ -7,17 +7,19 @@ public class Game {
     public static ArrayList<Player> players;
     private static ArrayList<Card> deck; // should be displayed
     private static ArrayList<Card> discard; // should be displayed
+    public static ArrayList<ObjectiveCard> objDeck;
     public static ArrayList<ObjectiveCard> objectives;
     int amtOfSettlements;
     public static Board gameBoard;
     private int playerTurn;
-
-    public Game() { // remember to show the discard pile
+    
+    public Game(int playerAmount) { // remember to show the discard pile
+        objDeck = new ArrayList<>();
         gameBoard = new Board();
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
                                // to 0
         players = new ArrayList<Player>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
         }
         
@@ -34,15 +36,35 @@ public class Game {
             deck.add(new Card("desert"));
         }
         Collections.shuffle(deck);
-
+        Collections.shuffle(objDeck);
+        
         objectives = new ArrayList<ObjectiveCard>();
-        String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
-                "miner", "worker" };
-        for (int i = 0; i < 3; i++) {
-            int r = (int) (Math.random() * 9);
-            objectives.add(new ObjectiveCard(objs[r]));
+        // String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
+        //         "miner", "worker" };
+        // for (int i = 0; i < 3; i++) {
+        //     int r = (int) (Math.random() * 9); // (possibility of repeats)
+        //     objectives.add(new ObjectiveCard(objs[r]));
+        // }
+        fillObjectiveDeck();
+        getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to display them later)
+        // startGame();
+    }
+    public void getObjectives(){
+        for(int i = 0; i < 3; i++){
+            objectives.add(objDeck.get(i));
         }
-
+    }
+    public void fillObjectiveDeck(){
+        objDeck.add(new ObjectiveCard("citizen"));
+        objDeck.add(new ObjectiveCard("discoverer"));
+        objDeck.add(new ObjectiveCard("farmer"));
+        objDeck.add(new ObjectiveCard("fisherman"));
+        objDeck.add(new ObjectiveCard("hermit"));
+        objDeck.add(new ObjectiveCard("knight"));
+        objDeck.add(new ObjectiveCard("lord"));
+        objDeck.add(new ObjectiveCard("merchant"));
+        objDeck.add(new ObjectiveCard("miner"));
+        objDeck.add(new ObjectiveCard("worker"));
     }
 
     public void addDiscardPile(Card c) {
@@ -65,7 +87,8 @@ public class Game {
 
     public void startGame() {
         // connect 4 boards - not doing that yet
-        reshuffle(); // dont need to add anything
+        // reshuffle(); // dont need to add anything
+
     }
 
     public void turn(Player p) {
@@ -111,10 +134,10 @@ public class Game {
 
     }
 
-    public void reshuffle() {
-        Collections.shuffle(deck);
-        Collections.shuffle(objectives);
-    }
+    // public void reshuffle() {
+    //     Collections.shuffle(deck);
+    //     Collections.shuffle(objectives);
+    // }
 
     public void initializeHex() {
 
@@ -134,14 +157,16 @@ public class Game {
             rankings.add(arr);
         }
 
-        Collections.sort(rankings, new rankingComparator());
+        Collections.sort(rankings, new rankingComparator());  // ascending order
+        Collections.reverse(rankings); // becomes descending order
         return rankings;
 
     }
 
-    public Player getWinner() {
-
-        return new Player(false, null, 0);
+    public int getWinner() { // wont return player
+        ArrayList<ArrayList<Integer>> ranks = rankings();
+        int playerNumber = ranks.get(0).get(0);
+        return playerNumber;
     }
     
 }
