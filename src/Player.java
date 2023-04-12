@@ -212,6 +212,7 @@ public class Player {
     }
 
     public void oracleAction(Hex h) {
+        
     }
 
     public void tavernAction(Hex h) {
