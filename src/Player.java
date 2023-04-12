@@ -105,13 +105,11 @@ public class Player {
         terrainCard = Game.getCard();
     }
 
-   public void useSpecialHexTile(SpecialHex sh) { // should be clicked
-       String type = sh.getType();
-       if(type.equals("barn")){ // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
-           // code after you find out which settlement they choose
-       }
-       else if(type.equals("paddock")){
-
+    public void useSpecialHexTile(SpecialHex sh) { // should be clicked
+        String type = sh.getType();
+        if (type.equals("barn")) { // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
+            // code after you find out which settlement they choose
+        } else if (type.equals("paddock")) {
 
         } else if (type.equals("oracle")) {
 
@@ -161,18 +159,18 @@ public class Player {
     public ArrayList<Hex> showAvailForFarmAction(Hex h) {
         ArrayList<Hex> availableHexList = new ArrayList<Hex>();
         // edge case where 0 adjecent hexes
-        for(int i = 0; i<placed.size(); i++){
-            Hex[] adj = placed.get(i).adjacents();
-            for(int j = 0; j<adj.length; j++){
-                if(adj[j].isEmpty() && adj[j].getTerrain().equals("grass")){
+        for (int i = 0; i < placed.size(); i++) {
+            Hex[] adj = placed.get(i).placedOn().adjacents();
+            for (int j = 0; j < adj.length; j++) {
+                if (adj[j].isEmpty() && adj[j].getTerrain().equals("grass")) {
                     availableHexList.add(adj[j]);
                 }
             }
         }
-        if(availableHexList.size() == 0){
-            for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
-                for(int c = 0; c<Game.gameBoard.getGraph([r].length; c++){
-                    if(Game.gameBoard.getGraph().[r][c].getTerrain().equals("grass")){
+        if (availableHexList.size() == 0) {
+            for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
+                for (int c = 0; c < Game.gameBoard.Graph[r].length; c++) {
+                    if (Game.gameBoard.Graph[r][c].getTerrain().equals("grass")) {
                         availableHexList.add(Game.gameBoard.getGraph()[r][c]);
                     }
                 }
@@ -181,15 +179,16 @@ public class Player {
         return availableHexList;
     }
 
-    public void farmAction(Hex h){
+    public void farmAction(Hex h) {
         h.setSettlement(getSettlementFromStore());
     }
-    public ArrayList<Hex> showAvailForHarborAction(){
+
+    public ArrayList<Hex> showAvailForHarborAction() {
         ArrayList<Hex> avail = new ArrayList<Hex>();
-        for(int r = 0; r< Game.gameBoard.getGraph().length; r++){
-            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
-                if(Game.gameBoard.getGraph()[r][c].getTerrain().equals("water") &&
-                Game.gameBoard.getGraph()[r][c].isEmpty()){
+        for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
+            for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
+                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("water") &&
+                        Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     avail.add(Game.gameBoard.getGraph()[r][c]);
                 }
             }
@@ -197,8 +196,9 @@ public class Player {
         return avail;
 
     }
+
     public void harborAction(Hex h, Settlement s) {
-        h.setSettlement(s));
+        h.setSettlement(s);
         return;
     }
 
@@ -207,8 +207,8 @@ public class Player {
         return;
     }
 
-    public ArrayList oasisAction(Hex h) {
-
+    public ArrayList<Settlement> oasisAction(Hex h) {
+        return new ArrayList<Settlement>();
     }
 
     public void oracleAction(Hex h) {

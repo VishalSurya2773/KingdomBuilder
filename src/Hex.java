@@ -25,12 +25,12 @@ public class Hex {
 
     public Hex(String terrainType) {
         terrain = terrainType;
-        left = new Hex("");
-        right = new Hex("");
-        topRight = new Hex("");
-        topLeft = new Hex("");
-        bottomRight = new Hex("");
-        bottomLeft = new Hex("");
+        // left = null;
+        // right = new Hex("");
+        // topRight = new Hex("");
+        // topLeft = new Hex("");
+        // bottomRight = new Hex("");
+        // bottomLeft = new Hex("");
     }
 
     public int compareTo(Hex cmp) {
@@ -94,13 +94,19 @@ public class Hex {
         }
     }
 
+    public Hex[] adjacents() {
+        Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
+        return out;
+    }
+
     public void setSettlement(Settlement s) {
         playerSettlement = s;
+        playerSettlement.setHex(this);
         isAvail = false;
-    } 
+    }
 
     public void removeSettlement() {
-        
+
     }
 
     public Settlement getSettlement() {

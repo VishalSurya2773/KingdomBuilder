@@ -2,17 +2,20 @@ public class Settlement {
     private int x, y;
     private String color;
     private Player p;
+    private Hex placedOn;
     private Settlement left, right, topLeft, topRight, bottomLeft, bottomRight;
     private Board board;
     private Hex[][] hexes;
 
     public Settlement(String color) {
         this.color = color;
-        right = null;
-        topLeft = null;
-        topRight = null;
-        bottomLeft = null;
-        bottomRight = null;
+        right = new Settlement("");
+        left = new Settlement("");
+        topRight = new Settlement("");
+        topLeft = new Settlement("");
+        bottomRight = new Settlement("");
+        bottomLeft = new Settlement("");
+
         board = Game.gameBoard;
         hexes = board.Graph;
     }
@@ -46,6 +49,14 @@ public class Settlement {
         return color;
     }
 
+    public void setHex(Hex x) {
+        placedOn = x;
+    }
+
+    public Hex placedOn() {
+        return placedOn;
+    }
+
     public void findAdjacents() {
         for (int r = 0; r < hexes.length; r++) {
             for (int c = 0; c < hexes[r].length; c++) {
@@ -67,23 +78,33 @@ public class Settlement {
                         topRight = null;
                     }
 
-                    if (left == null) {
-
+                    if (left != null) {
+                        left = hexes[r][c - 2].getSettlement();
+                    }
+                    if (right != null) {
+                        right = hexes[r][c + 2].getSettlement();
+                    }
+                    if (topLeft != null) {
+                        topLeft = hexes[r - 1][c - 1].getSettlement();
+                    }
+                    if (bottomLeft != null) {
+                        bottomLeft = hexes[r + 1][c - 1].getSettlement();
+                    }
+                    if (topRight != null) {
+                        topRight = hexes[r - 1][c + 1].getSettlement();
+                    }
+                    if (bottomRight != null) {
+                        bottomRight = hexes[r + 1][c + 1].getSettlement();
                     }
 
                 }
             }
         }
-
-        if (board.isValid(x - 2, y) && hexes[x - 2][y].getSettlement() == null) {
-            left = null;
-        } else {
-            left = hexes[x - 2][y].getSettlement();
-        }
     }
 
-    public Hex[] adjacents() {
-        return new Hex[6];
+    public Settlement[] adjacents() {
+        Settlement[] adj = { left, topLeft, bottomLeft, right, topRight, bottomRight };
+        return adj;
     }
 
 }
