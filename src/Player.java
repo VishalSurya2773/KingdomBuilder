@@ -16,7 +16,6 @@ public class Player {
     public Player(boolean first, String clr, int playerNum) {
         isFirst = first;
         color = clr;
-        order = or;
         stored = new ArrayList<Settlement>();
         fillStored();
         this.playerNum = playerNum;
