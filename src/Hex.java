@@ -106,7 +106,7 @@ public class Hex {
     }
 
     public void removeSettlement() {
-
+        playerSettlement = null;
     }
 
     public Settlement getSettlement() {
