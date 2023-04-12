@@ -7,17 +7,18 @@ public class Game {
     public static ArrayList<Player> players;
     private static ArrayList<Card> deck; // should be displayed
     private static ArrayList<Card> discard; // should be displayed
+    public static ArrayList<ObjectiveCard> objDeck;
     public static ArrayList<ObjectiveCard> objectives;
     int amtOfSettlements;
     public static Board gameBoard;
     private int playerTurn;
-
-    public Game() { // remember to show the discard pile
+    
+    public Game(int playerAmount) { // remember to show the discard pile
         gameBoard = new Board();
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
                                // to 0
         players = new ArrayList<Player>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
         }
         
@@ -42,7 +43,7 @@ public class Game {
             int r = (int) (Math.random() * 9);
             objectives.add(new ObjectiveCard(objs[r]));
         }
-
+        startGame();
     }
 
     public void addDiscardPile(Card c) {
@@ -66,6 +67,7 @@ public class Game {
     public void startGame() {
         // connect 4 boards - not doing that yet
         reshuffle(); // dont need to add anything
+
     }
 
     public void turn(Player p) {
