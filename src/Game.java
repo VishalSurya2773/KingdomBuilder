@@ -39,15 +39,15 @@ public class Game {
         Collections.shuffle(objDeck);
         
         objectives = new ArrayList<ObjectiveCard>();
-        String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
-                "miner", "worker" };
-        for (int i = 0; i < 3; i++) {
-            int r = (int) (Math.random() * 9);
-            objectives.add(new ObjectiveCard(objs[r]));
-        }
+        // String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
+        //         "miner", "worker" };
+        // for (int i = 0; i < 3; i++) {
+        //     int r = (int) (Math.random() * 9); // (possibility of repeats)
+        //     objectives.add(new ObjectiveCard(objs[r]));
+        // }
         fillObjectiveDeck();
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to display them later)
-        startGame();
+        // startGame();
     }
     public void getObjectives(){
         for(int i = 0; i < 3; i++){
@@ -87,7 +87,7 @@ public class Game {
 
     public void startGame() {
         // connect 4 boards - not doing that yet
-        reshuffle(); // dont need to add anything
+        // reshuffle(); // dont need to add anything
 
     }
 
@@ -134,10 +134,10 @@ public class Game {
 
     }
 
-    public void reshuffle() {
-        Collections.shuffle(deck);
-        Collections.shuffle(objectives);
-    }
+    // public void reshuffle() {
+    //     Collections.shuffle(deck);
+    //     Collections.shuffle(objectives);
+    // }
 
     public void initializeHex() {
 
@@ -153,18 +153,20 @@ public class Game {
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
             arr.add(i);
-            arr.add(players.get(i).getScore());
+            arr.add(players.get(i).getScore()); // descending order
             rankings.add(arr);
         }
 
         Collections.sort(rankings, new rankingComparator());
+        Collections.reverse(rankings);
         return rankings;
 
     }
 
-    public Player getWinner() {
-
-        return new Player(false, null, 0);
+    public int getWinner() { // wont return player
+        ArrayList<ArrayList<Integer>> ranks = rankings();
+        int playerNumber = ranks.get(0).get(0);
+        return playerNumber;
     }
     
 }
