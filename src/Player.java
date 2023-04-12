@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Player {
     private ArrayList<SpecialHex> hand;
@@ -9,14 +10,17 @@ public class Player {
     private boolean isFirst;
     private int order;
     private String color;
+    private int playerNum; 
     private Hex chosenLocationForNewHex;
 
-    public Player(boolean first, String clr, int or) {
+    public Player(boolean first, String clr, int playerNum) {
         isFirst = first;
         color = clr;
         order = or;
         stored = new ArrayList<Settlement>();
         fillStored();
+        this.playerNum = playerNum;
+
     }
 
     public void fillStored() {
@@ -189,7 +193,9 @@ public class Player {
             for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
                 if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("water") &&
                         Game.gameBoard.getGraph()[r][c].isEmpty()) {
-                    avail.add(Game.gameBoard.getGraph()[r][c]);
+                    ArrayList<Integer> x = new ArrayList<Integer>();
+
+                    avail.put(Game.gameBoard.getGraph()[r][c], x );
                 }
             }
         }
@@ -197,6 +203,7 @@ public class Player {
 
     }
 
+    
     public void harborAction(Hex h, Settlement s) {
         h.setSettlement(s);
         return;
