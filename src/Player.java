@@ -13,6 +13,7 @@ public class Player {
     private int playerNum; 
     private Hex chosenLocationForNewHex;
 
+
     public Player(boolean first, String clr, int playerNum) {
         isFirst = first;
         color = clr;
@@ -90,6 +91,10 @@ public class Player {
 
     public Hex chosenTerrainHex() {
         return chosenLocationForNewHex;
+    }
+
+    public void drawObjectiveCard(){
+
     }
 
     public void calculateScore() {
@@ -186,15 +191,16 @@ public class Player {
         h.setSettlement(getSettlementFromStore());
     }
 
-    public ArrayList<Hex> showAvailForHarborAction() {
-        ArrayList<Hex> avail = new ArrayList<Hex>();
+    public TreeMap<Hex, ArrayList<Integer>> showAvailForHarborAction() {
+        TreeMap<Hex, ArrayList<Integer>> avail = new TreeMap<Hex, ArrayList<Integer>>();
         for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
             for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
                 if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("water") &&
                         Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     ArrayList<Integer> x = new ArrayList<Integer>();
-
-                    avail.put(Game.gameBoard.getGraph()[r][c], x );
+                    x.add(r);
+                    x.add(c);
+                    avail.put(Game.gameBoard.getGraph()[r][c], x);
                 }
             }
         }
@@ -208,7 +214,33 @@ public class Player {
         return;
     }
 
-    public void paddockAction(Hex h, Settlement s) {
+    public TreeMap<Hex, int[]> showAvailForPaddock(int r, int c){
+        TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
+        int[] cord = new int[2];
+        if(Game.gameBoard.isValid(r+2, c) && Game.gameBoard.getGraph()[r+2][c].isEmpty()){
+            cord[0] = r+2;
+            cord[1] = c;
+            avail.put(Game.gameBoard.getGraph()[r+2][c], cord  );
+        }
+         if(Game.gameBoard.isValid(r-2, c) && Game.gameBoard.getGraph()[r-2][c].isEmpty()){
+            cord[0] = r-2;
+            cord[1] = c;
+            avail.put(Game.gameBoard.getGraph()[r-2][c], cord  );
+        }
+        if(Game.gameBoard.isValid(r, c+2) && Game.gameBoard.getGraph()[r][c+2].isEmpty()){
+            cord[0] = r;
+            cord[1] = c+2;
+            avail.put(Game.gameBoard.getGraph()[r][c+2], cord  );
+         }
+        if(Game.gameBoard.isValid(r, c-2) && Game.gameBoard.getGraph()[r][c-2].isEmpty()){
+            cord[0] = r;
+            cord[1] = c-2;
+            avail.put(Game.gameBoard.getGraph()[r][c-2], cord  );
+        }
+        return avail;
+
+    }
+    public void paddockAction(Hex original, Hex new, Settlement s) {
         h.setSettlement(s);
         return;
     }
