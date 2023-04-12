@@ -125,7 +125,6 @@ public class Game {
     }
 
     public ArrayList<ArrayList<Integer>> rankings() {
-        // this prolly doesnt work
         
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
