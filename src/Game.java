@@ -12,7 +12,6 @@ public class Game {
     int amtOfSettlements;
     public static Board gameBoard;
     private int playerTurn;
-    
     public Game(int playerAmount) { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
@@ -122,8 +121,8 @@ public class Game {
         for(int i = 0; i < players.size(); i++){
             players.get(i).calculateScore();
         }
-        ArrayList<ArrayList<Integer>> playerRankings = rankings(); // make sure to check for ties
-        
+        ArrayList<ArrayList<Integer>> playerRankings = rankings(); 
+        ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
         
         
         
@@ -133,11 +132,6 @@ public class Game {
         // traverse through each hex and clear it
 
     }
-
-    // public void reshuffle() {
-    //     Collections.shuffle(deck);
-    //     Collections.shuffle(objectives);
-    // }
 
     public void initializeHex() {
 
@@ -163,10 +157,20 @@ public class Game {
 
     }
 
-    public int getWinner() { // wont return player
+    public ArrayList<Integer> getWinner() { // wont return player
         ArrayList<ArrayList<Integer>> ranks = rankings();
+        ArrayList<Integer> Winners = new ArrayList<>();
         int playerNumber = ranks.get(0).get(0);
-        return playerNumber;
+        Winners.add(playerNumber);
+        for(int i = 1; i < 4; i++){
+            if(ranks.get(i).get(1) == ranks.get(0).get(1)){
+                Winners.add(ranks.get(i).get(0));
+            }
+            else{
+                break;
+            }
+        }
+        return Winners;
     }
     
 }
