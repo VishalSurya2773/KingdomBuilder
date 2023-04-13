@@ -136,7 +136,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             drawStartScreen(g);
             // jbutton stuff
         } else if (gamePhase) {
-            g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage(background, 0, 0, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
@@ -145,6 +145,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 3", WIDTH - WIDTH / 15, HEIGHT / 2);
             g.drawString("PLAYER 4", 0, HEIGHT / 2);
             g.setColor(burgundy);
+
             // g.drawRect(0, WIDTH / 15, WIDTH / 5, WIDTH / 5);
             // g.drawRect(WIDTH - WIDTH / 5, WIDTH / 15, WIDTH / 5, WIDTH / 5);
             // g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
@@ -161,7 +162,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(background, 0, 0, WIDTH, HEIGHT, getBackground(), null);
+        g.drawImage(mainmenu, 0, 0, getBackground(), null);
+
     }
 
     public void drawEndScreen(Graphics g) {
