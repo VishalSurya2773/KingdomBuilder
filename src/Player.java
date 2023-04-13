@@ -242,16 +242,69 @@ public class Player {
     }
     public void paddockAction(Hex original, Hex newHex, Settlement s) {
         newHex.setSettlement(s);
-        original.setSetlement(new Hex(""));
+        original.setSettlement(null);
         return;
     }
 
-    public ArrayList<Settlement> oasisAction(Hex h) {
-        return new ArrayList<Settlement>();
+    public TreeMap<Hex, int[]> showAvailForOasis() {
+        TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
+        for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+                if(Game.gameBoard.getGraph()[r][c].getTerrain().equals("desert") && Game.gameBoard.getGraph()[r][c].isEmpty()){
+                    avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
+                    avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
+                    avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                }
+            }
+        }
+        return avail; 
+    }
+
+    public void oasisAction(Hex h){
+        Settlement s = getSettlementFromStore();
+        h.setSettlement(s);
+        return;
+    }
+
+    public TreeMap<Hex, int[]> showAvailForOracle(String terrain){
+        TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
+
+        // checking to see if there are any adjacents or something like that
+
+        for(int r = 0; r< Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+                if(Game.gameBoard.getGraph()[r][c].getSettlement().getPlayer().equals(this)){
+                    Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
+                    for(Hex h: adj){
+                        if(h.isEmpty() && h.getTerrain().equals(terrain)){
+                            avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
+                            avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
+                            avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(avail.keySet().size() > 0){
+            return avail; 
+        }
+        
+        // in the event that there isnt any adjacent stuff - it will j highlight whatever it can possibly do. 
+        for(int r = 0; r< Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+                if(Game.gameBoard.getGraph()[r][c].getTerrain().equals(terrain) && Game.gameBoard.getGraph()[r][c].isEmpty()){
+                    avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
+                    avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
+                    avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                }
+            }
+        }
+        return avail; 
     }
 
     public void oracleAction(Hex h) {
-        
+
     }
 
     public void tavernAction(Hex h) {
