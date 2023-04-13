@@ -9,11 +9,10 @@ public class Game {
     private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objDeck;
     public static ArrayList<ObjectiveCard> objectives;
+    private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    private int playerTurn;
-    
-    public Game(int playerAmount) { // remember to show the discard pile
+    public Game(int playerAmount) throws IOException{ // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
@@ -37,7 +36,7 @@ public class Game {
         }
         Collections.shuffle(deck);
         Collections.shuffle(objDeck);
-        
+        playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
         // String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
         //         "miner", "worker" };
@@ -85,18 +84,11 @@ public class Game {
         return ans;
     }
 
-    public void startGame() {
-        // connect 4 boards - not doing that yet
-        // reshuffle(); // dont need to add anything
 
-    }
-
-    public void turn(Player p) {
-        if (gameOver) {
-            endGame();
-            return;
-        }
-
+    public void turn() {
+        while(true){
+            playerIndex++;
+        } 
     }
 
     public void useSpecialHex(Player p) {
@@ -122,8 +114,8 @@ public class Game {
         for(int i = 0; i < players.size(); i++){
             players.get(i).calculateScore();
         }
-        ArrayList<ArrayList<Integer>> playerRankings = rankings(); // make sure to check for ties
-        
+        ArrayList<ArrayList<Integer>> playerRankings = rankings(); 
+        ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
         
         
         
@@ -133,11 +125,6 @@ public class Game {
         // traverse through each hex and clear it
 
     }
-
-    // public void reshuffle() {
-    //     Collections.shuffle(deck);
-    //     Collections.shuffle(objectives);
-    // }
 
     public void initializeHex() {
 
@@ -163,10 +150,20 @@ public class Game {
 
     }
 
-    public int getWinner() { // wont return player
+    public ArrayList<Integer> getWinner() { // wont return player
         ArrayList<ArrayList<Integer>> ranks = rankings();
+        ArrayList<Integer> Winners = new ArrayList<>();
         int playerNumber = ranks.get(0).get(0);
-        return playerNumber;
+        Winners.add(playerNumber);
+        for(int i = 1; i < 4; i++){
+            if(ranks.get(i).get(1) == ranks.get(0).get(1)){
+                Winners.add(ranks.get(i).get(0));
+            }
+            else{
+                break;
+            }
+        }
+        return Winners;
     }
     
 }
