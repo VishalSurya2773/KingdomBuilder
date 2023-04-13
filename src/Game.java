@@ -9,10 +9,10 @@ public class Game {
     private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objDeck;
     public static ArrayList<ObjectiveCard> objectives;
+    private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    private int playerTurn;
-    public Game(int playerAmount) { // remember to show the discard pile
+    public Game(int playerAmount) throws IOException{ // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
@@ -36,7 +36,7 @@ public class Game {
         }
         Collections.shuffle(deck);
         Collections.shuffle(objDeck);
-        
+        playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
         // String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
         //         "miner", "worker" };
@@ -84,18 +84,11 @@ public class Game {
         return ans;
     }
 
-    public void startGame() {
-        // connect 4 boards - not doing that yet
-        // reshuffle(); // dont need to add anything
 
-    }
-
-    public void turn(Player p) {
-        if (gameOver) {
-            endGame();
-            return;
-        }
-
+    public void turn() {
+        while(true){
+            playerIndex++;
+        } 
     }
 
     public void useSpecialHex(Player p) {
