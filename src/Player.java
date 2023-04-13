@@ -240,8 +240,9 @@ public class Player {
         return avail;
 
     }
-    public void paddockAction(Hex original, Hex new, Settlement s) {
-        h.setSettlement(s);
+    public void paddockAction(Hex original, Hex newHex, Settlement s) {
+        newHex.setSettlement(s);
+        original.setSetlement(new Hex(""));
         return;
     }
 
@@ -250,6 +251,7 @@ public class Player {
     }
 
     public void oracleAction(Hex h) {
+        
     }
 
     public void tavernAction(Hex h) {

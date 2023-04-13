@@ -29,6 +29,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             sumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
     private int clickedX, clickedY;
+    public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
     private boolean pickHex, startPhase, gamePhase, scoringPhase; // ???
     private JButton playButton, guideButton;
@@ -40,7 +41,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // p1 = new Player(1);
         try {
             // background and buttons
-            mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main.png"));
+            mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main_menu.png"));
             b_play = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_template.png"));
             b_guide_start = ImageIO.read(KingdomBuilderPanel.class.getResource("images/guide_template.png"));
             background = ImageIO.read(KingdomBuilderPanel.class.getResource("images/background.jpg"));
@@ -105,69 +106,70 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             System.out.println("failure");
         }
 
-        // jbutton stuff for start panel
-        Icon play = new ImageIcon(b_play);
-        playButton = new JButton(play);
-        playButton.addActionListener(this);
-        playButton.setBounds(800, 500, 10, 10);
-        playButton.setSize(new Dimension(100, 100));
+        // // jbutton stuff for start panel
+        // Icon play = new ImageIcon(b_play);
+        // playButton = new JButton(play);
+        // playButton.addActionListener(this);
+        // playButton.setBounds(800, 500, 10, 10);
+        // playButton.setSize(new Dimension(100, 100));
 
-        Icon guide = new ImageIcon(b_guide_start);
-        guideButton = new JButton(guide);
-        playButton.addActionListener(this);
+        // Icon guide = new ImageIcon(b_guide_start);
+        // guideButton = new JButton(guide);
+        // playButton.addActionListener(this);
 
-        this.add(playButton);
-        this.add(guideButton);
-        playButton.setVisible(false);
-        guideButton.setVisible(false);
+        // this.add(playButton);
+        // this.add(guideButton);
+        // playButton.setVisible(false);
+        // guideButton.setVisible(false);
 
-        startPhase = false;
-        gamePhase = true;
+        startPhase = true;
+        gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = new Board();
+        b = Game.gameBoard;
         board = b.getGraph();
     }
 
     public void paint(Graphics g) {
+        Color burgundy = new Color(128, 0, 32);
         if (startPhase) {
-            g.drawImage(mainmenu, 0, 0, 1600, 900, null);
-            playButton.setVisible(true);
-            guideButton.setVisible(true);
+            drawStartScreen(g);
+            // jbutton stuff
         } else if (gamePhase) {
-            g.drawImage(background, 0, 0, 1600, 900, null);
+            g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
-            g.drawString("PLAYER 1", 0, 75);
-            g.drawString("PLAYER 2", 1400, 75);
-            g.drawString("PLAYER 4", 0, 525);
-            Color burgundy = new Color(128, 0, 32);
+            g.drawString("PLAYER 1", 0, HEIGHT / 15);
+            g.drawString("PLAYER 2", WIDTH - WIDTH / 15, HEIGHT / 15);
+            g.drawString("PLAYER 3", WIDTH - WIDTH / 15, HEIGHT / 2);
+            g.drawString("PLAYER 4", 0, HEIGHT / 2);
             g.setColor(burgundy);
-            g.drawRect(0, 100, 300, 300);
-            g.drawRect(1350, 100, 300, 300);
-            g.drawRect(1350, 540, 300, 300);
-            g.drawRect(0, 540, 300, 300);
+            // g.drawRect(0, WIDTH / 15, WIDTH / 5, WIDTH / 5);
+            // g.drawRect(WIDTH - WIDTH / 5, WIDTH / 15, WIDTH / 5, WIDTH / 5);
+            // g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
+            // g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
 
-            g.drawRect(0, 850, 1600, 50);
-            g.fillRect(0, 850, 1600, 50);
-            g.drawImage(b_home, 50, 850, 50, 50, null);
-            g.drawImage(b_guide, 125, 850, 50, 50, null);
-            g.drawImage(b_endgame, 200, 850, 50, 50, null);
-
-            // draw board
+            // g.drawRect(0, 850, 1600, 50);
+            // g.fillRect(0, 850, 1600, 50);
+            // g.drawImage(b_home, 50, 850, 50, 50, null);
+            // g.drawImage(b_guide, 125, 850, 50, 50, null);
+            // g.drawImage(b_endgame, 200, 850, 50, 50, null);
 
         }
 
     }
 
     public void drawStartScreen(Graphics g) {
+        g.drawImage(background, 0, 0, WIDTH, HEIGHT, getBackground(), null);
     }
 
     public void drawEndScreen(Graphics g) {
+        g.drawImage(background, 0, 0, null);
     }
 
     public void drawBoard(Graphics g) {
+
     }
 
     public void drawSpecialCard(Graphics g) {
@@ -187,14 +189,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == playButton) {
-            System.out.println("game started");
-            startPhase = false;
-            gamePhase = true;
-        }
-        if (e.getSource() == guideButton) {
-            System.out.println("guide button clicked");
-            // open up pdf of guidebook, have the ability to come back to start screen
+        System.out.println("x:" + clickedX + ", y:" + clickedY);
+        // if (e.getSource() == playButton) {
+        // System.out.println("game started");
+        // startPhase = false;
+        // gamePhase = true;
+        // }
+        // if (e.getSource() == guideButton) {
+        // System.out.println("guide button clicked");
+        // // open up pdf of guidebook, have the ability to come back to start screen
+        // }
+        if (startPhase) {
+            // check if play button or guide button are selected
+            // take in coordinates for the num of players selection
         }
         repaint();
     }
