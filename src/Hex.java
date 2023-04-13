@@ -57,7 +57,8 @@ public class Hex {
         Hex[][] board = Board.getGraph();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
-                if (compareTo(board[i][j]) == 0) {
+                if (this.compareTo(board[i][j]) == 0) { // to check if it's the same hex
+
                     if (i == 0) {
                         topLeft = null;
                         topRight = null;
