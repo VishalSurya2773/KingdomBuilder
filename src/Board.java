@@ -10,7 +10,7 @@ public class Board {
     private ArrayList<Scanner> boardScanners;
 
     public Board() {
-        Graph = new Hex[40][40]; // tentative values
+        Graph = new Hex[40][40];
         map = new TreeMap<Integer, Hex>();
         map.put(0, new Hex("sand"));
         map.put(1, new Hex("canyon"));
@@ -36,7 +36,7 @@ public class Board {
         boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
-        Collections.shuffle(boardScanners);
+        // Collections.shuffle(boardScanners);
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
