@@ -39,7 +39,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
 
     public KingdomBuilderPanel() {
-        // p1 = new Player(1);
         try {
             // background and buttons
             mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main_menu.png"));
@@ -178,20 +177,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawBoard(Graphics g) {
-        // random board 1: board 3 img
-        // random board 3: board 1 img
-        // random board 2: board 7 img
-        // random board 4: board 2 img
         // find and use variable to store the specific board and then reference the
         BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
-        int[] nums = b.numbers;
-        for (int i = 0; i < 4; i++) {
-            if (i == 0) {
-                g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20, null);
-            } else if (i == 1) {
-                g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
-            }
-        }
+        // int[] nums = b.numbers;
+        // for (int i = 0; i < 4; i++) {
+        // if (i == 0) {
+        // g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20,
+        // null);
+        // g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
+        // }
+        // }
 
     }
 
