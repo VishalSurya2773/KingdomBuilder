@@ -36,7 +36,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private JTextField textField;
     private Board b;
     private Hex[][] board;
-    private static int WIDTH, HEIGHT;
+    private int WIDTH, HEIGHT;
 
     public KingdomBuilderPanel() {
         // p1 = new Player(1);
@@ -107,6 +107,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             System.out.println("failure");
         }
 
+        WIDTH = KingdomBuilderFrame.WIDTH;
+        HEIGHT = KingdomBuilderFrame.HEIGHT;
+
+        System.out.println("w: " + WIDTH + "h: " + HEIGHT);
+
         // // jbutton stuff for start panel
         // Icon play = new ImageIcon(b_play);
         // playButton = new JButton(play);
@@ -122,9 +127,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // this.add(guideButton);
         // playButton.setVisible(false);
         // guideButton.setVisible(false);
-
-        WIDTH = KingdomBuilderFrame.WIDTH;
-        HEIGHT = KingdomBuilderFrame.HEIGHT;
 
         startPhase = false;
         gamePhase = true;
@@ -145,9 +147,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
             g.drawString("PLAYER 1", 0, HEIGHT / 15);
-            g.drawString("PLAYER 2", WIDTH - WIDTH / 8, HEIGHT / 15);
-            g.drawString("PLAYER 3", WIDTH - WIDTH / 8, HEIGHT / 2);
-            g.drawString("PLAYER 4", 0, HEIGHT / 2);
+            g.drawString("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
+            g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
+            g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
             g.setColor(burgundy);
             drawBoard(g);
 
@@ -156,11 +158,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
             g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
 
-            g.drawRect(0, 850, 1600, 50);
-            g.fillRect(0, 850, 1600, 50);
-            g.drawImage(b_home, 50, 850, 50, 50, null);
-            g.drawImage(b_guide, 125, 850, 50, 50, null);
-            g.drawImage(b_endgame, 200, 850, 50, 50, null);
+            g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
 
         }
 
