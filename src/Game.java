@@ -81,8 +81,13 @@ public class Game {
 
 
     public void turn() {
-        while(true){
+        int stop = -1;
+        while(playerIndex != stop){ // might be an infinite loop
             playerIndex++;
+            playerIndex %= 4;
+            Player p = players.get(playerIndex);
+
+            if(players.get(playerIndex).numSettlements() == 0 && stop == -1) stop = playerIndex;
         } 
     }
 
