@@ -38,12 +38,7 @@ public class Game {
         Collections.shuffle(objDeck);
         playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
-        // String[] objs = { "citizen", "discoverer", "farmer", "fisherman", "hermit", "knight", "lord", "merchant",
-        //         "miner", "worker" };
-        // for (int i = 0; i < 3; i++) {
-        //     int r = (int) (Math.random() * 9); // (possibility of repeats)
-        //     objectives.add(new ObjectiveCard(objs[r]));
-        // }
+
         fillObjectiveDeck();
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to display them later)
         // startGame();
