@@ -8,7 +8,7 @@ public class Board {
     public static Hex[][] Graph;
     private TreeMap<Integer, Hex> map;
     private ArrayList<Scanner> boardScanners;
-
+    public int[] numbers;
     public Board() {
         Graph = new Hex[40][40];
         map = new TreeMap<Integer, Hex>();
@@ -29,6 +29,7 @@ public class Board {
         map.put(14, new SpecialHex("castle"));
         map.put(15, new SpecialHex("oasis"));
         boardScanners = new ArrayList<Scanner>();
+        numbers = new int[4];
     }
 
     public void makeGraph() throws IOException {
@@ -36,8 +37,13 @@ public class Board {
         boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
-        // Collections.shuffle(boardScanners);
-
+        Collections.shuffle(boardScanners);
+        
+        numbers[0] = boardScanners.get(0).nextInt();
+        numbers[1] = boardScanners.get(1).nextInt();
+        numbers[2] = boardScanners.get(2).nextInt();
+        numbers[3] = boardScanners.get(3).nextInt();
+  
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
@@ -82,7 +88,10 @@ public class Board {
             }
         }
 
+
     }
+
+    
 
     public static Hex[][] getGraph() {
         return Graph;
