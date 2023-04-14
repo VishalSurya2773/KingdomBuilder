@@ -36,6 +36,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private JTextField textField;
     private Board b;
     private Hex[][] board;
+    private static int WIDTH, HEIGHT;
 
     public KingdomBuilderPanel() {
         // p1 = new Player(1);
@@ -122,8 +123,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // playButton.setVisible(false);
         // guideButton.setVisible(false);
 
-        startPhase = true;
-        gamePhase = false;
+        WIDTH = KingdomBuilderFrame.WIDTH;
+        HEIGHT = KingdomBuilderFrame.HEIGHT;
+
+        startPhase = false;
+        gamePhase = true;
         scoringPhase = false;
         addMouseListener(this);
         b = Game.gameBoard;
@@ -136,34 +140,35 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             drawStartScreen(g);
             // jbutton stuff
         } else if (gamePhase) {
-            g.drawImage(background, 0, 0, null);
+            g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
             g.drawString("PLAYER 1", 0, HEIGHT / 15);
-            g.drawString("PLAYER 2", WIDTH - WIDTH / 15, HEIGHT / 15);
-            g.drawString("PLAYER 3", WIDTH - WIDTH / 15, HEIGHT / 2);
+            g.drawString("PLAYER 2", WIDTH - WIDTH / 8, HEIGHT / 15);
+            g.drawString("PLAYER 3", WIDTH - WIDTH / 8, HEIGHT / 2);
             g.drawString("PLAYER 4", 0, HEIGHT / 2);
             g.setColor(burgundy);
+            drawBoard(g);
 
-            // g.drawRect(0, WIDTH / 15, WIDTH / 5, WIDTH / 5);
-            // g.drawRect(WIDTH - WIDTH / 5, WIDTH / 15, WIDTH / 5, WIDTH / 5);
-            // g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
-            // g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
+            g.drawRect(0, WIDTH / 15, WIDTH / 5, WIDTH / 5);
+            g.drawRect(WIDTH - WIDTH / 5, WIDTH / 15, WIDTH / 5, WIDTH / 5);
+            g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
+            g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
 
-            // g.drawRect(0, 850, 1600, 50);
-            // g.fillRect(0, 850, 1600, 50);
-            // g.drawImage(b_home, 50, 850, 50, 50, null);
-            // g.drawImage(b_guide, 125, 850, 50, 50, null);
-            // g.drawImage(b_endgame, 200, 850, 50, 50, null);
+            g.drawRect(0, 850, 1600, 50);
+            g.fillRect(0, 850, 1600, 50);
+            g.drawImage(b_home, 50, 850, 50, 50, null);
+            g.drawImage(b_guide, 125, 850, 50, 50, null);
+            g.drawImage(b_endgame, 200, 850, 50, 50, null);
 
         }
 
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(mainmenu, 0, 0, getBackground(), null);
-
+        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT, getBackground(), null);
+        // jbutton stuff
     }
 
     public void drawEndScreen(Graphics g) {
@@ -171,6 +176,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawBoard(Graphics g) {
+        // random board 1: board 3 img
+        // random board 3: board 1 img
+        // random board 2: board 7 img
+        // random board 4: board 2 img
+        // find and use variable to store the specific board and then reference the
+        // image to be drawn
+        g.drawImage(b3, WIDTH / 4, HEIGHT / 4, WIDTH / 4, WIDTH / 4, null);
 
     }
 
@@ -209,6 +221,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void mouseClicked(java.awt.event.MouseEvent e) {
+        clickedX = e.getX();
+        clickedY = e.getY();
+        System.out.println(clickedX + ", " + clickedY);
+        if (clickedX > 710 && clickedX < 920 && clickedY > 560 && clickedY < 705) { // play button
+            startPhase = false;
+            gamePhase = true;
+            System.out.println("it's game time");
+        }
+        // else if(clickedX)
+        repaint();
     }
 
     public void mousePressed(java.awt.event.MouseEvent e) {

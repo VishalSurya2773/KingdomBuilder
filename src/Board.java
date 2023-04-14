@@ -2,6 +2,7 @@ import java.util.TreeMap;
 import java.util.zip.ZipInputStream;
 import java.util.*;
 import java.io.*;
+import java.util.Collections;
 
 public class Board {
     public static Hex[][] Graph;
@@ -9,7 +10,7 @@ public class Board {
     private ArrayList<Scanner> boardScanners;
 
     public Board() {
-        Graph = new Hex[40][40]; // tentative values
+        Graph = new Hex[40][40];
         map = new TreeMap<Integer, Hex>();
         map.put(0, new Hex("sand"));
         map.put(1, new Hex("canyon"));
@@ -35,6 +36,7 @@ public class Board {
         boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
         boardScanners.add(new Scanner(new File("RandomBoard4.txt")));
+        // Collections.shuffle(boardScanners);
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
@@ -86,8 +88,8 @@ public class Board {
         return Graph;
     }
 
-    public boolean isValid(int r, int c){
-        if( r>=0 && r<Graph.length && c >=0 && c <= Graph[0].length){
+    public boolean isValid(int r, int c) {
+        if (r >= 0 && r < Graph.length && c >= 0 && c <= Graph[0].length) {
             return !Graph[r][c].getTerrain().equals("");
         }
         return false;
