@@ -15,7 +15,7 @@ public class KingdomBuilderFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         add(new KingdomBuilderPanel());
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
 
     }

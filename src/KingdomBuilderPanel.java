@@ -34,9 +34,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private boolean pickHex, startPhase, gamePhase, scoringPhase; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
+    private Game game;
     private Board b;
     private Hex[][] board;
     private int WIDTH, HEIGHT;
+    public Graphics graphics;
 
     public KingdomBuilderPanel() {
         try {
@@ -109,7 +111,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         WIDTH = KingdomBuilderFrame.WIDTH;
         HEIGHT = KingdomBuilderFrame.HEIGHT;
 
-        System.out.println("w: " + WIDTH + "h: " + HEIGHT);
+        System.out.println("w: " + WIDTH + "; h: " + HEIGHT);
 
         // // jbutton stuff for start panel
         // Icon play = new ImageIcon(b_play);
@@ -127,15 +129,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // playButton.setVisible(false);
         // guideButton.setVisible(false);
 
-        startPhase = false;
-        gamePhase = true;
+        startPhase = true;
+        gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = Game.gameBoard;
+        b = game.gameBoard;
         board = b.getGraph();
     }
 
     public void paint(Graphics g) {
+        graphics = g;
         Color burgundy = new Color(128, 0, 32);
         if (startPhase) {
             drawStartScreen(g);
@@ -168,7 +171,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT, getBackground(), null);
+        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 50, null);
         // jbutton stuff
     }
 
@@ -178,7 +181,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
-        BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
+        // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         // int[] nums = b.numbers;
         // for (int i = 0; i < 4; i++) {
         // if (i == 0) {
@@ -228,11 +231,27 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         clickedX = e.getX();
         clickedY = e.getY();
         System.out.println(clickedX + ", " + clickedY);
-        if (clickedX > 710 && clickedX < 920 && clickedY > 560 && clickedY < 705) { // play button
-            startPhase = false;
-            gamePhase = true;
-            System.out.println("it's game time");
+        // scale all of these w width and height icons
+        if (startPhase) {
+            // play button
+            if (clickedX > (int) (WIDTH / 2.5) && clickedX < (int) (WIDTH / 2) && clickedY > (int) (WIDTH / 3)
+                    && clickedY < (int) (WIDTH / 2.5)) {
+                startPhase = false;
+                gamePhase = true;
+                try {
+                    game = new Game(numPlayers);
+                } catch (IOException a) {
+                    System.out.println("Game creation failure");
+                }
+            } else if (clickedX > 715 && clickedX < 760 && clickedY > 790 && clickedY < 855) { // 2 player select
+                numPlayers = 2;
+
+            } else if (clickedX > 800 && clickedX < 875 && clickedY > 785 && clickedY < 850) { // 3 player select
+                numPlayers = 2;
+
+            }
         }
+
         // else if(clickedX)
         repaint();
     }
