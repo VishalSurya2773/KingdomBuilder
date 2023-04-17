@@ -183,7 +183,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
-        int currX = 450;
+        int currX = 475;
         int currY = 100;
         for(int i = 0; i < 4; i++){ // 620 x 528
             
@@ -203,7 +203,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.drawImage(b7, currX, currY, null);
                 currX += 590;
             }
-            if(i == 1) {currY += 505; currX = 450;}
+            if(i == 1) {currY += 505; currX = 475;}
         }
         // for (int i = 0; i < 4; i++) 
         // if (i == 0) {
