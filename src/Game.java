@@ -87,7 +87,7 @@ public class Game {
             playerIndex %= 4;
             Player p = players.get(playerIndex);
 
-            if(players.get(playerIndex).numSettlements() == 0 && stop == -1) stop = playerIndex;
+            if(players.get(playerIndex).numSettlements() == 0 && stop == -1) {stop = playerIndex;}
         } 
     }
 
