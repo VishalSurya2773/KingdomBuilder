@@ -12,16 +12,20 @@ public class Game {
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    public Game(int playerAmount) throws IOException{ // remember to show the discard pile
+
+    public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
+        gameBoard.makeGraph();
+        System.out.println(gameBoard.getGraph()[0][0]);
+
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
                                // to 0
         players = new ArrayList<Player>();
         for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
         }
-        
+
         Collections.shuffle(players);
 
         deck = new ArrayList<Card>();
@@ -40,15 +44,18 @@ public class Game {
         objectives = new ArrayList<ObjectiveCard>();
 
         fillObjectiveDeck();
-        getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to display them later)
+        getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
+                         // display them later)
         // startGame();
     }
-    public void getObjectives(){
-        for(int i = 0; i < 3; i++){
+
+    public void getObjectives() {
+        for (int i = 0; i < 3; i++) {
             objectives.add(objDeck.get(i));
         }
     }
-    public void fillObjectiveDeck(){
+
+    public void fillObjectiveDeck() {
         objDeck.add(new ObjectiveCard("citizen"));
         objDeck.add(new ObjectiveCard("discoverer"));
         objDeck.add(new ObjectiveCard("farmer"));
@@ -79,15 +86,14 @@ public class Game {
         return ans;
     }
 
-
     public void turn() {
         int stop = -1;
-        while(playerIndex != stop){ // might be an infinite loop
+        while (playerIndex != stop) { // might be an infinite loop
             playerIndex++;
             playerIndex %= 4;
             Player p = players.get(playerIndex);
 
-            if(players.get(playerIndex).numSettlements() == 0 && stop == -1) {stop = playerIndex;}
+            if(players.get(playerIndex).numSettlements() == 0 && stop == -1) stop = playerIndex;
         } 
     }
 
@@ -110,18 +116,16 @@ public class Game {
     }
 
     public void endGame() {
-        //scores everything
-        for(int i = 0; i < players.size(); i++){
+        // scores everything
+        for (int i = 0; i < players.size(); i++) {
             players.get(i).calculateScore();
         }
-        ArrayList<ArrayList<Integer>> playerRankings = rankings(); 
+        ArrayList<ArrayList<Integer>> playerRankings = rankings();
         ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
-        
-        
-        
+
     }
 
-    public void clearBoard(){ // only if we do 4 random boards 
+    public void clearBoard() { // only if we do 4 random boards
         // traverse through each hex and clear it
 
     }
@@ -135,7 +139,7 @@ public class Game {
     }
 
     public ArrayList<ArrayList<Integer>> rankings() {
-        
+
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
@@ -144,7 +148,7 @@ public class Game {
             rankings.add(arr);
         }
 
-        Collections.sort(rankings, new rankingComparator());  // ascending order
+        Collections.sort(rankings, new rankingComparator()); // ascending order
         Collections.reverse(rankings); // becomes descending order
         return rankings;
 
@@ -155,23 +159,22 @@ public class Game {
         ArrayList<Integer> Winners = new ArrayList<>();
         int playerNumber = ranks.get(0).get(0);
         Winners.add(playerNumber);
-        for(int i = 1; i < 4; i++){
-            if(ranks.get(i).get(1) == ranks.get(0).get(1)){
+        for (int i = 1; i < 4; i++) {
+            if (ranks.get(i).get(1) == ranks.get(0).get(1)) {
                 Winners.add(ranks.get(i).get(0));
-            }
-            else{
+            } else {
                 break;
             }
         }
         return Winners;
     }
-    
+
 }
+
 class rankingComparator implements Comparator<ArrayList<Integer>> {
-  
+
     // override the compare() method
-    public int compare(ArrayList<Integer> s1, ArrayList<Integer> s2)
-    {
+    public int compare(ArrayList<Integer> s1, ArrayList<Integer> s2) {
         if (s1.get(1) == s2.get(1))
             return 0;
         else if (s1.get(1) > s2.get(1))

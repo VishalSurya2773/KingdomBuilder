@@ -34,12 +34,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private boolean pickHex, startPhase, gamePhase, scoringPhase; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
+    private Game game;
     private Board b;
     private Hex[][] board;
-    private static int WIDTH, HEIGHT;
+    private int WIDTH, HEIGHT;
+    public Graphics graphics;
 
     public KingdomBuilderPanel() {
-        // p1 = new Player(1);
         try {
             // background and buttons
             mainmenu = ImageIO.read(KingdomBuilderPanel.class.getResource("images/main_menu.png"));
@@ -107,6 +108,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             System.out.println("failure");
         }
 
+        WIDTH = KingdomBuilderFrame.WIDTH;
+        HEIGHT = KingdomBuilderFrame.HEIGHT;
+
+        System.out.println("w: " + WIDTH + "; h: " + HEIGHT);
+
         // // jbutton stuff for start panel
         // Icon play = new ImageIcon(b_play);
         // playButton = new JButton(play);
@@ -123,18 +129,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // playButton.setVisible(false);
         // guideButton.setVisible(false);
 
-        WIDTH = KingdomBuilderFrame.WIDTH;
-        HEIGHT = KingdomBuilderFrame.HEIGHT;
-
-        startPhase = false;
-        gamePhase = true;
+        startPhase = true;
+        gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = Game.gameBoard;
+        b = game.gameBoard;
         board = b.getGraph();
     }
 
     public void paint(Graphics g) {
+        graphics = g;
         Color burgundy = new Color(128, 0, 32);
         if (startPhase) {
             drawStartScreen(g);
@@ -145,9 +149,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
             g.drawString("PLAYER 1", 0, HEIGHT / 15);
-            g.drawString("PLAYER 2", WIDTH - WIDTH / 8, HEIGHT / 15);
-            g.drawString("PLAYER 3", WIDTH - WIDTH / 8, HEIGHT / 2);
-            g.drawString("PLAYER 4", 0, HEIGHT / 2);
+            g.drawString("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
+            g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
+            g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
             g.setColor(burgundy);
             drawBoard(g);
 
@@ -156,18 +160,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
             g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
 
-            g.drawRect(0, 850, 1600, 50);
-            g.fillRect(0, 850, 1600, 50);
-            g.drawImage(b_home, 50, 850, 50, 50, null);
-            g.drawImage(b_guide, 125, 850, 50, 50, null);
-            g.drawImage(b_endgame, 200, 850, 50, 50, null);
+            g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
 
         }
 
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT, getBackground(), null);
+        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 50, null);
         // jbutton stuff
     }
 
@@ -176,13 +180,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawBoard(Graphics g) {
-        // random board 1: board 3 img
-        // random board 3: board 1 img
-        // random board 2: board 7 img
-        // random board 4: board 2 img
         // find and use variable to store the specific board and then reference the
-        // image to be drawn
-        g.drawImage(b3, WIDTH / 4, HEIGHT / 4, WIDTH / 4, WIDTH / 4, null);
+        // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
+        // int[] nums = b.numbers;
+        // for (int i = 0; i < 4; i++) {
+        // if (i == 0) {
+        // g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20,
+        // null);
+        // g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
+        // }
+        // }
 
     }
 
@@ -224,11 +231,27 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         clickedX = e.getX();
         clickedY = e.getY();
         System.out.println(clickedX + ", " + clickedY);
-        if (clickedX > 710 && clickedX < 920 && clickedY > 560 && clickedY < 705) { // play button
-            startPhase = false;
-            gamePhase = true;
-            System.out.println("it's game time");
+        // scale all of these w width and height icons
+        if (startPhase) {
+            // play button
+            if (clickedX > (int) (WIDTH / 2.5) && clickedX < (int) (WIDTH / 2) && clickedY > (int) (WIDTH / 3)
+                    && clickedY < (int) (WIDTH / 2.5)) {
+                startPhase = false;
+                gamePhase = true;
+                try {
+                    game = new Game(numPlayers);
+                } catch (IOException a) {
+                    System.out.println("Game creation failure");
+                }
+            } else if (clickedX > 715 && clickedX < 760 && clickedY > 790 && clickedY < 855) { // 2 player select
+                numPlayers = 2;
+
+            } else if (clickedX > 800 && clickedX < 875 && clickedY > 785 && clickedY < 850) { // 3 player select
+                numPlayers = 2;
+
+            }
         }
+
         // else if(clickedX)
         repaint();
     }
