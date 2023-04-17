@@ -308,10 +308,60 @@ public class Player {
     }
 
     public void tavernAction(Hex h) {
+
+    }
+
+    public TreeMap<Hex, int[]> showAvailForTower(){
+        TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
+        TreeMap<Hex, int[]> adj = new TreeMap<Hex, int[]>();
+        for(int c = 0; c<Game.gameBoard.getGraph()[0].length; c++){
+            if(!Game.gameBoard.getGraph()[0][c].getTerrain().equals("") && Game.gameBoard.getGraph()[0][c].isEmpty()){
+                avail.put(Game.gameBoard.getGraph()[0][c], new int[2]);
+                avail.get(Game.gameBoard.getGraph()[0][c])[0] = 0;
+                avail.get(Game.gameBoard.getGraph()[0][c])[1] = c;
+            }
+        }
+
+        for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
+            if(!Game.gameBoard.getGraph()[r][0].getTerrain().equals("") && Game.gameBoard.getGraph()[r][0].isEmpty()){
+                avail.put(Game.gameBoard.getGraph()[r][0], new int[2]);
+                avail.get(Game.gameBoard.getGraph()[r][0])[0] = r;
+                avail.get(Game.gameBoard.getGraph()[r][0])[1] = 0;
+            }
+        }
+        for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
+            if(!Game.gameBoard.getGraph()[r][Game.gameBoard.getGraph()[0].length-1].getTerrain().equals("") && Game.gameBoard.getGraph()[r][Game.gameBoard.getGraph()[0].length-1].isEmpty()){
+                avail.put(Game.gameBoard.getGraph()[r][Game.gameBoard.getGraph()[0].length-1], new int[2]);
+                avail.get(Game.gameBoard.getGraph()[r][Game.gameBoard.getGraph()[0].length-1])[0] = r;
+                avail.get(Game.gameBoard.getGraph()[r][Game.gameBoard.getGraph()[0].length-1])[1] = Game.gameBoard.getGraph()[0].length - 1;
+            }
+        }
+
+        for(int c = 0; c<Game.gameBoard.getGraph()[0].length; c++){
+            if(!Game.gameBoard.getGraph()[Game.gameBoard.getGraph().length  - 1][c].getTerrain().equals("") && Game.gameBoard.getGraph()[Game.gameBoard.getGraph().length - 1][c].isEmpty()){
+                avail.put(Game.gameBoard.getGraph()[0][c], new int[2]);
+                avail.get(Game.gameBoard.getGraph()[0][c])[0] = 0;
+                avail.get(Game.gameBoard.getGraph()[0][c])[1] = c;
+            }
+        }
+
+        // to find adjacencies
+        for(int r = 0; r< Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+                if(Game.gameBoard.getGraph()[r][c].getSettlement().getPlayer().equals(this)){
+                   adj.put(Game.gameBoard.getGraph()[r][c], new int[2]);
+                   adj.get(Game.gameBoard.getGraph()[r][c])[0] = r;
+                   adj.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                }
+            }
+        }
+        
+
+        
     }
 
     public void towerAction(Hex h) {
-
+        
     }
 
 }
