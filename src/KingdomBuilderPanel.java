@@ -234,8 +234,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // scale all of these w width and height icons
         if (startPhase) {
             // play button
-            if (clickedX > (int) (WIDTH / 2.5) && clickedX < (int) (WIDTH / 2) && clickedY > (int) (WIDTH / 3)
-                    && clickedY < (int) (WIDTH / 2.5)) {
+            if (clickedX > (int) (WIDTH / 2.42) && clickedX < (int) (WIDTH / 1.87) && clickedY > (int) (HEIGHT / 1.65)
+                    && clickedY < (int) (HEIGHT / 1.3)) {
                 startPhase = false;
                 gamePhase = true;
                 try {
@@ -248,7 +248,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
             } else if (clickedX > 800 && clickedX < 875 && clickedY > 785 && clickedY < 850) { // 3 player select
                 numPlayers = 2;
-
             }
         }
 

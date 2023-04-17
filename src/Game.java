@@ -16,7 +16,12 @@ public class Game {
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
-        gameBoard.makeGraph();
+        try {
+            gameBoard.makeGraph();
+            System.out.println("yay success in graph building");
+        } catch (IOException a) {
+            System.out.println("graph building failure");
+        }
         System.out.println(gameBoard.getGraph()[0][0]);
 
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
