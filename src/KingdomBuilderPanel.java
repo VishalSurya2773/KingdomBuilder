@@ -207,13 +207,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 currY += 200;
             }
         }
-        // for (int i = 0; i < 4; i++) {
+        // for (int i = 0; i < 4; i++) 
         // if (i == 0) {
         // g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20,
         // null);
         // g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
         // }
-        // }
+        
 
     }
 
