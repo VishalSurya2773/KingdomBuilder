@@ -8,7 +8,7 @@ public class Board {
     public static Hex[][] Graph;
     private TreeMap<Integer, Hex> map;
     private ArrayList<Scanner> boardScanners;
-    public int[] numbers;
+    public static int[] numbers;
 
     public Board() {
         Graph = new Hex[40][40];
@@ -36,13 +36,17 @@ public class Board {
 
     public void makeGraph() throws IOException {
         System.out.println("graph creation test");
-        boardScanners.add(new Scanner(new File("text_files/RandomBoard1.txt")));
-        boardScanners.add(new Scanner(new File("text_files/RandomBoard2.txt")));
-        boardScanners.add(new Scanner(new File("text_files/RandomBoard3.txt")));
-        boardScanners.add(new Scanner(new File("text_files/RandomBoard7.txt")));
-        System.out.println("before shuffle");
+        try {
+            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard1.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard2.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard3.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard7.txt")));
+            System.out.println("scanners are read");
+        } catch (IOException e) {
+            System.out.println("Scanner reading failure");
+        }
+
         Collections.shuffle(boardScanners);
-        System.out.println("after shuffle");
         System.out.println(boardScanners.get(0).nextInt());
 
         numbers[0] = boardScanners.get(0).nextInt();
@@ -107,7 +111,7 @@ public class Board {
         return false;
     }
 
-    public int[] getNumbers() {
+    public static int[] getNumbers() {
         return numbers;
     }
 }
