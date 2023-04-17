@@ -31,15 +31,18 @@ public class Board {
         map.put(15, new SpecialHex("oasis"));
         boardScanners = new ArrayList<Scanner>();
         numbers = new int[4];
+        System.out.println("board creation works");
     }
 
     public void makeGraph() throws IOException {
-        System.out.println("0");
-        boardScanners.add(new Scanner(new File("RandomBoard1.txt")));
-        boardScanners.add(new Scanner(new File("RandomBoard2.txt")));
-        boardScanners.add(new Scanner(new File("RandomBoard3.txt")));
-        boardScanners.add(new Scanner(new File("RandomBoard7.txt")));
+        System.out.println("graph creation test");
+        boardScanners.add(new Scanner(new File("text_files/RandomBoard1.txt")));
+        boardScanners.add(new Scanner(new File("text_files/RandomBoard2.txt")));
+        boardScanners.add(new Scanner(new File("text_files/RandomBoard3.txt")));
+        boardScanners.add(new Scanner(new File("text_files/RandomBoard7.txt")));
+        System.out.println("before shuffle");
         Collections.shuffle(boardScanners);
+        System.out.println("after shuffle");
         System.out.println(boardScanners.get(0).nextInt());
 
         numbers[0] = boardScanners.get(0).nextInt();
@@ -104,4 +107,7 @@ public class Board {
         return false;
     }
 
+    public int[] getNumbers() {
+        return numbers;
+    }
 }
