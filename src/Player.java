@@ -355,12 +355,15 @@ public class Player {
                 }
             }
         }
-        
 
-        
+        TreeMap<Hex, int[]> result = new TreeMap<Hex, int[]>(avail);
+        result.keySet().retainAll(adj.keySet());
+        return result; 
     }
 
     public void towerAction(Hex h) {
+        Settlement s = this.getSettlementFromStore();
+        h.setSettlement(s);
         
     }
 
