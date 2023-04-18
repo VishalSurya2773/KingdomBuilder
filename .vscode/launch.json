@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "java",
             "name": "Launch Current File",
@@ -15,7 +16,19 @@
             "name": "Launch KingdomBuilderRunner",
             "request": "launch",
             "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder"
+            "projectName": "KingdomBuilder",
+            "vmArgs": "-Dspring.devtools.restart.enable=false",
+            "console": "internalConsole",
+            "stepFilters": {
+                "skipClasses": [
+                    "$JDK",
+                    "junit.*"
+                ],
+                "skipSynthetics": false,
+                "skipStaticInitializers": false,
+                "skipConstructors": false
+            },
+            "env": {}
         }
     ]
 }
