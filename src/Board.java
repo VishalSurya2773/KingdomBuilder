@@ -31,17 +31,14 @@ public class Board {
         map.put(15, new SpecialHex("oasis"));
         boardScanners = new ArrayList<Scanner>();
         numbers = new int[4];
-        System.out.println("board creation works");
     }
 
     public void makeGraph() throws IOException {
-        System.out.println("graph creation test");
         try {
             boardScanners.add(new Scanner(new File("src/text_files/RandomBoard1.txt")));
             boardScanners.add(new Scanner(new File("src/text_files/RandomBoard2.txt")));
             boardScanners.add(new Scanner(new File("src/text_files/RandomBoard3.txt")));
             boardScanners.add(new Scanner(new File("src/text_files/RandomBoard7.txt")));
-            System.out.println("scanners are read");
         } catch (IOException e) {
             System.out.println("Scanner reading failure");
         }
@@ -49,10 +46,10 @@ public class Board {
         Collections.shuffle(boardScanners);
         System.out.println(boardScanners.get(0).nextInt());
 
-        numbers[0] = boardScanners.get(0).nextInt();
-        numbers[1] = boardScanners.get(1).nextInt();
-        numbers[2] = boardScanners.get(2).nextInt();
-        numbers[3] = boardScanners.get(3).nextInt();
+        System.out.println(boardScanners.get(0).nextInt());
+        System.out.println(boardScanners.get(1).nextInt());
+        System.out.println(boardScanners.get(2).nextInt());
+        System.out.println(numbers[3] = boardScanners.get(3).nextInt());
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {

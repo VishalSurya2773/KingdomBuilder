@@ -9,34 +9,20 @@
             "name": "KingdomBuilderRunner",
             "request": "launch",
             "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder_4f138ba8"
+            "projectName": "KingdomBuilder_ed9f7644"
         },
         {
             "type": "java",
-            "name": "KingdomBuilderRunner",
-            "request": "launch",
-            "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder_58bc031d"
-        },
-        {
-            "type": "java",
-            "name": "KingdomBuilderRunner",
-            "request": "launch",
-            "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder_8a18dc72"
-        },
-        {
-            "type": "java",
-            "name": "KingdomBuilderRunner",
-            "request": "launch",
-            "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder_7ec07ccd"
-        },
-        {
-            "type": "java",
-            "name": "Current File",
+            "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch KingdomBuilderRunner",
+            "request": "launch",
+            "mainClass": "KingdomBuilderRunner",
+            "projectName": "KingdomBuilder"
         }
     ]
 }
