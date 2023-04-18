@@ -65,7 +65,7 @@ public class ObjectiveCard {
         return s;
     }
 
-    public int discoverer(String settlementColor, Board graph) {
+    public int discoverer(String settlementColor) {
         int s = 0;
         for (int r = 0; r < 40; r++) {
             for (int c = 0; c < 40; c++) {
@@ -87,12 +87,12 @@ public class ObjectiveCard {
         return 0;
     }
 
-    public int hermit(String settlementColor, Board b) {
+    public int hermit(String settlementColor) {
         int s = 0;
         for(int r = 0; r<40; r++) {
             for(int c = 0; c<40; c++) {
-                if(b.getGraph()[r][c] != null) {
-                    if(b.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                if(Board.getGraph()[r][c] != null) {
+                    if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
                               s++;
                     }
                 }
