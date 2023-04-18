@@ -9,13 +9,16 @@ public class KingdomBuilderFrame extends JFrame {
 
     public KingdomBuilderFrame(String title) {
         super(title);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        WIDTH = (int) (screenSize.getWidth());
-        HEIGHT = (int) (screenSize.getHeight());
+
+        WIDTH = 1920;
+        HEIGHT = 1080;
+        // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // WIDTH = (int) (screenSize.getWidth());
+        // HEIGHT = (int) (screenSize.getHeight());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         add(new KingdomBuilderPanel());
-        setResizable(true);
+        setResizable(false);
         setVisible(true);
 
     }
