@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Player {
     private ArrayList<SpecialHex> hand;
@@ -307,6 +309,26 @@ public class Player {
 
     }
 
+
+    public TreeMap<Hex, int[]> showAvailForTavern(){
+        for(int r = 0; r< Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+
+            }
+        }
+    }
+
+    public TreeSet<Hex> tav(int r, int c){
+        if (Game.gameBoard.getGraph()[r][c].isEmpty()){
+            return null;
+        }
+        
+        TreeSet<Hex> taken = new TreeSet<Hex>;
+        taken.add(Game.gameBoard.getGraph()[r][c]);
+        taken.add(tav(r, c+`));
+        taken.add(tav(r, c-1));
+        
+    }
     public void tavernAction(Hex h) {
 
     }
@@ -364,7 +386,7 @@ public class Player {
     public void towerAction(Hex h) {
         Settlement s = this.getSettlementFromStore();
         h.setSettlement(s);
-        
+
     }
 
 }
