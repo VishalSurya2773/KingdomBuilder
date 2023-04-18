@@ -46,10 +46,10 @@ public class Board {
         Collections.shuffle(boardScanners);
         System.out.println(boardScanners.get(0).nextInt());
 
-        System.out.println(boardScanners.get(0).nextInt());
-        System.out.println(boardScanners.get(1).nextInt());
-        System.out.println(boardScanners.get(2).nextInt());
-        System.out.println(numbers[3] = boardScanners.get(3).nextInt());
+        numbers[0] = boardScanners.get(0).nextInt();
+        numbers[1] = boardScanners.get(1).nextInt();
+        numbers[2] = boardScanners.get(2).nextInt();
+        numbers[3] = boardScanners.get(3).nextInt();
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {

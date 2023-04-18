@@ -144,7 +144,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             drawStartScreen(g);
             // jbutton stuff
         } else if (gamePhase) {
-            g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
@@ -171,7 +171,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 50, null);
+        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
     }
 
@@ -185,34 +185,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         int[] nums = Board.getNumbers();
         int currX = 475;
         int currY = 100;
-        for(int i = 0; i < 4; i++){ // 620 x 528
-            
-            if(nums[i] == 1){
+        for (int i = 0; i < 4; i++) { // 620 x 528
+
+            if (nums[i] == 1) {
                 g.drawImage(b1, currX, currY, null);
                 currX += 590;
-            }
-            else if(nums[i] == 2){
+            } else if (nums[i] == 2) {
                 g.drawImage(b2, currX, currY, null);
                 currX += 590;
-            }
-            else if(nums[i] == 3){
+            } else if (nums[i] == 3) {
                 g.drawImage(b3, currX, currY, null);
                 currX += 590;
-            }
-            else{
+            } else {
                 g.drawImage(b7, currX, currY, null);
                 currX += 590;
             }
-            if(i == 1) {currY += 505; currX = 475;}
+            if (i == 1) {
+                currY += 505;
+                currX = 475;
+            }
         }
-        // for (int i = 0; i < 4; i++) 
-        // if (i == 0) {
-        // g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20,
-        // null);
-        // g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
-        // }
-        
-
     }
 
     public void drawSpecialCard(Graphics g) {
