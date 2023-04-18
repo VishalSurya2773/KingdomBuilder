@@ -102,7 +102,7 @@ public class Game {
         } 
     }
 
-    public void useSpecialHex(Player p) { 
+    public void useSpecialHex(Player p) {  // already in player class - don't need to use unless smth comes up
         if (p.chooseHex().getType().equals("barn")) {
             p.barnAction();
         }
@@ -128,6 +128,8 @@ public class Game {
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
         ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
+        // show winners and ranks
+        // if they want to play again, maybe have a play again button that starts the game over (if we have extra time)
 
     }
     
