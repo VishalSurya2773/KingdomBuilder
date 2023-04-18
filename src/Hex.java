@@ -34,6 +34,9 @@ public class Hex {
     }
 
     public int compareTo(Hex cmp) {
+        if (cmp == null) {
+            return Integer.MIN_VALUE;
+        }
         if (cmp.getCenterX() == x)
             return cmp.getCenterY() - y;
         return cmp.getCenterX() - x;

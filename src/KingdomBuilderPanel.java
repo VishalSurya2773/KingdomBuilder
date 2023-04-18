@@ -182,14 +182,36 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
-        // int[] nums = b.numbers;
-        // for (int i = 0; i < 4; i++) {
+        int[] nums = Board.getNumbers();
+        int currX = 475;
+        int currY = 100;
+        for(int i = 0; i < 4; i++){ // 620 x 528
+            
+            if(nums[i] == 1){
+                g.drawImage(b1, currX, currY, null);
+                currX += 590;
+            }
+            else if(nums[i] == 2){
+                g.drawImage(b2, currX, currY, null);
+                currX += 590;
+            }
+            else if(nums[i] == 3){
+                g.drawImage(b3, currX, currY, null);
+                currX += 590;
+            }
+            else{
+                g.drawImage(b7, currX, currY, null);
+                currX += 590;
+            }
+            if(i == 1) {currY += 505; currX = 475;}
+        }
+        // for (int i = 0; i < 4; i++) 
         // if (i == 0) {
         // g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20,
         // null);
         // g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
         // }
-        // }
+        
 
     }
 
@@ -234,8 +256,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // scale all of these w width and height icons
         if (startPhase) {
             // play button
-            if (clickedX > (int) (WIDTH / 2.5) && clickedX < (int) (WIDTH / 2) && clickedY > (int) (WIDTH / 3)
-                    && clickedY < (int) (WIDTH / 2.5)) {
+            if (clickedX > (int) (WIDTH / 2.42) && clickedX < (int) (WIDTH / 1.87) && clickedY > (int) (HEIGHT / 1.65)
+                    && clickedY < (int) (HEIGHT / 1.3)) {
                 startPhase = false;
                 gamePhase = true;
                 try {
@@ -248,7 +270,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
             } else if (clickedX > 800 && clickedX < 875 && clickedY > 785 && clickedY < 850) { // 3 player select
                 numPlayers = 2;
-
             }
         }
 
