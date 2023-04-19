@@ -320,13 +320,20 @@ public class Player {
 
     public TreeSet<Hex> tav(int r, int c){
         if (Game.gameBoard.getGraph()[r][c].isEmpty()){
-            return null;
+            return;
         }
         
-        TreeSet<Hex> taken = new TreeSet<Hex>;
+        TreeSet<Hex> taken = new TreeSet<Hex>();
         taken.add(Game.gameBoard.getGraph()[r][c]);
-        taken.add(tav(r, c+`));
-        taken.add(tav(r, c-1));
+        if(Game.gameBoard.getGraph()[r][c+1].getSettlement().equals(stored.get(0))){
+            taken.addAll(tav(r, c+1));
+        }
+        if(Game.gameBoard.getGraph()[r][c-1].getSettlement().equals(stored.get(0))){
+            taken.addAll(tav(r, c-1));
+        }
+        return taken;
+     }
+
         
     }
     public void tavernAction(Hex h) {
