@@ -91,18 +91,18 @@ public class Game {
         return ans;
     }
 
-    public void turn() {
+    public void turn() { // unfinished - oversees the turns of the players
         int stop = -1;
         while (playerIndex != stop) { // might be an infinite loop
             playerIndex++;
             playerIndex %= 4;
             Player p = players.get(playerIndex);
-
+            // choose cards and do special actions - front UI
             if(players.get(playerIndex).numSettlements() == 0 && stop == -1) stop = playerIndex;
         } 
     }
 
-    public void useSpecialHex(Player p) {
+    public void useSpecialHex(Player p) {  // already in player class - don't need to use unless smth comes up
         if (p.chooseHex().getType().equals("barn")) {
             p.barnAction();
         }
@@ -118,6 +118,7 @@ public class Game {
             }
         }
 
+
     }
 
     public void endGame() {
@@ -127,24 +128,17 @@ public class Game {
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
         ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
+        // show winners and ranks
+        // if they want to play again, maybe have a play again button that starts the game over (if we have extra time)
 
     }
-
-    public void clearBoard() { // only if we do 4 random boards
-        // traverse through each hex and clear it
-
-    }
-
-    public void initializeHex() {
-
-    }
-
+    
     public void chooseStartingPlayer() {
         players.get(0).setFirst();
     }
 
-    public ArrayList<ArrayList<Integer>> rankings() {
-
+    public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
+ 
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
@@ -159,7 +153,7 @@ public class Game {
 
     }
 
-    public ArrayList<Integer> getWinner() { // wont return player
+    public ArrayList<Integer> getWinner() { // return arraylist of players - (in case of ties)
         ArrayList<ArrayList<Integer>> ranks = rankings();
         ArrayList<Integer> Winners = new ArrayList<>();
         int playerNumber = ranks.get(0).get(0);

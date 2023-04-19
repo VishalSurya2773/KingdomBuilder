@@ -9,7 +9,7 @@
             "name": "KingdomBuilderRunner",
             "request": "launch",
             "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder_ed9f7644"
+            "projectName": "KingdomBuilder-4_19c7b584"
         },
         {
             "type": "java",
@@ -22,7 +22,19 @@
             "name": "Launch KingdomBuilderRunner",
             "request": "launch",
             "mainClass": "KingdomBuilderRunner",
-            "projectName": "KingdomBuilder"
+            "projectName": "KingdomBuilder",
+            "vmArgs": "-Dspring.devtools.restart.enable=false",
+            "console": "internalConsole",
+            "stepFilters": {
+                "skipClasses": [
+                    "$JDK",
+                    "junit.*"
+                ],
+                "skipSynthetics": false,
+                "skipStaticInitializers": false,
+                "skipConstructors": false
+            },
+            "env": {}
         }
     ]
 }
