@@ -146,11 +146,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 int alpha = 127; // 50% transparent
                 Color highlight = new Color(255, 0, 0, alpha);
                 if (numPlayers == 2) {
-                    highLightRect(g, 925, 960, 85, 80, highlight);
+                    highLightRect(g, 925, 960, 86, 80, highlight);
                 } else if (numPlayers == 3) {
-                    highLightRect(g, 1030, 960, 85, 80, highlight);
+                    highLightRect(g, 1030, 960, 92, 80, highlight);
                 } else if (numPlayers == 4) {
-                    highLightRect(g, 1140, 960, 85, 80, highlight);
+                    highLightRect(g, 1143, 960, 92, 80, highlight);
                 }
             }
             // jbutton stuff
