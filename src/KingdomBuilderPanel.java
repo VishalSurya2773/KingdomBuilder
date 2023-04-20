@@ -166,10 +166,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.setColor(burgundy);
             drawBoard(g);
 
-            g.drawRect(0, 100, 320, 320);
-            g.drawRect(0, 496, 320, 320);
-            g.drawRect(1600, 100, 320, 320);
-            g.drawRect(1600, 496, 320, 320);
+            g.drawRect(0, 100, 320, 315);
+            g.drawRect(0, 496, 320, 315);
+            g.drawRect(1600, 100, 320, 315);
+            g.drawRect(1600, 496, 320, 315);
 
             g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
             g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
@@ -178,10 +178,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
 
             // drawing cards 117, 180
-            drawCard(g, 320, 110, 195, 300);
-            drawCard(g, 320, 606, 195, 300);
-            drawCard(g, 1600 - 195, 110, 195, 300);
-            drawCard(g, 1600 - 195, 606, 195, 300);
+            drawCard(g, 315, 110, 176, 270);
+            drawCard(g, 315, 606, 176, 270);
+            drawCard(g, 1605 - 195, 110, 176, 270);
+            drawCard(g, 1605 - 195, 606, 176, 270);
 
         }
 
@@ -200,31 +200,32 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
-        int currX = 385;
+        int currX = 495;
         int currY = 100;
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
-                g.drawImage(b1, currX, currY, 599, 510, null);
-                currX += 551;
+                g.drawImage(b1, currX, currY, 467, 400, null);
+                currX += 445;
             } else if (nums[i] == 2) {
-                g.drawImage(b2, currX, currY, 599, 510, null);
-                currX += 551;
+                g.drawImage(b2, currX, currY, 467, 400, null);
+                currX += 445;
             } else if (nums[i] == 3) {
-                g.drawImage(b3, currX, currY, 599, 510, null);
-                currX += 551;
+                g.drawImage(b3, currX, currY, 467, 400, null);
+                currX += 445;
             } else {
-                g.drawImage(b7, currX, currY, 599, 510, null);
-                currX += 551;
+                g.drawImage(b7, currX, currY, 467, 400, null);
+                currX += 445;
             }
             if (i == 1) {
-                currY += 450;
-                currX = 385;
+                currY += 388;
+                currX = 495;
             }
         }
     }
 
-    public void drawSpecialCard(Graphics g) {
+    public void drawSpecialCard(Graphics g, int x, int y, int w, int h) {
+
     }
 
     public void drawCard(Graphics g, int x, int y, int w, int h) {
