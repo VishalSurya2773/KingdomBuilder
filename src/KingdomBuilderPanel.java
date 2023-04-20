@@ -146,9 +146,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 int alpha = 127; // 50% transparent
                 Color highlight = new Color(255, 0, 0, alpha);
                 if (numPlayers == 2) {
-                    highLightRect(g, 925, 960, 86, 80, highlight);
+                    highLightRect(g, 925, 960, 88, 80, highlight);
                 } else if (numPlayers == 3) {
-                    highLightRect(g, 1030, 960, 92, 80, highlight);
+                    highLightRect(g, 1030, 960, 94, 80, highlight);
                 } else if (numPlayers == 4) {
                     highLightRect(g, 1143, 960, 92, 80, highlight);
                 }
@@ -159,23 +159,29 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
-            g.drawString("PLAYER 1", 0, HEIGHT / 15);
-            g.drawString("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
-            g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
-            g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
+            g.drawString("PLAYER 1", 0, 72);
+            g.drawString("PLAYER 2", 1710, 72);
+            g.drawString("PLAYER 3", 1710, 468);
+            g.drawString("PLAYER 4", 0, 468);
             g.setColor(burgundy);
             drawBoard(g);
 
-            g.drawRect(0, WIDTH / 15, WIDTH / 5, WIDTH / 5);
-            g.drawRect(WIDTH - WIDTH / 5, WIDTH / 15, WIDTH / 5, WIDTH / 5);
-            g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
-            g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
+            g.drawRect(0, 100, 320, 320);
+            g.drawRect(0, 496, 320, 320);
+            g.drawRect(1600, 100, 320, 320);
+            g.drawRect(1600, 496, 320, 320);
 
             g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
             g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
             g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
             g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
             g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+
+            // drawing cards 117, 180
+            drawCard(g, 320, 110, 195, 300);
+            drawCard(g, 320, 606, 195, 300);
+            drawCard(g, 1600 - 195, 110, 195, 300);
+            drawCard(g, 1600 - 195, 606, 195, 300);
 
         }
 
@@ -194,26 +200,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
-        int currX = 475;
+        int currX = 385;
         int currY = 100;
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
-                g.drawImage(b1, currX, currY, null);
-                currX += 590;
+                g.drawImage(b1, currX, currY, 599, 510, null);
+                currX += 551;
             } else if (nums[i] == 2) {
-                g.drawImage(b2, currX, currY, null);
-                currX += 590;
+                g.drawImage(b2, currX, currY, 599, 510, null);
+                currX += 551;
             } else if (nums[i] == 3) {
-                g.drawImage(b3, currX, currY, null);
-                currX += 590;
+                g.drawImage(b3, currX, currY, 599, 510, null);
+                currX += 551;
             } else {
-                g.drawImage(b7, currX, currY, null);
-                currX += 590;
+                g.drawImage(b7, currX, currY, 599, 510, null);
+                currX += 551;
             }
             if (i == 1) {
-                currY += 505;
-                currX = 475;
+                currY += 450;
+                currX = 385;
             }
         }
     }
@@ -221,7 +227,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawSpecialCard(Graphics g) {
     }
 
-    public void drawCard(Graphics g) {
+    public void drawCard(Graphics g, int x, int y, int w, int h) {
+        g.drawImage(cardBack, x, y, w, h, null);
     }
 
     public void drawScore(Graphics g) {
@@ -235,7 +242,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
         g.setColor(c);
-        g.drawRect(x, y, w, h);
         g.fillRect(x, y, w, h);
     }
 
