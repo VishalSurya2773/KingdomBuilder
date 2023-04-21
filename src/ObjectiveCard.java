@@ -218,8 +218,7 @@ public class ObjectiveCard {
         Hex[][] b = Board.getGraph();
         for (int r = 0; r < b.length; r++) {
             for (int c = 0; c < b[r].length; c++) {
-                if (b[r][c].getSettlement().getColor().equals(settlementColor)
-                        && isAdjToMountain(b[r][c].adjacents())) {
+                if (b[r][c].getSettlement().getColor().equals(settlementColor) && isAdjToWater(b[r][c].adjacents())) {
                     total++;
                 }
             }
@@ -229,7 +228,7 @@ public class ObjectiveCard {
 
     public boolean isAdjToMountain(Hex[] adj) {
         for (int i = 0; i < adj.length; i++) {
-            if (adj[i].getTerrain().equals("mountain")) {
+            if (adj[i].getTerrain().equals("water")) {
                 return true;
             }
         }
