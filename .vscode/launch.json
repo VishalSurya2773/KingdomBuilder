@@ -9,6 +9,13 @@
             "name": "KingdomBuilderRunner",
             "request": "launch",
             "mainClass": "KingdomBuilderRunner",
+            "projectName": "KingdomBuilder-2_19c7b582"
+        },
+        {
+            "type": "java",
+            "name": "KingdomBuilderRunner",
+            "request": "launch",
+            "mainClass": "KingdomBuilderRunner",
             "projectName": "KingdomBuilder_4f138ba8"
         },
         {

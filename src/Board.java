@@ -35,10 +35,10 @@ public class Board {
 
     public void makeGraph() throws IOException {
         try {
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard1.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard2.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard3.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard7.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board1.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board2.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board3.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board7.txt")));
         } catch (IOException e) {
             System.out.println("Scanner reading failure");
         }
@@ -50,7 +50,7 @@ public class Board {
         numbers[2] = boardScanners.get(2).nextInt();
         numbers[3] = boardScanners.get(3).nextInt();
         int coordX = 384;
-        int coordY = 107; 
+        int coordY = 107;
         int changeX = 57;
         int changeY = 49;
         for (int r = 0; r < Graph.length; r++) {
@@ -106,7 +106,7 @@ public class Board {
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
                     }
-                    
+
                 }
             }
             coordY += changeY;

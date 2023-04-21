@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.TreeMap;
+
 public class ObjectiveCard {
 
     private String type;
@@ -45,6 +50,33 @@ public class ObjectiveCard {
         return 0;
     }
 
+    public int findNumSettlementsInSector(String settlementColor, int sect) {
+        int length = 0;
+        int width = 0;
+        if (sect == 1) {
+            length = 20;
+            width = 20;
+        } else if (sect == 2) {
+            length = 40;
+            width = 40;
+        } else if (sect == 3) {
+            length = 20;
+            width = 40;
+        } else if (sect == 4) {
+            length = 40;
+            width = 20;
+        }
+        int total = 0;
+        for (int r = length - 20; r < length; r++) {
+            for (int c = width - 20; c < width; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    total++;
+                }
+            }
+        }
+        return total;
+    }
+
     public int citizen(String settlementColor) {
         int s = 0;
         int temp = 0;
@@ -81,39 +113,10 @@ public class ObjectiveCard {
     }
 
     public int farmer(String settlementColor) {
-        int s1 = 0;
-        int s2 = 0;
-        int s3 = 0;
-        int s4 = 0;
-        for (int r = 0; r < 20; r++) {
-            for (int c = 0; c < 20; c++) {
-                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
-                    s1++;
-                }
-            }
-        }
-        for (int r = 20; r < 40; r++) {
-            for (int c = 20; c < 40; c++) {
-                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
-                    s2++;
-                }
-            }
-        }
-        for (int r = 0; r < 20; r++) {
-            for (int c = 20; c < 40; c++) {
-                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
-                    s3++;
-                }
-            }
-        }
-        for (int r = 20; r < 40; r++) {
-            for (int c = 0; c < 20; c++) {
-                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
-                    s4++;
-                }
-            }
-        }
-
+        int s1 = findNumSettlementsInSector(settlementColor, 1);
+        int s2 = findNumSettlementsInSector(settlementColor, 2);
+        int s3 = findNumSettlementsInSector(settlementColor, 3);
+        int s4 = findNumSettlementsInSector(settlementColor, 4);
         if (s1 < s2 && s1 < s3 && s1 < s4) {
             return s1 * 3;
         } else if (s2 < s1 && s2 < s3 && s2 < s4) {
@@ -164,11 +167,46 @@ public class ObjectiveCard {
     }
 
     public int knight(String settlementColor) {
+
         return 0;
     }
 
     public int lord(String settlementColor) {
+
+        ArrayList<Player> a = new ArrayList<Player>();
+        a.add(new Player(false, "", 0));
+        a.add(new Player(false, "", 0));
         return 0;
+
+    }
+
+    public int getLargestNumSetInSect(String settlementColor) {
+        int[] scores = { findNumSettlementsInSector(settlementColor, 1), findNumSettlementsInSector(settlementColor, 2),
+                findNumSettlementsInSector(settlementColor, 3), findNumSettlementsInSector(settlementColor, 4) };
+        int largest = 0;
+        for (int i = 0; i < scores.length; i++) {
+            if (i > largest) {
+                largest = i;
+            }
+        }
+        return 0;
+    }
+
+    public ArrayList<Player> lordRankings() {
+        ArrayList<Player> ps = Game.players;
+        int p1 = getLargestNumSetInSect(ps.get(0).getColor());
+        int p2 = getLargestNumSetInSect(ps.get(1).getColor());
+        int p3 = getLargestNumSetInSect(ps.get(2).getColor());
+        int p4 = getLargestNumSetInSect(ps.get(3).getColor());
+        Map<Integer, Player> rankings = new HashMap<Integer, Player>();
+
+        rankings.put(1, ps.get(0));
+        rankings.put(2, ps.get(1));
+        rankings.put(3, ps.get(2));
+        rankings.put(4, ps.get(3));
+        TreeMap<Integer, Player> sorted = new TreeMap<>();
+        sorted.putAll(rankings);
+        return (ArrayList) sorted.values();
     }
 
     public int merchant(String settlementColor) {
