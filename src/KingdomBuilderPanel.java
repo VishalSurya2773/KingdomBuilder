@@ -35,8 +35,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private JButton playButton, guideButton;
     private JTextField textField;
     private Game game;
-    private Board b;
-    private Hex[][] board;
+    private static Board b;
+    private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
 
@@ -133,8 +133,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = game.gameBoard;
-        board = b.getGraph();
+        b = Game.gameBoard;
+        board = Board.getGraph();
     }
     public void paint(Graphics g) {
         graphics = g;
@@ -163,18 +163,23 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
             g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
             g.setColor(burgundy);
+
             drawBoard(g);
+            drawHexOutline(g);
+            // image.png(g);
 
             g.drawRect(0, 128, 340, 340);
             g.drawRect(1580, 128, 340, 340);
             g.drawRect(1580, 480, 340, 340);
             g.drawRect(0, 480, 340, 340);
+            
+            // Commented this out bc it blocks the last row of hexes on the game board
 
-            g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-            g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-            g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-            g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-            g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
 
         }
 
@@ -194,7 +199,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
         int currX = 355;
-        int currY = 75;
+        int currY = 0;
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
@@ -215,17 +220,22 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 currX = 355;
             }
         }
+        
+    }
+    public void drawHexOutline(Graphics g){
         for(int i = 0; i < 40; i++){
             for(int j = 0; j < 40; j++){
                 if(board[i][j] != null){
                     int XCoord = board[i][j].getCenterX();
                     int YCoord = board[i][j].getCenterY();
-                    
+                    g.setColor(Color.BLACK);
+                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord, XCoord-30};
+                    int[] yPoints = {YCoord-17, YCoord-18, YCoord-17, YCoord+17, YCoord+35, YCoord+17};
+                    g.drawPolygon(xPoints, yPoints, 6);
                 }
             }
         }
     }
-
     public void drawSpecialCard(Graphics g) {
     }
 
