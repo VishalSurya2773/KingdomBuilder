@@ -126,11 +126,15 @@ public class Board {
             }
             coordY += changeY;
         }
-        // for(int i = 0; i < 40; i++){
-        //     for(int j = 0; j < 40; j++){
-        //         if(Graph[i][j] == null) System.out.println(i + " " + j + " NULL");
-        //     }
-        // }
+         for(int i = 0; i < 40; i++){
+             for(int j = 0; j < 40; j++){
+                 if(Graph[i][j] == null) System.out.print("N");
+                 else System.out.print("G");
+             }
+             System.out.println();
+         }
+         System.out.println();
+         System.out.println();
     }
 
     public static Hex[][] getGraph() {
