@@ -35,8 +35,8 @@ public class Board {
     }
 
     public void makeGraph() throws IOException {
-        int[] boardNums = { (int) (Math.random() * 8), (int) (Math.random() * 8), (int) (Math.random() * 8),
-                (int) (Math.random() * 8) };
+        int[] boardNums = { (int) (Math.random() * 8) + 1, (int) (Math.random() * 8) + 1, (int) (Math.random() * 8) + 1,
+                (int) (Math.random() * 8) + 1 };
         for (int i = 0; i < 3; i++) {
             if (boardNums[i] == boardNums[i + 1]) {
                 boardNums[i] = (int) (Math.random() * 8);
@@ -131,11 +131,12 @@ public class Board {
             }
             coordY += changeY;
         }
-        // for(int i = 0; i < 40; i++){
-        // for(int j = 0; j < 40; j++){
-        // if(Graph[i][j] == null) System.out.println(i + " " + j + " NULL");
-        // }
-        // }
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 40; j++) {
+                if (Graph[i][j] == null)
+                    System.out.println(i + ", " + j);
+            }
+        }
     }
 
     public static Hex[][] getGraph() {
