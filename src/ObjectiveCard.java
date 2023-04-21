@@ -214,7 +214,26 @@ public class ObjectiveCard {
     }
 
     public int miner(String settlementColor) {
-        return 0;
+        int total = 0;
+        Hex[][] b = Board.getGraph();
+        for (int r = 0; r < b.length; r++) {
+            for (int c = 0; c < b[r].length; c++) {
+                if (b[r][c].getSettlement().getColor().equals(settlementColor)
+                        && isAdjToMountain(b[r][c].adjacents())) {
+                    total++;
+                }
+            }
+        }
+        return total;
+    }
+
+    public boolean isAdjToMountain(Hex[] adj) {
+        for (int i = 0; i < adj.length; i++) {
+            if (adj[i].getTerrain().equals("mountain")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int worker(String settlementColor) {
