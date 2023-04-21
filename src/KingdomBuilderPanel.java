@@ -215,6 +215,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 currX = 355;
             }
         }
+        for(int i = 0; i < 40; i++){
+            for(int j = 0; j < 40; j++){
+                if(board[i][j] != null){
+                    int XCoord = board[i][j].getCenterX();
+                    int YCoord = board[i][j].getCenterY();
+                    
+                }
+            }
+        }
     }
 
     public void drawSpecialCard(Graphics g) {
