@@ -171,12 +171,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawRect(1580, 128, 340, 340);
             g.drawRect(1580, 480, 340, 340);
             g.drawRect(0, 480, 340, 340);
-
-            g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-            g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-            g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-            g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-            g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            
+            // Commented this out bc it blocks the last row of hexes on the game board
+            
+            // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+            // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+            // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
 
         }
 
@@ -196,7 +198,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
         int currX = 355;
-        int currY = 75;
+        int currY = 0;
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
