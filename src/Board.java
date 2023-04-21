@@ -3,6 +3,7 @@ import java.util.zip.ZipInputStream;
 import java.util.*;
 import java.io.*;
 import java.util.Collections;
+import java.util.Random;
 
 public class Board {
     public static Hex[][] Graph;
@@ -34,21 +35,25 @@ public class Board {
     }
 
     public void makeGraph() throws IOException {
+        int[] boardNums = { (int) (Math.random() * 8), (int) (Math.random() * 8), (int) (Math.random() * 8),
+                (int) (Math.random() * 8) };
+        for (int i = 0; i < 3; i++) {
+            if (boardNums[i] == boardNums[i + 1]) {
+                boardNums[i] = (int) (Math.random() * 8);
+            }
+        }
         try {
-            boardScanners.add(new Scanner(new File("src/text_files/Board1.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/Board2.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/Board3.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/Board7.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + boardNums[0] + ".txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + boardNums[1] + ".txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + boardNums[2] + ".txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + boardNums[3] + ".txt")));
         } catch (IOException e) {
             System.out.println("Scanner reading failure");
         }
 
         Collections.shuffle(boardScanners);
 
-        numbers[0] = boardScanners.get(0).nextInt();
-        numbers[1] = boardScanners.get(1).nextInt();
-        numbers[2] = boardScanners.get(2).nextInt();
-        numbers[3] = boardScanners.get(3).nextInt();
+        numbers = boardNums;
         int coordX = 384;
         int coordY = 107;
         int changeX = 57;
@@ -127,9 +132,9 @@ public class Board {
             coordY += changeY;
         }
         // for(int i = 0; i < 40; i++){
-        //     for(int j = 0; j < 40; j++){
-        //         if(Graph[i][j] == null) System.out.println(i + " " + j + " NULL");
-        //     }
+        // for(int j = 0; j < 40; j++){
+        // if(Graph[i][j] == null) System.out.println(i + " " + j + " NULL");
+        // }
         // }
     }
 
