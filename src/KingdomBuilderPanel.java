@@ -136,7 +136,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         b = game.gameBoard;
         board = b.getGraph();
     }
-
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
