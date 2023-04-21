@@ -131,12 +131,15 @@ public class Hex {
     public int getCenterY() {
         return y;
     }
-    public void setX(int num){
+
+    public void setX(int num) {
         x = num;
     }
-    public void setY(int num){
+
+    public void setY(int num) {
         y = num;
     }
+
     public int getRadius() {
         return radius;
     }
@@ -145,4 +148,7 @@ public class Hex {
         return terrain;
     }
 
+    public String toString() {
+        return terrain;
+    }
 }
