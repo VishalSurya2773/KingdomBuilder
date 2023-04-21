@@ -165,7 +165,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.setColor(burgundy);
 
             drawBoard(g);
-            drawHexOutline(g);
+            // image.png(g);
 
             g.drawRect(0, 128, 340, 340);
             g.drawRect(1580, 128, 340, 340);
