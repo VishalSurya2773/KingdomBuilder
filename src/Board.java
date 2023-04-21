@@ -58,9 +58,13 @@ public class Board {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = new Hex(""); // basically just a null pointer
                     Graph[r][c].setAdjacent();
-                    Graph[r][c]
+                    Graph[r][c].setX(coordX);
+                    Graph[r][c].setY(coordY);
+                    coordX += changeX;
+
                 }
             }
+            coordY += changeY;
         }
 
         for (int r = 0; r < 20; r++) {
@@ -69,9 +73,13 @@ public class Board {
                     while (boardScanners.get(0).hasNextInt()) {
                         Graph[r][c] = map.get(boardScanners.get(0).nextInt());
                         Graph[r][c].setAdjacent();
+                        Graph[r][c].setX(coordX);
+                        Graph[r][c].setY(coordY);
+                        coordX += changeX;
                     }
                 }
             }
+            coordY += changeY;
         }
 
         for (int r = 0; r < 20; r++) {
@@ -80,9 +88,13 @@ public class Board {
                     while (boardScanners.get(1).hasNextInt()) {
                         Graph[r][c] = map.get(boardScanners.get(1).nextInt());
                         Graph[r][c].setAdjacent();
+                        Graph[r][c].setX(coordX);
+                        Graph[r][c].setY(coordY);
+                        coordX += changeX;
                     }
                 }
             }
+            coordY += changeY;
         }
         for (int r = 20; r < 40; r++) {
             for (int c = 0; c < 20; c++) {
@@ -90,9 +102,14 @@ public class Board {
                     while (boardScanners.get(2).hasNextInt()) {
                         Graph[r][c] = map.get(boardScanners.get(2).nextInt());
                         Graph[r][c].setAdjacent();
+                        Graph[r][c].setX(coordX);
+                        Graph[r][c].setY(coordY);
+                        coordX += changeX;
                     }
+                    
                 }
             }
+            coordY += changeY;
         }
 
         for (int r = 20; r < 40; r++) {
@@ -101,9 +118,13 @@ public class Board {
                     while (boardScanners.get(3).hasNextInt()) {
                         Graph[r][c] = map.get(boardScanners.get(3).nextInt());
                         Graph[r][c].setAdjacent();
+                        Graph[r][c].setX(coordX);
+                        Graph[r][c].setY(coordY);
+                        coordX += changeX;
                     }
                 }
             }
+            coordY += changeY;
         }
 
     }
