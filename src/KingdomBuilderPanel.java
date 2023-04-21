@@ -35,8 +35,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private JButton playButton, guideButton;
     private JTextField textField;
     private Game game;
-    private Board b;
-    private Hex[][] board;
+    private static Board b;
+    private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
 
@@ -133,8 +133,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = game.gameBoard;
-        board = b.getGraph();
+        b = Game.gameBoard;
+        board = Board.getGraph();
     }
     public void paint(Graphics g) {
         graphics = g;
@@ -163,8 +163,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
             g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
             g.setColor(burgundy);
+
             drawBoard(g);
             drawHexOutline(g);
+
             g.drawRect(0, 128, 340, 340);
             g.drawRect(1580, 128, 340, 340);
             g.drawRect(1580, 480, 340, 340);
@@ -218,19 +220,59 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         
     }
     public void drawHexOutline(Graphics g){
-        for(int i = 0; i < 40; i++){
-            for(int j = 0; j < 40; j++){
-                if(board[i][j] != null){
-                    int XCoord = board[i][j].getCenterX();
-                    int YCoord = board[i][j].getCenterY();
+        for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 20; c++) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                    int XCoord = board[r][c].getCenterX();
+                    int YCoord = board[r][c].getCenterY();
                     g.setColor(Color.BLACK);
-                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord};
-                    int[] yPoints = {YCoord-17, YCoord-32, YCoord-17, YCoord+17, YCoord+35};
-                    g.drawPolygon(xPoints, yPoints, 5);
+                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord, XCoord-30};
+                    int[] yPoints = {YCoord-17, YCoord-18, YCoord-17, YCoord+17, YCoord+35, YCoord+17};
+                    g.drawPolygon(xPoints, yPoints, 6);
+                }
+            }
+        }
+
+        for (int r = 0; r < 20; r++) {
+            for (int c = 20; c < 40; c++) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                    int XCoord = board[r][c].getCenterX();
+                    int YCoord = board[r][c].getCenterY();
+                    g.setColor(Color.BLACK);
+                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord, XCoord-30};
+                    int[] yPoints = {YCoord-17, YCoord-18, YCoord-17, YCoord+17, YCoord+35, YCoord+17};
+                    g.drawPolygon(xPoints, yPoints, 6);
+                }
+            }
+        }
+        for (int r = 20; r < 40; r++) {
+            for (int c = 0; c < 20; c++) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                    int XCoord = board[r][c].getCenterX();
+                    int YCoord = board[r][c].getCenterY();
+                    g.setColor(Color.BLACK);
+                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord, XCoord-30};
+                    int[] yPoints = {YCoord-17, YCoord-18, YCoord-17, YCoord+17, YCoord+35, YCoord+17};
+                    g.drawPolygon(xPoints, yPoints, 6);
                     
                 }
             }
         }
+
+        for (int r = 20; r < 40; r++) {
+            for (int c = 20; c < 40; c++) {
+                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                    int XCoord = board[r][c].getCenterX();
+                    int YCoord = board[r][c].getCenterY();
+                    g.setColor(Color.BLACK);
+                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord, XCoord-30};
+                    int[] yPoints = {YCoord-17, YCoord-18, YCoord-17, YCoord+17, YCoord+35, YCoord+17};
+                    g.drawPolygon(xPoints, yPoints, 6);
+                }
+            }
+        }
+
+    
     }
     public void drawSpecialCard(Graphics g) {
     }
