@@ -133,9 +133,10 @@ public class Board {
         }
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 40; j++) {
-                if (Graph[i][j] == null)
-                    System.out.println(i + ", " + j);
+                if (Graph[i][j] != null)
+                    System.out.print(Graph[i][j] + ", ");
             }
+            System.out.println();
         }
     }
 
