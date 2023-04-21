@@ -48,14 +48,14 @@ public class ObjectiveCard {
     public int citizen(String settlementColor) {
         int s = 0;
         int temp = 0;
-        int max =0;
-        for(int r = 0; r<40; r++) {
-            for(int c = 0; c<40; c++) {
-                if(Board.getGraph()[r][c].getSettlement().equals(settlementColor) ) {
+        int max = 0;
+        for (int r = 0; r < 40; r++) {
+            for (int c = 0; c < 40; c++) {
+                if (Board.getGraph()[r][c].getSettlement().equals(settlementColor)) {
                     Board.getGraph()[r][c].getSettlement().findAdjacents();
                     Settlement[] adjs = Board.getGraph()[r][c].getSettlement().adjacents();
                     temp = adjs.length;
-                    if(temp>max) {
+                    if (temp > max) {
                         max = temp;
                     }
                 }
@@ -69,12 +69,12 @@ public class ObjectiveCard {
         int s = 0;
         for (int r = 0; r < 40; r++) {
             for (int c = 0; c < 40; c++) {
-                if(Board.getGraph()[r][c]!= null) {
-                    if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                if (Board.getGraph()[r][c] != null) {
+                    if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
                         s++;
                         r++;
                     }
-                } 
+                }
             }
         }
         return s;
@@ -83,17 +83,60 @@ public class ObjectiveCard {
     public int farmer(String settlementColor) {
         return 0;
     }
+
     public int fisherman(String settlementColor) {
+        int s1 = 0;
+        int s2 = 0;
+        int s3 = 0;
+        int s4 = 0;
+        for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 20; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    s1++;
+                }
+            }
+        }
+        for (int r = 20; r < 40; r++) {
+            for (int c = 20; c < 40; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    s2++;
+                }
+            }
+        }
+        for (int r = 0; r < 20; r++) {
+            for (int c = 20; c < 40; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    s3++;
+                }
+            }
+        }
+        for (int r = 20; r < 40; r++) {
+            for (int c = 0; c < 20; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    s4++;
+                }
+            }
+        }
+
+        if (s1 < s2 && s1 < s3 && s1 < s4) {
+            return s1 * 3;
+        } else if (s2 < s1 && s2 < s3 && s2 < s4) {
+            return s2 * 3;
+        } else if (s3 < s1 && s3 < s2 && s3 < s4) {
+            return s3 * 3;
+        } else if (s4 < s1 && s4 < s2 && s4 < s3) {
+            return s4 * 3;
+        }
         return 0;
     }
 
     public int hermit(String settlementColor) {
         int s = 0;
-        for(int r = 0; r<40; r++) {
-            for(int c = 0; c<40; c++) {
-                if(Board.getGraph()[r][c] != null) {
-                    if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
-                              s++;
+        for (int r = 0; r < 40; r++) {
+            for (int c = 0; c < 40; c++) {
+                if (Board.getGraph()[r][c] != null) {
+                    if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                        s++;
                     }
                 }
             }
