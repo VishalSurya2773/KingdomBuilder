@@ -81,10 +81,6 @@ public class ObjectiveCard {
     }
 
     public int farmer(String settlementColor) {
-        return 0;
-    }
-
-    public int fisherman(String settlementColor) {
         int s1 = 0;
         int s2 = 0;
         int s3 = 0;
@@ -128,6 +124,29 @@ public class ObjectiveCard {
             return s4 * 3;
         }
         return 0;
+    }
+
+    public int fisherman(String settlementColor) {
+        int total = 0;
+        Hex[][] b = Board.getGraph();
+        for (int r = 0; r < b.length; r++) {
+            for (int c = 0; c < b[r].length; c++) {
+                if (b[r][c].getSettlement().getColor().equals(settlementColor) && isAdjToWater(b[r][c].adjacents())) {
+                    total++;
+                }
+            }
+        }
+        return total;
+
+    }
+
+    public boolean isAdjToWater(Hex[] adj) {
+        for (int i = 0; i < adj.length; i++) {
+            if (adj[i].getTerrain().equals("water")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int hermit(String settlementColor) {
