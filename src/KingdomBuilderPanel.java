@@ -31,7 +31,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int clickedX, clickedY;
     public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
-    private boolean pickHex, startPhase, gamePhase, scoringPhase; // ???
+    private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
     private Game game;
@@ -142,9 +142,20 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         Color burgundy = new Color(128, 0, 32);
         if (startPhase) {
             drawStartScreen(g);
+            if (playAmtClicked) {
+                int alpha = 127; // 50% transparent
+                Color highlight = new Color(255, 0, 0, alpha);
+                if (numPlayers == 2) {
+                    highLightRect(g, 925, 960, 85, 80, highlight);
+                } else if (numPlayers == 3) {
+                    highLightRect(g, 1030, 960, 85, 80, highlight);
+                } else if (numPlayers == 4) {
+                    highLightRect(g, 1140, 960, 85, 80, highlight);
+                }
+            }
             // jbutton stuff
         } else if (gamePhase) {
-            g.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
             g.setFont(ps);
@@ -155,10 +166,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.setColor(burgundy);
             drawBoard(g);
 
-            g.drawRect(0, WIDTH / 15, WIDTH / 5, WIDTH / 5);
-            g.drawRect(WIDTH - WIDTH / 5, WIDTH / 15, WIDTH / 5, WIDTH / 5);
-            g.drawRect(WIDTH - WIDTH / 5, WIDTH / 4, WIDTH / 5, WIDTH / 5);
-            g.drawRect(0, WIDTH / 4, WIDTH / 5, WIDTH / 5);
+            g.drawRect(0, 128, 340, 340);
+            g.drawRect(1580, 128, 340, 340);
+            g.drawRect(1580, 480, 340, 340);
+            g.drawRect(0, 480, 340, 340);
 
             g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
             g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
@@ -171,7 +182,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawStartScreen(Graphics g) {
-        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 50, null);
+        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
     }
 
@@ -183,36 +194,28 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
-        int currX = 475;
-        int currY = 100;
-        for(int i = 0; i < 4; i++){ // 620 x 528
-            
-            if(nums[i] == 1){
+        int currX = 355;
+        int currY = 75;
+        for (int i = 0; i < 4; i++) { // 620 x 528
+
+            if (nums[i] == 1) {
                 g.drawImage(b1, currX, currY, null);
                 currX += 590;
-            }
-            else if(nums[i] == 2){
+            } else if (nums[i] == 2) {
                 g.drawImage(b2, currX, currY, null);
                 currX += 590;
-            }
-            else if(nums[i] == 3){
+            } else if (nums[i] == 3) {
                 g.drawImage(b3, currX, currY, null);
                 currX += 590;
-            }
-            else{
+            } else {
                 g.drawImage(b7, currX, currY, null);
                 currX += 590;
             }
-            if(i == 1) {currY += 505; currX = 475;}
+            if (i == 1) {
+                currY += 505;
+                currX = 355;
+            }
         }
-        // for (int i = 0; i < 4; i++) 
-        // if (i == 0) {
-        // g.drawImage(imgs[nums[i]], WIDTH / 4 - WIDTH / 32, HEIGHT / 2 - HEIGHT / 20,
-        // null);
-        // g.drawImage(imgs[nums[i]], 2 * WIDTH / 4, HEIGHT / 2 - HEIGHT / 20, null);
-        // }
-        
-
     }
 
     public void drawSpecialCard(Graphics g) {
@@ -228,6 +231,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawSpecialHex(Graphics g) {
+    }
+
+    public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
+        g.setColor(c);
+        g.drawRect(x, y, w, h);
+        g.fillRect(x, y, w, h);
     }
 
     @Override
@@ -256,8 +265,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // scale all of these w width and height icons
         if (startPhase) {
             // play button
-            if (clickedX > (int) (WIDTH / 2.42) && clickedX < (int) (WIDTH / 1.87) && clickedY > (int) (HEIGHT / 1.65)
-                    && clickedY < (int) (HEIGHT / 1.3)) {
+            if (clickedX > 850 && clickedX < 1100 && clickedY > 670
+                    && clickedY < 850) {
                 startPhase = false;
                 gamePhase = true;
                 try {
@@ -265,11 +274,20 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 } catch (IOException a) {
                     System.out.println("Game creation failure");
                 }
-            } else if (clickedX > 715 && clickedX < 760 && clickedY > 790 && clickedY < 855) { // 2 player select
+            } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
+                playAmtClicked = true;
                 numPlayers = 2;
 
-            } else if (clickedX > 800 && clickedX < 875 && clickedY > 785 && clickedY < 850) { // 3 player select
-                numPlayers = 2;
+                System.out.println("2p");
+
+            } else if (clickedX > 1030 && clickedX < 1120 && clickedY > 960 && clickedY < 1040) { // 3 player select
+                playAmtClicked = true;
+                numPlayers = 3;
+                System.out.println("3p");
+            } else if (clickedX > 1140 && clickedX < 1230 && clickedY > 960 && clickedY < 1040) { // 4 player select
+                playAmtClicked = true;
+                numPlayers = 4;
+                System.out.println("4p");
             }
         }
 
