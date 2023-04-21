@@ -49,12 +49,16 @@ public class Board {
         numbers[1] = boardScanners.get(1).nextInt();
         numbers[2] = boardScanners.get(2).nextInt();
         numbers[3] = boardScanners.get(3).nextInt();
-
+        int coordX = 384;
+        int coordY = 107; 
+        int changeX = 57;
+        int changeY = 49;
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = new Hex(""); // basically just a null pointer
                     Graph[r][c].setAdjacent();
+                    Graph[r][c]
                 }
             }
         }
