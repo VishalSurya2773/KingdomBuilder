@@ -1,19 +1,51 @@
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import javax.imageio.ImageIO;
+
 public class ObjectiveCard {
 
     private String type;
     private Player p;
+    private BufferedImage cardimage;
 
-    public ObjectiveCard(String t) {
+    public ObjectiveCard(String t, BufferedImage b) {
         type = t;
+    }
+    public ObjectiveCard(BufferedImage b) {
+        cardimage = b;
     }
 
     public String getType() {
         return type;
+    }
+    public BufferedImage getImage(String type) throws IOException{
+        if (type.equals("citizen")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Citizens.png"));
+        } else if (type.equals("discoverer")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Discoverers.png"));
+        } else if (type.equals("farmer")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Farmers.png"));
+        } else if (type.equals("fisherman")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Fishermen.png"));
+        } else if (type.equals("hermit")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Hermits.png"));
+        } else if (type.equals("knight")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Knights.png"));
+        } else if (type.equals("lord")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Lords.png"));
+        } else if (type.equals("merchant")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Merchants.png"));
+        } else if (type.equals("miner")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Miners.png"));
+        } else if (type.equals("worker")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Workers.png"));
+        }
+        return cardimage;
     }
 
     public int getScore(String settlementColor) {
