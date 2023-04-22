@@ -258,6 +258,19 @@ public class ObjectiveCard {
     }
 
     public int worker(String settlementColor) {
-        return 0;
+        int total = 0;
+        for(int r = 0; r<40; r++) {
+            for(int c = 0; c<40; c++) {
+                if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    Hex[] adjs = Board.getGraph()[r][c].adjacents();
+                    for(Hex h : adjs) {
+                        if(h.getTerrain().equals("castle")) {
+                            total++;
+                        }
+                    }
+                }
+            }
+        }
+        return total;
     }
 }
