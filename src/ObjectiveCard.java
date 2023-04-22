@@ -167,17 +167,39 @@ public class ObjectiveCard {
     }
 
     public int knight(String settlementColor) {
-
-        return 0;
+        int temp = 0;
+        int largest = 0;
+        for (int r = 0; r < Board.getGraph().length; r++) {
+            for (int c = 0; c < Board.getGraph()[r].length; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor))
+                    temp++;
+            }
+            if (temp > largest) {
+                largest = temp;
+            }
+        }
+        return largest * 2;
     }
 
     public int lord(String settlementColor) {
+        int pNum = 0;
+        ArrayList<Player> ps = Game.players;
+        if (settlementColor.equals(ps.get(0).getColor())) {
+            pNum = ps.get(0).playerNum;
+        } else if (settlementColor.equals(ps.get(1).getColor())) {
+            pNum = ps.get(1).playerNum;
+        } else if (settlementColor.equals(ps.get(2).getColor())) {
+            pNum = ps.get(2).playerNum;
+        } else if (settlementColor.equals(ps.get(3).getColor())) {
+            pNum = ps.get(3).playerNum;
+        }
 
-        ArrayList<Player> a = new ArrayList<Player>();
-        a.add(new Player(false, "", 0));
-        a.add(new Player(false, "", 0));
+        if (lordRankings().get(0).equals("p" + pNum + 1 + "")) {
+            return 12;
+        } else if (lordRankings().get(1).equals("p" + pNum + 1 + "")) {
+            return 6;
+        }
         return 0;
-
     }
 
     public int getLargestNumSetInSect(String settlementColor) {
@@ -206,7 +228,7 @@ public class ObjectiveCard {
         rankings.put(4, ps.get(3));
         TreeMap<Integer, Player> sorted = new TreeMap<>();
         sorted.putAll(rankings);
-        return (ArrayList) sorted.values();
+        return (ArrayList) sorted.keySet();
     }
 
     public int merchant(String settlementColor) {
