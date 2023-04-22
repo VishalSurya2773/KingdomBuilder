@@ -399,5 +399,4 @@ public class Player {
         h.setSettlement(s);
 
     }
-
 }
