@@ -236,10 +236,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             }
         }
     }
-    public void drawSpecialCard(Graphics g) {
+    public void drawSpecialCard(Graphics g) throws IOException {
+        ObjectiveCard c1 = game.objectives.get(0);
+        ObjectiveCard c2 = game.objectives.get(1);
+        ObjectiveCard c3 = game.objectives.get(2);
+        g.drawImage(c1.getImage(c1.getType()),840,300,null); //coordinates are just placeholders rn
+        g.drawImage(c2.getImage(c2.getType()),840,300,null); ///coordinates are just placeholders rn
+        g.drawImage(c3.getImage(c3.getType()),840,300,null);
     }
 
     public void drawCard(Graphics g) {
+        
     }
 
     public void drawScore(Graphics g) {

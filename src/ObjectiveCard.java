@@ -1,19 +1,51 @@
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
 
+import javax.imageio.ImageIO;
+
 public class ObjectiveCard {
 
     private String type;
     private Player p;
+    private BufferedImage cardimage;
 
-    public ObjectiveCard(String t) {
+    public ObjectiveCard(String t, BufferedImage b) {
         type = t;
+    }
+    public ObjectiveCard(BufferedImage b) {
+        cardimage = b;
     }
 
     public String getType() {
         return type;
+    }
+    public BufferedImage getImage(String type) throws IOException{
+        if (type.equals("citizen")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Citizens.png"));
+        } else if (type.equals("discoverer")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Discoverers.png"));
+        } else if (type.equals("farmer")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Farmers.png"));
+        } else if (type.equals("fisherman")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Fishermen.png"));
+        } else if (type.equals("hermit")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Hermits.png"));
+        } else if (type.equals("knight")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Knights.png"));
+        } else if (type.equals("lord")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Lords.png"));
+        } else if (type.equals("merchant")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Merchants.png"));
+        } else if (type.equals("miner")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Miners.png"));
+        } else if (type.equals("worker")) {
+            cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Workers.png"));
+        }
+        return cardimage;
     }
 
     public int getScore(String settlementColor) {
@@ -167,17 +199,39 @@ public class ObjectiveCard {
     }
 
     public int knight(String settlementColor) {
-
-        return 0;
+        int temp = 0;
+        int largest = 0;
+        for (int r = 0; r < Board.getGraph().length; r++) {
+            for (int c = 0; c < Board.getGraph()[r].length; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor))
+                    temp++;
+            }
+            if (temp > largest) {
+                largest = temp;
+            }
+        }
+        return largest * 2;
     }
 
     public int lord(String settlementColor) {
+        int pNum = 0;
+        ArrayList<Player> ps = Game.players;
+        if (settlementColor.equals(ps.get(0).getColor())) {
+            pNum = ps.get(0).playerNum;
+        } else if (settlementColor.equals(ps.get(1).getColor())) {
+            pNum = ps.get(1).playerNum;
+        } else if (settlementColor.equals(ps.get(2).getColor())) {
+            pNum = ps.get(2).playerNum;
+        } else if (settlementColor.equals(ps.get(3).getColor())) {
+            pNum = ps.get(3).playerNum;
+        }
 
-        ArrayList<Player> a = new ArrayList<Player>();
-        a.add(new Player(false, "", 0));
-        a.add(new Player(false, "", 0));
+        if (lordRankings().get(0).equals("p" + pNum + 1 + "")) {
+            return 12;
+        } else if (lordRankings().get(1).equals("p" + pNum + 1 + "")) {
+            return 6;
+        }
         return 0;
-
     }
 
     public int getLargestNumSetInSect(String settlementColor) {
@@ -206,7 +260,7 @@ public class ObjectiveCard {
         rankings.put(4, ps.get(3));
         TreeMap<Integer, Player> sorted = new TreeMap<>();
         sorted.putAll(rankings);
-        return (ArrayList) sorted.values();
+        return (ArrayList) sorted.keySet();
     }
 
     public int merchant(String settlementColor) {
@@ -236,6 +290,19 @@ public class ObjectiveCard {
     }
 
     public int worker(String settlementColor) {
-        return 0;
+        int total = 0;
+        for(int r = 0; r<40; r++) {
+            for(int c = 0; c<40; c++) {
+                if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+                    Hex[] adjs = Board.getGraph()[r][c].adjacents();
+                    for(Hex h : adjs) {
+                        if(h.getTerrain().equals("castle")) {
+                            total++;
+                        }
+                    }
+                }
+            }
+        }
+        return total;
     }
 }
