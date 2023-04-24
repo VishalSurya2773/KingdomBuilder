@@ -43,6 +43,7 @@ public class Board {
                 randBoards[i] = (int) (Math.random() * 8) + 1;
             }
         }
+        System.out.print("Boards: ");
         for (int i : randBoards) {
             System.out.print(i);
         }
@@ -61,6 +62,7 @@ public class Board {
         int coordY = 107;
         int changeX = 57;
         int changeY = 49;
+
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
@@ -74,16 +76,21 @@ public class Board {
             }
             coordY += changeY;
         }
-
         for (int r = 0; r < 20; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     while (boardScanners.get(0).hasNextInt()) {
-                        Graph[r][c] = map.get(boardScanners.get(0).nextInt());
+                        if (Graph[r][c] == null) {
+                            System.out.println("sect1 failed:" + "r:" + r);
+                        }
+                        int temp = boardScanners.get(0).nextInt();
+                        Graph[r][c] = map.get(temp);
+                        System.out.println(temp + "r: " + r + "c:" + c);
                         Graph[r][c].setAdjacent();
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
+
                     }
                 }
             }
@@ -134,6 +141,7 @@ public class Board {
             }
             coordY += changeY;
         }
+
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 40; j++) {
                 if (Graph[i][j] == null)
