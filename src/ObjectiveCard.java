@@ -14,7 +14,7 @@ public class ObjectiveCard {
     private BufferedImage cardimage;
     private int merchantScore = 0;
 
-    public ObjectiveCard(String t, BufferedImage b) {
+    public ObjectiveCard(String t) {
         type = t;
     }
 
