@@ -43,6 +43,7 @@ public class Board {
                 randBoards[i] = (int) (Math.random() * 8) + 1;
             }
         }
+        System.out.print("Boards: ");
         for (int i : randBoards) {
             System.out.print(i);
         }
@@ -61,6 +62,7 @@ public class Board {
         int coordY = 107;
         int changeX = 57;
         int changeY = 49;
+
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
@@ -76,66 +78,81 @@ public class Board {
         }
 
         for (int r = 0; r < 20; r++) {
-            for (int c = 0; c < 20; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    while (boardScanners.get(0).hasNextInt()) {
-                        Graph[r][c] = map.get(boardScanners.get(0).nextInt());
-                        Graph[r][c].setAdjacent();
-                        Graph[r][c].setX(coordX);
-                        Graph[r][c].setY(coordY);
-                        coordX += changeX;
+            if (boardScanners.get(0).hasNextLine()) {
+                Scanner a = new Scanner(boardScanners.get(0).nextLine());
+                for (int c = 0; c < 20; c++) {
+                    if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                        if (a.hasNextInt()) {
+                            Graph[r][c] = map.get(a.nextInt());
+                            Graph[r][c].setAdjacent();
+                            Graph[r][c].setX(coordX);
+                            Graph[r][c].setY(coordY);
+                            coordX += changeX;
+
+                        }
                     }
                 }
+
             }
             coordY += changeY;
         }
 
         for (int r = 0; r < 20; r++) {
-            for (int c = 20; c < 40; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    while (boardScanners.get(1).hasNextInt()) {
-                        Graph[r][c] = map.get(boardScanners.get(1).nextInt());
-                        Graph[r][c].setAdjacent();
-                        Graph[r][c].setX(coordX);
-                        Graph[r][c].setY(coordY);
-                        coordX += changeX;
+            if (boardScanners.get(1).hasNextLine()) {
+                Scanner a = new Scanner(boardScanners.get(1).nextLine());
+                for (int c = 20; c < 40; c++) {
+                    if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                        if (a.hasNextInt()) {
+                            Graph[r][c] = map.get(a.nextInt());
+                            Graph[r][c].setAdjacent();
+                            Graph[r][c].setX(coordX);
+                            Graph[r][c].setY(coordY);
+                            coordX += changeX;
+                        }
                     }
-                }
-            }
-            coordY += changeY;
-        }
-        for (int r = 20; r < 40; r++) {
-            for (int c = 0; c < 20; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    while (boardScanners.get(2).hasNextInt()) {
-                        Graph[r][c] = map.get(boardScanners.get(2).nextInt());
-                        Graph[r][c].setAdjacent();
-                        Graph[r][c].setX(coordX);
-                        Graph[r][c].setY(coordY);
-                        coordX += changeX;
-                    }
-
                 }
             }
             coordY += changeY;
         }
 
         for (int r = 20; r < 40; r++) {
-            for (int c = 20; c < 40; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    while (boardScanners.get(3).hasNextInt()) {
-                        Graph[r][c] = map.get(boardScanners.get(3).nextInt());
-                        Graph[r][c].setAdjacent();
-                        Graph[r][c].setX(coordX);
-                        Graph[r][c].setY(coordY);
-                        coordX += changeX;
+            if (boardScanners.get(2).hasNextLine()) {
+                Scanner a = new Scanner(boardScanners.get(2).nextLine());
+                for (int c = 0; c < 20; c++) {
+                    if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                        if (a.hasNextInt()) {
+                            Graph[r][c] = map.get(a.nextInt());
+                            Graph[r][c].setAdjacent();
+                            Graph[r][c].setX(coordX);
+                            Graph[r][c].setY(coordY);
+                            coordX += changeX;
+                        }
                     }
                 }
             }
             coordY += changeY;
         }
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 40; j++) {
+
+        for (int r = 20; r < 40; r++) {
+            if (boardScanners.get(3).hasNextLine()) {
+                Scanner a = new Scanner(boardScanners.get(3).nextLine());
+                for (int c = 20; c < 40; c++) {
+                    if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                        if (a.hasNextInt()) {
+                            Graph[r][c] = map.get(a.nextInt());
+                            Graph[r][c].setAdjacent();
+                            Graph[r][c].setX(coordX);
+                            Graph[r][c].setY(coordY);
+                            coordX += changeX;
+                        }
+                    }
+                }
+            }
+            coordY += changeY;
+        }
+
+        for (int i = 0; i < Graph.length; i++) {
+            for (int j = 0; j < Graph[i].length; j++) {
                 if (Graph[i][j] == null)
                     System.out.print("N");
                 else
