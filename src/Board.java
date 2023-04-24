@@ -3,6 +3,7 @@ import java.util.zip.ZipInputStream;
 import java.util.*;
 import java.io.*;
 import java.util.Collections;
+import java.util.Random;
 
 public class Board {
     public static Hex[][] Graph;
@@ -34,23 +35,30 @@ public class Board {
     }
 
     public void makeGraph() throws IOException {
+        int[] randBoards = { (int) (Math.random() * 8) + 1, (int) (Math.random() * 8) + 1,
+                (int) (Math.random() * 8) + 1,
+                (int) (Math.random() * 8) + 1 };
+        for (int i = 0; i < 3; i++) {
+            if (randBoards[i] == randBoards[3 - i] || randBoards[i] == randBoards[3 - i - 1]) {
+                randBoards[i] = (int) (Math.random() * 8) + 1;
+            }
+        }
+        for (int i : randBoards) {
+            System.out.print(i);
+        }
+        System.out.println();
         try {
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard1.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard2.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard3.txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/RandomBoard7.txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0] + ".txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[1] + ".txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[2] + ".txt")));
+            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[3] + ".txt")));
         } catch (IOException e) {
             System.out.println("Scanner reading failure");
         }
 
-        Collections.shuffle(boardScanners);
-
-        numbers[0] = boardScanners.get(0).nextInt();
-        numbers[1] = boardScanners.get(1).nextInt();
-        numbers[2] = boardScanners.get(2).nextInt();
-        numbers[3] = boardScanners.get(3).nextInt();
+        numbers = randBoards;
         int coordX = 384;
-        int coordY = 107; 
+        int coordY = 107;
         int changeX = 57;
         int changeY = 49;
         for (int r = 0; r < Graph.length; r++) {
@@ -106,7 +114,7 @@ public class Board {
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
                     }
-                    
+
                 }
             }
             coordY += changeY;
@@ -126,15 +134,17 @@ public class Board {
             }
             coordY += changeY;
         }
-         for(int i = 0; i < 40; i++){
-             for(int j = 0; j < 40; j++){
-                 if(Graph[i][j] == null) System.out.print("N");
-                 else System.out.print("G");
-             }
-             System.out.println();
-         }
-         System.out.println();
-         System.out.println();
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 40; j++) {
+                if (Graph[i][j] == null)
+                    System.out.print("N");
+                else
+                    System.out.print(" " + Graph[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
     }
 
     public static Hex[][] getGraph() {
