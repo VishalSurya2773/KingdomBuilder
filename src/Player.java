@@ -165,6 +165,42 @@ public class Player {
 
     }
 
+    public TreeMap<Hex, int[]> showAvailForFarm(){
+        TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
+
+        for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
+            for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
+                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("grass") && Game.gameBoard.getGraph()[r][c].isEmpty()) {
+                    Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
+                    for (Hex h : adj) {
+                        if(h.getSettlement.getPlayer().equals(this)){
+                            avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
+                            avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
+                            avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                        }
+                    }
+                }
+            }
+        }
+        if(avail.keySet.size() > 0){
+            return avail; 
+        }
+        TreeMap<Hex, int[]> sec = new TreeMap<Hex, int[]>();
+        for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
+            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
+                if(Game.gameBoard.getGraph()[r][c].isEmpty() && Game.gameBoard.getGraph()[r][c].getTerrain.equals("grass")){
+                    sec.put(Game.gameBoard.getGraph()[r][c], new int[2]);
+                    sec.get(Game.gameBoard.getGraph()[r][c])[0] = r;
+                    sec.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                }
+            }
+        }
+
+        return sec;
+
+
+    }
+
     public ArrayList<Hex> showAvailForFarmAction(Hex h) {
         ArrayList<Hex> availableHexList = new ArrayList<Hex>();
         // edge case where 0 adjecent hexes
@@ -311,13 +347,7 @@ public class Player {
 
     }
 
-    public TreeMap<Hex, int[]> showAvailForTavern() {
-        for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
-            for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
-
-            }
-        }
-    }
+    
 
     public TreeSet<Hex> tav(int r, int c) {
         if (Game.gameBoard.getGraph()[r][c].isEmpty()) {
