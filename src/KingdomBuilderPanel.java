@@ -245,11 +245,44 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         g.drawImage(c3.getImage(c3.getType()),840,300,null);
     }
 
-    public void drawCard(Graphics g) {
-        
+    public void drawCard(Graphics g) throws IOException {
+        BufferedImage cimage = cardBack;
+        Card c1 = game.getCard();
+        boolean b = false;
+        while(b==false) {
+            if(c1.getTerrain().equals("canyon")) {
+                cimage = cardCanyon;
+                b = true;
+            }else if(c1.getTerrain().equals("Desert")) {
+                cimage = cardDesert;
+                b = true;
+            }else if(c1.getTerrain().equals("Meadow")) {
+                cimage = cardMeadow;
+                b= true;
+            }else if(c1.getTerrain().equals("Flower")) {
+                cimage = cardFlower;
+                b = true;
+            }else if(c1.getTerrain().equals("Forest")) {
+                cimage = cardForest;
+                b = true;
+            }
+                
+        }
+        g.drawImage(cimage ,900, 1200 , null); //placeholder coordinates
     }
 
     public void drawScore(Graphics g) {
+       ArrayList<Player> p = game.getPlayers();
+       int length = p.size();
+       int[] s = new int[length];
+       String[] s2 = new String[length];
+       for(int i = 0; i<length; i++) {
+        s[i] = p.get(i).getScore();
+        s2[i] = Integer.toString(s[i]);
+       }
+       for(String x : s2) {
+        g.drawString(x, 5000, 5000); //placeholder coordinates
+       }
     }
 
     public void drawSettlement(Graphics g) {
@@ -321,15 +354,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void mousePressed(java.awt.event.MouseEvent e) {
+
     }
 
     public void mouseReleased(java.awt.event.MouseEvent e) {
+
     }
 
     public void mouseEntered(java.awt.event.MouseEvent e) {
+
     }
 
     public void mouseExited(java.awt.event.MouseEvent e) {
+
     }
 
 }
