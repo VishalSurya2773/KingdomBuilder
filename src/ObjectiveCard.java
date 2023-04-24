@@ -12,7 +12,7 @@ public class ObjectiveCard {
     private String type;
     private Player p;
     private BufferedImage cardimage;
-
+    private int merchantScore = 0;
     public ObjectiveCard(String t, BufferedImage b) {
         type = t;
     }
@@ -262,9 +262,31 @@ public class ObjectiveCard {
         sorted.putAll(rankings);
         return (ArrayList) sorted.keySet();
     }
-
-    public int merchant(String settlementColor) {
-        return 0;
+    public void floodfill(Hex h, Player p, HashMap<Hex, Boolean> map){
+        if(h.getSettlement() == null) return;
+        if(h.getSettlement().getPlayer() != p) return;
+        if(map.get(h)) return;
+        merchantScore++;
+        map.put(h, true);
+        Hex[] arr = h.adjacents();
+        for(int i = 0; i < arr.length; i++){
+            floodfill(arr[i], p, map);
+        }
+        
+    }
+    public int merchant(Player p) {
+        int ans = 0;
+        for(int i = 0; i < 40; i++){
+            for(int j = 0; j < 40; j++){
+                if(((SpecialHex) Board.getGraph()[i][j]).isCastle()){
+                    HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
+                    floodfill(Board.getGraph()[i][j], p, map);
+                    ans = Math.max(ans, merchantScore);
+                    merchantScore = 0;
+                }
+            }
+        }
+        return ans;
     }
 
     public int miner(String settlementColor) {
