@@ -42,28 +42,34 @@ public class Player {
             // then place it graphically on the board
         }
     }
-    public void dfsCanPlace(Hex h, HashMap<Hex, Boolean> map, Card chosenCard){
-        if(h.getTerrain().equals("")) {return;}
-        if(map.get(h) || !h.getTerrain().equals(chosenCard.getTerrain())) return;
-        map.put(h, true);
-        Hex[] hexes = h.adjacents();
-        for(int i = 0; i < hexes.length; i++){
-            dfsCanPlace(hexes[i], map, chosenCard);
-        }
-    }
+    // public void dfsCanPlace(Hex h, HashMap<Hex, Boolean> map, Card chosenCard){
+    //     if(h.getTerrain().equals("")) {return;}
+    //     if(map.get(h) || !h.getTerrain().equals(chosenCard.getTerrain())) return;
+    //     map.put(h, true);
+    //     Hex[] hexes = h.adjacents();
+    //     for(int i = 0; i < hexes.length; i++){
+    //         dfsCanPlace(hexes[i], map, chosenCard);
+    //     }
+    // }
     public boolean canPlace(Settlement s, Hex h, Card chosenCard) { //  h is the hex the player clicked on, chosenCard is the terraincard the person chose, idk what s is but wed can remove it if it's unnecessary
         // checks if the player can place a settlement there
-        if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
-            // check possible adjacency
-            for(int i = 0; i < placed.size(); i++){
-                /*
-                 * NEEDS MORE WORK
-                 */
-                HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
-                if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ // check the adjacencies of this hex and see if it's all full - it would be false if there is an area where the settlements in the terrain exist 
-                    if(map.get(h)) continue; // MAKE SURE MAP IS PROPERLY WOKRING LATER ON - MIHGT SKIP OVER DFS
-                    dfsCanPlace(placed.get(i).placedOn(), map, chosenCard);
-                }
+        // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
+        //     // check possible adjacency
+        //     for(int i = 0; i < placed.size(); i++){
+        //         /*
+        //          * NEEDS MORE WORK
+        //          */
+        //         HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
+        //         if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ // check the adjacencies of this hex and see if it's all full - it would be false if there is an area where the settlements in the terrain exist 
+        //             if(map.get(h)) continue; // MAKE SURE MAP IS PROPERLY WOKRING LATER ON - MIHGT SKIP OVER DFS
+        //             dfsCanPlace(placed.get(i).placedOn(), map, chosenCard);
+        //         }
+
+        //     }
+        // }
+        ArrayList<Hex> possible = new ArrayList<Hex>();
+        for(int i = 0; i < placed.size(); i++){
+            if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ // make sure that the arraylist of possible hexes doesnt contain already occupied hexes
 
             }
         }
