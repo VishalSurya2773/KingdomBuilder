@@ -27,7 +27,7 @@ public class Game {
         players = new ArrayList<Player>();
         for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
-        }
+        }// test syncing stuff
 
         Collections.shuffle(players);
 

@@ -119,7 +119,7 @@ public class Player {
         if (type.equals("barn")) { // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
             // code after you find out which settlement they choose
         } else if (type.equals("paddock")) {
-
+            
         } else if (type.equals("oracle")) {
 
         } else if (type.equals("farm")) {
@@ -204,7 +204,7 @@ public class Player {
 
 
     public void farmAction(Hex h) {
-        h.placeSettlement(getSettlementFromStore());
+        h.setSettlement(getSettlementFromStore());
         return;
     }
 
@@ -247,7 +247,7 @@ public class Player {
     }
 
     public void harborAction(Hex h, Settlement s) {
-        h.placeSettlement(s);
+        h.setSettlement(s);
         return;
     }
 
@@ -279,7 +279,7 @@ public class Player {
     }
 
     public void paddockAction(Hex original, Hex newHex, Settlement s) {
-        newHex.placeSettlement(s);
+
         original.setSettlement(null);
         return;
     }
@@ -321,7 +321,7 @@ public class Player {
 
     public void oasisAction(Hex h) {
         Settlement s = getSettlementFromStore();
-        h.placeSettlement(s);
+        h.setSettlement(s);
         return;       
     }
 
@@ -366,7 +366,7 @@ public class Player {
 
     public void oracleAction(Hex h) {
         Settlement s = getSettlementFromStore();
-        h.placeSettlement(s);
+        h.setSettlement(s);
         return;
     
     }
@@ -406,7 +406,7 @@ public class Player {
 
     public void tavernAction(Hex h) {
         Settlement s = getSettlementFromStore();
-        h.placeSettlement(s);
+        h.setSettlement(s);
         return;
     }
 
@@ -465,7 +465,7 @@ public class Player {
 
     public void towerAction(Hex h) {
         Settlement s = this.getSettlementFromStore();
-        h.placeSettlement(s);
+        h.setSettlement(s);
         return;
 
     }
