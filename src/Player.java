@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.*;
+
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
@@ -42,36 +43,46 @@ public class Player {
             // then place it graphically on the board
         }
     }
-    public boolean canPlace(Settlement s, Hex h, Card chosenCard) { //  h is the hex the player clicked on, chosenCard is the terraincard the person chose, idk what s is but wed can remove it if it's unnecessary
+
+    public boolean canPlace(Settlement s, Hex h, Card chosenCard) { // h is the hex the player clicked on, chosenCard is
+                                                                    // the terraincard the person chose, idk what s is
+                                                                    // but wed can remove it if it's unnecessary
         // checks if the player can place a settlement there
         // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
-        //     // check possible adjacency
-        //     for(int i = 0; i < placed.size(); i++){
-        //         /*
-        //          * NEEDS MORE WORK
-        //          */
-        //         HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
-        //         if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ // check the adjacencies of this hex and see if it's all full - it would be false if there is an area where the settlements in the terrain exist 
-        //             if(map.get(h)) continue; // MAKE SURE MAP IS PROPERLY WOKRING LATER ON - MIHGT SKIP OVER DFS
-        //             dfsCanPlace(placed.get(i).placedOn(), map, chosenCard);
-        //         }
+        // // check possible adjacency
+        // for(int i = 0; i < placed.size(); i++){
+        // /*
+        // * NEEDS MORE WORK
+        // */
+        // HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
+        // if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ //
+        // check the adjacencies of this hex and see if it's all full - it would be
+        // false if there is an area where the settlements in the terrain exist
+        // if(map.get(h)) continue; // MAKE SURE MAP IS PROPERLY WOKRING LATER ON -
+        // MIHGT SKIP OVER DFS
+        // dfsCanPlace(placed.get(i).placedOn(), map, chosenCard);
+        // }
 
-        //     }
+        // }
         // }
         ArrayList<Hex> possible = new ArrayList<Hex>();
-        boolean empty = true; 
-        for(int i = 0; i < placed.size(); i++){
-            if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ // make sure that the arraylist of possible hexes doesnt contain already occupied hexes
+        boolean empty = true;
+        for (int i = 0; i < placed.size(); i++) {
+            if (placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())) { // make sure that the arraylist
+                                                                                         // of possible hexes doesnt
+                                                                                         // contain already occupied
+                                                                                         // hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
-                for(int j = 0; j < hexes.length; j++){
-                    if(hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()){
+                for (int j = 0; j < hexes.length; j++) {
+                    if (hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
                     }
-                } 
+                }
             }
         }
-        for(int i = 0; i < possible.size(); i++){
-            if(possible.get(i).equals(h)) return true;
+        for (int i = 0; i < possible.size(); i++) {
+            if (possible.get(i).equals(h))
+                return true;
         }
         return false;
     }
@@ -146,7 +157,7 @@ public class Player {
         if (type.equals("barn")) { // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
             // code after you find out which settlement they choose
         } else if (type.equals("paddock")) {
-            
+
         } else if (type.equals("oracle")) {
 
         } else if (type.equals("farm")) {
@@ -193,15 +204,16 @@ public class Player {
 
     }
 
-    public TreeMap<Hex, int[]> showAvailForFarm(){
+    public TreeMap<Hex, int[]> showAvailForFarm() {
         TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
 
         for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
             for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
-                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("grass") && Game.gameBoard.getGraph()[r][c].isEmpty()) {
+                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("grass")
+                        && Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
                     for (Hex h : adj) {
-                        if(h.getSettlement.getPlayer().equals(this)){
+                        if (h.getSettlement().getPlayer().equals(this)) {
                             avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
                             avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
                             avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
@@ -210,13 +222,14 @@ public class Player {
                 }
             }
         }
-        if(avail.keySet.size() > 0){
-            return avail; 
+        if (avail.keySet().size() > 0) {
+            return avail;
         }
         TreeMap<Hex, int[]> sec = new TreeMap<Hex, int[]>();
-        for(int r = 0; r<Game.gameBoard.getGraph().length; r++){
-            for(int c = 0; c<Game.gameBoard.getGraph()[r].length; c++){
-                if(Game.gameBoard.getGraph()[r][c].isEmpty() && Game.gameBoard.getGraph()[r][c].getTerrain.equals("grass")){
+        for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
+            for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
+                if (Game.gameBoard.getGraph()[r][c].isEmpty()
+                        && Game.gameBoard.getGraph()[r][c].getTerrain().equals("grass")) {
                     sec.put(Game.gameBoard.getGraph()[r][c], new int[2]);
                     sec.get(Game.gameBoard.getGraph()[r][c])[0] = r;
                     sec.get(Game.gameBoard.getGraph()[r][c])[1] = c;
@@ -226,9 +239,7 @@ public class Player {
 
         return sec;
 
-
     }
-
 
     public void farmAction(Hex h) {
         h.setSettlement(getSettlementFromStore());
@@ -240,10 +251,11 @@ public class Player {
 
         for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
             for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
-                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("water") && Game.gameBoard.getGraph()[r][c].isEmpty()) {
+                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("water")
+                        && Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
                     for (Hex h : adj) {
-                        if(h.getSettlement.getPlayer().equals(this)){
+                        if (h.getSettlement.getPlayer().equals(this)) {
                             avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
                             avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
                             avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
@@ -253,8 +265,8 @@ public class Player {
             }
         }
 
-        if(avail.keySet().size() > 0){
-            return avail; 
+        if (avail.keySet().size() > 0) {
+            return avail;
         }
 
         TreeMap<Hex, ArrayList<Integer>> sec = new TreeMap<Hex, ArrayList<Integer>>();
@@ -316,10 +328,11 @@ public class Player {
 
         for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
             for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
-                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("desert") && Game.gameBoard.getGraph()[r][c].isEmpty()) {
+                if (Game.gameBoard.getGraph()[r][c].getTerrain().equals("desert")
+                        && Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
                     for (Hex h : adj) {
-                        if(h.getSettlement.getPlayer().equals(this)){
+                        if (h.getSettlement.getPlayer().equals(this)) {
                             avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
                             avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
                             avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
@@ -329,8 +342,8 @@ public class Player {
             }
         }
 
-        if(avail.keySet().size() > 0){
-            return avail; 
+        if (avail.keySet().size() > 0) {
+            return avail;
         }
         TreeMap<Hex, int[]> sec = new TreeMap<Hex, int[]>();
         for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
@@ -349,7 +362,7 @@ public class Player {
     public void oasisAction(Hex h) {
         Settlement s = getSettlementFromStore();
         h.setSettlement(s);
-        return;       
+        return;
     }
 
     public TreeMap<Hex, int[]> showAvailForOracle(String terrain) {
@@ -395,39 +408,43 @@ public class Player {
         Settlement s = getSettlementFromStore();
         h.setSettlement(s);
         return;
-    
+
     }
 
-    
-    
     public boolean tav(int r, int c) {
 
-        if(Game.gameBoard.getGraph()[r][c].isEmpty() && Game.gameBoard.getGraph()[r][c-1].getSettlement().equals(stored.get(0))
-        &&  Game.gameBoard.getGraph()[r][c-2].getSettlement().equals(stored.get(0)) &&  Game.gameBoard.getGraph()[r][c-3].getSettlement().equals(stored.get(0))){
-            return true; 
+        if (Game.gameBoard.getGraph()[r][c].isEmpty()
+                && Game.gameBoard.getGraph()[r][c - 1].getSettlement().equals(stored.get(0))
+                && Game.gameBoard.getGraph()[r][c - 2].getSettlement().equals(stored.get(0))
+                && Game.gameBoard.getGraph()[r][c - 3].getSettlement().equals(stored.get(0))) {
+            return true;
         }
-         if(Game.gameBoard.getGraph()[r][c].isEmpty() && Game.gameBoard.getGraph()[r][c+1].getSettlement().equals(stored.get(0))
-        &&  Game.gameBoard.getGraph()[r][c+2].getSettlement().equals(stored.get(0)) &&  Game.gameBoard.getGraph()[r][c+3].getSettlement().equals(stored.get(0))){
-            return true; 
+        if (Game.gameBoard.getGraph()[r][c].isEmpty()
+                && Game.gameBoard.getGraph()[r][c + 1].getSettlement().equals(stored.get(0))
+                && Game.gameBoard.getGraph()[r][c + 2].getSettlement().equals(stored.get(0))
+                && Game.gameBoard.getGraph()[r][c + 3].getSettlement().equals(stored.get(0))) {
+            return true;
         }
         return false;
         /*
-        if (Game.gameBoard.getGraph()[r][c].isEmpty()) {
-            return;
-        }
-
-        TreeSet<Hex> taken = new TreeSet<Hex>();
-        taken.add(Game.gameBoard.getGraph()[r][c]);
-        if (Game.gameBoard.getGraph()[r][c + 1].getSettlement().equals(stored.get(0))) {
-            taken.addAll(tav(r, c + 1));
-        }
-        if (Game.gameBoard.getGraph()[r][c - 1].getSettlement().equals(stored.get(0))) {
-            taken.addAll(tav(r, c - 1));
-        }
-        if(taken.size())
-        return taken;
-    }   
-    */
+         * if (Game.gameBoard.getGraph()[r][c].isEmpty()) {
+         * return;
+         * }
+         * 
+         * TreeSet<Hex> taken = new TreeSet<Hex>();
+         * taken.add(Game.gameBoard.getGraph()[r][c]);
+         * if (Game.gameBoard.getGraph()[r][c +
+         * 1].getSettlement().equals(stored.get(0))) {
+         * taken.addAll(tav(r, c + 1));
+         * }
+         * if (Game.gameBoard.getGraph()[r][c -
+         * 1].getSettlement().equals(stored.get(0))) {
+         * taken.addAll(tav(r, c - 1));
+         * }
+         * if(taken.size())
+         * return taken;
+         * }
+         */
 
     }
 
