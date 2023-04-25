@@ -39,7 +39,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
-
+    public GameStates gameStates = GameStates.startGame;;
     public KingdomBuilderPanel() {
         try {
             // background and buttons
@@ -353,6 +353,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         clickedY = e.getY();
         System.out.println(clickedX + ", " + clickedY);
         // scale all of these w width and height icons
+
+        
+
         switch (gameStates) {
             case startGame:
                 if (clickedX > 850 && clickedX < 1100 && clickedY > 670 && clickedY < 850) {
