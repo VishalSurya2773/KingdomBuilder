@@ -27,7 +27,7 @@ public class Game {
         players = new ArrayList<Player>();
         for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
-        }// test syncing stuff
+        } // test syncing stuff
 
         Collections.shuffle(players);
 
@@ -69,6 +69,19 @@ public class Game {
         objDeck.add(new ObjectiveCard("merchant"));
         objDeck.add(new ObjectiveCard("miner"));
         objDeck.add(new ObjectiveCard("worker"));
+    }
+
+    public void chooseObjCards() {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(1);
+        q.add(1);
+        q.add(3);
+        // while(q.size()<4){
+        // q.add((int) (Math.random() * 10) + 1);
+        // }
+        System.out.println(q);
+        objectives.add(objDeck.get(q.poll()));
+
     }
 
     public void addDiscardPile(Card c) {
