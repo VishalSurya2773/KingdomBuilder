@@ -22,7 +22,7 @@ import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
-            b3, b4, b5, b6, b7, b8,
+            b3, b4, b5, b6, b7, b8, firstToken,
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
@@ -32,6 +32,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
     private ArrayList<ObjectiveCard> ObjectiveDeck;
+    private ArrayList<Player> players;
     private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
@@ -41,6 +42,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
+    
     public KingdomBuilderPanel() {
         try {
             // background and buttons
@@ -104,6 +106,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             t_paddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_paddock.png"));
             t_tavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tavern.png"));
             t_tower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tower.png"));
+            firstToken = ImageIO.read(KingdomBuilderPanel.class.getResource("images/first_token.png"));
             GameStates gameStates = GameStates.startGame;
 
         } catch (Exception e) {
@@ -193,12 +196,34 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break; 
                 case turnStart:
                 drawObjectiveCards(g);
+                // drawFirstPlayerToken(g); // doesnt work yet
                 break;
                 
         }
 
     }
-
+    public void drawFirstPlayerToken(Graphics g){
+        players = game.getPlayers();
+        int firstPlayer = players.get(0).getOrder();
+        /*
+         * ("PLAYER 1", 0, HEIGHT / 15);
+           ("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
+           ("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
+           ("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
+         */
+        if(firstPlayer == 1){
+            g.drawImage(firstToken, 50, HEIGHT / 15, 10, 10, null);
+        }
+        else if(firstPlayer == 2){
+            g.drawImage(firstToken, WIDTH - WIDTH / 7 + 50, HEIGHT / 15, 10, 10, null);
+        }
+        else if(firstPlayer == 3){
+            g.drawImage(firstToken, WIDTH - WIDTH / 7 + 50, HEIGHT / 2 - HEIGHT / 15, 10, 10, null);
+        }
+        else{
+            g.drawImage(firstToken, 50, HEIGHT / 2 - HEIGHT / 15, 10, 10, null);
+        }
+    }
     public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
