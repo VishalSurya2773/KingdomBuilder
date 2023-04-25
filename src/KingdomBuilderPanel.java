@@ -172,7 +172,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
                 drawBoard(g);
                 g.drawImage(cardBack, 470, 560, null);
-                drawHexOutline(g);
+                // drawHexOutline(g);
                 // image.png(g);
 
                 g.drawRect(0, 128, 340, 340);
