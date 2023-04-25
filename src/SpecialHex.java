@@ -1,6 +1,6 @@
 public class SpecialHex extends Hex {
     private String powerType; // lowercase strings
-    private int tilesLeft, x, y;
+    private int tilesLeft, x, y; 
     private boolean isCastle;
 
     public SpecialHex(int xComp, int yComp, String type, boolean castle) {
@@ -26,10 +26,12 @@ public class SpecialHex extends Hex {
         return isCastle;
     }
 
+    @Override
     public int getCenterX() {
         return x;
     }
 
+    @Override
     public int getCenterY() {
         return y;
     }
