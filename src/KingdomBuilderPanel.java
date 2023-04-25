@@ -166,7 +166,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
             drawBoard(g);
             g.drawImage(cardBack, 470, 560, null);
-            // drawHexOutline(g);
+            drawHexOutline(g);
             // image.png(g);
 
             g.drawRect(0, 128, 340, 340);
@@ -224,14 +224,24 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         
     }
     public void drawHexOutline(Graphics g){
+        // Hex1 - center: 664 292
+        /*
+         * 664, 276
+         * 678 284
+         * 678 300
+         * 665 309
+         * 650 300
+         * 650 283
+         */
         for(int i = 0; i < 40; i++){
             for(int j = 0; j < 40; j++){
                 if(board[i][j] != null){
                     int XCoord = board[i][j].getCenterX();
                     int YCoord = board[i][j].getCenterY();
                     g.setColor(Color.BLACK);
-                    int[] xPoints = {XCoord-30, XCoord, XCoord+28, XCoord+28, XCoord, XCoord-30};
-                    int[] yPoints = {YCoord-17, YCoord-18, YCoord-17, YCoord+17, YCoord+35, YCoord+17};
+                    int[] xPoints = {XCoord, XCoord+14, XCoord+14, XCoord, XCoord-14, XCoord-14};
+                    int[] yPoints = {YCoord-16, YCoord-8, YCoord+8, YCoord+18, YCoord+8, YCoord-16};
+                    g.setColor(Color.BLACK);
                     g.drawPolygon(xPoints, yPoints, 6);
                 }
             }
