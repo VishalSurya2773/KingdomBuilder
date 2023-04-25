@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
+
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
             b3, b4, b5, b6, b7, b8,
@@ -142,6 +143,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 }
             
             case objectiveCards:
+                drawObjectiveCards(g);
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 40);
@@ -182,6 +184,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // jbutton stuff
     }
 
+    public void drawObjectiveCards(Graphics g){
+        g.drawImage(background, 0, 0, null);
+        drawSpecialCard(g);
+    }
     public void drawEndScreen(Graphics g) {
         g.drawImage(background, 0, 0, null);
     }
