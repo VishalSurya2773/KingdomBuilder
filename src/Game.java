@@ -51,9 +51,11 @@ public class Game {
                          // display them later)
         // startGame();
     }
-    public ArrayList<ObjectiveCard> getObjDeck(){
+
+    public ArrayList<ObjectiveCard> getObjDeck() {
         return objDeck;
     }
+
     public void getObjectives() {
         for (int i = 0; i < 3; i++) {
             objectives.add(objDeck.get(i));
@@ -109,7 +111,7 @@ public class Game {
         }
 
         if (p.chooseHex().getType().equals("farm")) {
-            Hex[][] map = Board.Graph;
+            Hex[][] map = gameBoard.getGraph();
             for (int r = 0; r < map.length; r++) {
                 for (int c = 0; c < map[0].length; c++) {
                     if (map[r][c].getTerrain().equals("grass") && map[r][c].isEmpty()) {
