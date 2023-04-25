@@ -164,7 +164,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-                // drawObjectiveCards(g); // gonna be in the case Startturn
+                drawObjectiveCards(g);
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 40);
@@ -192,10 +192,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-                
+                gameStates = GameStates.turnStart;
                 break; 
                 case turnStart:
-                drawObjectiveCards(g);
+                
                 // drawFirstPlayerToken(g); // doesnt work yet
                 break;
                 
@@ -301,10 +301,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
             g.drawImage(c1.getImage(c1.getType()), 650, 20, 150, 230, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 865, 20, 150, 230, null); /// coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 865, 20, 150, 230, null); // coordinates are just placeholders rn
             g.drawImage(c3.getImage(c3.getType()), 1080, 20, 150, 230, null);
         } catch (Exception E) {
-            System.out.println("error");
+            System.out.println("error on special card");
             return;
         }
 
@@ -412,13 +412,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 }
                 break;
 
-            case objectiveCards:
-                // card back - 470, 450,110, 180
-                if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
-                    ObjectiveDeck = game.getObjDeck();
-                    gameStates = gameStates.turnStart;
-                }
-                break;
+            // case objectiveCards:
+            //     // card back - 470, 450,110, 180
+            //     if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
+            //         ObjectiveDeck = game.getObjDeck();
+            //         gameStates = gameStates.turnStart;
+            //     }
+            //     break;
             case turnStart:
                 break;
             case chooseSettlement:
