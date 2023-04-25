@@ -351,8 +351,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     playAmtClicked = true;
                     numPlayers = 4;
                     System.out.println("4p");
+                    gameStates = GameStates.objectiveCards;
+
                 }
-                gameStates = GameStates.objectiveCards;
                 break;
             
             case objectiveCards:
