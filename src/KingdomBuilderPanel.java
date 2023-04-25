@@ -164,7 +164,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-                drawObjectiveCards(g);
+                
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 40);
@@ -192,6 +192,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+                drawObjectiveCards(g);
                 gameStates = GameStates.turnStart;
                 break; 
                 case turnStart:
@@ -297,6 +298,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawSpecialCard(Graphics g) throws IOException {
         try {
+            ObjectiveDeck = game.getObjDeck();
             ObjectiveCard c1 = ObjectiveDeck.get(0);
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
