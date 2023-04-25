@@ -1,11 +1,24 @@
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
+import java.awt.event.MouseListener;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
@@ -27,6 +40,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
+
     public KingdomBuilderPanel() {
         try {
             // background and buttons
@@ -127,7 +141,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
-        switch(gameStates){
+        switch (gameStates) {
             case startGame:
                 drawStartScreen(g);
                 if (playAmtClicked) {
@@ -141,7 +155,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         highLightRect(g, 1140, 960, 85, 80, highlight);
                     }
                 }
-            
+
             case objectiveCards:
                 drawObjectiveCards(g);
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
@@ -172,22 +186,24 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
         }
-           
-            
 
-        }
-
-    
+    }
 
     public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
     }
 
-    public void drawObjectiveCards(Graphics g){
+    public void drawObjectiveCards(Graphics g) {
         g.drawImage(background, 0, 0, null);
-        drawSpecialCard(g);
+        try {
+            drawSpecialCard(g);
+        } catch (IOException e) {
+            System.out.println("draw special cards failed");
+        }
+
     }
+
     public void drawEndScreen(Graphics g) {
         g.drawImage(background, 0, 0, null);
     }
@@ -334,15 +350,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         System.out.println(clickedX + ", " + clickedY);
         // scale all of these w width and height icons
 
-        switch(gameStates){
-            case startGame: 
+        switch (gameStates) {
+            case startGame:
                 if (clickedX > 850 && clickedX < 1100 && clickedY > 670 && clickedY < 850) {
-                startPhase = false;
-                gamePhase = true;
+                    startPhase = false;
+                    gamePhase = true;
                     try {
                         game = new Game(numPlayers);
-                    }catch (IOException a) {
-                    System.out.println("Game creation failure");
+                    } catch (IOException a) {
+                        System.out.println("Game creation failure");
                     }
                 } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
                     playAmtClicked = true;
@@ -361,21 +377,21 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
                 }
                 break;
-            
+
             case objectiveCards:
-                
-                break; 
+
+                break;
             case turnStart:
                 break;
             case chooseSettlement:
                 break;
-            case gameOver: 
-                break; 
-           
+            case gameOver:
+                break;
+
         }
         if (startPhase) {
             // play button
-           
+
         }
 
         // else if(clickedX)
