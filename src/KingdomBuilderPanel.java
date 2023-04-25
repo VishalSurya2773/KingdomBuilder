@@ -4,6 +4,7 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.Icon;
@@ -416,6 +417,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // card back - 470, 450,110, 180
                 if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
                     ObjectiveDeck = game.getObjDeck();
+                    Collections.shuffle(ObjectiveDeck);
                     gameStates = gameStates.turnStart;
                 }
                 break;
