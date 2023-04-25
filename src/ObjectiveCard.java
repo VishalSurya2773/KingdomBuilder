@@ -13,9 +13,11 @@ public class ObjectiveCard {
     private Player p;
     private BufferedImage cardimage;
     private int merchantScore = 0;
-    public ObjectiveCard(String t, BufferedImage b) {
+
+    public ObjectiveCard(String t) {
         type = t;
     }
+
     public ObjectiveCard(BufferedImage b) {
         cardimage = b;
     }
@@ -23,7 +25,8 @@ public class ObjectiveCard {
     public String getType() {
         return type;
     }
-    public BufferedImage getImage(String type) throws IOException{
+
+    public BufferedImage getImage(String type) throws IOException {
         if (type.equals("citizen")) {
             cardimage = ImageIO.read(ObjectiveCard.class.getResource("images/Obj_Citizens.png"));
         } else if (type.equals("discoverer")) {
@@ -262,23 +265,29 @@ public class ObjectiveCard {
         sorted.putAll(rankings);
         return (ArrayList) sorted.keySet();
     }
-    public void floodfill(Hex h, Player p, HashMap<Hex, Boolean> map){
-        if(h.getSettlement() == null) return;
-        if(h.getSettlement().getPlayer() != p) return;
-        if(map.get(h)) return;
+
+    public void floodfill(Hex h, Player p, HashMap<Hex, Boolean> map) {
+        if (h.getSettlement() == null)
+            return;
+        if (h.getSettlement().getPlayer() != p)
+            return;
+        if (map.get(h))
+            return;
         merchantScore++;
         map.put(h, true);
         Hex[] arr = h.adjacents();
-        for(int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             floodfill(arr[i], p, map);
         }
-        
+
     }
-    public int merchant(Player p) {
+
+    public int merchant(String settllementColor) {
+
         int ans = 0;
-        for(int i = 0; i < 40; i++){
-            for(int j = 0; j < 40; j++){
-                if(((SpecialHex) Board.getGraph()[i][j]).isCastle()){
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 40; j++) {
+                if (((SpecialHex) Board.getGraph()[i][j]).isCastle()) {
                     HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
                     floodfill(Board.getGraph()[i][j], p, map);
                     ans = Math.max(ans, merchantScore);
@@ -313,12 +322,12 @@ public class ObjectiveCard {
 
     public int worker(String settlementColor) {
         int total = 0;
-        for(int r = 0; r<40; r++) {
-            for(int c = 0; c<40; c++) {
-                if(Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
+        for (int r = 0; r < 40; r++) {
+            for (int c = 0; c < 40; c++) {
+                if (Board.getGraph()[r][c].getSettlement().getColor().equals(settlementColor)) {
                     Hex[] adjs = Board.getGraph()[r][c].adjacents();
-                    for(Hex h : adjs) {
-                        if(h.getTerrain().equals("castle")) {
+                    for (Hex h : adjs) {
+                        if (h.getTerrain().equals("castle")) {
                             total++;
                         }
                     }

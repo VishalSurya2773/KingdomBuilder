@@ -198,26 +198,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
-        int currX = 355;
-        int currY = 0;
+        int currX = 460;
+        int currY = 25;
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
-                g.drawImage(b1, currX, currY, null);
-                currX += 590;
+                g.drawImage(b1, currX, currY, 500, 450, null);
+                currX += 475;
             } else if (nums[i] == 2) {
-                g.drawImage(b2, currX, currY, null);
-                currX += 590;
+                g.drawImage(b2, currX, currY, 500, 450, null);
+                currX += 475;
             } else if (nums[i] == 3) {
-                g.drawImage(b3, currX, currY, null);
-                currX += 590;
+                g.drawImage(b3, currX, currY, 500, 450, null);
+                currX += 475;
             } else {
-                g.drawImage(b7, currX, currY, null);
-                currX += 590;
+                g.drawImage(b7, currX, currY, 500, 450, null);
+                currX += 475;
             }
             if (i == 1) {
-                currY += 505;
-                currX = 355;
+                currY += 435;
+                currX = 460;
             }
         }
         
@@ -245,11 +245,44 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         g.drawImage(c3.getImage(c3.getType()),840,300,null);
     }
 
-    public void drawCard(Graphics g) {
-        
+    public void drawCard(Graphics g) throws IOException {
+        BufferedImage cimage = cardBack;
+        Card c1 = game.getCard();
+        boolean b = false;
+        while(b==false) {
+            if(c1.getTerrain().equals("canyon")) {
+                cimage = cardCanyon;
+                b = true;
+            }else if(c1.getTerrain().equals("Desert")) {
+                cimage = cardDesert;
+                b = true;
+            }else if(c1.getTerrain().equals("Meadow")) {
+                cimage = cardMeadow;
+                b= true;
+            }else if(c1.getTerrain().equals("Flower")) {
+                cimage = cardFlower;
+                b = true;
+            }else if(c1.getTerrain().equals("Forest")) {
+                cimage = cardForest;
+                b = true;
+            }
+                
+        }
+        g.drawImage(cimage ,900, 1200 , null); //placeholder coordinates
     }
 
     public void drawScore(Graphics g) {
+       ArrayList<Player> p = game.getPlayers();
+       int length = p.size();
+       int[] s = new int[length];
+       String[] s2 = new String[length];
+       for(int i = 0; i<length; i++) {
+        s[i] = p.get(i).getScore();
+        s2[i] = Integer.toString(s[i]);
+       }
+       for(String x : s2) {
+        g.drawString(x, 5000, 5000); //placeholder coordinates
+       }
     }
 
     public void drawSettlement(Graphics g) {
@@ -321,15 +354,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void mousePressed(java.awt.event.MouseEvent e) {
+
     }
 
     public void mouseReleased(java.awt.event.MouseEvent e) {
+
     }
 
     public void mouseEntered(java.awt.event.MouseEvent e) {
+
     }
 
     public void mouseExited(java.awt.event.MouseEvent e) {
+
     }
 
 }
