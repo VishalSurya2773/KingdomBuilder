@@ -66,12 +66,11 @@ public class Board {
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
-                    Graph[r][c] = new Hex(""); // basically just a null pointer
+                    Graph[r][c] = new Hex("blank"); // basically just a null pointer
                     Graph[r][c].setAdjacent();
                     Graph[r][c].setX(coordX);
                     Graph[r][c].setY(coordY);
                     coordX += changeX;
-
                 }
             }
             coordY += changeY;
@@ -88,7 +87,6 @@ public class Board {
                             Graph[r][c].setX(coordX);
                             Graph[r][c].setY(coordY);
                             coordX += changeX;
-
                         }
                     }
                 }
@@ -150,18 +148,6 @@ public class Board {
             }
             coordY += changeY;
         }
-
-        for (int i = 0; i < Graph.length; i++) {
-            for (int j = 0; j < Graph[i].length; j++) {
-                if (Graph[i][j] == null)
-                    System.out.print("N");
-                else
-                    System.out.print(" " + Graph[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.println();
     }
 
     public static Hex[][] getGraph() {
