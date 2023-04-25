@@ -25,6 +25,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
+   
 
     public KingdomBuilderPanel() {
         try {
@@ -140,6 +141,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             }
             // jbutton stuff
         } else if (gamePhase) {
+
             g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
@@ -221,7 +223,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
          */
         for(int i = 0; i < 40; i++){
             for(int j = 0; j < 40; j++){
-                if(board[i][j] != null){
+                if(!board[i][j].getTerrain().equals("")){
                     int XCoord = board[i][j].getCenterX();
                     int YCoord = board[i][j].getCenterY();
                     g.setColor(Color.BLACK);
