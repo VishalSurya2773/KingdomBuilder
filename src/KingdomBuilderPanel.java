@@ -172,6 +172,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawRect(1580, 128, 340, 340);
             g.drawRect(1580, 480, 340, 340);
             g.drawRect(0, 480, 340, 340);
+            drawSpecialCard(g);
             
             // Commented this out bc it blocks the last row of hexes on the game board
 
@@ -242,10 +243,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         ObjectiveCard c3 = game.objectives.get(2);
         g.drawImage(c1.getImage(c1.getType()),840,300,null); //coordinates are just placeholders rn
         g.drawImage(c2.getImage(c2.getType()),840,300,null); ///coordinates are just placeholders rn
-        g.drawImage(c3.getImage(c3.getType()),840,300,null);
+        g.drawImage(c3.getImage(c3.getType()),840,300,null); //coordinates are just placeholders rn
     }
 
-    public void drawCard(Graphics g) throws IOException {
+    public void drawCard(Graphics g) {
         BufferedImage cimage = cardBack;
         Card c1 = game.getCard();
         boolean b = false;
@@ -253,22 +254,22 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             if(c1.getTerrain().equals("canyon")) {
                 cimage = cardCanyon;
                 b = true;
-            }else if(c1.getTerrain().equals("Desert")) {
+            }else if(c1.getTerrain().equals("desert")) {
                 cimage = cardDesert;
                 b = true;
-            }else if(c1.getTerrain().equals("Meadow")) {
+            }else if(c1.getTerrain().equals("meadow")) {
                 cimage = cardMeadow;
                 b= true;
-            }else if(c1.getTerrain().equals("Flower")) {
+            }else if(c1.getTerrain().equals("flower")) {
                 cimage = cardFlower;
                 b = true;
-            }else if(c1.getTerrain().equals("Forest")) {
+            }else if(c1.getTerrain().equals("forest")) {
                 cimage = cardForest;
                 b = true;
             }
                 
         }
-        g.drawImage(cimage ,900, 1200 , null); //placeholder coordinates
+        g.drawImage(cimage ,650, 120 , null); //placeholder coordinates
     }
 
     public void drawScore(Graphics g) {
@@ -286,9 +287,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawSettlement(Graphics g) {
+
     }
 
     public void drawSpecialHex(Graphics g) {
+
     }
 
     public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
