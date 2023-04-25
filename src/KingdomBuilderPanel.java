@@ -22,7 +22,7 @@ import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
-            b3, b4, b5, b6, b7, b8,
+            b3, b4, b5, b6, b7, b8, firstToken,
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
@@ -31,6 +31,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int clickedX, clickedY;
     public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
+    private ArrayList<ObjectiveCard> ObjectiveDeck;
+    private ArrayList<Player> players;
     private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
@@ -39,7 +41,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
-    public GameStates gameStates = GameStates.startGame;;
+    public GameStates gameStates = GameStates.startGame;
+    
     public KingdomBuilderPanel() {
         try {
             // background and buttons
@@ -103,6 +106,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             t_paddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_paddock.png"));
             t_tavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tavern.png"));
             t_tower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tower.png"));
+            firstToken = ImageIO.read(KingdomBuilderPanel.class.getResource("images/first_token.png"));
             GameStates gameStates = GameStates.startGame;
 
         } catch (Exception e) {
@@ -141,7 +145,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
-
+        
         switch (gameStates) {
             // System.out.println("this is being reached");
             case startGame:
@@ -157,6 +161,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         highLightRect(g, 1140, 960, 85, 80, highlight);
                     }
                 }
+                System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
                 drawObjectiveCards(g);
@@ -171,8 +176,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.setColor(burgundy);
 
                 drawBoard(g);
-                g.drawImage(cardBack, 470, 560, null);
-                drawHexOutline(g);
+                g.drawImage(cardBack, 470, 450,110, 180, null);
+                // drawHexOutline(g);
                 // image.png(g);
 
                 g.drawRect(0, 128, 340, 340);
@@ -187,20 +192,44 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-                
+                gameStates = GameStates.turnStart;
                 break; 
+                case turnStart:
+                
+                // drawFirstPlayerToken(g); // doesnt work yet
+                break;
                 
         }
 
     }
-
+    public void drawFirstPlayerToken(Graphics g){
+        players = game.getPlayers();
+        int firstPlayer = players.get(0).getOrder();
+        /*
+         * ("PLAYER 1", 0, HEIGHT / 15);
+           ("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
+           ("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
+           ("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
+         */
+        if(firstPlayer == 1){
+            g.drawImage(firstToken, 50, HEIGHT / 15, 10, 10, null);
+        }
+        else if(firstPlayer == 2){
+            g.drawImage(firstToken, WIDTH - WIDTH / 7 + 50, HEIGHT / 15, 10, 10, null);
+        }
+        else if(firstPlayer == 3){
+            g.drawImage(firstToken, WIDTH - WIDTH / 7 + 50, HEIGHT / 2 - HEIGHT / 15, 10, 10, null);
+        }
+        else{
+            g.drawImage(firstToken, 50, HEIGHT / 2 - HEIGHT / 15, 10, 10, null);
+        }
+    }
     public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
     }
 
     public void drawObjectiveCards(Graphics g) {
-        g.drawImage(background, 0, 0, null);
         try {
             drawSpecialCard(g);
         } catch (IOException e) {
@@ -241,7 +270,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
 
     }
-
     public void drawHexOutline(Graphics g) {
         // Hex1 - center: 664 292
         /*
@@ -269,14 +297,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawSpecialCard(Graphics g) throws IOException {
         try {
-            ObjectiveCard c1 = game.objectives.get(0);
-            ObjectiveCard c2 = game.objectives.get(1);
-            ObjectiveCard c3 = game.objectives.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 840, 300, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 840, 300, null); /// coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 840, 300, null);
+            ObjectiveCard c1 = ObjectiveDeck.get(0);
+            ObjectiveCard c2 = ObjectiveDeck.get(1);
+            ObjectiveCard c3 = ObjectiveDeck.get(2);
+            g.drawImage(c1.getImage(c1.getType()), 650, 20, 150, 230, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 865, 20, 150, 230, null); // coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 1080, 20, 150, 230, null);
         } catch (Exception E) {
-            System.out.println("error");
+            System.out.println("error on special card");
             return;
         }
 
@@ -364,6 +392,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     gamePhase = true;
                     try {
                         game = new Game(numPlayers);
+                        gameStates = GameStates.objectiveCards;
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
@@ -380,14 +409,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     playAmtClicked = true;
                     numPlayers = 4;
                     System.out.println("4p");
-                    gameStates = GameStates.objectiveCards;
-
                 }
                 break;
 
-            case objectiveCards:
-
-                break;
+            // case objectiveCards:
+            //     // card back - 470, 450,110, 180
+            //     if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
+            //         ObjectiveDeck = game.getObjDeck();
+            // Collections.shuffle(ObjectiveDeck);
+            //         gameStates = gameStates.turnStart;
+            //     }
+            //     break;
             case turnStart:
                 break;
             case chooseSettlement:

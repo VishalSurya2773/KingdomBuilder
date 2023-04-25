@@ -51,7 +51,9 @@ public class Game {
                          // display them later)
         // startGame();
     }
-
+    public ArrayList<ObjectiveCard> getObjDeck(){
+        return objDeck;
+    }
     public void getObjectives() {
         for (int i = 0; i < 3; i++) {
             objectives.add(objDeck.get(i));
