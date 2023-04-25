@@ -71,7 +71,6 @@ public class Board {
                     Graph[r][c].setX(coordX);
                     Graph[r][c].setY(coordY);
                     coordX += changeX;
-
                 }
             }
             coordY += changeY;
@@ -149,18 +148,6 @@ public class Board {
             }
             coordY += changeY;
         }
-
-        for (int i = 0; i < Graph.length; i++) {
-            for (int j = 0; j < Graph[i].length; j++) {
-                if (Graph[i][j] == null)
-                    System.out.print("N");
-                else
-                    System.out.print(" " + Graph[i][j].getTerrain().substring(0, 1));
-            }
-            System.out.println();
-        }
-        System.out.println();
-        System.out.println();
     }
 
     public static Hex[][] getGraph() {
