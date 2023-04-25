@@ -416,6 +416,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             //     // card back - 470, 450,110, 180
             //     if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
             //         ObjectiveDeck = game.getObjDeck();
+            // Collections.shuffle(ObjectiveDeck);
             //         gameStates = gameStates.turnStart;
             //     }
             //     break;
