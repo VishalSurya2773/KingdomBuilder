@@ -128,6 +128,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
         switch (gameStates) {
+            System.out.println("this is being reached");
             case startGame:
                 drawStartScreen(g);
                 if (playAmtClicked) {
@@ -141,7 +142,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         highLightRect(g, 1140, 960, 85, 80, highlight);
                     }
                 }
-
+                break;
             case objectiveCards:
                 drawObjectiveCards(g);
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
