@@ -248,39 +248,41 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
     }
     public void drawSpecialCard(Graphics g) throws IOException {
-        ObjectiveCard c1 = game.objectives.get(0);
-        ObjectiveCard c2 = game.objectives.get(1);
-        ObjectiveCard c3 = game.objectives.get(2);
-        g.drawImage(c1.getImage(c1.getType()),840,300,null); //coordinates are just placeholders rn
-        g.drawImage(c2.getImage(c2.getType()),840,300,null); ///coordinates are just placeholders rn
-        g.drawImage(c3.getImage(c3.getType()),840,300,null);
+        try {
+            ObjectiveCard c1 = game.objectives.get(0);
+            ObjectiveCard c2 = game.objectives.get(1);
+            ObjectiveCard c3 = game.objectives.get(2);
+            g.drawImage(c1.getImage(c1.getType()),840,300,null); //coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()),840,300,null); ///coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()),840,300,null);
+        }catch(Exception E) {
+            System.out.println("error");
+            return;
+        }
+
     }
 
     public void drawCard(Graphics g) throws IOException {
         BufferedImage cimage = cardBack;
         Card c1 = game.getCard();
-        boolean b = false;
-        while(b==false) {
+        try {
             if(c1.getTerrain().equals("canyon")) {
                 cimage = cardCanyon;
-                b = true;
             }else if(c1.getTerrain().equals("Desert")) {
                 cimage = cardDesert;
-                b = true;
             }else if(c1.getTerrain().equals("Meadow")) {
                 cimage = cardMeadow;
-                b= true;
             }else if(c1.getTerrain().equals("Flower")) {
                 cimage = cardFlower;
-                b = true;
             }else if(c1.getTerrain().equals("Forest")) {
                 cimage = cardForest;
-                b = true;
             }
-                
+            g.drawImage(cimage ,900, 1200 , null);
+        }catch(Exception E) {
+            System.out.println("error");
+            return;
         }
-        g.drawImage(cimage ,900, 1200 , null); //placeholder coordinates
-    }
+         //placeholder coordinates
 
     public void drawScore(Graphics g) {
        ArrayList<Player> p = game.getPlayers();
