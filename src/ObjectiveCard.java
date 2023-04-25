@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 
 public class ObjectiveCard {
-
+    
     private String type;
     private Player p;
     private BufferedImage cardimage;

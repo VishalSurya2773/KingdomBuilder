@@ -4,3 +4,4 @@ enum GameStates{
     chooseSettlement,
     gameOver
 } 
+
