@@ -126,53 +126,56 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
-        if (startPhase) {
-            drawStartScreen(g);
-            if (playAmtClicked) {
-                int alpha = 127; // 50% transparent
-                Color highlight = new Color(255, 0, 0, alpha);
-                if (numPlayers == 2) {
-                    highLightRect(g, 925, 960, 85, 80, highlight);
-                } else if (numPlayers == 3) {
-                    highLightRect(g, 1030, 960, 85, 80, highlight);
-                } else if (numPlayers == 4) {
-                    highLightRect(g, 1140, 960, 85, 80, highlight);
+        switch(gameStates){
+            case startGame:
+                drawStartScreen(g);
+                if (playAmtClicked) {
+                    int alpha = 127; // 50% transparent
+                    Color highlight = new Color(255, 0, 0, alpha);
+                    if (numPlayers == 2) {
+                        highLightRect(g, 925, 960, 85, 80, highlight);
+                    } else if (numPlayers == 3) {
+                        highLightRect(g, 1030, 960, 85, 80, highlight);
+                    } else if (numPlayers == 4) {
+                        highLightRect(g, 1140, 960, 85, 80, highlight);
+                    }
                 }
-            }
-            // jbutton stuff
-        } else if (gamePhase) {
+            
+            case objectiveCards:
+                g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
+                g.setColor(Color.WHITE);
+                Font ps = new Font("Abril Fatface", Font.BOLD, 40);
+                g.setFont(ps);
+                g.drawString("PLAYER 1", 0, HEIGHT / 15);
+                g.drawString("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
+                g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
+                g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
+                g.setColor(burgundy);
 
-            g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
-            g.setColor(Color.WHITE);
-            Font ps = new Font("Abril Fatface", Font.BOLD, 40);
-            g.setFont(ps);
-            g.drawString("PLAYER 1", 0, HEIGHT / 15);
-            g.drawString("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
-            g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
-            g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
-            g.setColor(burgundy);
+                drawBoard(g);
+                g.drawImage(cardBack, 470, 560, null);
+                drawHexOutline(g);
+                // image.png(g);
 
-            drawBoard(g);
-            g.drawImage(cardBack, 470, 560, null);
-            drawHexOutline(g);
-            // image.png(g);
+                g.drawRect(0, 128, 340, 340);
+                g.drawRect(1580, 128, 340, 340);
+                g.drawRect(1580, 480, 340, 340);
+                g.drawRect(0, 480, 340, 340);
 
-            g.drawRect(0, 128, 340, 340);
-            g.drawRect(1580, 128, 340, 340);
-            g.drawRect(1580, 480, 340, 340);
-            g.drawRect(0, 480, 340, 340);
+                // Commented this out bc it blocks the last row of hexes on the game board
 
-            // Commented this out bc it blocks the last row of hexes on the game board
-
-            // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-            // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-            // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-            // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-            // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+                // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+                // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+                // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+                // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+                // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+        }
+           
+            
 
         }
 
-    }
+    
 
     public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
@@ -349,9 +352,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     numPlayers = 4;
                     System.out.println("4p");
                 }
+                gameStates = GameStates.objectiveCards;
                 break;
             
-            case 
+            case objectiveCards:
+                
+                break; 
             case turnStart:
                 break;
             case chooseSettlement:
