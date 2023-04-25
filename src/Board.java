@@ -35,12 +35,21 @@ public class Board {
     }
 
     public void makeGraph() throws IOException {
-        int[] randBoards = { (int) (Math.random() * 8) + 1, (int) (Math.random() * 8) + 1,
-                (int) (Math.random() * 8) + 1,
-                (int) (Math.random() * 8) + 1 };
-        for (int i = 0; i < 3; i++) {
-            if (randBoards[i] == randBoards[3 - i] || randBoards[i] == randBoards[3 - i - 1]) {
-                randBoards[i] = (int) (Math.random() * 8) + 1;
+        int[] randBoards = new int[4];
+        for (int i = 0; i < randBoards.length; i++) {
+            boolean added = false;
+            while (!added) {
+                int r = (int) (Math.random() * 7) + 1;
+                boolean contains = false;
+                for (int j : randBoards) {
+                    if (r == j) {
+                        contains = true;
+                    }
+                }
+                if (!contains) {
+                    randBoards[i] = r;
+                    added = true;
+                }
             }
         }
         System.out.print("Boards: ");
