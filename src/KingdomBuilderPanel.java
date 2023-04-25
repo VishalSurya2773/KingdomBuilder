@@ -136,35 +136,20 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         b = Game.gameBoard;
         board = Board.getGraph();
     }
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
         if (startPhase) {
-            // drawStartScreen(g);
+            drawStartScreen(g);
             if (playAmtClicked) {
                 int alpha = 127; // 50% transparent
                 Color highlight = new Color(255, 0, 0, alpha);
                 if (numPlayers == 2) {
-                    try {
-                        highLightRect(g, 925, 960, 85, 80, highlight);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    highLightRect(g, 925, 960, 85, 80, highlight);
                 } else if (numPlayers == 3) {
-                    try {
-                        highLightRect(g, 1030, 960, 85, 80, highlight);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    highLightRect(g, 1030, 960, 85, 80, highlight);
                 } else if (numPlayers == 4) {
-                    try {
-                        highLightRect(g, 1140, 960, 85, 80, highlight);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    highLightRect(g, 1140, 960, 85, 80, highlight);
                 }
             }
             // jbutton stuff
@@ -179,12 +164,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
             g.setColor(burgundy);
 
-            try {
-                drawBoard(g);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            drawBoard(g);
             // drawHexOutline(g);
             // image.png(g);
 
@@ -192,12 +172,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawRect(1580, 128, 340, 340);
             g.drawRect(1580, 480, 340, 340);
             g.drawRect(0, 480, 340, 340);
-            try {
-                drawSpecialCard(g);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
             
             // Commented this out bc it blocks the last row of hexes on the game board
 
@@ -211,23 +185,23 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
-    public void drawStartScreen(Graphics g) throws IOException {
+    public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
     }
 
-    public void drawEndScreen(Graphics g) throws IOException {
+    public void drawEndScreen(Graphics g) {
         g.drawImage(background, 0, 0, null);
     }
 
-    public void drawBoard(Graphics g) throws IOException {
+    public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = Board.getNumbers();
         int currX = 650;
         int currY = 276;
         for (int i = 0; i < 4; i++) { // 620 x 528
-
+    
             if (nums[i] == 1) {
                 g.drawImage(b1, currX, currY, 620/2, 528/2, null);
                 currX += 620/2 - 20;
@@ -248,7 +222,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
         
     }
-    public void drawHexOutline(Graphics g) throws IOException{
+    public void drawHexOutline(Graphics g){
         for(int i = 0; i < 40; i++){
             for(int j = 0; j < 40; j++){
                 if(board[i][j] != null){
@@ -268,28 +242,36 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         ObjectiveCard c3 = game.objectives.get(2);
         g.drawImage(c1.getImage(c1.getType()),840,300,null); //coordinates are just placeholders rn
         g.drawImage(c2.getImage(c2.getType()),840,300,null); ///coordinates are just placeholders rn
-        g.drawImage(c3.getImage(c3.getType()),840,300,null); //coordinates are just placeholders rn
+        g.drawImage(c3.getImage(c3.getType()),840,300,null);
     }
 
-    public void drawCard(Graphics g) throws IOException{
+    public void drawCard(Graphics g) throws IOException {
         BufferedImage cimage = cardBack;
         Card c1 = game.getCard();
         boolean b = false;
+        while(b==false) {
             if(c1.getTerrain().equals("canyon")) {
                 cimage = cardCanyon;
-            }else if(c1.getTerrain().equals("desert")) {
+                b = true;
+            }else if(c1.getTerrain().equals("Desert")) {
                 cimage = cardDesert;
-            }else if(c1.getTerrain().equals("meadow")) {
+                b = true;
+            }else if(c1.getTerrain().equals("Meadow")) {
                 cimage = cardMeadow;
-            }else if(c1.getTerrain().equals("flower")) {
+                b= true;
+            }else if(c1.getTerrain().equals("Flower")) {
                 cimage = cardFlower;
-            }else if(c1.getTerrain().equals("forest")) {
+                b = true;
+            }else if(c1.getTerrain().equals("Forest")) {
                 cimage = cardForest;
+                b = true;
             }
-            g.drawImage(cimage ,650, 120 , null);
-        } //placeholder coordinates
+                
+        }
+        g.drawImage(cimage ,900, 1200 , null); //placeholder coordinates
+    }
 
-    public void drawScore(Graphics g) throws IOException{
+    public void drawScore(Graphics g) {
        ArrayList<Player> p = game.getPlayers();
        int length = p.size();
        int[] s = new int[length];
@@ -303,15 +285,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
        }
     }
 
-    public void drawSettlement(Graphics g) throws IOException{
-
+    public void drawSettlement(Graphics g) {
     }
 
-    public void drawSpecialHex(Graphics g) throws IOException{
-
+    public void drawSpecialHex(Graphics g) {
     }
 
-    public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) throws IOException {
+    public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
         g.setColor(c);
         g.drawRect(x, y, w, h);
         g.fillRect(x, y, w, h);
@@ -390,3 +370,4 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
 }
+
