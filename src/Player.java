@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 public class Player {
     private ArrayList<SpecialHex> hand;
-    private ArrayList<Settlement> placed;
+    private ArrayList<Settlement> placed; // placed settlements
     private ArrayList<Settlement> stored;
     private Card terrainCard; // the card the player has on the current turn
     private int score;
@@ -34,17 +34,25 @@ public class Player {
         isFirst = true;
     }
 
-    public void placeSettlement(Settlement s, Hex h) {
-        if (canPlace(s, h)) {
-            placeSettlement(s, h); // places it logically on the board
+    public void placeSettlement(Settlement s, Hex h, Card chosenCard) {
+        if (canPlace(s, h, chosenCard)) {
+            // need to finish
+            // places it logically on the board
             // then place it graphically on the board
         }
     }
-
-    public boolean canPlace(Settlement s, Hex h) {
+    public void dfsCanPlace(Hex h){
+        
+    }
+    public boolean canPlace(Settlement s, Hex h, Card chosenCard) { //  h is the hex the player clicked on, chosenCard is the terraincard the person chose, idk what s is but wed can remove it if it's unnecessary
         // checks if the player can place a settlement there
-        if (h.isEmpty()) {
+        if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
             // check possible adjacency
+            for(int i = 0; i < placed.size(); i++){
+                if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){
+
+                }
+            }
         }
         return false;
     }
