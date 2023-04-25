@@ -42,15 +42,6 @@ public class Player {
             // then place it graphically on the board
         }
     }
-    // public void dfsCanPlace(Hex h, HashMap<Hex, Boolean> map, Card chosenCard){
-    //     if(h.getTerrain().equals("")) {return;}
-    //     if(map.get(h) || !h.getTerrain().equals(chosenCard.getTerrain())) return;
-    //     map.put(h, true);
-    //     Hex[] hexes = h.adjacents();
-    //     for(int i = 0; i < hexes.length; i++){
-    //         dfsCanPlace(hexes[i], map, chosenCard);
-    //     }
-    // }
     public boolean canPlace(Settlement s, Hex h, Card chosenCard) { //  h is the hex the player clicked on, chosenCard is the terraincard the person chose, idk what s is but wed can remove it if it's unnecessary
         // checks if the player can place a settlement there
         // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
@@ -68,10 +59,19 @@ public class Player {
         //     }
         // }
         ArrayList<Hex> possible = new ArrayList<Hex>();
+        boolean empty = true; 
         for(int i = 0; i < placed.size(); i++){
             if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ // make sure that the arraylist of possible hexes doesnt contain already occupied hexes
-
+                Hex[] hexes = placed.get(i).placedOn().adjacents();
+                for(int j = 0; j < hexes.length; j++){
+                    if(hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()){
+                        possible.add(hexes[j]);
+                    }
+                } 
             }
+        }
+        for(int i = 0; i < possible.size(); i++){
+            if(possible.get(i).equals(h)) return true;
         }
         return false;
     }
