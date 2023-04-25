@@ -1,24 +1,10 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.*;
-import javax.imageio.ImageIO;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.awt.event.MouseListener;
-import javax.swing.Box;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
@@ -211,7 +197,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
-        int[] nums = Board.getNumbers();
+        int[] nums = b.getNumbers();
         int currX = 650;
         int currY = 276;
         for (int i = 0; i < 4; i++) { // 620 x 528
