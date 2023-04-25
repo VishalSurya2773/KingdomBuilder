@@ -1,10 +1,24 @@
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
+import java.awt.event.MouseListener;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
