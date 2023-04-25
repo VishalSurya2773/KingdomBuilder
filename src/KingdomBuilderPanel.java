@@ -140,16 +140,31 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
         if (startPhase) {
-            drawStartScreen(g);
+            // drawStartScreen(g);
             if (playAmtClicked) {
                 int alpha = 127; // 50% transparent
                 Color highlight = new Color(255, 0, 0, alpha);
                 if (numPlayers == 2) {
-                    highLightRect(g, 925, 960, 85, 80, highlight);
+                    try {
+                        highLightRect(g, 925, 960, 85, 80, highlight);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 } else if (numPlayers == 3) {
-                    highLightRect(g, 1030, 960, 85, 80, highlight);
+                    try {
+                        highLightRect(g, 1030, 960, 85, 80, highlight);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 } else if (numPlayers == 4) {
-                    highLightRect(g, 1140, 960, 85, 80, highlight);
+                    try {
+                        highLightRect(g, 1140, 960, 85, 80, highlight);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                 }
             }
             // jbutton stuff
@@ -164,7 +179,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
             g.setColor(burgundy);
 
-            drawBoard(g);
+            try {
+                drawBoard(g);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             // drawHexOutline(g);
             // image.png(g);
 
@@ -172,7 +192,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.drawRect(1580, 128, 340, 340);
             g.drawRect(1580, 480, 340, 340);
             g.drawRect(0, 480, 340, 340);
-            drawSpecialCard(g);
+            try {
+                drawSpecialCard(g);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             
             // Commented this out bc it blocks the last row of hexes on the game board
 
