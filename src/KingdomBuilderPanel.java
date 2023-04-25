@@ -5,27 +5,6 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.*;
-import javax.imageio.ImageIO;
-import java.io.*;
-import java.util.ArrayList;
-import java.awt.event.MouseListener;
-import javax.swing.Box;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
@@ -46,7 +25,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
-
+    public GameStates gameStates = GameStates.startGame;
     public KingdomBuilderPanel() {
         try {
             // background and buttons
@@ -345,32 +324,45 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         clickedY = e.getY();
         System.out.println(clickedX + ", " + clickedY);
         // scale all of these w width and height icons
-        if (startPhase) {
-            // play button
-            if (clickedX > 850 && clickedX < 1100 && clickedY > 670
-                    && clickedY < 850) {
+
+        switch(gameStates){
+            case startGame: 
+                if (clickedX > 850 && clickedX < 1100 && clickedY > 670 && clickedY < 850) {
                 startPhase = false;
                 gamePhase = true;
-                try {
-                    game = new Game(numPlayers);
-                } catch (IOException a) {
+                    try {
+                        game = new Game(numPlayers);
+                    }catch (IOException a) {
                     System.out.println("Game creation failure");
+                    }
+                } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
+                    playAmtClicked = true;
+                    numPlayers = 2;
+                    System.out.println("2p");
+
+                } else if (clickedX > 1030 && clickedX < 1120 && clickedY > 960 && clickedY < 1040) { // 3 player select
+                    playAmtClicked = true;
+                    numPlayers = 3;
+                    System.out.println("3p");
+                } else if (clickedX > 1140 && clickedX < 1230 && clickedY > 960 && clickedY < 1040) { // 4 player select
+                    playAmtClicked = true;
+                    numPlayers = 4;
+                    System.out.println("4p");
                 }
-            } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
-                playAmtClicked = true;
-                numPlayers = 2;
-
-                System.out.println("2p");
-
-            } else if (clickedX > 1030 && clickedX < 1120 && clickedY > 960 && clickedY < 1040) { // 3 player select
-                playAmtClicked = true;
-                numPlayers = 3;
-                System.out.println("3p");
-            } else if (clickedX > 1140 && clickedX < 1230 && clickedY > 960 && clickedY < 1040) { // 4 player select
-                playAmtClicked = true;
-                numPlayers = 4;
-                System.out.println("4p");
-            }
+                break;
+            
+            case 
+            case turnStart:
+                break;
+            case chooseSettlement:
+                break;
+            case gameOver: 
+                break; 
+           
+        }
+        if (startPhase) {
+            // play button
+           
         }
 
         // else if(clickedX)
