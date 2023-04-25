@@ -71,19 +71,6 @@ public class Game {
         objDeck.add(new ObjectiveCard("worker"));
     }
 
-    public void chooseObjCards() {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(1);
-        q.add(1);
-        q.add(3);
-        // while(q.size()<4){
-        // q.add((int) (Math.random() * 10) + 1);
-        // }
-        System.out.println(q);
-        objectives.add(objDeck.get(q.poll()));
-
-    }
-
     public void addDiscardPile(Card c) {
         discard.add(c);
     }
