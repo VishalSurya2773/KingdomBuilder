@@ -141,8 +141,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
+
         switch (gameStates) {
-            System.out.println("this is being reached");
+            // System.out.println("this is being reached");
             case startGame:
                 drawStartScreen(g);
                 if (playAmtClicked) {
