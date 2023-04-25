@@ -1,24 +1,10 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.*;
-import javax.imageio.ImageIO;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.awt.event.MouseListener;
-import javax.swing.Box;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
@@ -39,6 +25,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private static Hex[][] board;
     private int WIDTH, HEIGHT;
     public Graphics graphics;
+   
 
     public KingdomBuilderPanel() {
         try {
@@ -134,7 +121,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         scoringPhase = false;
         addMouseListener(this);
         b = Game.gameBoard;
-        board = Board.getGraph();
+        board = b.getGraph();
     }
     public void paint(Graphics g) {
         graphics = g;
@@ -154,6 +141,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             }
             // jbutton stuff
         } else if (gamePhase) {
+
             g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
             g.setColor(Color.WHITE);
             Font ps = new Font("Abril Fatface", Font.BOLD, 40);
@@ -235,7 +223,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
          */
         for(int i = 0; i < 40; i++){
             for(int j = 0; j < 40; j++){
-                if(board[i][j] != null){
+                if(!board[i][j].getTerrain().equals("")){
                     int XCoord = board[i][j].getCenterX();
                     int YCoord = board[i][j].getCenterY();
                     g.setColor(Color.BLACK);

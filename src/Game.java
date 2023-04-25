@@ -18,18 +18,16 @@ public class Game {
         gameBoard = new Board();
         try {
             gameBoard.makeGraph();
-            System.out.println("yay success in graph building");
         } catch (IOException a) {
-            System.out.println("graph building failure");
+            System.out.println("Board graph building failure");
         }
-        System.out.println(gameBoard.getGraph()[0][0]);
 
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
                                // to 0
         players = new ArrayList<Player>();
         for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
-        }
+        }// test syncing stuff
 
         Collections.shuffle(players);
 
@@ -98,11 +96,12 @@ public class Game {
             playerIndex %= 4;
             Player p = players.get(playerIndex);
             // choose cards and do special actions - front UI
-            if(players.get(playerIndex).numSettlements() == 0 && stop == -1) stop = playerIndex;
-        } 
+            if (players.get(playerIndex).numSettlements() == 0 && stop == -1)
+                stop = playerIndex;
+        }
     }
 
-    public void useSpecialHex(Player p) {  // already in player class - don't need to use unless smth comes up
+    public void useSpecialHex(Player p) { // already in player class - don't need to use unless smth comes up
         if (p.chooseHex().getType().equals("barn")) {
             p.barnAction();
         }
@@ -118,7 +117,6 @@ public class Game {
             }
         }
 
-
     }
 
     public void endGame() {
@@ -129,16 +127,17 @@ public class Game {
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
         ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
         // show winners and ranks
-        // if they want to play again, maybe have a play again button that starts the game over (if we have extra time)
+        // if they want to play again, maybe have a play again button that starts the
+        // game over (if we have extra time)
 
     }
-    
+
     public void chooseStartingPlayer() {
         players.get(0).setFirst();
     }
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
- 
+
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
