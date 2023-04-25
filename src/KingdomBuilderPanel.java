@@ -161,7 +161,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-                drawObjectiveCards(g);
+                // drawObjectiveCards(g); // gonna be in the case Startturn
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 40);
@@ -191,6 +191,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 
                 break; 
+                case turnStart:
+                drawObjectiveCards(g);
+                break;
                 
         }
 
@@ -202,7 +205,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawObjectiveCards(Graphics g) {
-        g.drawImage(background, 0, 0, null);
         try {
             drawSpecialCard(g);
         } catch (IOException e) {
@@ -243,7 +245,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
 
     }
-
     public void drawHexOutline(Graphics g) {
         // Hex1 - center: 664 292
         /*
@@ -271,12 +272,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawSpecialCard(Graphics g) throws IOException {
         try {
-            ObjectiveCard c1 = game.objectives.get(0);
-            ObjectiveCard c2 = game.objectives.get(1);
-            ObjectiveCard c3 = game.objectives.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 840, 300, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 840, 300, null); /// coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 840, 300, null);
+            ObjectiveCard c1 = ObjectiveDeck.get(0);
+            ObjectiveCard c2 = ObjectiveDeck.get(1);
+            ObjectiveCard c3 = ObjectiveDeck.get(2);
+            g.drawImage(c1.getImage(c1.getType()), 650, 20, 150, 230, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 865, 20, 150, 230, null); /// coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 1080, 20, 150, 230, null);
         } catch (Exception E) {
             System.out.println("error");
             return;
