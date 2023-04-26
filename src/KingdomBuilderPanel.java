@@ -42,7 +42,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
-    
+
     public KingdomBuilderPanel() {
         try {
             // background and buttons
@@ -141,11 +141,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         b = Game.gameBoard;
         board = b.getGraph();
     }
+
     // settlements r 36x36
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
-        
+
         switch (gameStates) {
             // System.out.println("this is being reached");
             case startGame:
@@ -164,16 +165,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-                
+
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
-                Font ps = new Font("Abril Fatface", Font.BOLD, 40);
+                Font ps = new Font("Abril Fatface", Font.BOLD, 80);
                 g.setFont(ps);
-                g.drawString("PLAYER 1", 0, HEIGHT / 15);
-                g.drawString("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
-                g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
-                g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
+                g.drawString("Player 1", 0, 79);
+                g.drawString("Player 2", 0, 438);
+                g.drawString("Player 3", 1600, 78);
+                g.drawString("Player 4", 1600, 438);
                 g.setColor(burgundy);
+                g.drawArc(303, 23, 99, 98, 360, 360);
                 drawDeck(g);
                 drawBoard(g);
                 drawFirstPlayerToken(g);
@@ -187,7 +189,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawRect(1580, 480, 340, 340);
                 // g.drawRect(0, 480, 340, 340);
 
-
                 // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
                 // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
                 // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
@@ -195,46 +196,46 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 drawObjectiveCards(g);
                 gameStates = GameStates.drawCard;
-                break; 
-                case turnStart:
-                
-                // drawFirstPlayerToken(g); // doesnt work yet
                 break;
-                
+            case turnStart:
+                drawPlayerTokens(g);
+
+                break;
         }
 
     }
-    public void drawConfirmButton(Graphics g){
-        
+
+    public void drawConfirmButton(Graphics g) {
+
     }
-    public void drawDeck(Graphics g){
+
+    public void drawDeck(Graphics g) {
         g.drawImage(cardBack, 1715, 800, 200, 270, null);
         g.setColor(Color.WHITE);
         g.drawString("DECK", 1760, 864);
     }
-    public void drawFirstPlayerToken(Graphics g){
+
+    public void drawFirstPlayerToken(Graphics g) {
         players = game.getPlayers();
         // if(players.size() == 0){System.out.println("PLAYER LIST IS 0"); return;}
         int firstPlayer = players.get(0).getOrder();
         /*
          * ("PLAYER 1", 0, HEIGHT / 15);
-           ("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
-           ("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
-           ("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
+         * ("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
+         * ("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
+         * ("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
          */
-        if(firstPlayer == 1){
+        if (firstPlayer == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
-        }
-        else if(firstPlayer == 2){
+        } else if (firstPlayer == 2) {
             g.drawImage(firstToken, 421, 418, 100, 85, null);
-        }
-        else if(firstPlayer == 3){
+        } else if (firstPlayer == 3) {
             g.drawImage(firstToken, 1317, 45, 100, 85, null);
-        }
-        else{
+        } else {
             g.drawImage(firstToken, 1317, 418, 100, 85, null);
         }
     }
+
     public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
@@ -252,7 +253,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawEndScreen(Graphics g) {
         g.drawImage(background, 0, 0, null);
     }
-    
+
     public void drawPlayerTokens(Graphics g) {
         ArrayList<Player> players = Game.players;
         int currX = 0;
@@ -302,17 +303,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
     }
 
-
-
-
-
-
     public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
-        int[] currX = {504, 907, 508, 907};
-        int[] currY = {130, 130, 477, 477};
+        int[] currX = { 504, 907, 508, 907 };
+        int[] currY = { 130, 130, 477, 477 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
@@ -321,12 +317,21 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.drawImage(b2, currX[i], currY[i], 426, 363, null);
             } else if (nums[i] == 3) {
                 g.drawImage(b3, currX[i], currY[i], 426, 363, null);
-            } else {
+            } else if (nums[i] == 4) {
+                g.drawImage(b4, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 5) {
+                g.drawImage(b5, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 6) {
+                g.drawImage(b6, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 7) {
                 g.drawImage(b7, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 8) {
+                g.drawImage(b8, currX[i], currY[i], 426, 363, null);
             }
         }
 
     }
+
     public void drawHexOutline(Graphics g) {
         // Hex1 - center: 664 292
         /*
@@ -441,8 +446,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         System.out.println(clickedX + ", " + clickedY);
         // scale all of these w width and height icons
 
-        
-
         switch (gameStates) {
             case startGame:
                 if (clickedX > 850 && clickedX < 1100 && clickedY > 670 && clickedY < 850) {
@@ -471,18 +474,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
 
             // case objectiveCards:
-            //     // card back - 470, 450,110, 180
-            //     if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
-            //         ObjectiveDeck = game.getObjDeck();
+            // // card back - 470, 450,110, 180
+            // if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
+            // ObjectiveDeck = game.getObjDeck();
             // Collections.shuffle(ObjectiveDeck);
-            //         gameStates = gameStates.turnStart;
-            //     }
-            //     break;
+            // gameStates = gameStates.turnStart;
+            // }
+            // break;
             case drawCard:
-                //1715, 800, 200, 270
-                if(clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070){
+                // 1715, 800, 200, 270
+                if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
-                    
+
                 }
                 break;
             case turnStart:
