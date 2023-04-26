@@ -51,9 +51,11 @@ public class Game {
                          // display them later)
         // startGame();
     }
-    public ArrayList<ObjectiveCard> getObjDeck(){
+
+    public ArrayList<ObjectiveCard> getObjDeck() {
         return objDeck;
     }
+
     public void getObjectives() {
         for (int i = 0; i < 3; i++) {
             objectives.add(objDeck.get(i));
@@ -71,6 +73,7 @@ public class Game {
         objDeck.add(new ObjectiveCard("merchant"));
         objDeck.add(new ObjectiveCard("miner"));
         objDeck.add(new ObjectiveCard("worker"));
+        Collections.shuffle(objDeck);
     }
 
     public void addDiscardPile(Card c) {
@@ -91,16 +94,15 @@ public class Game {
         return ans;
     }
 
-    public void turn() { // unfinished - oversees the turns of the players
-        int stop = -1;
-        while (playerIndex != stop) { // might be an infinite loop
-            playerIndex++;
+    public void turn() { // unfinished - oversees the turns of the players {
+        playerIndex = (int)(Math.random() * 4) + 1;
+        boolean b = this.gameOver;
+        while(b!= gameOver) {
             playerIndex %= 4;
-            Player p = players.get(playerIndex);
-            // choose cards and do special actions - front UI
-            if (players.get(playerIndex).numSettlements() == 0 && stop == -1)
-                stop = playerIndex;
+            Player playing = players.get(playerIndex+1);
+            playerIndex++;
         }
+
     }
 
     public void useSpecialHex(Player p) { // already in player class - don't need to use unless smth comes up
@@ -109,7 +111,7 @@ public class Game {
         }
 
         if (p.chooseHex().getType().equals("farm")) {
-            Hex[][] map = Board.Graph;
+            Hex[][] map = gameBoard.getGraph();
             for (int r = 0; r < map.length; r++) {
                 for (int c = 0; c < map[0].length; c++) {
                     if (map[r][c].getTerrain().equals("grass") && map[r][c].isEmpty()) {
@@ -127,7 +129,8 @@ public class Game {
             players.get(i).calculateScore();
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
-        ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
+        ArrayList<Integer> Winners = getWinner(); 
+        gameOver = true;    // it's an arraylist because of possible ties
         // show winners and ranks
         // if they want to play again, maybe have a play again button that starts the
         // game over (if we have extra time)
