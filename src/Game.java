@@ -93,16 +93,15 @@ public class Game {
         return ans;
     }
 
-    public void turn() { // unfinished - oversees the turns of the players
-        int stop = -1;
-        while (playerIndex != stop) { // might be an infinite loop
-            playerIndex++;
+    public void turn() { // unfinished - oversees the turns of the players {
+        playerIndex = (int)(Math.random() * 4) + 1;
+        boolean b = this.gameOver;
+        while(b!= gameOver) {
             playerIndex %= 4;
-            Player p = players.get(playerIndex);
-            // choose cards and do special actions - front UI
-            if (players.get(playerIndex).numSettlements() == 0 && stop == -1)
-                stop = playerIndex;
+            Player playing = players.get(playerIndex+1);
+            playerIndex++;
         }
+
     }
 
     public void useSpecialHex(Player p) { // already in player class - don't need to use unless smth comes up
