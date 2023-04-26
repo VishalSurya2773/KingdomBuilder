@@ -141,7 +141,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         b = Game.gameBoard;
         board = b.getGraph();
     }
-
+    // settlements r 36x36
     public void paint(Graphics g) {
         graphics = g;
         Color burgundy = new Color(128, 0, 32);
@@ -174,18 +174,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.drawString("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
                 g.drawString("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
                 g.setColor(burgundy);
-
+                drawDeck(g);
                 drawBoard(g);
-                g.drawImage(cardBack, 470, 450,110, 180, null);
+                // drawFirstPlayerToken(g);
+
+                // g.drawImage(cardBack, 470, 450,110, 180, null);
                 // drawHexOutline(g);
                 // image.png(g);
 
-                g.drawRect(0, 128, 340, 340);
-                g.drawRect(1580, 128, 340, 340);
-                g.drawRect(1580, 480, 340, 340);
-                g.drawRect(0, 480, 340, 340);
+                // g.drawRect(0, 128, 340, 340);
+                // g.drawRect(1580, 128, 340, 340);
+                // g.drawRect(1580, 480, 340, 340);
+                // g.drawRect(0, 480, 340, 340);
 
-                // Commented this out bc it blocks the last row of hexes on the game board
 
                 // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
                 // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
@@ -193,7 +194,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 drawObjectiveCards(g);
-                gameStates = GameStates.turnStart;
+                gameStates = GameStates.drawCard;
                 break; 
                 case turnStart:
                 
@@ -202,6 +203,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 
         }
 
+    }
+    public void drawConfirmButton(Graphics g){
+        
+    }
+    public void drawDeck(Graphics g){
+        g.drawImage(cardBack, 1715, 800, 200, 270, null);
+        g.setColor(Color.WHITE);
+        g.drawString("DECK", 1760, 864);
     }
     public void drawFirstPlayerToken(Graphics g){
         players = game.getPlayers();
@@ -213,16 +222,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
            ("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
          */
         if(firstPlayer == 1){
-            g.drawImage(firstToken, 50, HEIGHT / 15, 10, 10, null);
+            g.drawImage(firstToken, 405, 31, 100, 85, null);
         }
         else if(firstPlayer == 2){
-            g.drawImage(firstToken, WIDTH - WIDTH / 7 + 50, HEIGHT / 15, 10, 10, null);
+            g.drawImage(firstToken, 421, 418, 100, 85, null);
         }
         else if(firstPlayer == 3){
-            g.drawImage(firstToken, WIDTH - WIDTH / 7 + 50, HEIGHT / 2 - HEIGHT / 15, 10, 10, null);
+            g.drawImage(firstToken, 1317, 45, 100, 85, null);
         }
         else{
-            g.drawImage(firstToken, 50, HEIGHT / 2 - HEIGHT / 15, 10, 10, null);
+            g.drawImage(firstToken, 1317, 418, 100, 85, null);
         }
     }
     public void drawStartScreen(Graphics g) {
@@ -247,26 +256,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
-        int currX = 650;
-        int currY = 276;
+        int[] currX = {504, 907, 508, 907};
+        int[] currY = {130, 130, 477, 477};
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
-                g.drawImage(b1, currX, currY, 620 / 2, 528 / 2, null);
-                currX += 620 / 2 - 20;
+                g.drawImage(b1, currX[i], currY[i], 426, 363, null);
             } else if (nums[i] == 2) {
-                g.drawImage(b2, currX, currY, 620 / 2, 528 / 2, null);
-                currX += 620 / 2 - 20;
+                g.drawImage(b2, currX[i], currY[i], 426, 363, null);
             } else if (nums[i] == 3) {
-                g.drawImage(b3, currX, currY, 620 / 2, 528 / 2, null);
-                currX += 620 / 2 - 20;
+                g.drawImage(b3, currX[i], currY[i], 426, 363, null);
             } else {
-                g.drawImage(b7, currX, currY, 620 / 2, 528 / 2, null);
-                currX += 620 / 2 - 20;
-            }
-            if (i == 1) {
-                currY += 528 / 2 - 10;
-                currX = 650;
+                g.drawImage(b7, currX[i], currY[i], 426, 363, null);
             }
         }
 
@@ -302,9 +303,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             ObjectiveCard c1 = ObjectiveDeck.get(0);
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 650, 20, 150, 230, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 865, 20, 150, 230, null); // coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 1080, 20, 150, 230, null);
+            g.drawImage(c1.getImage(c1.getType()), 675, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 827, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 987, 835, 160, 225, null);
         } catch (Exception E) {
             System.out.println("error on special card");
             return;
@@ -422,6 +423,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             //         gameStates = gameStates.turnStart;
             //     }
             //     break;
+            case drawCard:
+                //1715, 800, 200, 270
+                if(clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070){
+                    // draw card for that player
+                    
+                }
+                break;
             case turnStart:
                 break;
             case chooseSettlement:
