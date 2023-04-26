@@ -24,11 +24,11 @@ public class Game {
 
         amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
                                // to 0
+        playerAmount = 4;
         players = new ArrayList<Player>();
         for (int i = 0; i < playerAmount; i++) {
             players.add(new Player(false, null, i + 1));
         } // test syncing stuff
-
         Collections.shuffle(players);
 
         deck = new ArrayList<Card>();

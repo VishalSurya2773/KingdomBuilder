@@ -100,6 +100,10 @@ public class Player {
         return null;
     }
 
+    public ArrayList<SpecialHex> getHand() {
+        return hand;
+    }
+
     public int numSettlements() {
         return stored.size();
     }
