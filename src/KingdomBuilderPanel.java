@@ -176,7 +176,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.setColor(burgundy);
                 drawDeck(g);
                 drawBoard(g);
-                // drawFirstPlayerToken(g);
+                drawFirstPlayerToken(g);
 
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
                 // drawHexOutline(g);
@@ -214,6 +214,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
     public void drawFirstPlayerToken(Graphics g){
         players = game.getPlayers();
+        // if(players.size() == 0){System.out.println("PLAYER LIST IS 0"); return;}
         int firstPlayer = players.get(0).getOrder();
         /*
          * ("PLAYER 1", 0, HEIGHT / 15);
@@ -251,6 +252,60 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawEndScreen(Graphics g) {
         g.drawImage(background, 0, 0, null);
     }
+    
+    public void drawPlayerTokens(Graphics g) {
+        ArrayList<Player> players = Game.players;
+        int currX = 0;
+        int currY = 150;
+        BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
+        for (int i = 0; i < players.size(); i++) {
+            // ArrayList<SpecialHex> hand = players.get(i).getHand(); //below is for testing
+            ArrayList<SpecialHex> hand = new ArrayList<SpecialHex>();
+            hand.add(new SpecialHex("paddock"));
+            hand.add(new SpecialHex("paddock"));
+            hand.add(new SpecialHex("paddock"));
+            hand.add(new SpecialHex("paddock"));
+            if (i == 1 || i == 2) {
+                currX = 1390;
+            } else if (i == 3) {
+                currY = 510;
+            }
+            for (int j = 0; j < hand.size(); j++) {
+                SpecialHex x = hand.get(j);
+                BufferedImage temp = null;
+                if (x.getType() == "barn") {
+                    temp = actionTiles[0];
+                } else if (x.getType() == "farm") {
+                    temp = actionTiles[1];
+                } else if (x.getType() == "harbor") {
+                    temp = actionTiles[2];
+                } else if (x.getType() == "oasis") {
+                    temp = actionTiles[3];
+                } else if (x.getType() == "oracle") {
+                    temp = actionTiles[4];
+                } else if (x.getType() == "padock") {
+                    temp = actionTiles[5];
+                } else if (x.getType() == "tavern") {
+                    temp = actionTiles[6];
+                } else if (x.getType() == "tower") {
+                    temp = actionTiles[7];
+                }
+                if (temp != null) {
+                    g.drawImage(temp, currX, currY, 104, 95, null);
+                    currX += 110;
+                }
+                if (j == 3) {
+                    currX -= 110;
+                    currY += 105;
+                }
+            }
+        }
+    }
+
+
+
+
+
 
     public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
