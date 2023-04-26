@@ -73,6 +73,7 @@ public class Game {
         objDeck.add(new ObjectiveCard("merchant"));
         objDeck.add(new ObjectiveCard("miner"));
         objDeck.add(new ObjectiveCard("worker"));
+        Collections.shuffle(objDeck);
     }
 
     public void addDiscardPile(Card c) {
@@ -128,7 +129,8 @@ public class Game {
             players.get(i).calculateScore();
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
-        ArrayList<Integer> Winners = getWinner(); // it's an arraylist because of possible ties
+        ArrayList<Integer> Winners = getWinner(); 
+        gameOver = true;    // it's an arraylist because of possible ties
         // show winners and ranks
         // if they want to play again, maybe have a play again button that starts the
         // game over (if we have extra time)
