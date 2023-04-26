@@ -9,12 +9,12 @@ public class Settlement {
 
     public Settlement(String color) {
         this.color = color;
-        right = new Settlement("");
-        left = new Settlement("");
-        topRight = new Settlement("");
-        topLeft = new Settlement("");
-        bottomRight = new Settlement("");
-        bottomLeft = new Settlement("");
+        // right = new Settlement("");
+        // left = new Settlement("");
+        // topRight = new Settlement("");
+        // topLeft = new Settlement("");
+        // bottomRight = new Settlement("");
+        // bottomLeft = new Settlement("");
 
         board = Game.gameBoard;
         hexes = board.Graph;

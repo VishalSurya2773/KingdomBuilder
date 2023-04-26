@@ -39,7 +39,7 @@ public class Board {
         for (int i = 0; i < randBoards.length; i++) {
             boolean added = false;
             while (!added) {
-                int r = (int) (Math.random() * 7) + 1;
+                int r = (int) (Math.random() * 8) + 1;
                 boolean contains = false;
                 for (int j : randBoards) {
                     if (r == j) {

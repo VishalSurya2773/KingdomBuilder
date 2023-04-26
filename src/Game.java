@@ -26,11 +26,24 @@ public class Game {
                                // to 0
         playerAmount = 4;
         players = new ArrayList<Player>();
-        for (int i = 0; i < playerAmount; i++) {
-            players.add(new Player(false, null, i + 1));
-        } // test syncing stuff
-        Collections.shuffle(players);
+        ArrayList<String> clrs = new ArrayList<>();
+        clrs.add("blue");
+        clrs.add("green");
+        clrs.add("orange");
+        clrs.add("purple");
+        clrs.add("red");
+        clrs.add("yellow");
 
+        for (int i = 1; i <= playerAmount; i++) {
+            int temp = (int) (Math.random() * clrs.size()) + 1;
+            players.add(new Player(false, clrs.get(temp - 1), i));
+            clrs.remove(clrs.get(temp - 1));
+        }
+
+        Collections.shuffle(players);
+        for (Player p : players) {
+            System.out.println(p.getColor());
+        }
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
         // add cards into deck:
@@ -95,11 +108,11 @@ public class Game {
     }
 
     public void turn() { // unfinished - oversees the turns of the players {
-        playerIndex = (int)(Math.random() * 4) + 1;
+        playerIndex = (int) (Math.random() * 4) + 1;
         boolean b = this.gameOver;
-        while(b!= gameOver) {
+        while (b != gameOver) {
             playerIndex %= 4;
-            Player playing = players.get(playerIndex+1);
+            Player playing = players.get(playerIndex + 1);
             playerIndex++;
         }
 
@@ -129,8 +142,8 @@ public class Game {
             players.get(i).calculateScore();
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
-        ArrayList<Integer> Winners = getWinner(); 
-        gameOver = true;    // it's an arraylist because of possible ties
+        ArrayList<Integer> Winners = getWinner();
+        gameOver = true; // it's an arraylist because of possible ties
         // show winners and ranks
         // if they want to play again, maybe have a play again button that starts the
         // game over (if we have extra time)
