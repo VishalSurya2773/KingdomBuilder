@@ -194,8 +194,8 @@ public class Player {
 
     public void barnAction() {
         Settlement s = getSettlementFromStore();
-        if (canPlace(s, chosenTerrainHex())) {
-            placeSettlement(s, chosenTerrainHex());
+        if (canPlace(s, chosenTerrainHex(), terrainCard)) {
+            placeSettlement(s, chosenTerrainHex(), terrainCard);
             System.out.println("Success");
         } else {
             System.out.println("failed");
@@ -247,7 +247,7 @@ public class Player {
     }
 
     public TreeMap<Hex, ArrayList<Integer>> showAvailForHarborAction() {
-        TreeMap<Hex, int[]> avail = new TreeMap<Hex, int[]>();
+        TreeMap<Hex, ArrayList<Integer>> avail = new TreeMap<Hex, ArrayList<Integer>>();
 
         for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
             for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
@@ -255,10 +255,10 @@ public class Player {
                         && Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
                     for (Hex h : adj) {
-                        if (h.getSettlement.getPlayer().equals(this)) {
-                            avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
-                            avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
-                            avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
+                        if (h.getSettlement().getPlayer().equals(this)) {
+                            avail.put(Game.gameBoard.getGraph()[r][c], new ArrayList<Integer>());
+                            avail.get(Game.gameBoard.getGraph()[r][c]).set(0, r);
+                            avail.get(Game.gameBoard.getGraph()[r][c]).set(1, c);
                         }
                     }
                 }
@@ -332,7 +332,7 @@ public class Player {
                         && Game.gameBoard.getGraph()[r][c].isEmpty()) {
                     Hex[] adj = Game.gameBoard.getGraph()[r][c].adjacents();
                     for (Hex h : adj) {
-                        if (h.getSettlement.getPlayer().equals(this)) {
+                        if (h.getSettlement().getPlayer().equals(this)) {
                             avail.put(Game.gameBoard.getGraph()[r][c], new int[2]);
                             avail.get(Game.gameBoard.getGraph()[r][c])[0] = r;
                             avail.get(Game.gameBoard.getGraph()[r][c])[1] = c;
