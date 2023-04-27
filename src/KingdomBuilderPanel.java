@@ -29,7 +29,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
-            sumTower, reverseSumBarn, reverseSumFar, reverseSumHarbor, reverseSumOasis, reverseSumOracle,
+            sumTower, reverseSumBarn, reverseSumFarm, reverseSumHarbor, reverseSumOasis, reverseSumOracle,
             reverseSumPaddock, reverseSumTavern, reverseSumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle,
             t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
@@ -104,6 +104,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             sumPaddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_paddock.png"));
             sumTavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tavern.png"));
             sumTower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tower.png"));
+            // reverse summary tiles
+            reverseSumBarn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_barn.png"));
+            reverseSumFarm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_farm.png"));
+            reverseSumHarbor = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_harbor.png"));
+            reverseSumOasis = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_oasis.png"));
+            reverseSumOracle = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_oracle.png"));
+            reverseSumPaddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_paddock.png"));
+            reverseSumTavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tavern.png"));
+            reverseSumTower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tower.png"));
             // tokens
             t_barn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_barn.png"));
             t_farm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_farm.png"));
