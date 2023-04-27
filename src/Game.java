@@ -31,14 +31,14 @@ public class Game {
         clrs.add("Purple");
         clrs.add("Red");
         clrs.add("Yellow");
-        for (int i = 0; i < playerAmount; i++) {
+        for (int i = 1; i <= playerAmount; i++) {
             int temp = (int) (Math.random() * clrs.size()) + 1;
-            players.add(new Player(false, clrs.get(temp - 1), i + 1));
+            players.add(new Player(false, clrs.get(temp - 1), i));
             clrs.remove(clrs.get(temp - 1));
         }
         Collections.shuffle(players);
         for (Player p : players) {
-            System.out.print(p.getOrder() + ", ");
+            System.out.print(p.getOrder() + ", " + p.getColor() + "; ");
         }
         System.out.println();
 
