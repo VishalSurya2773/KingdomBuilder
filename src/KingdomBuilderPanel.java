@@ -157,8 +157,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.setFont(ps);
                 g.drawString("Player 1", 0, 79);
                 g.drawString("Player 2", 1600, 78);
-                g.drawString("Player 3", 1600, 438);
-                g.drawString("Player 4", 0, 438);
+                g.drawString("Player 3", 1600, 468);
+                g.drawString("Player 4", 0, 468);
 
                 g.setColor(burgundy);
                 drawBackCards(g);
@@ -245,13 +245,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
         // p2
         settlement = settleImage(playClrs.get(1));
-        g.fillArc(1420, 20, 99, 98, 360, 360);
-        g.drawImage(settlement, 1430, 30, 80, 80, null);
+        g.fillArc(1500, 20, 99, 98, 360, 360);
+        g.drawImage(settlement, 1510, 30, 80, 80, null);
 
         // p3
         settlement = settleImage(playClrs.get(2));
-        g.fillArc(1420, 420, 99, 98, 360, 360);
-        g.drawImage(settlement, 1430, 430, 80, 80, null);
+        g.fillArc(1500, 420, 99, 98, 360, 360);
+        g.drawImage(settlement, 1510, 430, 80, 80, null);
 
         // p4
         settlement = settleImage(playClrs.get(3));
@@ -261,9 +261,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         g.setFont(new Font("Abril Fatface", Font.PLAIN, 40));
         g.setColor(Color.WHITE);
         g.drawString("" + playClrs.get(0).numSettlements(), 315, 95);
-        g.drawString("" + playClrs.get(1).numSettlements(), 1433, 95);
-        g.drawString("" + playClrs.get(2).numSettlements(), 1433, 495);
+        g.drawString("" + playClrs.get(1).numSettlements(), 1512, 95);
+        g.drawString("" + playClrs.get(2).numSettlements(), 1512, 495);
         g.drawString("" + playClrs.get(3).numSettlements(), 315, 495);
+        g.setColor(Color.BLACK);
 
     }
 
@@ -308,7 +309,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawPlayerTokens(Graphics g) {
-
+        // almost complete
         ArrayList<Player> players = game.players;
         int currX = 0;
         int currY = 150;
@@ -344,7 +345,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 } else if (x.getType() == "tower") {
                     temp = actionTiles[7];
                 }
-                g.drawImage(t_barn, currX, currY, 104, 95, null);
+                g.drawImage(temp, currX, currY, 104, 95, null);
                 currX += 110;
                 // if (temp != null) {
 
@@ -361,7 +362,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
-        int[] currX = { 504, 907, 508, 907 };
+        int[] currX = { 546, 949, 550, 949 };
         int[] currY = { 130, 130, 477, 477 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
