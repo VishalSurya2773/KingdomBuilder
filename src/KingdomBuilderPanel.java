@@ -4,6 +4,8 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.Icon;
@@ -154,9 +156,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 Font ps = new Font("Abril Fatface", Font.BOLD, 80);
                 g.setFont(ps);
                 g.drawString("Player 1", 0, 79);
-                g.drawString("Player 2", 0, 438);
-                g.drawString("Player 3", 1600, 78);
-                g.drawString("Player 4", 1600, 438);
+                g.drawString("Player 2", 1600, 78);
+                g.drawString("Player 3", 1600, 438);
+                g.drawString("Player 4", 0, 438);
+
                 g.setColor(burgundy);
                 drawAmtSettle(g);
                 drawDeck(g);
@@ -211,19 +214,70 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         if (firstPlayer == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
         } else if (firstPlayer == 2) {
-            g.drawImage(firstToken, 405, 418, 100, 85, null);
-        } else if (firstPlayer == 3) {
             g.drawImage(firstToken, 1350, 45, 100, 85, null);
-        } else {
+        } else if (firstPlayer == 3) {
             g.drawImage(firstToken, 1350, 395, 100, 85, null);
+        } else {
+            g.drawImage(firstToken, 405, 418, 100, 85, null);
         }
     }
 
     public void drawAmtSettle(Graphics g) {
         g.setColor(Color.BLACK);
         // g.drawArc(303, 23, 99, 98, 360, 360);
+        ArrayList<Player> playClrs = new ArrayList<>();
+        playClrs = game.players;
+        Collections.sort(playClrs, new sortPlayer());
+        BufferedImage settlement = null;
+        // p1
+        settlement = settleImage(playClrs.get(0));
         g.fillArc(303, 20, 99, 98, 360, 360);
-        g.drawImage(settleBlue, 313, 26, 80, 80, null);
+        g.drawImage(settlement, 313, 30, 80, 80, null);
+
+        // p2
+        settlement = settleImage(playClrs.get(1));
+        g.fillArc(1420, 20, 99, 98, 360, 360);
+        g.drawImage(settlement, 1430, 30, 80, 80, null);
+
+        // p3
+        settlement = settleImage(playClrs.get(2));
+        g.fillArc(1420, 420, 99, 98, 360, 360);
+        g.drawImage(settlement, 1430, 430, 80, 80, null);
+
+        // p4
+        settlement = settleImage(playClrs.get(3));
+        g.fillArc(303, 420, 99, 98, 360, 360);
+        g.drawImage(settlement, 313, 430, 80, 80, null);
+
+        g.setFont(new Font("Abril Fatface", Font.PLAIN, 40));
+        g.setColor(Color.WHITE);
+        g.drawString("" + playClrs.get(0).numSettlements(), 315, 95);
+        g.drawString("" + playClrs.get(1).numSettlements(), 1433, 95);
+        g.drawString("" + playClrs.get(2).numSettlements(), 1433, 495);
+        g.drawString("" + playClrs.get(3).numSettlements(), 315, 495);
+
+    }
+
+    public BufferedImage settleImage(Player p) {
+        String clr = p.getColor();
+        BufferedImage temp = null;
+        BufferedImage[] clrs = { settleBlue, settleGreen, settleOrange, settlePurple, settleRed, settleYellow };
+        for (int i = 0; i < clrs.length; i++) {
+            if (clr.equals("Blue")) {
+                temp = settleBlue;
+            } else if (clr.equals("Green")) {
+                temp = settleGreen;
+            } else if (clr.equals("Orange")) {
+                temp = settleOrange;
+            } else if (clr.equals("Purple")) {
+                temp = settlePurple;
+            } else if (clr.equals("Red")) {
+                temp = settleRed;
+            } else if (clr.equals("Yellow")) {
+                temp = settleYellow;
+            }
+        }
+        return temp;
     }
 
     public void drawStartScreen(Graphics g) {
@@ -512,4 +566,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
+}
+
+class sortPlayer implements Comparator<Player> {
+    // Used for sorting in ascending order of
+    // roll number
+    public int compare(Player a, Player b) {
+        return a.getOrder() - b.getOrder();
+    }
 }
