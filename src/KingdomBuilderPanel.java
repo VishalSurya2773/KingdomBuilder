@@ -158,7 +158,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.drawString("Player 3", 1600, 78);
                 g.drawString("Player 4", 1600, 438);
                 g.setColor(burgundy);
-                g.drawArc(303, 23, 99, 98, 360, 360);
+                drawAmtSettle(g);
                 drawDeck(g);
                 drawBoard(g);
                 drawFirstPlayerToken(g);
@@ -211,12 +211,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         if (firstPlayer == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
         } else if (firstPlayer == 2) {
-            g.drawImage(firstToken, 421, 418, 100, 85, null);
+            g.drawImage(firstToken, 405, 418, 100, 85, null);
         } else if (firstPlayer == 3) {
-            g.drawImage(firstToken, 1317, 45, 100, 85, null);
+            g.drawImage(firstToken, 1350, 45, 100, 85, null);
         } else {
-            g.drawImage(firstToken, 1317, 418, 100, 85, null);
+            g.drawImage(firstToken, 1350, 395, 100, 85, null);
         }
+    }
+
+    public void drawAmtSettle(Graphics g) {
+        g.setColor(Color.BLACK);
+        // g.drawArc(303, 23, 99, 98, 360, 360);
+        g.fillArc(303, 20, 99, 98, 360, 360);
+        g.drawImage(settleBlue, 313, 26, 80, 80, null);
     }
 
     public void drawStartScreen(Graphics g) {

@@ -22,7 +22,7 @@ public class Player {
         color = clr;
         stored = new ArrayList<Settlement>();
         fillStored();
-        playerNum = pNum;
+        order = pNum;
         hand = new ArrayList<>();
 
     }

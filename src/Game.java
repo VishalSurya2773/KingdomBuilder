@@ -25,22 +25,22 @@ public class Game {
         amtOfSettlements = 40; // show this int on front end and make sure to check when it gets to 0
         players = new ArrayList<Player>();
         ArrayList<String> clrs = new ArrayList<>();
-        clrs.add("blue");
-        clrs.add("green");
-        clrs.add("orange");
-        clrs.add("purple");
-        clrs.add("red");
-        clrs.add("yellow");
-        for (int i = 0; i <= playerAmount; i++) {
-            System.out.println("in loop");
+        clrs.add("Blue");
+        clrs.add("Green");
+        clrs.add("Orange");
+        clrs.add("Purple");
+        clrs.add("Red");
+        clrs.add("Yellow");
+        for (int i = 0; i < playerAmount; i++) {
             int temp = (int) (Math.random() * clrs.size()) + 1;
-            players.add(new Player(false, clrs.get(temp - 1), 4));
+            players.add(new Player(false, clrs.get(temp - 1), i + 1));
             clrs.remove(clrs.get(temp - 1));
         }
         Collections.shuffle(players);
         for (Player p : players) {
             System.out.print(p.getOrder() + ", ");
         }
+        System.out.println();
 
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
