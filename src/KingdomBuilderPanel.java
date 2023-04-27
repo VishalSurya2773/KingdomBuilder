@@ -217,15 +217,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawFirstPlayerToken(Graphics g) {
-        players = game.getPlayers();
+        // players = game.players;
         // if(players.size() == 0){System.out.println("PLAYER LIST IS 0"); return;}
-        int firstPlayer = players.get(0).getOrder();
-        /*
-         * ("PLAYER 1", 0, HEIGHT / 15);
-         * ("PLAYER 2", WIDTH - WIDTH / 7, HEIGHT / 15);
-         * ("PLAYER 3", WIDTH - WIDTH / 7, HEIGHT / 2 - HEIGHT / 15);
-         * ("PLAYER 4", 0, HEIGHT / 2 - HEIGHT / 15);
-         */
+        int firstPlayer = 0;
+        for (Player i : game.players) {
+            if (i.isFirst()) {
+                firstPlayer = i.getOrder();
+            }
+        }
         if (firstPlayer == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
         } else if (firstPlayer == 2) {

@@ -101,6 +101,10 @@ public class Player {
         return null;
     }
 
+    public boolean isFirst() {
+        return isFirst;
+    }
+
     public ArrayList<SpecialHex> getHand() {
         return hand;
     }
