@@ -167,6 +167,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawBoard(g);
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
+                drawSumActionTiles(g);
 
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
                 // drawHexOutline(g);
@@ -194,6 +195,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawConfirmButton(Graphics g) {
 
+    }
+
+    public void drawSumActionTiles(Graphics g) {
+        // find boards and correlate them w a specialaction tile
+        // add each to edge of board -> idk how to rotate them tho
     }
 
     public void drawDeck(Graphics g) {
