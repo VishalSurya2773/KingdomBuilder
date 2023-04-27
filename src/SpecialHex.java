@@ -47,3 +47,4 @@ public class SpecialHex extends Hex {
     }
 
 }
+//
