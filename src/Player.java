@@ -23,6 +23,7 @@ public class Player {
         stored = new ArrayList<Settlement>();
         fillStored();
         this.playerNum = playerNum;
+        hand = new ArrayList<>();
 
     }
 

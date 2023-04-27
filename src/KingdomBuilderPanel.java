@@ -156,10 +156,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     Color highlight = new Color(255, 0, 0, alpha);
                     if (numPlayers == 2) {
                         highLightRect(g, 925, 960, 85, 80, highlight);
+                        game.addPlayers(2);
                     } else if (numPlayers == 3) {
                         highLightRect(g, 1030, 960, 85, 80, highlight);
+                        game.addPlayers(3);
                     } else if (numPlayers == 4) {
                         highLightRect(g, 1140, 960, 85, 80, highlight);
+                        game.addPlayers(4);
                     }
                 }
                 System.out.println("Start Game GameState");
@@ -257,16 +260,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawPlayerTokens(Graphics g) {
 
         ArrayList<Player> players = Game.players;
+        for (Player i : players) {
+            System.out.print("pl #" + i.getOrder() + ", ");
+        }
         int currX = 0;
         int currY = 150;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
         for (int i = 0; i < players.size(); i++) {
-            // ArrayList<SpecialHex> hand = players.get(i).getHand(); //below is for testing
-            ArrayList<SpecialHex> hand = new ArrayList<SpecialHex>();
-            hand.add(new SpecialHex("paddock"));
-            hand.add(new SpecialHex("paddock"));
-            hand.add(new SpecialHex("paddock"));
-            hand.add(new SpecialHex("paddock"));
+            ArrayList<SpecialHex> hand = players.get(i).getHand();
+            hand.add(new SpecialHex("barn"));
+            hand.add(new SpecialHex("barn"));
+            hand.add(new SpecialHex("barn"));
+            hand.add(new SpecialHex("barn"));
             if (i == 1 || i == 2) {
                 currX = 1390;
             } else if (i == 3) {
@@ -286,17 +291,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 } else if (x.getType() == "oracle") {
                     temp = actionTiles[4];
                 } else if (x.getType() == "paddock") {
-                    System.out.println("EEEEEEEEee");
                     temp = actionTiles[5];
                 } else if (x.getType() == "tavern") {
                     temp = actionTiles[6];
                 } else if (x.getType() == "tower") {
                     temp = actionTiles[7];
                 }
-                if (temp != null) {
-                    g.drawImage(temp, currX, currY, 104, 95, null);
-                    currX += 110;
-                }
+                g.drawImage(temp, currX, currY, 104, 95, null);
+                currX += 110;
+                // if (temp != null) {
+
+                // }
                 if (j == 3) {
                     currX -= 110;
                     currY += 105;
