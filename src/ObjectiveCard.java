@@ -242,14 +242,14 @@ public class ObjectiveCard {
                 findNumSettlementsInSector(settlementColor, 3), findNumSettlementsInSector(settlementColor, 4) };
         int largest = 0;
         for (int i = 0; i < scores.length; i++) {
-            if (i > largest) {
-                largest = i;
+            if (scores[i] > largest) {
+                largest = scores[i];
             }
         }
-        return 0;
+        return largest;
     }
 
-    public ArrayList<Player> lordRankings() {
+    public ArrayList<Player> lordRankings() { // highest gets 12, second highest gets 6
         ArrayList<Player> ps = Game.players;
         int p1 = getLargestNumSetInSect(ps.get(0).getColor());
         int p2 = getLargestNumSetInSect(ps.get(1).getColor());
