@@ -25,8 +25,8 @@ import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
-            b3, b4, b5, b6, b7, b8, firstToken,
-            citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
+            b3, b4, b5, b6, b7, b8, firstToken, citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant,
+            miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
             sumTower, reverseSumBarn, reverseSumFarm, reverseSumHarbor, reverseSumOasis, reverseSumOracle,
@@ -195,48 +195,35 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
-
-                // g.drawImage(cardBack, 470, 450,110, 180, null);
-                // drawHexOutline(g);
-                // image.png(g);
-
-                // g.drawRect(0, 128, 340, 340);
-                // g.drawRect(1580, 128, 340, 340);
-                // g.drawRect(1580, 480, 340, 340);
-                // g.drawRect(0, 480, 340, 340);
-
-                // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-                // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-                // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-                // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-                // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 drawObjectiveCards(g);
                 gameStates = GameStates.drawCard;
                 break;
 
             case drawCard:
-
                 if (currentPlayer.hasDrawn) {
-                    if (currentPlayer.playerNum == 1) {
-                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                        g.drawImage(b, 350, 140, 175, 270, null);
-                        gameStates = GameStates.turnStart;
-                    } else if (currentPlayer.playerNum == 2) {
-                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                        g.drawImage(b, 1388, 140, 175, 270, null);
-                        gameStates = GameStates.turnStart;
+                    drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
+                            currentPlayer.getOrder());
+                    gameStates = GameStates.turnStart;
+                    // if (currentPlayer.playerNum == 1) {
+                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                    // g.drawImage(b, 350, 140, 175, 270, null);
+                    // gameStates = GameStates.turnStart;
+                    // } else if (currentPlayer.playerNum == 2) {
+                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                    // g.drawImage(b, 1388, 140, 175, 270, null);
+                    // gameStates = GameStates.turnStart;
 
-                    } else if (currentPlayer.playerNum == 3) {
-                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                        g.drawImage(b, 1388, 520, 175, 270, null);
-                        gameStates = GameStates.turnStart;
+                    // } else if (currentPlayer.playerNum == 3) {
+                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                    // g.drawImage(b, 1388, 520, 175, 270, null);
+                    // gameStates = GameStates.turnStart;
 
-                    } else if (currentPlayer.playerNum == 4) {
-                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                        g.drawImage(b, 350, 520, 175, 270, null);
-                        gameStates = GameStates.turnStart;
+                    // } else if (currentPlayer.playerNum == 4) {
+                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                    // g.drawImage(b, 350, 520, 175, 270, null);
+                    // gameStates = GameStates.turnStart;
 
-                    }
+                    // }
 
                 }
             case turnStart:
@@ -492,19 +479,44 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
+    public void drawPlayerCard(Graphics g, String terrain, int pNum) {
+        BufferedImage image = cardCanyon;
+        if (terrain.equals("canyon")) {
+            image = cardCanyon;
+        } else if (terrain.equals("desert")) {
+            image = cardDesert;
+        } else if (terrain.equals("meadow")) {
+            image = cardMeadow;
+        } else if (terrain.equals("flower")) {
+            image = cardFlower;
+        } else if (terrain.equals("forest")) {
+            image = cardForest;
+        }
+
+        if (pNum == 1) {
+            g.drawImage(image, 350, 140, 175, 270, null);
+        } else if (pNum == 2) {
+            g.drawImage(image, 1388, 140, 175, 270, null);
+        } else if (pNum == 3) {
+            g.drawImage(image, 1388, 520, 175, 270, null);
+        } else if (pNum == 4) {
+            g.drawImage(image, 350, 520, 175, 270, null);
+        }
+    }
+
     public void drawCard(Graphics g) throws IOException {
         BufferedImage cimage = cardBack;
         Card c1 = game.getCard();
         try {
-            if (c1.getTerrain().equals("canyon")) {
+            if (c1.getTerrain().equals("danyon")) {
                 cimage = cardCanyon;
-            } else if (c1.getTerrain().equals("Desert")) {
+            } else if (c1.getTerrain().equals("desert")) {
                 cimage = cardDesert;
-            } else if (c1.getTerrain().equals("Meadow")) {
+            } else if (c1.getTerrain().equals("meadow")) {
                 cimage = cardMeadow;
-            } else if (c1.getTerrain().equals("Flower")) {
+            } else if (c1.getTerrain().equals("flower")) {
                 cimage = cardFlower;
-            } else if (c1.getTerrain().equals("Forest")) {
+            } else if (c1.getTerrain().equals("forest")) {
                 cimage = cardForest;
             }
             g.drawImage(cimage, 900, 1200, null);
@@ -611,6 +623,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     current.drawCard();
                     String terrainType = current.terrainCard.getTerrain();
                     current.hasDrawn = true;
+                    currentPlayer = current;
                     System.out.println("has drawn card");
                 }
                 break;
@@ -623,12 +636,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
 
         }
-        if (startPhase) {
-            // play button
-
-        }
-
-        // else if(clickedX)
         repaint();
     }
 
