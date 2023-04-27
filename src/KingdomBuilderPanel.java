@@ -151,7 +151,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
             case objectiveCards:
 
-                g.drawImage(background, 0, 0, 1920 , 1080, null);
+                g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 80);
                 g.setFont(ps);
