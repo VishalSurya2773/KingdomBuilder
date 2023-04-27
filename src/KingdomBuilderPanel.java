@@ -44,6 +44,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
+    public Player currentPlayer;
+    
 
     public KingdomBuilderPanel() {
         try {
@@ -110,7 +112,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             t_tower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tower.png"));
             firstToken = ImageIO.read(KingdomBuilderPanel.class.getResource("images/first_token.png"));
             GameStates gameStates = GameStates.startGame;
-
+            
         } catch (Exception e) {
             System.out.println("failure");
         }
@@ -191,7 +193,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 
             case turnStart:
 
+                
                 break;
+            case chooseSettlement:
+
+                if(Game.gameOver){
+                    gameStates = GameStates.gameOver;
+                    break;
+                }
+                
+                case gameOver:
+
         }
 
     }
@@ -593,3 +605,4 @@ class sortPlayer implements Comparator<Player> {
         return a.getOrder() - b.getOrder();
     }
 }
+
