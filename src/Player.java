@@ -9,20 +9,22 @@ public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
     private ArrayList<Settlement> stored;
-    private Card terrainCard; // the card the player has on the current turn
+    public Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
     private int order;
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
+    public boolean hasDrawn = false; 
 
-    public Player(boolean first, String clr, int playerNum) {
+    public Player(boolean first, String clr, int pNum) {
         isFirst = first;
         color = clr;
         stored = new ArrayList<Settlement>();
         fillStored();
-        this.playerNum = playerNum;
+        order = pNum;
+        hand = new ArrayList<>();
 
     }
 
@@ -50,21 +52,7 @@ public class Player {
         // checks if the player can place a settlement there
         // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
         // // check possible adjacency
-        // for(int i = 0; i < placed.size(); i++){
-        // /*
-        // * NEEDS MORE WORK
-        // */
-        // HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
-        // if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ //
-        // check the adjacencies of this hex and see if it's all full - it would be
-        // false if there is an area where the settlements in the terrain exist
-        // if(map.get(h)) continue; // MAKE SURE MAP IS PROPERLY WOKRING LATER ON -
-        // MIHGT SKIP OVER DFS
-        // dfsCanPlace(placed.get(i).placedOn(), map, chosenCard);
-        // }
 
-        // }
-        // }
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         for (int i = 0; i < placed.size(); i++) {
@@ -98,6 +86,10 @@ public class Player {
         }
         Game.gameOver = true;
         return null;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
     }
 
     public ArrayList<SpecialHex> getHand() {
@@ -517,4 +509,5 @@ public class Player {
         return;
 
     }
+
 }

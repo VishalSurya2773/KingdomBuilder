@@ -12,6 +12,7 @@ public class Game {
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
+    public static int index = 0;
 
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
@@ -22,28 +23,27 @@ public class Game {
             System.out.println("Board graph building failure");
         }
 
-        amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
-                               // to 0
-        playerAmount = 4;
+        amtOfSettlements = 40; // show this int on front end and make sure to check when it gets to 0
         players = new ArrayList<Player>();
         ArrayList<String> clrs = new ArrayList<>();
-        clrs.add("blue");
-        clrs.add("green");
-        clrs.add("orange");
-        clrs.add("purple");
-        clrs.add("red");
-        clrs.add("yellow");
-
+        clrs.add("Blue");
+        clrs.add("Green");
+        clrs.add("Orange");
+        clrs.add("Purple");
+        clrs.add("Red");
+        clrs.add("Yellow");
         for (int i = 1; i <= playerAmount; i++) {
             int temp = (int) (Math.random() * clrs.size()) + 1;
             players.add(new Player(false, clrs.get(temp - 1), i));
             clrs.remove(clrs.get(temp - 1));
         }
-
         Collections.shuffle(players);
         for (Player p : players) {
-            System.out.println(p.getColor());
+            System.out.print(p.getOrder() + ", " + p.getColor() + "; ");
         }
+        System.out.println();
+        chooseStartingPlayer();
+
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
         // add cards into deck:
@@ -63,6 +63,10 @@ public class Game {
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
+    }
+
+    public void incrementIndex(){
+        index ++;
     }
 
     public ArrayList<ObjectiveCard> getObjDeck() {
@@ -108,7 +112,7 @@ public class Game {
     }
 
     public void turn() { // unfinished - oversees the turns of the players {
-        playerIndex = (int) (Math.random() * 4) + 1;
+       // probably wont use this method
         boolean b = this.gameOver;
         while (b != gameOver) {
             playerIndex %= 4;
