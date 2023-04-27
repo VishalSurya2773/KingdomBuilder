@@ -288,13 +288,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             }
         }
         if (firstPlayer == 1) {
-            g.drawImage(firstToken, 405, 31, 100, 85, null);
+            g.drawImage(firstToken, 405, 30, 100, 85, null);
         } else if (firstPlayer == 2) {
-            g.drawImage(firstToken, 1350, 45, 100, 85, null);
+            g.drawImage(firstToken, 1390, 30, 100, 85, null);
         } else if (firstPlayer == 3) {
-            g.drawImage(firstToken, 1350, 395, 100, 85, null);
+            g.drawImage(firstToken, 1390, 430, 100, 85, null);
         } else {
-            g.drawImage(firstToken, 405, 418, 100, 85, null);
+            g.drawImage(firstToken, 405, 430, 100, 85, null);
         }
     }
 
@@ -337,17 +337,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         BufferedImage temp = null;
         BufferedImage[] clrs = { settleBlue, settleGreen, settleOrange, settlePurple, settleRed, settleYellow };
         for (int i = 0; i < clrs.length; i++) {
-            if (clr.equals("Blue")) {
+            if (clr.equals("Blue") || clr.equals("blue")) {
                 temp = settleBlue;
-            } else if (clr.equals("Green")) {
+            } else if (clr.equals("Green") || clr.equals("green")) {
                 temp = settleGreen;
-            } else if (clr.equals("Orange")) {
+            } else if (clr.equals("Orange") || clr.equals("orange")) {
                 temp = settleOrange;
-            } else if (clr.equals("Purple")) {
+            } else if (clr.equals("Purple") || clr.equals("purple")) {
                 temp = settlePurple;
-            } else if (clr.equals("Red")) {
+            } else if (clr.equals("Red") || clr.equals("red")) {
                 temp = settleRed;
-            } else if (clr.equals("Yellow")) {
+            } else if (clr.equals("Yellow") || clr.equals("yellow")) {
                 temp = settleYellow;
             }
         }
