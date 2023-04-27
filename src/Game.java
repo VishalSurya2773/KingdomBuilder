@@ -41,6 +41,7 @@ public class Game {
             System.out.print(p.getOrder() + ", " + p.getColor() + "; ");
         }
         System.out.println();
+        chooseStartingPlayer();
 
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
