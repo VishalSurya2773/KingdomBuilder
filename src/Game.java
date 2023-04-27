@@ -22,14 +22,26 @@ public class Game {
             System.out.println("Board graph building failure");
         }
 
-        amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
-                               // to 0
-        playerAmount = 4;
-
+        amtOfSettlements = 40; // show this int on front end and make sure to check when it gets to 0
+        players = new ArrayList<Player>();
+        ArrayList<String> clrs = new ArrayList<>();
+        clrs.add("blue");
+        clrs.add("green");
+        clrs.add("orange");
+        clrs.add("purple");
+        clrs.add("red");
+        clrs.add("yellow");
+        for (int i = 0; i <= playerAmount; i++) {
+            System.out.println("in loop");
+            int temp = (int) (Math.random() * clrs.size()) + 1;
+            players.add(new Player(false, clrs.get(temp - 1), 4));
+            clrs.remove(clrs.get(temp - 1));
+        }
         Collections.shuffle(players);
         for (Player p : players) {
-            System.out.println(p.getColor());
+            System.out.print(p.getOrder() + ", ");
         }
+
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
         // add cards into deck:
@@ -49,22 +61,6 @@ public class Game {
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
-    }
-
-    public void addPlayers(int plAmt) {
-        players = new ArrayList<Player>();
-        ArrayList<String> clrs = new ArrayList<>();
-        clrs.add("blue");
-        clrs.add("green");
-        clrs.add("orange");
-        clrs.add("purple");
-        clrs.add("red");
-        clrs.add("yellow");
-        for (int i = 1; i <= plAmt; i++) {
-            int temp = (int) (Math.random() * clrs.size()) + 1;
-            players.add(new Player(false, clrs.get(temp - 1), i));
-            clrs.remove(clrs.get(temp - 1));
-        }
     }
 
     public ArrayList<ObjectiveCard> getObjDeck() {
