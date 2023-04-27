@@ -153,12 +153,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
                 g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
                 g.setColor(Color.WHITE);
-                Font ps = new Font("Abril Fatface", Font.BOLD, 80);
+                Font ps = new Font("Abril Fatface", Font.BOLD, 76);
                 g.setFont(ps);
-                g.drawString("Player 1", 1, 26);
-                g.drawString("Player 2", 1600, 26);
+                g.drawString("Player 1", 0, 80);
+                g.drawString("Player 2", 1600, 72);
                 g.drawString("Player 3", 1600, 390);
-                g.drawString("Player 4", 1, 390);
+                g.drawString("Player 4", 0, 460);
 
                 g.setColor(burgundy);
                 drawBackCards(g);
@@ -186,6 +186,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawObjectiveCards(g);
                 gameStates = GameStates.drawCard;
                 break;
+            
+            case drawCard:
+                
             case turnStart:
 
                 break;
