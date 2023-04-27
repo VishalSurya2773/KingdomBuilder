@@ -22,14 +22,25 @@ public class Game {
             System.out.println("Board graph building failure");
         }
 
-        amtOfSettlements = 40; // show this integer on the front end and also make sure to check when it gets
-                               // to 0
-        playerAmount = 4;
+        amtOfSettlements = 40; // show this int on front end and make sure to check when it gets to 0
         players = new ArrayList<Player>();
+        ArrayList<String> clrs = new ArrayList<>();
+        clrs.add("Blue");
+        clrs.add("Green");
+        clrs.add("Orange");
+        clrs.add("Purple");
+        clrs.add("Red");
+        clrs.add("Yellow");
         for (int i = 0; i < playerAmount; i++) {
-            players.add(new Player(false, null, i + 1));
-        } // test syncing stuff
+            int temp = (int) (Math.random() * clrs.size()) + 1;
+            players.add(new Player(false, clrs.get(temp - 1), i + 1));
+            clrs.remove(clrs.get(temp - 1));
+        }
         Collections.shuffle(players);
+        for (Player p : players) {
+            System.out.print(p.getOrder() + ", ");
+        }
+        System.out.println();
 
         deck = new ArrayList<Card>();
         discard = new ArrayList<Card>();
@@ -95,11 +106,11 @@ public class Game {
     }
 
     public void turn() { // unfinished - oversees the turns of the players {
-        playerIndex = (int)(Math.random() * 4) + 1;
+        playerIndex = (int) (Math.random() * 4) + 1;
         boolean b = this.gameOver;
-        while(b!= gameOver) {
+        while (b != gameOver) {
             playerIndex %= 4;
-            Player playing = players.get(playerIndex+1);
+            Player playing = players.get(playerIndex + 1);
             playerIndex++;
         }
 
@@ -129,8 +140,8 @@ public class Game {
             players.get(i).calculateScore();
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
-        ArrayList<Integer> Winners = getWinner(); 
-        gameOver = true;    // it's an arraylist because of possible ties
+        ArrayList<Integer> Winners = getWinner();
+        gameOver = true; // it's an arraylist because of possible ties
         // show winners and ranks
         // if they want to play again, maybe have a play again button that starts the
         // game over (if we have extra time)

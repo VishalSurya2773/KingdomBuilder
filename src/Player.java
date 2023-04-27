@@ -17,12 +17,13 @@ public class Player {
     public int playerNum;
     private Hex chosenLocationForNewHex;
 
-    public Player(boolean first, String clr, int playerNum) {
+    public Player(boolean first, String clr, int pNum) {
         isFirst = first;
         color = clr;
         stored = new ArrayList<Settlement>();
         fillStored();
-        this.playerNum = playerNum;
+        order = pNum;
+        hand = new ArrayList<>();
 
     }
 
@@ -517,4 +518,5 @@ public class Player {
         return;
 
     }
+
 }
