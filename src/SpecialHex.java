@@ -1,6 +1,6 @@
 public class SpecialHex extends Hex {
     private String powerType; // lowercase strings
-    private int tilesLeft, x, y; 
+    private int tilesLeft, x, y;
     private boolean isCastle;
 
     public SpecialHex(int xComp, int yComp, String type, boolean castle) {
@@ -11,9 +11,11 @@ public class SpecialHex extends Hex {
         y = yComp;
         isCastle = castle;
     }
-    public  SpecialHex(String s){
+
+    public SpecialHex(String s) {
         super(s);
     }
+
     public SpecialHex giveSpecialTile(Player p) {
         tilesLeft--;
         if (tilesLeft < 0) {
@@ -40,6 +42,8 @@ public class SpecialHex extends Hex {
         return powerType;
     }
 
-    
+    public String toString() {
+        return powerType;
+    }
 
 }
