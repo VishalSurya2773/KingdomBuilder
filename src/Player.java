@@ -51,21 +51,7 @@ public class Player {
         // checks if the player can place a settlement there
         // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
         // // check possible adjacency
-        // for(int i = 0; i < placed.size(); i++){
-        // /*
-        // * NEEDS MORE WORK
-        // */
-        // HashMap<Hex, Boolean> map = new HashMap<Hex, Boolean>();
-        // if(placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())){ //
-        // check the adjacencies of this hex and see if it's all full - it would be
-        // false if there is an area where the settlements in the terrain exist
-        // if(map.get(h)) continue; // MAKE SURE MAP IS PROPERLY WOKRING LATER ON -
-        // MIHGT SKIP OVER DFS
-        // dfsCanPlace(placed.get(i).placedOn(), map, chosenCard);
-        // }
 
-        // }
-        // }
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         for (int i = 0; i < placed.size(); i++) {
