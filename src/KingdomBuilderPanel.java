@@ -151,14 +151,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
             case objectiveCards:
 
-                g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
+                g.drawImage(background, 0, 0, 1920 , 1080, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 80);
                 g.setFont(ps);
-                g.drawString("Player 1", 0, 79);
-                g.drawString("Player 2", 1600, 78);
-                g.drawString("Player 3", 1600, 468);
-                g.drawString("Player 4", 0, 468);
+                g.drawString("Player 1", 1, 26);
+                g.drawString("Player 2", 1600, 26);
+                g.drawString("Player 3", 1600, 390);
+                g.drawString("Player 4", 1, 390);
 
                 g.setColor(burgundy);
                 drawBackCards(g);
@@ -368,7 +368,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
-        int[] currX = { 546, 949, 550, 949 };
+        int[] currX = { 504, 907, 504, 907 };
         int[] currY = { 130, 130, 477, 477 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
