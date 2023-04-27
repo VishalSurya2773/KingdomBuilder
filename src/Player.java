@@ -9,13 +9,14 @@ public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
     private ArrayList<Settlement> stored;
-    private Card terrainCard; // the card the player has on the current turn
+    public Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
     private int order;
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
+    public boolean hasDrawn = false; 
 
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;

@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.TreeMap;
 import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.Icon;
@@ -45,6 +46,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
     public Player currentPlayer;
+    private TreeMap<String, BufferedImage> cardMapping;
     
 
     public KingdomBuilderPanel() {
@@ -111,6 +113,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             t_tavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tavern.png"));
             t_tower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tower.png"));
             firstToken = ImageIO.read(KingdomBuilderPanel.class.getResource("images/first_token.png"));
+
+            cardMapping = new TreeMap<String, BufferedImage>();
+
+            loadCardMap();
+            
             GameStates gameStates = GameStates.startGame;
             
         } catch (Exception e) {
@@ -126,6 +133,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         addMouseListener(this);
         b = game.gameBoard;
         board = b.getGraph();
+    }
+
+    public void loadCardMap(){
+        cardMapping.put("canyon", cardCanyon);
+        cardMapping.put("forest", cardForest);
+        cardMapping.put("meadow", cardMeadow);
+        cardMapping.put("desert", cardDesert);
+        cardMapping.put("flower", cardFlower);
+
     }
 
     // settlements r 36x36
@@ -190,7 +206,32 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
             
             case drawCard:
-                
+                if(currentPlayer.hasDrawn){
+                    if(currentPlayer.playerNum == 1){
+                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                       g.drawImage(b, 350, 140, 175, 270, null );
+                       gameStates = GameStates.turnStart;
+                    }
+                   else  if(currentPlayer.playerNum == 2){
+                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                       g.drawImage(b, 1388, 140, 175, 270, null );
+                       gameStates = GameStates.turnStart;
+
+                    } 
+                   else  if(currentPlayer.playerNum == 3){
+                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                       g.drawImage(b, 1388, 520, 175, 270, null );
+                       gameStates = GameStates.turnStart;
+
+                    }
+                   else  if(currentPlayer.playerNum == 4){
+                        BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
+                       g.drawImage(b, 350, 520, 175, 270, null );
+                       gameStates = GameStates.turnStart;
+
+                    }
+
+                }
             case turnStart:
 
                 
@@ -557,13 +598,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             // }
             // break;
             case drawCard:
-                // 1715, 800, 200, 270
+                // 1715, 800, 200, 270                    
+                Player current = getList().get(Game.index % 4 + 1);
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
-                    // draw card for that player
-
+                    current.drawCard();
+                    String terrainType = current.terrainCard.getTerrain();
+                    current.hasDrawn = true;
+                    System.out.println("has drawn card");
                 }
                 break;
             case turnStart:
+            
                 break;
             case chooseSettlement:
                 break;
@@ -595,6 +640,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void mouseExited(java.awt.event.MouseEvent e) {
 
     }
+   
+    public ArrayList<Player> getList(){
+        ArrayList<Player> players = new ArrayList<>();
+        players = Game.players;
+        Collections.sort(players, new sortPlayer());
+        return players;
+    }
+    
 
 }
 
@@ -605,4 +658,5 @@ class sortPlayer implements Comparator<Player> {
         return a.getOrder() - b.getOrder();
     }
 }
+
 

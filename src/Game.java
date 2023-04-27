@@ -65,6 +65,10 @@ public class Game {
         // startGame();
     }
 
+    public void incrementIndex(){
+        index ++;
+    }
+
     public ArrayList<ObjectiveCard> getObjDeck() {
         return objDeck;
     }
