@@ -37,7 +37,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
     private ArrayList<ObjectiveCard> ObjectiveDeck;
-    private ArrayList<Player> sortedPlayers;
+    private ArrayList<Player> players, sortedPlayers;
     private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
@@ -215,6 +215,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
 
             case drawCard:
+
                 if (currentPlayer.hasDrawn) {
                     if (currentPlayer.playerNum == 1) {
                         BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
@@ -282,7 +283,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // players = game.players;
         // if(players.size() == 0){System.out.println("PLAYER LIST IS 0"); return;}
         int firstPlayer = 0;
-        for (Player i : game.players) {
+        for (Player i : players) {
             if (i.isFirst()) {
                 firstPlayer = i.getOrder();
             }
@@ -374,7 +375,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawPlayerTokens(Graphics g) {
         // almost complete
-        ArrayList<Player> players = game.players;
         int currX = 0;
         int currY = 150;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
@@ -482,9 +482,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             ObjectiveCard c1 = ObjectiveDeck.get(0);
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 675, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 827, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 987, 835, 160, 225, null);
+            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 1027, 835, 160, 225, null);
         } catch (Exception E) {
             System.out.println("error on special card");
             return;
@@ -578,6 +578,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     }
                     sortedPlayers = game.players;
                     Collections.sort(sortedPlayers, new sortPlayer());
+                    players = game.players;
+                    currentPlayer = players.get(0);
                 } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
                     playAmtClicked = true;
                     numPlayers = 2;
