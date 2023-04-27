@@ -261,7 +261,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawSumActionTiles(Graphics g) {
         // find boards and correlate them w a specialaction tile
         // add each to edge of board -> idk how to rotate them tho
-
+        int[] boards = game.gameBoard.getBoards();
     }
 
     public void drawDeck(Graphics g) {
