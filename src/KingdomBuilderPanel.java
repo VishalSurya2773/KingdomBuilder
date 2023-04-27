@@ -137,8 +137,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         numPlayers = 4;
         WIDTH = KingdomBuilderFrame.WIDTH;
         HEIGHT = KingdomBuilderFrame.HEIGHT;
-        sortedPlayers = game.players;
-        Collections.sort(sortedPlayers, new sortPlayer());
         startPhase = true;
         gamePhase = false;
         scoringPhase = false;
@@ -175,7 +173,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     } else if (numPlayers == 4) {
                         highLightRect(g, 1140, 960, 85, 80, highlight);
                     }
-                } else {
                 }
                 System.out.println("Start Game GameState");
                 break;
@@ -264,6 +261,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawSumActionTiles(Graphics g) {
         // find boards and correlate them w a specialaction tile
         // add each to edge of board -> idk how to rotate them tho
+
     }
 
     public void drawDeck(Graphics g) {
@@ -578,6 +576,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
+                    sortedPlayers = game.players;
+                    Collections.sort(sortedPlayers, new sortPlayer());
                 } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
                     playAmtClicked = true;
                     numPlayers = 2;
