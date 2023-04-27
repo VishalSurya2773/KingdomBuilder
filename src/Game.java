@@ -107,7 +107,7 @@ public class Game {
     }
 
     public void turn() { // unfinished - oversees the turns of the players {
-        playerIndex = (int) (Math.random() * 4) + 1;
+       // probably wont use this method
         boolean b = this.gameOver;
         while (b != gameOver) {
             playerIndex %= 4;
