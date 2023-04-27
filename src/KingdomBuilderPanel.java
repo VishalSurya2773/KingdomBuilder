@@ -179,6 +179,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawDeck(g);
                 drawBoard(g);
                 drawFirstPlayerToken(g);
+                drawPlayerTokens(g);
 
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
                 // drawHexOutline(g);
@@ -198,7 +199,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 gameStates = GameStates.drawCard;
                 break;
             case turnStart:
-                drawPlayerTokens(g);
 
                 break;
         }
@@ -255,6 +255,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawPlayerTokens(Graphics g) {
+
         ArrayList<Player> players = Game.players;
         int currX = 0;
         int currY = 150;
@@ -284,7 +285,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     temp = actionTiles[3];
                 } else if (x.getType() == "oracle") {
                     temp = actionTiles[4];
-                } else if (x.getType() == "padock") {
+                } else if (x.getType() == "paddock") {
+                    System.out.println("EEEEEEEEee");
                     temp = actionTiles[5];
                 } else if (x.getType() == "tavern") {
                     temp = actionTiles[6];
