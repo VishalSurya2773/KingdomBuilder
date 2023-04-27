@@ -113,32 +113,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             System.out.println("failure");
         }
 
+        numPlayers = 4;
         WIDTH = KingdomBuilderFrame.WIDTH;
         HEIGHT = KingdomBuilderFrame.HEIGHT;
-
-        System.out.println("w: " + WIDTH + "; h: " + HEIGHT);
-
-        // // jbutton stuff for start panel
-        // Icon play = new ImageIcon(b_play);
-        // playButton = new JButton(play);
-        // playButton.addActionListener(this);
-        // playButton.setBounds(800, 500, 10, 10);
-        // playButton.setSize(new Dimension(100, 100));
-
-        // Icon guide = new ImageIcon(b_guide_start);
-        // guideButton = new JButton(guide);
-        // playButton.addActionListener(this);
-
-        // this.add(playButton);
-        // this.add(guideButton);
-        // playButton.setVisible(false);
-        // guideButton.setVisible(false);
-
         startPhase = true;
         gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = Game.gameBoard;
+        b = game.gameBoard;
         board = b.getGraph();
     }
 
@@ -156,14 +138,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     Color highlight = new Color(255, 0, 0, alpha);
                     if (numPlayers == 2) {
                         highLightRect(g, 925, 960, 85, 80, highlight);
-                        game.addPlayers(2);
                     } else if (numPlayers == 3) {
                         highLightRect(g, 1030, 960, 85, 80, highlight);
-                        game.addPlayers(3);
                     } else if (numPlayers == 4) {
                         highLightRect(g, 1140, 960, 85, 80, highlight);
-                        game.addPlayers(4);
                     }
+                } else {
                 }
                 System.out.println("Start Game GameState");
                 break;
@@ -259,10 +239,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawPlayerTokens(Graphics g) {
 
-        ArrayList<Player> players = Game.players;
-        for (Player i : players) {
-            System.out.print("pl #" + i.getOrder() + ", ");
-        }
+        ArrayList<Player> players = game.players;
         int currX = 0;
         int currY = 150;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
