@@ -161,6 +161,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 g.drawString("Player 4", 0, 438);
 
                 g.setColor(burgundy);
+                drawBackCards(g);
                 drawAmtSettle(g);
                 drawDeck(g);
                 drawBoard(g);
@@ -199,6 +200,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         g.drawImage(cardBack, 1715, 800, 200, 270, null);
         g.setColor(Color.WHITE);
         g.drawString("DECK", 1760, 864);
+    }
+
+    public void drawBackCards(Graphics g) {
+        g.drawImage(cardBack, 350, 140, 175, 270, null);
+        g.drawImage(cardBack, 1388, 140, 175, 270, null);
+        g.drawImage(cardBack, 1388, 520, 175, 270, null);
+        g.drawImage(cardBack, 350, 520, 175, 270, null);
+
     }
 
     public void drawFirstPlayerToken(Graphics g) {
@@ -335,7 +344,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 } else if (x.getType() == "tower") {
                     temp = actionTiles[7];
                 }
-                g.drawImage(temp, currX, currY, 104, 95, null);
+                g.drawImage(t_barn, currX, currY, 104, 95, null);
                 currX += 110;
                 // if (temp != null) {
 
