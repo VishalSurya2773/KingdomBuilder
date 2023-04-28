@@ -150,7 +150,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-
+                System.out.println("objectiveCards GameState");
                 g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 76);
@@ -184,13 +184,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 drawObjectiveCards(g);
-                gameStates = GameStates.drawCard;
+                gameStates = GameStates.showCard;
                 break;
-            
-            case drawCard:
-                
+            case showCard: // not needed in the paint class but needed in mouselistener
+                System.out.println("showCard GameState");
             case turnStart:
-
+                System.out.println("turnStart GameState");
+                Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
+                drawCard(g, currTurn);
+                // ************ two cases: starts with specialHex actions, starts with choosing tile ************
+                drawPossibleHexOutline(g, currTurn);
+                    
+                game.nextTurn();
+                gameStates = GameStates.showCard; // next turn
                 break;
         }
 
@@ -231,9 +237,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         if (firstPlayer == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
         } else if (firstPlayer == 2) {
-            g.drawImage(firstToken, 1350, 45, 100, 85, null);
+            g.drawImage(firstToken, 1350, 31, 100, 85, null);
         } else if (firstPlayer == 3) {
-            g.drawImage(firstToken, 1350, 395, 100, 85, null);
+            g.drawImage(firstToken, 1350, 418, 100, 85, null);
         } else {
             g.drawImage(firstToken, 405, 418, 100, 85, null);
         }
@@ -395,7 +401,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
-    public void drawHexOutline(Graphics g) {
+    public void drawPossibleHexOutline(Graphics g, Player p) {
         // Hex1 - center: 664 292
         /*
          * 664, 276
@@ -405,18 +411,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
          * 650 300
          * 650 283
          */
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 40; j++) {
-                if (!board[i][j].getTerrain().equals("")) {
-                    int XCoord = board[i][j].getCenterX();
-                    int YCoord = board[i][j].getCenterY();
-                    g.setColor(Color.BLACK);
-                    int[] xPoints = { XCoord, XCoord + 14, XCoord + 14, XCoord, XCoord - 14, XCoord - 14 };
-                    int[] yPoints = { YCoord - 16, YCoord - 8, YCoord + 8, YCoord + 18, YCoord + 8, YCoord - 16 };
-                    g.setColor(Color.BLACK);
-                    g.drawPolygon(xPoints, yPoints, 6);
-                }
-            }
+        ArrayList<Hex> possibleChoices = p.getPossible();
+        for (int i = 0; i < possibleChoices.size(); i++) {
+                int XCoord = possibleChoices.get(i).getCenterX();
+                int YCoord = possibleChoices.get(i).getCenterY();
+                g.setColor(Color.BLACK);
+                int[] xPoints = { XCoord, XCoord + 14, XCoord + 14, XCoord, XCoord - 14, XCoord - 14 };
+                int[] yPoints = { YCoord - 16, YCoord - 8, YCoord + 8, YCoord + 18, YCoord + 8, YCoord - 16 };
+                g.setColor(Color.BLACK);
+                g.drawPolygon(xPoints, yPoints, 6);
         }
     }
 
@@ -436,22 +439,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
-    public void drawCard(Graphics g) throws IOException {
+    public void drawCard(Graphics g, Player p) {
         BufferedImage cimage = cardBack;
         Card c1 = game.getCard();
         try {
             if (c1.getTerrain().equals("canyon")) {
                 cimage = cardCanyon;
-            } else if (c1.getTerrain().equals("Desert")) {
+            } else if (c1.getTerrain().equals("desert")) {
                 cimage = cardDesert;
-            } else if (c1.getTerrain().equals("Meadow")) {
+            } else if (c1.getTerrain().equals("meadow")) {
                 cimage = cardMeadow;
-            } else if (c1.getTerrain().equals("Flower")) {
+            } else if (c1.getTerrain().equals("flower")) {
                 cimage = cardFlower;
-            } else if (c1.getTerrain().equals("Forest")) {
+            } else if (c1.getTerrain().equals("forest")) {
                 cimage = cardForest;
             }
-            g.drawImage(cimage, 900, 1200, null);
+            if(game.getTurn() == 0) g.drawImage(cimage, 350, 140, 175, 270, null);
+            if(game.getTurn() == 1) g.drawImage(cimage, 1388, 140, 175, 270, null);
+            if(game.getTurn() == 2) g.drawImage(cimage, 1388, 520, 175, 270, null);
+            if(game.getTurn() == 3) g.drawImage(cimage, 350, 520, 175, 270, null);
+            System.out.println(game.getTurn());
         } catch (Exception E) {
             System.out.println("error");
         }
@@ -544,15 +551,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             // gameStates = gameStates.turnStart;
             // }
             // break;
-            case drawCard:
                 // 1715, 800, 200, 270
+            case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
-
+                    gameStates = GameStates.turnStart;
                 }
-                break;
+            break;
             case turnStart:
-                break;
+
+                // get coords of available hexes
             case chooseSettlement:
                 break;
             case gameOver:
