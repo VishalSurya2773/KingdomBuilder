@@ -201,8 +201,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
             case drawCard:
                 if (currentPlayer.hasDrawn) {
+                    System.out.println("Player Number: " + currentPlayer.getOrder());
                     drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
-                            currentPlayer.getOrder());
+                            currentPlayer.getPlayerNum());
                     gameStates = GameStates.turnStart;
                     // if (currentPlayer.playerNum == 1) {
                     // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
@@ -493,13 +494,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             image = cardForest;
         }
 
-        if (pNum == 1) {
+        if (pNum == 0) {
             g.drawImage(image, 350, 140, 175, 270, null);
-        } else if (pNum == 2) {
+        } else if (pNum == 1) {
             g.drawImage(image, 1388, 140, 175, 270, null);
-        } else if (pNum == 3) {
+        } else if (pNum == 2) {
             g.drawImage(image, 1388, 520, 175, 270, null);
-        } else if (pNum == 4) {
+        } else if (pNum == 3) {
             g.drawImage(image, 350, 520, 175, 270, null);
         }
     }

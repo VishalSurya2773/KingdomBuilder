@@ -13,6 +13,7 @@ public class Player {
     private int score;
     private boolean isFirst;
     private int order;
+    private int pNumber;
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
@@ -27,7 +28,12 @@ public class Player {
         hand = new ArrayList<>();
 
     }
-
+    public void setPlayerNum(int pNum) {
+        pNumber = pNum;
+    }
+    public int getPlayerNum() {
+        return pNumber;
+    }
     public void fillStored() {
         for (int i = 0; i < 40; i++) {
             stored.add(new Settlement(this));
