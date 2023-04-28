@@ -149,8 +149,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 }
                 System.out.println("Start Game GameState");
                 break;
-            case showCard:
-                System.out.println("Show Card GameState");
             case objectiveCards:
                 System.out.println("objectiveCards GameState");
                 g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
@@ -172,7 +170,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawSumActionTiles(g);
 
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
-                // drawHexOutline(g);
                 // image.png(g);
 
                 // g.drawRect(0, 128, 340, 340);
@@ -195,7 +192,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
                 drawCard(g, currTurn);
                 // ************ two cases: starts with specialHex actions, starts with choosing tile ************
-                drawPossibleHexOutline(g, currTurn);
+                // drawPossibleHexOutline(g, currTurn);
                     
                 game.nextTurn();
                 gameStates = GameStates.showCard; // next turn
