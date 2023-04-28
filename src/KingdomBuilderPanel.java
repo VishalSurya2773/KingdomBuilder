@@ -192,7 +192,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
                 drawCard(g, currTurn);
                 // ************ two cases: starts with specialHex actions, starts with choosing tile ************
-                // drawPossibleHexOutline(g, currTurn);
+                drawPossibleHexOutline(g, currTurn);
                     
                 game.nextTurn();
                 gameStates = GameStates.showCard; // next turn
