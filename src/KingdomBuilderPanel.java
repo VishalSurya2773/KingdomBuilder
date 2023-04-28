@@ -172,7 +172,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawSumActionTiles(g);
 
                 gameStates = GameStates.turnStart;
-
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
                 // image.png(g);
 
@@ -438,9 +437,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             ObjectiveCard c1 = ObjectiveDeck.get(0);
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 675, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 827, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 987, 835, 160, 225, null);
+            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 1027, 835, 160, 225, null);
         } catch (Exception E) {
             System.out.println("error on special card");
             return;
