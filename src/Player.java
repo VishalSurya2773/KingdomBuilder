@@ -30,7 +30,7 @@ public class Player {
 
     public void fillStored() {
         for (int i = 0; i < 40; i++) {
-            stored.add(new Settlement(color));
+            stored.add(new Settlement(this));
         }
     }
 
@@ -43,6 +43,7 @@ public class Player {
             // need to finish
             // places it logically on the board
             // then place it graphically on the board
+            h.setSettlement(s);
         }
     }
 
