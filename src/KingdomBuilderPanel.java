@@ -170,8 +170,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
-                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
-                        currentPlayer.getOrder());
+
                 gameStates = GameStates.turnStart;
 
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
@@ -195,7 +194,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             case turnStart:
                 System.out.println("turnStart GameState");
                 Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
-                drawCard(g, currTurn);
+                // drawCard(g, currTurn);
+                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
+                        currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 // drawPossibleHexOutline(g, currTurn);
@@ -565,7 +566,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
                         currentPlayer.drawCard();
-                        String terrainType = currentPlayer.terrainCard.getTerrain();
+                        // String terrainType = currentPlayer.terrainCard.getTerrain();
                         currentPlayer.hasDrawn = true;
                         System.out.println("has drawn card");
                     } catch (IOException a) {
