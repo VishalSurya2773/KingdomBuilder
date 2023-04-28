@@ -26,7 +26,7 @@ public class Player {
         fillStored();
         order = pNum;
         hand = new ArrayList<>();
-
+        placed = new ArrayList<>();
     }
 
     public void setPlayerNum(int pNum) {
