@@ -88,7 +88,7 @@ public class Board {
             }
             coordY += changeY;
         }
-        coordX = 664;
+        coordX = 567;
         for (int r = 0; r < 20; r++) {
             if (boardScanners.get(0).hasNextLine()) {
                 Scanner a = new Scanner(boardScanners.get(0).nextLine());
@@ -107,7 +107,7 @@ public class Board {
             }
             coordY += changeY;
         }
-        scoordX = 680;
+        scoordX = 587;
 
         for (int r = 0; r < 20; r++) {
             if (boardScanners.get(1).hasNextLine()) {
@@ -126,7 +126,7 @@ public class Board {
             }
             coordY += changeY;
         }
-        coordX = 664;
+        coordX = 567;
         for (int r = 20; r < 40; r++) {
             if (boardScanners.get(2).hasNextLine()) {
                 Scanner a = new Scanner(boardScanners.get(2).nextLine());
@@ -144,7 +144,7 @@ public class Board {
             }
             coordY += changeY;
         }
-        scoordX = 680;
+        scoordX = 587;
         for (int r = 20; r < 40; r++) {
             if (boardScanners.get(3).hasNextLine()) {
                 Scanner a = new Scanner(boardScanners.get(3).nextLine());
