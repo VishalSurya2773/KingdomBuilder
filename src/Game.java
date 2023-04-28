@@ -12,7 +12,7 @@ public class Game {
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    public static int turn = 0;
+    public int turn = 0;
 
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
@@ -70,7 +70,10 @@ public class Game {
             if(players.get(i).getOrder() == 1) turn = i;
         }
     }
-    public void incrementTurn(){
+    public int getTurn(){
+        return turn;
+    }
+    public void nextTurn(){
         turn++;
         turn %= 4;
     }
