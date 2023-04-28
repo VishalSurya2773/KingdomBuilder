@@ -17,7 +17,7 @@ public class Player {
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
-    public boolean hasDrawn = false; 
+    public boolean hasDrawn = false;
 
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;
@@ -28,12 +28,15 @@ public class Player {
         hand = new ArrayList<>();
 
     }
+
     public void setPlayerNum(int pNum) {
         pNumber = pNum;
     }
+
     public int getPlayerNum() {
         return pNumber;
     }
+
     public void fillStored() {
         for (int i = 0; i < 40; i++) {
             stored.add(new Settlement(this));
@@ -52,7 +55,6 @@ public class Player {
             h.setSettlement(s);
         }
     }
-
 
     public boolean canPlace(Settlement s, Hex h, Card chosenCard) { // h is the hex the player clicked on, chosenCard is
                                                                     // the terraincard the person chose, idk what s is
@@ -82,15 +84,16 @@ public class Player {
         }
         return false;
     }
-    
-    
-    public ArrayList<Hex> getPossible(){
+
+    public ArrayList<Hex> getPossible() {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         for (int i = 0; i < placed.size(); i++) {
-            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { // make sure that the arraylist
-                                                                                         // of possible hexes doesnt
-                                                                                         // contain already occupied                                                                     // hexes
+            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { // make sure that the
+                                                                                          // arraylist
+                                                                                          // of possible hexes doesnt
+                                                                                          // contain already occupied //
+                                                                                          // hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
                 for (int j = 0; j < hexes.length; j++) {
                     if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
@@ -100,11 +103,11 @@ public class Player {
                 }
             }
         }
-        if(empty){
-            for(int i = 0; i < 40; i++){
-                for(int j = 0; j < 40; j++){
-                    if(Board.Graph[i][j] != null){
-                        if(Board.Graph[i][j].getTerrain().equals(terrainCard.getTerrain())){
+        if (empty) {
+            for (int i = 0; i < 40; i++) {
+                for (int j = 0; j < 40; j++) {
+                    if (Board.Graph[i][j] != null) {
+                        if (Board.Graph[i][j].getTerrain().equals(terrainCard.getTerrain())) {
                             possible.add(Board.Graph[i][j]);
                         }
                     }
@@ -113,6 +116,7 @@ public class Player {
         }
         return possible;
     }
+
     public Settlement getSettlementFromBoard() {
         // random return filler
         return placed.get(0);
