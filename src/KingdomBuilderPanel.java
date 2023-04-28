@@ -200,6 +200,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // tile ************
                 // drawPossibleHexOutline(g, currTurn);
 
+                // ************ two cases: starts with specialHex actions, starts with choosing
+                // tile ************
+                // drawPossibleHexOutline(g, currTurn);
                 game.nextTurn();
                 gameStates = GameStates.showCard; // next turn
                 break;

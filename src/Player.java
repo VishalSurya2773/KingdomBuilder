@@ -90,12 +90,23 @@ public class Player {
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { // make sure that the arraylist
                                                                                          // of possible hexes doesnt
-                                                                                         // contain already occupied
-                                                                                         // hexes
+                                                                                         // contain already occupied                                                                     // hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
                 for (int j = 0; j < hexes.length; j++) {
                     if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
+                        empty = false;
+                    }
+                }
+            }
+        }
+        if(empty){
+            for(int i = 0; i < 40; i++){
+                for(int j = 0; j < 40; j++){
+                    if(Board.Graph[i][j] != null){
+                        if(Board.Graph[i][j].getTerrain().equals(terrainCard.getTerrain())){
+                            possible.add(Board.Graph[i][j]);
+                        }
                     }
                 }
             }
