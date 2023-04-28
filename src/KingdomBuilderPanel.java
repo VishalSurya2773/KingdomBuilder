@@ -424,8 +424,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             int XCoord = possibleChoices.get(i).getCenterX();
             int YCoord = possibleChoices.get(i).getCenterY();
             g.setColor(Color.BLACK);
-            int[] xPoints = new int[]{ XCoord - 20, XCoord, XCoord + 20, XCoord + 20, XCoord, XCoord - 20};
-            int[] yPoints = new int[]{ YCoord - 10, YCoord - 20, YCoord - 10, YCoord + 10, YCoord + 20, YCoord + 10 };
+            int[] xPoints = new int[] { XCoord - 20, XCoord, XCoord + 20, XCoord + 20, XCoord, XCoord - 20 };
+            int[] yPoints = new int[] { YCoord - 10, YCoord - 20, YCoord - 10, YCoord + 10, YCoord + 20, YCoord + 10 };
             g.setColor(Color.BLACK);
             g.drawPolygon(xPoints, yPoints, 6);
         }
@@ -478,6 +478,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawPlayerCard(Graphics g, String terrain, int pNum) {
+        drawBackCards(g);
         BufferedImage image = cardCanyon;
         if (terrain.equals("canyon")) {
             image = cardCanyon;
