@@ -9,13 +9,15 @@ public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
     private ArrayList<Settlement> stored;
-    private Card terrainCard; // the card the player has on the current turn
+    public Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
     private int order;
+    private int pNumber;
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
+    public boolean hasDrawn = false; 
 
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;
@@ -26,10 +28,15 @@ public class Player {
         hand = new ArrayList<>();
 
     }
-
+    public void setPlayerNum(int pNum) {
+        pNumber = pNum;
+    }
+    public int getPlayerNum() {
+        return pNumber;
+    }
     public void fillStored() {
         for (int i = 0; i < 40; i++) {
-            stored.add(new Settlement(color));
+            stored.add(new Settlement(this));
         }
     }
 
@@ -42,6 +49,7 @@ public class Player {
             // need to finish
             // places it logically on the board
             // then place it graphically on the board
+            h.setSettlement(s);
         }
     }
 

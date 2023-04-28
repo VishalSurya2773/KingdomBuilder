@@ -9,13 +9,15 @@ public class Game {
     private static ArrayList<Card> discard; // should be displayed
     public static ArrayList<ObjectiveCard> objDeck;
     public static ArrayList<ObjectiveCard> objectives;
-    private int turn; // used when doing the turns
+    private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
+    public static int index = 0;
 
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
+        index = (int) (Math.random() * 4);
         try {
             gameBoard.makeGraph();
         } catch (IOException a) {
@@ -55,26 +57,19 @@ public class Game {
         }
         Collections.shuffle(deck);
         Collections.shuffle(objDeck);
+        playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
 
         fillObjectiveDeck();
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
-        intializeTurn();
     }
-    public void intializeTurn(){
-        for(int i = 0; i < 4; i++){
-            if(players.get(i).getOrder() == 1) turn = i;
-        }
+
+    public void incrementIndex(){
+        index ++;
     }
-    public int getTurn(){
-        return turn;
-    }
-    public void nextTurn(){
-        turn++;
-        turn %= 4;
-    }
+
     public ArrayList<ObjectiveCard> getObjDeck() {
         return objDeck;
     }

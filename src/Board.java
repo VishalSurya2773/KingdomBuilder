@@ -9,7 +9,7 @@ public class Board {
     public static Hex[][] Graph;
     private TreeMap<Integer, Hex> map;
     private ArrayList<Scanner> boardScanners;
-    public static int[] numbers;
+    public static int[] numbers, boards;
 
     public Board() {
         Graph = new Hex[40][40];
@@ -57,6 +57,7 @@ public class Board {
             System.out.print(i);
         }
         System.out.println();
+        boards = randBoards;
         try {
             boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0] + ".txt")));
             boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[1] + ".txt")));
@@ -176,5 +177,9 @@ public class Board {
 
     public static int[] getNumbers() {
         return numbers;
+    }
+
+    public int[] getBoards() {
+        return boards;
     }
 }
