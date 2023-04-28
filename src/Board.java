@@ -79,7 +79,7 @@ public class Board {
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
-                    Graph[r][c] = new Hex("blank"); // basically just a null pointer
+                    Graph[r][c] = new Hex(""); // basically just a null pointer
                     Graph[r][c].setAdjacent();
                     Graph[r][c].setX(coordX);
                     Graph[r][c].setY(coordY);
