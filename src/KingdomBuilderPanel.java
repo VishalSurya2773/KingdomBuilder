@@ -618,7 +618,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             // break;
             case drawCard:
                 // 1715, 800, 200, 270
-                Player current = getList().get(Game.index % 4 + 1);
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     current.drawCard();
                     String terrainType = current.terrainCard.getTerrain();
