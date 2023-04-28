@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.TreeMap;
 import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.Icon;
@@ -25,19 +24,17 @@ import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
-            b3, b4, b5, b6, b7, b8, firstToken, citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant,
-            miner, worker, settleBlue,
+            b3, b4, b5, b6, b7, b8, firstToken,
+            citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
-            sumTower, reverseSumBarn, reverseSumFarm, reverseSumHarbor, reverseSumOasis, reverseSumOracle,
-            reverseSumPaddock, reverseSumTavern, reverseSumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle,
-            t_paddock, t_tavern, t_tower;
+            sumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
     private int clickedX, clickedY;
     public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
     private ArrayList<ObjectiveCard> ObjectiveDeck;
-    private ArrayList<Player> players, sortedPlayers;
+    private ArrayList<Player> players;
     private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
@@ -47,8 +44,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
-    public Player currentPlayer;
-    private TreeMap<String, BufferedImage> cardMapping;
 
     public KingdomBuilderPanel() {
         try {
@@ -104,15 +99,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             sumPaddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_paddock.png"));
             sumTavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tavern.png"));
             sumTower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tower.png"));
-            // reverse summary tiles
-            reverseSumBarn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_barn.png"));
-            reverseSumFarm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_farm.png"));
-            reverseSumHarbor = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_harbor.png"));
-            reverseSumOasis = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_oasis.png"));
-            reverseSumOracle = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_oracle.png"));
-            reverseSumPaddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_paddock.png"));
-            reverseSumTavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tavern.png"));
-            reverseSumTower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tower.png"));
             // tokens
             t_barn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_barn.png"));
             t_farm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_farm.png"));
@@ -123,11 +109,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             t_tavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tavern.png"));
             t_tower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_tower.png"));
             firstToken = ImageIO.read(KingdomBuilderPanel.class.getResource("images/first_token.png"));
-
-            cardMapping = new TreeMap<String, BufferedImage>();
-
-            loadCardMap();
-
             GameStates gameStates = GameStates.startGame;
 
         } catch (Exception e) {
@@ -143,15 +124,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         addMouseListener(this);
         b = game.gameBoard;
         board = b.getGraph();
-    }
-
-    public void loadCardMap() {
-        cardMapping.put("canyon", cardCanyon);
-        cardMapping.put("forest", cardForest);
-        cardMapping.put("meadow", cardMeadow);
-        cardMapping.put("desert", cardDesert);
-        cardMapping.put("flower", cardFlower);
-
     }
 
     // settlements r 36x36
@@ -173,12 +145,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     } else if (numPlayers == 4) {
                         highLightRect(g, 1140, 960, 85, 80, highlight);
                     }
+                } else {
                 }
                 System.out.println("Start Game GameState");
                 break;
+            case showCard:
+                System.out.println("Show Card GameState");
             case objectiveCards:
-
-                g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
+                System.out.println("objectiveCards GameState");
+                g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 76);
                 g.setFont(ps);
@@ -195,38 +170,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
+
+                // g.drawImage(cardBack, 470, 450,110, 180, null);
+                // drawHexOutline(g);
+                // image.png(g);
+
+                // g.drawRect(0, 128, 340, 340);
+                // g.drawRect(1580, 128, 340, 340);
+                // g.drawRect(1580, 480, 340, 340);
+                // g.drawRect(0, 480, 340, 340);
+
+                // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+                // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
+                // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+                // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
+                // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 drawObjectiveCards(g);
                 gameStates = GameStates.showCard;
                 break;
-
-            case showCard:
-                if (currentPlayer.hasDrawn) {
-                    System.out.println("Player Number: " + currentPlayer.getOrder());
-                    drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
-                            currentPlayer.getPlayerNum());
-                    gameStates = GameStates.turnStart;
-                    // if (currentPlayer.playerNum == 1) {
-                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                    // g.drawImage(b, 350, 140, 175, 270, null);
-                    // gameStates = GameStates.turnStart;
-                    // } else if (currentPlayer.playerNum == 2) {
-                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                    // g.drawImage(b, 1388, 140, 175, 270, null);
-                    // gameStates = GameStates.turnStart;
-
-                    // } else if (currentPlayer.playerNum == 3) {
-                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                    // g.drawImage(b, 1388, 520, 175, 270, null);
-                    // gameStates = GameStates.turnStart;
-
-                    // } else if (currentPlayer.playerNum == 4) {
-                    // BufferedImage b = cardMapping.get(currentPlayer.terrainCard.getTerrain());
-                    // g.drawImage(b, 350, 520, 175, 270, null);
-                    // gameStates = GameStates.turnStart;
-
-                    // }
-
-                }
+            case showCard: // not needed in the paint class but needed in mouselistener
+                System.out.println("showCard GameState");
             case turnStart:
                 System.out.println("turnStart GameState");
                 Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
@@ -237,15 +200,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 game.nextTurn();
                 gameStates = GameStates.showCard; // next turn
                 break;
-            case chooseSettlement:
-
-                if (Game.gameOver) {
-                    gameStates = GameStates.gameOver;
-                    break;
-                }
-
-            case gameOver:
-
         }
 
     }
@@ -257,7 +211,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawSumActionTiles(Graphics g) {
         // find boards and correlate them w a specialaction tile
         // add each to edge of board -> idk how to rotate them tho
-        int[] boards = game.gameBoard.getBoards();
     }
 
     public void drawDeck(Graphics g) {
@@ -278,58 +231,55 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // players = game.players;
         // if(players.size() == 0){System.out.println("PLAYER LIST IS 0"); return;}
         int firstPlayer = 0;
-        for (Player i : players) {
+        for (Player i : game.players) {
             if (i.isFirst()) {
                 firstPlayer = i.getOrder();
             }
         }
         if (firstPlayer == 1) {
-            g.drawImage(firstToken, 405, 30, 100, 85, null);
+            g.drawImage(firstToken, 405, 31, 100, 85, null);
         } else if (firstPlayer == 2) {
-<<<<<<< HEAD
             g.drawImage(firstToken, 1350, 31, 100, 85, null);
         } else if (firstPlayer == 3) {
             g.drawImage(firstToken, 1350, 418, 100, 85, null);
-=======
-            g.drawImage(firstToken, 1400, 30, 100, 85, null);
-        } else if (firstPlayer == 3) {
-            g.drawImage(firstToken, 1400, 430, 100, 85, null);
->>>>>>> 35815dc6c3ac3dd655e2e5f95cc9de97fb14655f
         } else {
-            g.drawImage(firstToken, 405, 430, 100, 85, null);
+            g.drawImage(firstToken, 405, 418, 100, 85, null);
         }
     }
 
     public void drawAmtSettle(Graphics g) {
         g.setColor(Color.BLACK);
         // g.drawArc(303, 23, 99, 98, 360, 360);
+        ArrayList<Player> playClrs = new ArrayList<>();
+        playClrs = game.players;
+        Collections.sort(playClrs, new sortPlayer());
         BufferedImage settlement = null;
         // p1
-        settlement = settleImage(sortedPlayers.get(0));
+        settlement = settleImage(playClrs.get(0));
         g.fillArc(303, 20, 99, 98, 360, 360);
         g.drawImage(settlement, 313, 30, 80, 80, null);
 
         // p2
-        settlement = settleImage(sortedPlayers.get(1));
+        settlement = settleImage(playClrs.get(1));
         g.fillArc(1500, 20, 99, 98, 360, 360);
         g.drawImage(settlement, 1510, 30, 80, 80, null);
 
         // p3
-        settlement = settleImage(sortedPlayers.get(2));
+        settlement = settleImage(playClrs.get(2));
         g.fillArc(1500, 420, 99, 98, 360, 360);
         g.drawImage(settlement, 1510, 430, 80, 80, null);
 
         // p4
-        settlement = settleImage(sortedPlayers.get(3));
+        settlement = settleImage(playClrs.get(3));
         g.fillArc(303, 420, 99, 98, 360, 360);
         g.drawImage(settlement, 313, 430, 80, 80, null);
 
         g.setFont(new Font("Abril Fatface", Font.PLAIN, 40));
         g.setColor(Color.WHITE);
-        g.drawString("" + sortedPlayers.get(0).numSettlements(), 315, 95);
-        g.drawString("" + sortedPlayers.get(1).numSettlements(), 1512, 95);
-        g.drawString("" + sortedPlayers.get(2).numSettlements(), 1512, 495);
-        g.drawString("" + sortedPlayers.get(3).numSettlements(), 315, 495);
+        g.drawString("" + playClrs.get(0).numSettlements(), 315, 95);
+        g.drawString("" + playClrs.get(1).numSettlements(), 1512, 95);
+        g.drawString("" + playClrs.get(2).numSettlements(), 1512, 495);
+        g.drawString("" + playClrs.get(3).numSettlements(), 315, 495);
         g.setColor(Color.BLACK);
 
     }
@@ -339,17 +289,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         BufferedImage temp = null;
         BufferedImage[] clrs = { settleBlue, settleGreen, settleOrange, settlePurple, settleRed, settleYellow };
         for (int i = 0; i < clrs.length; i++) {
-            if (clr.equals("Blue") || clr.equals("blue")) {
+            if (clr.equals("Blue")) {
                 temp = settleBlue;
-            } else if (clr.equals("Green") || clr.equals("green")) {
+            } else if (clr.equals("Green")) {
                 temp = settleGreen;
-            } else if (clr.equals("Orange") || clr.equals("orange")) {
+            } else if (clr.equals("Orange")) {
                 temp = settleOrange;
-            } else if (clr.equals("Purple") || clr.equals("purple")) {
+            } else if (clr.equals("Purple")) {
                 temp = settlePurple;
-            } else if (clr.equals("Red") || clr.equals("red")) {
+            } else if (clr.equals("Red")) {
                 temp = settleRed;
-            } else if (clr.equals("Yellow") || clr.equals("yellow")) {
+            } else if (clr.equals("Yellow")) {
                 temp = settleYellow;
             }
         }
@@ -376,6 +326,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawPlayerTokens(Graphics g) {
         // almost complete
+        ArrayList<Player> players = game.players;
         int currX = 0;
         int currY = 150;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
@@ -427,7 +378,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
-        int[] currX = { 545, 950, 545, 950 };
+        int[] currX = { 547, 920, 547, 920 };
         int[] currY = { 130, 130, 477, 477 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
@@ -480,9 +431,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             ObjectiveCard c1 = ObjectiveDeck.get(0);
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 1027, 835, 160, 225, null);
+            g.drawImage(c1.getImage(c1.getType()), 675, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 827, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 987, 835, 160, 225, null);
         } catch (Exception E) {
             System.out.println("error on special card");
             return;
@@ -490,40 +441,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
-<<<<<<< HEAD
     public void drawCard(Graphics g, Player p) {
-=======
-    public void drawPlayerCard(Graphics g, String terrain, int pNum) {
-        BufferedImage image = cardCanyon;
-        if (terrain.equals("canyon")) {
-            image = cardCanyon;
-        } else if (terrain.equals("desert")) {
-            image = cardDesert;
-        } else if (terrain.equals("meadow")) {
-            image = cardMeadow;
-        } else if (terrain.equals("flower")) {
-            image = cardFlower;
-        } else if (terrain.equals("forest")) {
-            image = cardForest;
-        }
-
-        if (pNum == 0) {
-            g.drawImage(image, 350, 140, 175, 270, null);
-        } else if (pNum == 1) {
-            g.drawImage(image, 1388, 140, 175, 270, null);
-        } else if (pNum == 2) {
-            g.drawImage(image, 1388, 520, 175, 270, null);
-        } else if (pNum == 3) {
-            g.drawImage(image, 350, 520, 175, 270, null);
-        }
-    }
-
-    public void drawCard(Graphics g) throws IOException {
->>>>>>> 35815dc6c3ac3dd655e2e5f95cc9de97fb14655f
         BufferedImage cimage = cardBack;
         Card c1 = game.getCard();
         try {
-            if (c1.getTerrain().equals("danyon")) {
+            if (c1.getTerrain().equals("canyon")) {
                 cimage = cardCanyon;
             } else if (c1.getTerrain().equals("desert")) {
                 cimage = cardDesert;
@@ -607,10 +529,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
-                    sortedPlayers = game.players;
-                    Collections.sort(sortedPlayers, new sortPlayer());
-                    players = game.players;
-                    currentPlayer = players.get(0);
                 } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
                     playAmtClicked = true;
                     numPlayers = 2;
@@ -636,34 +554,27 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             // }
             // break;
                 // 1715, 800, 200, 270
-<<<<<<< HEAD
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
                     gameStates = GameStates.turnStart;
-=======
-                
-                if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
-                    currentPlayer.drawCard();
-                    String terrainType = currentPlayer.terrainCard.getTerrain();
-                    currentPlayer.hasDrawn = true;
-                    System.out.println("has drawn card");
->>>>>>> 35815dc6c3ac3dd655e2e5f95cc9de97fb14655f
                 }
             break;
             case turnStart:
 
-<<<<<<< HEAD
                 // get coords of available hexes
-=======
-                break;
->>>>>>> 35815dc6c3ac3dd655e2e5f95cc9de97fb14655f
             case chooseSettlement:
                 break;
             case gameOver:
                 break;
 
         }
+        if (startPhase) {
+            // play button
+
+        }
+
+        // else if(clickedX)
         repaint();
     }
 
@@ -681,13 +592,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void mouseExited(java.awt.event.MouseEvent e) {
 
-    }
-
-    public ArrayList<Player> getList() {
-        ArrayList<Player> players = new ArrayList<>();
-        players = Game.players;
-        Collections.sort(players, new sortPlayer());
-        return players;
     }
 
 }
