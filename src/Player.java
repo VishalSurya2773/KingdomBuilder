@@ -45,6 +45,7 @@ public class Player {
         }
     }
 
+    /* 
     public boolean canPlace(Settlement s, Hex h, Card chosenCard) { // h is the hex the player clicked on, chosenCard is
                                                                     // the terraincard the person chose, idk what s is
                                                                     // but wed can remove it if it's unnecessary
@@ -73,7 +74,25 @@ public class Player {
         }
         return false;
     }
-
+    */
+    public ArrayList<Hex> getPossible(){
+        ArrayList<Hex> possible = new ArrayList<Hex>();
+        boolean empty = true;
+        for (int i = 0; i < placed.size(); i++) {
+            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { // make sure that the arraylist
+                                                                                         // of possible hexes doesnt
+                                                                                         // contain already occupied
+                                                                                         // hexes
+                Hex[] hexes = placed.get(i).placedOn().adjacents();
+                for (int j = 0; j < hexes.length; j++) {
+                    if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
+                        possible.add(hexes[j]);
+                    }
+                }
+            }
+        }
+        return possible;
+    }
     public Settlement getSettlementFromBoard() {
         // random return filler
         return placed.get(0);

@@ -1,8 +1,8 @@
 enum GameStates{
     startGame,
     objectiveCards,
-    drawCard,
     turnStart,
+    showCard,
     chooseSettlement,
     gameOver
 } 
