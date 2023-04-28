@@ -53,7 +53,7 @@ public class Player {
         }
     }
 
-    /* 
+
     public boolean canPlace(Settlement s, Hex h, Card chosenCard) { // h is the hex the player clicked on, chosenCard is
                                                                     // the terraincard the person chose, idk what s is
                                                                     // but wed can remove it if it's unnecessary
@@ -82,7 +82,8 @@ public class Player {
         }
         return false;
     }
-    */
+    
+    
     public ArrayList<Hex> getPossible(){
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
