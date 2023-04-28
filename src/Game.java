@@ -17,6 +17,7 @@ public class Game {
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
+        index = (int) (Math.random() * 4);
         try {
             gameBoard.makeGraph();
         } catch (IOException a) {
