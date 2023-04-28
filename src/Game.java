@@ -12,12 +12,11 @@ public class Game {
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    public static int index = 0;
+    public static int turn = 0;
 
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
-        index = (int) (Math.random() * 4);
         try {
             gameBoard.makeGraph();
         } catch (IOException a) {
@@ -64,10 +63,16 @@ public class Game {
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
+        initializeTurn();
     }
-
-    public void incrementIndex(){
-        index ++;
+    public void initializeTurn(){
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).getOrder() == 1) turn = i;
+        }
+    }
+    public void incrementTurn(){
+        turn++;
+        turn %= 4;
     }
 
     public ArrayList<ObjectiveCard> getObjDeck() {
@@ -111,7 +116,7 @@ public class Game {
         discard.add(deck.remove(0));
         return ans;
     }
-
+/*
     public void turn() { // unfinished - oversees the turns of the players {
        // probably wont use this method
         boolean b = this.gameOver;
@@ -122,7 +127,7 @@ public class Game {
         }
 
     }
-
+*/
     public void useSpecialHex(Player p) { // already in player class - don't need to use unless smth comes up
         if (p.chooseHex().getType().equals("barn")) {
             p.barnAction();

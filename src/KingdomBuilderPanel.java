@@ -177,13 +177,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-<<<<<<< HEAD
-                System.out.println("objectiveCards GameState");
-                g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
-=======
 
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
->>>>>>> 35815dc6c3ac3dd655e2e5f95cc9de97fb14655f
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 76);
                 g.setFont(ps);
@@ -203,12 +198,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawObjectiveCards(g);
                 gameStates = GameStates.showCard;
                 break;
-<<<<<<< HEAD
-            case showCard: // not needed in the paint class but needed in mouselistener
-                System.out.println("showCard GameState");
-=======
 
-            case drawCard:
+            case showCard:
                 if (currentPlayer.hasDrawn) {
                     System.out.println("Player Number: " + currentPlayer.getOrder());
                     drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
@@ -236,7 +227,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     // }
 
                 }
->>>>>>> 35815dc6c3ac3dd655e2e5f95cc9de97fb14655f
             case turnStart:
                 System.out.println("turnStart GameState");
                 Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
