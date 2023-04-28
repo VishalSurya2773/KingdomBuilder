@@ -34,7 +34,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public int numPlayers;
     private ArrayList<Hex> chosenHex; // ??
     private ArrayList<ObjectiveCard> ObjectiveDeck;
-    private ArrayList<Player> players;
+    private ArrayList<Player> players, sortedPlayers;
     private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
@@ -44,6 +44,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     private int WIDTH, HEIGHT;
     public Graphics graphics;
     public GameStates gameStates = GameStates.startGame;
+    private Player currentPlayer;
 
     public KingdomBuilderPanel() {
         try {
@@ -118,6 +119,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         numPlayers = 4;
         WIDTH = KingdomBuilderFrame.WIDTH;
         HEIGHT = KingdomBuilderFrame.HEIGHT;
+
         startPhase = true;
         gamePhase = false;
         scoringPhase = false;
@@ -151,7 +153,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
             case objectiveCards:
                 System.out.println("objectiveCards GameState");
-                g.drawImage(background, 0, 0, WIDTH , HEIGHT-1, null);
+                g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 76);
                 g.setFont(ps);
@@ -168,6 +170,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
+                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
+                        currentPlayer.getOrder());
+                gameStates = GameStates.turnStart;
 
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
                 // image.png(g);
@@ -191,9 +196,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("turnStart GameState");
                 Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
                 drawCard(g, currTurn);
-                // ************ two cases: starts with specialHex actions, starts with choosing tile ************
+                // ************ two cases: starts with specialHex actions, starts with choosing
+                // tile ************
                 // drawPossibleHexOutline(g, currTurn);
-                    
+
                 game.nextTurn();
                 gameStates = GameStates.showCard; // next turn
                 break;
@@ -412,13 +418,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
          */
         ArrayList<Hex> possibleChoices = p.getPossible();
         for (int i = 0; i < possibleChoices.size(); i++) {
-                int XCoord = possibleChoices.get(i).getCenterX();
-                int YCoord = possibleChoices.get(i).getCenterY();
-                g.setColor(Color.BLACK);
-                int[] xPoints = { XCoord, XCoord + 14, XCoord + 14, XCoord, XCoord - 14, XCoord - 14 };
-                int[] yPoints = { YCoord - 16, YCoord - 8, YCoord + 8, YCoord + 18, YCoord + 8, YCoord - 16 };
-                g.setColor(Color.BLACK);
-                g.drawPolygon(xPoints, yPoints, 6);
+            int XCoord = possibleChoices.get(i).getCenterX();
+            int YCoord = possibleChoices.get(i).getCenterY();
+            g.setColor(Color.BLACK);
+            int[] xPoints = { XCoord, XCoord + 14, XCoord + 14, XCoord, XCoord - 14, XCoord - 14 };
+            int[] yPoints = { YCoord - 16, YCoord - 8, YCoord + 8, YCoord + 18, YCoord + 8, YCoord - 16 };
+            g.setColor(Color.BLACK);
+            g.drawPolygon(xPoints, yPoints, 6);
         }
     }
 
@@ -453,15 +459,44 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             } else if (c1.getTerrain().equals("forest")) {
                 cimage = cardForest;
             }
-            if(game.getTurn() == 0) g.drawImage(cimage, 350, 140, 175, 270, null);
-            if(game.getTurn() == 1) g.drawImage(cimage, 1388, 140, 175, 270, null);
-            if(game.getTurn() == 2) g.drawImage(cimage, 1388, 520, 175, 270, null);
-            if(game.getTurn() == 3) g.drawImage(cimage, 350, 520, 175, 270, null);
+            if (game.getTurn() == 0)
+                g.drawImage(cimage, 350, 140, 175, 270, null);
+            if (game.getTurn() == 1)
+                g.drawImage(cimage, 1388, 140, 175, 270, null);
+            if (game.getTurn() == 2)
+                g.drawImage(cimage, 1388, 520, 175, 270, null);
+            if (game.getTurn() == 3)
+                g.drawImage(cimage, 350, 520, 175, 270, null);
             System.out.println(game.getTurn());
         } catch (Exception E) {
             System.out.println("error");
         }
         // placeholder coordinates
+    }
+
+    public void drawPlayerCard(Graphics g, String terrain, int pNum) {
+        BufferedImage image = cardCanyon;
+        if (terrain.equals("canyon")) {
+            image = cardCanyon;
+        } else if (terrain.equals("desert")) {
+            image = cardDesert;
+        } else if (terrain.equals("meadow")) {
+            image = cardMeadow;
+        } else if (terrain.equals("flower")) {
+            image = cardFlower;
+        } else if (terrain.equals("forest")) {
+            image = cardForest;
+        }
+
+        if (pNum == 1) {
+            g.drawImage(image, 350, 140, 175, 270, null);
+        } else if (pNum == 2) {
+            g.drawImage(image, 1388, 140, 175, 270, null);
+        } else if (pNum == 3) {
+            g.drawImage(image, 1388, 520, 175, 270, null);
+        } else if (pNum == 4) {
+            g.drawImage(image, 350, 520, 175, 270, null);
+        }
     }
 
     public void drawScore(Graphics g) {
@@ -522,7 +557,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     gamePhase = true;
                     try {
                         game = new Game(numPlayers);
+                        sortedPlayers = game.players;
+                        currentPlayer = game.players.get(0);
+                        Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
+                        currentPlayer.drawCard();
+                        String terrainType = currentPlayer.terrainCard.getTerrain();
+                        currentPlayer.hasDrawn = true;
+                        System.out.println("has drawn card");
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
@@ -550,13 +592,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             // gameStates = gameStates.turnStart;
             // }
             // break;
-                // 1715, 800, 200, 270
+            // 1715, 800, 200, 270
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
                     gameStates = GameStates.turnStart;
                 }
-            break;
+                break;
             case turnStart:
 
                 // get coords of available hexes
