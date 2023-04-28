@@ -1,5 +1,5 @@
 public class Hex {
-    private Hex left, right, topLeft, topRight, bottomLeft, bottomRight;
+    public Hex left, right, topLeft, topRight, bottomLeft, bottomRight;
     private int x, y;
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
@@ -101,6 +101,23 @@ public class Hex {
     public Hex[] adjacents() {
         Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
         return out;
+    }
+
+    public Hex returnDirection(String dir) {
+        if (dir.equals("bottomLeft")) {
+            return bottomLeft;
+        } else if (dir.equals("left")) {
+            return left;
+        } else if (dir.equals("topLeft")) {
+            return topLeft;
+        } else if (dir.equals("topRight")) {
+            return topRight;
+        } else if (dir.equals("right")) {
+            return right;
+        } else if (dir.equals("bottomRight")) {
+            return left;
+        }
+        return null;
     }
 
     public void setSettlement(Settlement s) {

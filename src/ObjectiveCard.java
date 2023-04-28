@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 
 public class ObjectiveCard {
-    
+
     private String type;
     private Player p;
     private BufferedImage cardimage;
@@ -93,13 +93,13 @@ public class ObjectiveCard {
             width = 20;
         } else if (sect == 2) {
             length = 40;
-            width = 40;
+            width = 20;
         } else if (sect == 3) {
-            length = 20;
+            length = 40;
             width = 40;
         } else if (sect == 4) {
-            length = 40;
-            width = 20;
+            length = 20;
+            width = 40;
         }
         int total = 0;
         for (int r = length - 20; r < length; r++) {
@@ -279,11 +279,9 @@ public class ObjectiveCard {
         for (int i = 0; i < arr.length; i++) {
             floodfill(arr[i], p, map);
         }
-
     }
 
-    public int merchant(String settllementColor) {
-
+    public int merchant(String settlementColor) {
         int ans = 0;
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 40; j++) {
