@@ -68,13 +68,13 @@ public class Board {
         }
 
         numbers = randBoards;
-        int coordX = 664;
-        int coordY = 292;
+        int coordX = 567;
+        int coordY = 149;
 
-        int scoordX = 680; // for odd rows
+        int scoordX = 587; // for odd rows
 
-        int changeX = 30;
-        int changeY = 26;
+        int changeX = 40;
+        int changeY = 35;
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {

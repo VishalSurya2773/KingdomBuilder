@@ -198,13 +198,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
-                // drawPossibleHexOutline(g, currTurn);
 
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currTurn);
                 // game.nextTurn();
-                gameStates = GameStates.showCard; // next turn
+                // gameStates = GameStates.showCard; // next turn
                 break;
         }
 
@@ -410,7 +409,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     }
 
     public void drawPossibleHexOutline(Graphics g, Player p) {
-        // Hex1 - center: 664 292
+        // Hex1 - center: 567 149
         /*
          * 664, 276
          * 678 284
@@ -424,8 +423,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             int XCoord = possibleChoices.get(i).getCenterX();
             int YCoord = possibleChoices.get(i).getCenterY();
             g.setColor(Color.BLACK);
-            int[] xPoints = { XCoord, XCoord + 14, XCoord + 14, XCoord, XCoord - 14, XCoord - 14 };
-            int[] yPoints = { YCoord - 16, YCoord - 8, YCoord + 8, YCoord + 18, YCoord + 8, YCoord - 16 };
+            int[] xPoints = { XCoord - 20, XCoord, XCoord + 20, XCoord + 20, XCoord, XCoord - 20};
+            int[] yPoints = { YCoord - 10, YCoord - 20, YCoord - 10, YCoord + 10, YCoord + 20, YCoord + 10 };
             g.setColor(Color.BLACK);
             g.drawPolygon(xPoints, yPoints, 6);
         }
