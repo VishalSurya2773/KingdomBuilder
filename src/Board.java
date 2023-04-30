@@ -94,6 +94,9 @@ public class Board {
                         coordX += changeX;
                         inputHexes++;
                     }
+                    else{
+                        Graph[r][c] = new Hex("blank");
+                    }
                 }
             }
             coordY += changeY;
@@ -111,6 +114,9 @@ public class Board {
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
                         inputHexes++;
+                    }
+                    else{
+                        Graph[r][c] = new Hex("blank");
                     }
                 }
             }
@@ -131,6 +137,9 @@ public class Board {
                         coordX += changeX;
                         inputHexes++;
                     }
+                    else{
+                        Graph[r][c] = new Hex("blank");
+                    }
                 }
             }
             coordY += changeY;
@@ -149,6 +158,9 @@ public class Board {
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
                         inputHexes++;
+                    }
+                    else{
+                        Graph[r][c] = new Hex("blank");
                     }
                 }
             }
