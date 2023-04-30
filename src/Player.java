@@ -74,7 +74,7 @@ public class Player {
                                                                                          // hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
                 for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()) {
+                    if (hexes[j] != null && hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
                     }
                 }
