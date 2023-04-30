@@ -4,7 +4,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.*;
-
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
@@ -74,7 +73,7 @@ public class Player {
                                                                                          // hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
                 for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j] != null && hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()) {
+                    if (hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
                     }
                 }
@@ -91,14 +90,11 @@ public class Player {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         for (int i = 0; i < placed.size(); i++) {
-            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { // make sure that the
-                                                                                          // arraylist
-                                                                                          // of possible hexes doesnt
-                                                                                          // contain already occupied //
-                                                                                          // hexes
+            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { 
+                // make sure that the of possible hexes doesnt contain already occupied hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
                 for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
+                    if (hexes[j] != null && hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
                         empty = false;
                     }
@@ -106,7 +102,7 @@ public class Player {
             }
         }
         if (empty) {
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 40; j++) {
                     if (!Board.Graph[i][j].getTerrain().equals("blank")) {
                         if (Board.Graph[i][j].getTerrain().equals(terrainCard.getTerrain())) {
