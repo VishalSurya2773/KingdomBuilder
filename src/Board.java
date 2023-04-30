@@ -142,13 +142,13 @@ public class Board {
         for (int r = 20; r < 40; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
+                    // System.out.println(a.hasNextInt());  
                     if (a.hasNextInt()) {
                         Graph[r][c] = map.get(a.nextInt());
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
                         inputHexes++;
-
                     }
                 }
             }
