@@ -58,7 +58,7 @@ public class Game {
         Collections.shuffle(objDeck);
         playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
-
+        // gameBoard.printGraph();
         fillObjectiveDeck();
         getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)

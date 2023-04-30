@@ -25,6 +25,8 @@ public class Hex {
 
     public Hex(String terrainType) {
         terrain = terrainType;
+        x = 0;
+        y = 0;
         // left = null;
         // right = new Hex("");
         // topRight = new Hex("");
@@ -65,14 +67,17 @@ public class Hex {
                     if (i == 0) {
                         topLeft = null;
                         topRight = null;
-                    } else if (j == 0) {
+                    } 
+                    if (j == 0) {
                         left = null;
                         topLeft = null;
                         bottomLeft = null;
-                    } else if (i == 39) {
+                    } 
+                    if (i == 39) {
                         bottomLeft = null;
                         bottomRight = null;
-                    } else if (j == 39) {
+                    } 
+                    if (j == 39) {
                         right = null;
                         topRight = null;
                         bottomRight = null;
@@ -80,15 +85,20 @@ public class Hex {
 
                     if (left != null) {
                         left = board[i][j - 2];
-                    } else if (right != null) {
+                    } 
+                    if (right != null) {
                         right = board[i][j + 2];
-                    } else if (topLeft != null) {
+                    } 
+                    if (topLeft != null) {
                         topLeft = board[i - 1][j - 1];
-                    } else if (topRight != null) {
+                    } 
+                    if (topRight != null) {
                         topRight = board[i - 1][j + 1];
-                    } else if (bottomLeft != null) {
+                    } 
+                    if (bottomLeft != null) {
                         bottomLeft = board[i + 1][j - 1];
-                    } else if (bottomRight != null) {
+                    } 
+                    if (bottomRight != null) {
                         bottomRight = board[i + 1][j + 1];
                     }
 
