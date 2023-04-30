@@ -80,11 +80,10 @@ public class Board {
                     Graph[r][c] = new Hex("blank"); // basically just a null pointer
                 }
             }
-            coordY += changeY;
         }
-        coordX = 567;
 
         Scanner a = boardScanners.get(0);
+        int inputHexes = 0;
         for (int r = 0; r < 20; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
@@ -93,13 +92,15 @@ public class Board {
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
+                        inputHexes++;
                     }
                 }
             }
             coordY += changeY;
         }
-
+        System.out.println("Sector 1 " + inputHexes);
         coordX = 567;
+        inputHexes = 0;
         a = boardScanners.get(1);
         for (int r = 0; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
@@ -109,14 +110,17 @@ public class Board {
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
+                        inputHexes++;
                     }
                 }
             }
             coordY += changeY;
         }
+        System.out.println("Sector 2 " + inputHexes);
         scoordX = 587;
 
         a = boardScanners.get(2);
+        inputHexes = 0;
         for (int r = 20; r < 40; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
@@ -125,13 +129,16 @@ public class Board {
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
+                        inputHexes++;
                     }
                 }
             }
             coordY += changeY;
         }
+        System.out.println("Sector 3 " + inputHexes);
         coordX = 567;
         a = boardScanners.get(3);
+        inputHexes = 0;
         for (int r = 20; r < 40; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
@@ -140,12 +147,14 @@ public class Board {
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
+                        inputHexes++;
 
                     }
                 }
             }
             coordY += changeY;
         }
+        System.out.println("Sector 4 " + inputHexes);
         int nulls = 0;
         int blanks = 0;
         for (int i = 0; i < 40; i++) {
@@ -159,8 +168,9 @@ public class Board {
                 }
             }
         }
-        System.out.println(nulls);
-        System.out.println(blanks);
+        // printGraph();
+        System.out.println("Null " + nulls);
+        System.out.println("Blanks " + blanks);
     }
 
     public static Hex[][] getGraph() {
@@ -170,18 +180,22 @@ public class Board {
     public void printGraph() {
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 40; j++) {
-                if (Graph[i][j].getTerrain().equals("")) {
-                    System.out.print("N ");
+                if(Graph[i][j] == null){
+                    System.out.print("null ");
+                }
+                else if (Graph[i][j].getTerrain().equals("blank")) {
+                    System.out.print("blank ");
                 } else {
                     System.out.print(Graph[i][j].getTerrain() + " ");
                 }
             }
+            System.out.println();
         }
     }
 
     public boolean isValid(int r, int c) {
         if (r >= 0 && r < Graph.length && c >= 0 && c <= Graph[0].length) {
-            return !Graph[r][c].getTerrain().equals("");
+            return !Graph[r][c].getTerrain().equals("blank");
         }
         return false;
     }
