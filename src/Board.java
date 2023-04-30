@@ -171,10 +171,11 @@ public class Board {
         int blanks = 0;
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 40; j++) {
+                Graph[i][j].setAdjacent();
                 if (Graph[i][j] == null) {
                     System.out.println(i + ", " + j + ": N");
                     nulls++;
-                    // Graph[i][j].setAdjacent();
+                    
                 } else if (Graph[i][j].getTerrain().equals("blank")) {
                     blanks++;
                 }

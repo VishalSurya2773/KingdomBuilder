@@ -108,9 +108,9 @@ public class Player {
         if (empty) {
             for (int i = 0; i < 40; i++) {
                 for (int j = 0; j < 40; j++) {
-                    if (!Board.getGraph()[i][j].getTerrain().equals("")) {
-                        if (Board.getGraph()[i][j].getTerrain().equals(terrainCard.getTerrain())) {
-                            possible.add(Board.getGraph()[i][j]);
+                    if (!Board.Graph[i][j].getTerrain().equals("blank")) {
+                        if (Board.Graph[i][j].getTerrain().equals(terrainCard.getTerrain())) {
+                            possible.add(Board.Graph[i][j]);
                         }
                     }
                 }

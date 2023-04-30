@@ -201,7 +201,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
-                // drawPossibleHexOutline(g, currTurn);
+                drawPossibleHexOutline(g, currTurn);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
                 break;
@@ -420,6 +420,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
          */
         ArrayList<Hex> possibleChoices = new ArrayList<>();
         possibleChoices = p.getPossible();
+        System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
         for (int i = 0; i < possibleChoices.size(); i++) {
             int XCoord = possibleChoices.get(i).getCenterX();
             int YCoord = possibleChoices.get(i).getCenterY();
