@@ -10,7 +10,7 @@ public class Board {
     public static int[] numbers, boards;
 
     public Board() {
-        Graph = new Hex[40][40];
+        Graph = new Hex[20][40];
         map = new TreeMap<Integer, Hex>();
         map.put(0, new Hex("sand"));
         map.put(1, new Hex("canyon"));
@@ -84,7 +84,7 @@ public class Board {
 
         Scanner a = boardScanners.get(0);
         int inputHexes = 0;
-        for (int r = 0; r < 20; r++) {
+        for (int r = 0; r < 10; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
@@ -105,7 +105,7 @@ public class Board {
         coordX = 567;
         inputHexes = 0;
         a = boardScanners.get(1);
-        for (int r = 0; r < 20; r++) {
+        for (int r = 0; r < 10; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
@@ -127,7 +127,7 @@ public class Board {
 
         a = boardScanners.get(2);
         inputHexes = 0;
-        for (int r = 20; r < 40; r++) {
+        for (int r = 10; r < 20; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
@@ -148,7 +148,7 @@ public class Board {
         coordX = 567;
         a = boardScanners.get(3);
         inputHexes = 0;
-        for (int r = 20; r < 40; r++) {
+        for (int r = 10; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     // System.out.println(a.hasNextInt());  
@@ -169,7 +169,7 @@ public class Board {
         System.out.println("Sector 4 " + inputHexes);
         int nulls = 0;
         int blanks = 0;
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
                 Graph[i][j].setAdjacent();
                 if (Graph[i][j] == null) {
@@ -191,7 +191,7 @@ public class Board {
     }
 
     public void printGraph() {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
                 if(Graph[i][j] == null){
                     System.out.print("N "); // null
