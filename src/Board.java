@@ -181,7 +181,7 @@ public class Board {
                 }
             }
         }
-        // printGraph();
+        printGraph();
         System.out.println("Null " + nulls);
         System.out.println("Blanks " + blanks);
     }
@@ -194,12 +194,12 @@ public class Board {
         for (int i = 0; i < 40; i++) {
             for (int j = 0; j < 40; j++) {
                 if(Graph[i][j] == null){
-                    System.out.print("null ");
+                    System.out.print("N "); // null
                 }
                 else if (Graph[i][j].getTerrain().equals("blank")) {
-                    System.out.print("blank ");
+                    System.out.print("B "); // blank
                 } else {
-                    System.out.print(Graph[i][j].getTerrain() + " ");
+                    System.out.print("G "); // good
                 }
             }
             System.out.println();
