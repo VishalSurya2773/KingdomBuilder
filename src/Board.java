@@ -80,9 +80,6 @@ public class Board {
             for (int c = 0; c < Graph[r].length; c++) {
                 if ((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0)) {
                     Graph[r][c] = new Hex(""); // basically just a null pointer
-                    // Graph[r][c].setX(coordX);
-                    // Graph[r][c].setY(coordY);
-                    // coordX += changeX;
                 }
             }
             coordY += changeY;
@@ -114,7 +111,7 @@ public class Board {
                     if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                         if (a.hasNextInt()) {
                             Graph[r][c] = map.get(a.nextInt());
-                            Graph[r][c].setX(coordX);
+                            Graph[r][c].setX(scoordX);
                             Graph[r][c].setY(coordY);
                             scoordX += changeX;
                         }
@@ -149,7 +146,7 @@ public class Board {
                     if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                         if (a.hasNextInt()) {
                             Graph[r][c] = map.get(a.nextInt());
-                            Graph[r][c].setX(coordX);
+                            Graph[r][c].setX(scoordX);
                             Graph[r][c].setY(coordY);
                             scoordX += changeX;
                         }
