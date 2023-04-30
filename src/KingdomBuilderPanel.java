@@ -566,9 +566,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         currentPlayer = game.players.get(0);
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
-                        currentPlayer.drawCard();
                         // String terrainType = currentPlayer.terrainCard.getTerrain();
-                        currentPlayer.hasDrawn = true;
                         System.out.println("has drawn card");
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
@@ -601,6 +599,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
+                    players.get(game.turn).drawCard();
                     gameStates = GameStates.turnStart;
                 }
                 break;
