@@ -2,8 +2,6 @@ import java.util.TreeMap;
 import java.util.zip.ZipInputStream;
 import java.util.*;
 import java.io.*;
-import java.util.Collections;
-import java.util.Random;
 
 public class Board {
     public static Hex[][] Graph;
