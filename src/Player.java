@@ -184,8 +184,8 @@ public class Player {
         score = total;
     }
 
-    public void drawCard() {
-        terrainCard = Game.getCard();
+    public void drawCard(Game g) {
+        terrainCard = g.getCard();
     }
 
     public void useSpecialHexTile(SpecialHex sh) { // should be clicked

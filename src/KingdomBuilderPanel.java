@@ -599,7 +599,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
-                    players.get(game.turn).drawCard();
+                    players.get(game.turn).drawCard(game);
                     gameStates = GameStates.turnStart;
                 }
                 break;
