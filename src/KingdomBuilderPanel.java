@@ -405,8 +405,48 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     }
 
+    public void drawSpecialCard(Graphics g) throws IOException {
+        try {
+            ObjectiveDeck = game.getObjDeck();
+            ObjectiveCard c1 = ObjectiveDeck.get(0);
+            ObjectiveCard c2 = ObjectiveDeck.get(1);
+            ObjectiveCard c3 = ObjectiveDeck.get(2);
+            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c3.getImage(c3.getType()), 1027, 835, 160, 225, null);
+        } catch (Exception E) {
+            System.out.println("error on special card");
+            return;
+        }
+
+    }
+
     public void drawEndScreen(Graphics g) {
         g.drawImage(background, 0, 0, null);
+        BufferedImage settlement = null;
+        Font disp = new Font("Abril Fatface", Font.PLAIN, 34);
+        g.setFont(disp);
+        // p1
+        settlement = settleImage(sortedPlayers.get(0));
+        g.drawImage(settlement, 47, 58, 270, 262, null);
+        g.drawString("Player 1 Score", 75, 175);
+
+        // p2
+        settlement = settleImage(sortedPlayers.get(1));
+        g.drawImage(settlement, 56, 773, 270, 262, null);
+        g.drawString("Player 1 Score", 75, 898);
+        // p3
+        settlement = settleImage(sortedPlayers.get(2));
+        g.drawImage(settlement, 1591, 58, 270, 262, null);
+        g.drawString("Player 1 Score", 1608, 180);
+
+        // p4
+        settlement = settleImage(sortedPlayers.get(3));
+        g.drawImage(settlement, 1591, 430, 773, 80, null);
+        g.drawString("Player 1 Score", 1608, 885);
+
+        g.drawRect(514, 235, 912, 773);
+        // rankings
     }
 
     public void drawPlayerTokens(Graphics g) {
@@ -482,22 +522,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             g.setColor(Color.RED);
             g.drawPolygon(xPoints, yPoints, 6);
         }
-    }
-
-    public void drawSpecialCard(Graphics g) throws IOException {
-        try {
-            ObjectiveDeck = game.getObjDeck();
-            ObjectiveCard c1 = ObjectiveDeck.get(0);
-            ObjectiveCard c2 = ObjectiveDeck.get(1);
-            ObjectiveCard c3 = ObjectiveDeck.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c3.getImage(c3.getType()), 1027, 835, 160, 225, null);
-        } catch (Exception E) {
-            System.out.println("error on special card");
-            return;
-        }
-
     }
 
     public void drawCard(Graphics g, Player p) {
