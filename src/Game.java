@@ -138,7 +138,7 @@ public class Game {
      */
     public void useSpecialHex(Player p) { // already in player class - don't need to use unless smth comes up
         if (p.chooseHex().getType().equals("barn")) {
-            p.barnAction();
+            p.barnAction(this);
         }
 
         if (p.chooseHex().getType().equals("farm")) {
@@ -159,7 +159,7 @@ public class Game {
     public void endGame() {
         // scores everything
         for (int i = 0; i < players.size(); i++) {
-            players.get(i).calculateScore();
+            players.get(i).calculateScore(this);
         }
         ArrayList<ArrayList<Integer>> playerRankings = rankings();
         ArrayList<Integer> Winners = getWinner();
