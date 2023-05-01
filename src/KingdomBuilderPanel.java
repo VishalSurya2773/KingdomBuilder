@@ -124,8 +124,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
-        b = game.gameBoard;
-        board = b.getGraph();
     }
 
     // settlements r 36x36
@@ -562,6 +560,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     gamePhase = true;
                     try {
                         game = new Game(numPlayers);
+                        b = game.gameBoard;
+                        board = b.getGraph();
                         players = game.players;
                         currentPlayer = game.players.get(0);
                         sortedPlayers = game.players;
