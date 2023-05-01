@@ -562,10 +562,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     gamePhase = true;
                     try {
                         game = new Game(numPlayers);
-                        sortedPlayers = game.players;
+                        players = game.players;
                         currentPlayer = game.players.get(0);
+                        sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
+                        currentPlayer.drawCard(game);
                         // String terrainType = currentPlayer.terrainCard.getTerrain();
                         System.out.println("has drawn card");
                     } catch (IOException a) {
