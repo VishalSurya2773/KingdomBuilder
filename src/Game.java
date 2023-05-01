@@ -3,12 +3,12 @@ import java.util.*;
 import java.io.*;
 
 public class Game {
-    public static boolean gameOver = false;
-    public static ArrayList<Player> players;
-    private static ArrayList<Card> deck; // should be displayed
-    private static ArrayList<Card> discard; // should be displayed
-    public static ArrayList<ObjectiveCard> objDeck;
-    public static ArrayList<ObjectiveCard> objectives;
+    public boolean gameOver = false;
+    public ArrayList<Player> players;
+    private ArrayList<Card> deck; // should be displayed
+    private ArrayList<Card> discard; // should be displayed
+    public ArrayList<ObjectiveCard> objDeck;
+    public ArrayList<ObjectiveCard> objectives;
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
@@ -114,7 +114,7 @@ public class Game {
         return players;
     }
 
-    public static Card getCard() { // deck has to reset when it's empty - account for it later
+    public Card getCard() { // deck has to reset when it's empty - account for it later
         if (deck.size() == 0) {
             deck = discard;
             Collections.shuffle(deck);
@@ -153,7 +153,9 @@ public class Game {
         }
 
     }
-
+    public boolean gameOver(){
+        return gameOver;
+    }
     public void endGame() {
         // scores everything
         for (int i = 0; i < players.size(); i++) {
