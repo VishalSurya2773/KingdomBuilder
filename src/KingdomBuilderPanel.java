@@ -258,8 +258,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // add each to edge of board -> idk how to rotate them tho
         int[] boards = b.getNumbers();
         BufferedImage temp = null;
-        int[] currX = { 543, 1300, 543, 1349 };
-        int[] currY = { 130, 130, 830, 830 };
+        int[] currX = { 556, 1100, 543, 1110 };
+        int[] currY = { 1, 1, 830, 830 };
         for (int i = 0; i < boards.length; i++) {
             if (i <= 1) {
                 if (boards[i] == 1) {
