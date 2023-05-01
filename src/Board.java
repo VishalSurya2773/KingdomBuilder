@@ -99,10 +99,11 @@ public class Board {
                     }
                 }
             }
+            coordX = 567;
             coordY += changeY;
         }
         System.out.println("Sector 1 " + inputHexes);
-        coordX = 567;
+        coordY = 149;
         inputHexes = 0;
         a = boardScanners.get(1);
         for (int r = 0; r < 10; r++) {
@@ -120,20 +121,21 @@ public class Board {
                     }
                 }
             }
+            scoordX = 587;
             coordY += changeY;
         }
         System.out.println("Sector 2 " + inputHexes);
-        scoordX = 587;
 
         a = boardScanners.get(2);
         inputHexes = 0;
+        int scoordY = coordY;
         for (int r = 10; r < 20; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
                         Graph[r][c] = map.get(a.nextInt());
                         Graph[r][c].setX(coordX);
-                        Graph[r][c].setY(coordY);
+                        Graph[r][c].setY(scoordY);
                         coordX += changeX;
                         inputHexes++;
                     }
@@ -142,12 +144,14 @@ public class Board {
                     }
                 }
             }
-            coordY += changeY;
+            coordX = 567;
+            scoordY += changeY;
         }
+        System.out.println(coordX + " " + coordY);
         System.out.println("Sector 3 " + inputHexes);
-        coordX = 567;
         a = boardScanners.get(3);
         inputHexes = 0;
+        scoordY = coordY;
         for (int r = 10; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
@@ -155,7 +159,7 @@ public class Board {
                     if (a.hasNextInt()) {
                         Graph[r][c] = map.get(a.nextInt());
                         Graph[r][c].setX(scoordX);
-                        Graph[r][c].setY(coordY);
+                        Graph[r][c].setY(scoordY);
                         scoordX += changeX;
                         inputHexes++;
                     }
@@ -164,7 +168,8 @@ public class Board {
                     }
                 }
             }
-            coordY += changeY;
+            scoordY += changeY;
+            scoordX = 587;
         }
         System.out.println("Sector 4 " + inputHexes);
         int nulls = 0;
