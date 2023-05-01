@@ -28,7 +28,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
-            sumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
+            sumTower, revSumBarn, revSumFarm, revSumHarbor, revSumOasis, revSumOracle, revSumPaddock, revSumTavern,
+            revSumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
     private int clickedX, clickedY;
     public int numPlayers;
@@ -100,6 +101,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             sumPaddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_paddock.png"));
             sumTavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tavern.png"));
             sumTower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_tower.png"));
+            // reverse
+            revSumBarn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_barn.png"));
+            revSumFarm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_farm.png"));
+            revSumHarbor = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_harbor.png"));
+            revSumOasis = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_oasis.png"));
+            revSumOracle = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_oracle.png"));
+            revSumPaddock = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_paddock.png"));
+            revSumTavern = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_tavern.png"));
+            revSumTower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/r_summary_tower.png"));
+
             // tokens
             t_barn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_barn.png"));
             t_farm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/token_farm.png"));
@@ -196,13 +207,44 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
-
-                // ************ two cases: starts with specialHex actions, starts with choosing
-                // tile ************
                 drawPossibleHexOutline(g, currTurn);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
                 break;
+        }
+
+    }
+
+    public void drawStartScreen(Graphics g) {
+        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
+        // jbutton stuff
+    }
+
+    public void drawBoard(Graphics g) {
+        // find and use variable to store the specific board and then reference the
+        // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
+        int[] nums = b.getNumbers();
+        int[] currX = { 543, 946, 543, 946 };
+        int[] currY = { 130, 130, 477, 477 };
+        for (int i = 0; i < 4; i++) { // 620 x 528
+
+            if (nums[i] == 1) {
+                g.drawImage(b1, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 2) {
+                g.drawImage(b2, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 3) {
+                g.drawImage(b3, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 4) {
+                g.drawImage(b4, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 5) {
+                g.drawImage(b5, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 6) {
+                g.drawImage(b6, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 7) {
+                g.drawImage(b7, currX[i], currY[i], 426, 363, null);
+            } else if (nums[i] == 8) {
+                g.drawImage(b8, currX[i], currY[i], 426, 363, null);
+            }
         }
 
     }
@@ -214,6 +256,51 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
     public void drawSumActionTiles(Graphics g) {
         // find boards and correlate them w a specialaction tile
         // add each to edge of board -> idk how to rotate them tho
+        int[] boards = b.getNumbers();
+        BufferedImage temp = null;
+        int[] currX = { 543, 1300, 543, 1349 };
+        int[] currY = { 130, 130, 1000, 477 };
+        for (int i = 0; i < boards.length; i++) {
+            if (i <= 1) {
+                if (boards[i] == 1) {
+                    temp = sumBarn;
+                } else if (boards[i] == 2) {
+                    temp = sumFarm;
+                } else if (boards[i] == 3) {
+                    temp = sumOracle;
+                } else if (boards[i] == 4) {
+                    temp = sumHarbor;
+                } else if (boards[i] == 5) {
+                    temp = sumTavern;
+                } else if (boards[i] == 6) {
+                    temp = sumOasis;
+                } else if (boards[i] == 7) {
+                    temp = sumPaddock;
+                } else if (boards[i] == 3) {
+                    temp = sumTavern;
+                }
+            } else if (i >= 2) {
+                if (boards[i] == 1) {
+                    temp = revSumBarn;
+                } else if (boards[i] == 2) {
+                    temp = revSumFarm;
+                } else if (boards[i] == 3) {
+                    temp = revSumOracle;
+                } else if (boards[i] == 4) {
+                    temp = revSumHarbor;
+                } else if (boards[i] == 5) {
+                    temp = revSumTavern;
+                } else if (boards[i] == 6) {
+                    temp = revSumOasis;
+                } else if (boards[i] == 7) {
+                    temp = revSumPaddock;
+                } else if (boards[i] == 3) {
+                    temp = revSumTavern;
+                }
+            }
+            g.drawImage(temp, currX[i], currY[i], null);
+        }
+
     }
 
     public void drawDeck(Graphics g) {
@@ -309,11 +396,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         return temp;
     }
 
-    public void drawStartScreen(Graphics g) {
-        g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
-        // jbutton stuff
-    }
-
     public void drawObjectiveCards(Graphics g) {
         try {
             drawSpecialCard(g);
@@ -375,35 +457,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 }
             }
         }
-    }
-
-    public void drawBoard(Graphics g) {
-        // find and use variable to store the specific board and then reference the
-        // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
-        int[] nums = b.getNumbers();
-        int[] currX = { 543, 946, 543, 946 };
-        int[] currY = { 130, 130, 477, 477 };
-        for (int i = 0; i < 4; i++) { // 620 x 528
-
-            if (nums[i] == 1) {
-                g.drawImage(b1, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 2) {
-                g.drawImage(b2, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 3) {
-                g.drawImage(b3, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 4) {
-                g.drawImage(b4, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 5) {
-                g.drawImage(b5, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 6) {
-                g.drawImage(b6, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 7) {
-                g.drawImage(b7, currX[i], currY[i], 426, 363, null);
-            } else if (nums[i] == 8) {
-                g.drawImage(b8, currX[i], currY[i], 426, 363, null);
-            }
-        }
-
     }
 
     public void drawPossibleHexOutline(Graphics g, Player p) {
