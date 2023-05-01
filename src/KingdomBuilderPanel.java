@@ -178,7 +178,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawBoard(g);
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
-                // drawSumActionTiles(g); // imma comment them out bc it's blocking the board - but we can fix the coords later and use it
+                drawSumActionTiles(g);
 
                 gameStates = GameStates.turnStart;
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
@@ -225,7 +225,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
         int[] currX = { 543, 946, 543, 946 };
-        int[] currY = { 130, 130, 477, 477 };
+        int[] currY = { 130, 130, 482, 482 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
@@ -258,8 +258,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         // add each to edge of board -> idk how to rotate them tho
         int[] boards = b.getNumbers();
         BufferedImage temp = null;
-        int[] currX = { 556, 1100, 543, 1110 };
-        int[] currY = { 1, 1, 830, 830 };
+        int[] currX = { 563, 1209, 581, 1229 };
+        int[] currY = { 25, 25, 830, 830 };
         for (int i = 0; i < boards.length; i++) {
             if (i <= 1) {
                 if (boards[i] == 1) {
@@ -271,12 +271,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 } else if (boards[i] == 4) {
                     temp = sumHarbor;
                 } else if (boards[i] == 5) {
-                    temp = sumTavern;
+                    temp = sumTower;
                 } else if (boards[i] == 6) {
                     temp = sumOasis;
                 } else if (boards[i] == 7) {
                     temp = sumPaddock;
-                } else if (boards[i] == 3) {
+                } else if (boards[i] == 8) {
                     temp = sumTavern;
                 }
             } else if (i >= 2) {
@@ -289,16 +289,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 } else if (boards[i] == 4) {
                     temp = revSumHarbor;
                 } else if (boards[i] == 5) {
-                    temp = revSumTavern;
+                    temp = revSumTower;
                 } else if (boards[i] == 6) {
                     temp = revSumOasis;
                 } else if (boards[i] == 7) {
                     temp = revSumPaddock;
-                } else if (boards[i] == 3) {
+                } else if (boards[i] == 8) {
                     temp = revSumTavern;
                 }
             }
-            g.drawImage(temp, currX[i], currY[i], 145, 143, null);
+            g.drawImage(temp, currX[i], currY[i], 125, 118, null);
         }
 
     }
