@@ -476,7 +476,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             int XCoord = possibleChoices.get(i).getCenterX();
             int YCoord = possibleChoices.get(i).getCenterY();
             System.out.println("RAN");
-            System.out.println(XCoord + " " + YCoord);
+            System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " " + XCoord + " " + YCoord);
             int[] xPoints = new int[] { XCoord - 20, XCoord, XCoord + 20, XCoord + 20, XCoord, XCoord - 20 };
             int[] yPoints = new int[] { YCoord - 10, YCoord - 20, YCoord - 10, YCoord + 10, YCoord + 20, YCoord + 10 };
             g.setColor(Color.RED);

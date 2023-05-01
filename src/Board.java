@@ -5,29 +5,29 @@ import java.io.*;
 
 public class Board {
     public static Hex[][] Graph;
-    private TreeMap<Integer, Hex> map;
+    private TreeMap<Integer, String> map;
     private ArrayList<Scanner> boardScanners;
     public static int[] numbers, boards;
 
     public Board() {
         Graph = new Hex[20][40];
-        map = new TreeMap<Integer, Hex>();
-        map.put(0, new Hex("sand"));
-        map.put(1, new Hex("canyon"));
-        map.put(2, new Hex("mountain"));
-        map.put(3, new Hex("flower"));
-        map.put(4, new Hex("forest"));
-        map.put(5, new Hex("water"));
-        map.put(6, new Hex("grass"));
-        map.put(7, new SpecialHex("oracle"));
-        map.put(8, new SpecialHex("farm"));
-        map.put(9, new SpecialHex("tower"));
-        map.put(10, new SpecialHex("tavern"));
-        map.put(11, new SpecialHex("barn"));
-        map.put(12, new SpecialHex("harbor"));
-        map.put(13, new SpecialHex("paddock"));
-        map.put(14, new SpecialHex("castle"));
-        map.put(15, new SpecialHex("oasis"));
+        map = new TreeMap<Integer, String>();
+        map.put(0, ("sand"));
+        map.put(1, ("canyon"));
+        map.put(2, ("mountain"));
+        map.put(3, ("flower"));
+        map.put(4, ("forest"));
+        map.put(5, ("water"));
+        map.put(6, ("grass"));
+        map.put(7, ("oracle"));
+        map.put(8, ("farm"));
+        map.put(9, ("tower"));
+        map.put(10, ("tavern"));
+        map.put(11, ("barn"));
+        map.put(12, ("harbor"));
+        map.put(13, ("paddock"));
+        map.put(14, ("castle"));
+        map.put(15, ("oasis"));
         boardScanners = new ArrayList<Scanner>();
         numbers = new int[4];
     }
@@ -88,7 +88,14 @@ public class Board {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
-                        Graph[r][c] = map.get(a.nextInt());
+                        int num = a.nextInt();
+                        if(num >= 7){
+                            Graph[r][c] = new SpecialHex(map.get(num));
+                        }
+                        else{
+                            Graph[r][c] = new Hex(map.get(num));
+                        }
+                        
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
@@ -110,7 +117,13 @@ public class Board {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
-                        Graph[r][c] = map.get(a.nextInt());
+                        int num = a.nextInt();
+                        if(num >= 7){
+                            Graph[r][c] = new SpecialHex(map.get(num));
+                        }
+                        else{
+                            Graph[r][c] = new Hex(map.get(num));
+                        }
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
@@ -133,7 +146,13 @@ public class Board {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
-                        Graph[r][c] = map.get(a.nextInt());
+                        int num = a.nextInt();
+                        if(num >= 7){
+                            Graph[r][c] = new SpecialHex(map.get(num));
+                        }
+                        else{
+                            Graph[r][c] = new Hex(map.get(num));
+                        }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
                         coordX += changeX;
@@ -157,7 +176,13 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     // System.out.println(a.hasNextInt());  
                     if (a.hasNextInt()) {
-                        Graph[r][c] = map.get(a.nextInt());
+                        int num = a.nextInt();
+                        if(num >= 7){
+                            Graph[r][c] = new SpecialHex(map.get(num));
+                        }
+                        else{
+                            Graph[r][c] = new Hex(map.get(num));
+                        }
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(scoordY);
                         scoordX += changeX;
