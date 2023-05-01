@@ -120,11 +120,11 @@ public class Player {
         return placed.get(0);
     }
 
-    public Settlement getSettlementFromStore() {
+    public Settlement getSettlementFromStore(Game g) {
         if (stored.size() > 0) {
             return stored.remove(0);
         }
-        Game.gameOver = true;
+        g.gameOver = true;
         return null;
     }
 
@@ -172,15 +172,15 @@ public class Player {
 
     }
 
-    public void calculateScore() {
+    public void calculateScore(Game g) {
         int total = 0;
-        ObjectiveCard first = Game.objectives.get(0);
-        ObjectiveCard scnd = Game.objectives.get(1);
-        ObjectiveCard thrd = Game.objectives.get(2);
+        ObjectiveCard first = g.objectives.get(0);
+        ObjectiveCard scnd = g.objectives.get(1);
+        ObjectiveCard thrd = g.objectives.get(2);
 
-        total += first.getScore(color);
-        total += scnd.getScore(color);
-        total += thrd.getScore(color);
+        total += first.getScore(color, g);
+        total += scnd.getScore(color, g);
+        total += thrd.getScore(color, g);
         score = total;
     }
 
@@ -228,8 +228,8 @@ public class Player {
         }
     }
 
-    public void barnAction() {
-        Settlement s = getSettlementFromStore();
+    public void barnAction(Game g) {
+        Settlement s = getSettlementFromStore(g);
         if (canPlace(s, chosenTerrainHex(), terrainCard)) {
             placeSettlement(s, chosenTerrainHex(), terrainCard);
             System.out.println("Success");
@@ -277,8 +277,8 @@ public class Player {
 
     }
 
-    public void farmAction(Hex h) {
-        h.setSettlement(getSettlementFromStore());
+    public void farmAction(Hex h, Game g) {
+        h.setSettlement(getSettlementFromStore(g));
         return;
     }
 
@@ -395,8 +395,8 @@ public class Player {
         return sec;
     }
 
-    public void oasisAction(Hex h) {
-        Settlement s = getSettlementFromStore();
+    public void oasisAction(Hex h, Game g) {
+        Settlement s = getSettlementFromStore(g);
         h.setSettlement(s);
         return;
     }
@@ -440,8 +440,8 @@ public class Player {
         return avail;
     }
 
-    public void oracleAction(Hex h) {
-        Settlement s = getSettlementFromStore();
+    public void oracleAction(Hex h, Game g) {
+        Settlement s = getSettlementFromStore(g);
         h.setSettlement(s);
         return;
 
@@ -484,8 +484,8 @@ public class Player {
 
     }
 
-    public void tavernAction(Hex h) {
-        Settlement s = getSettlementFromStore();
+    public void tavernAction(Hex h, Game g) {
+        Settlement s = getSettlementFromStore(g);
         h.setSettlement(s);
         return;
     }
@@ -543,8 +543,8 @@ public class Player {
         return result;
     }
 
-    public void towerAction(Hex h) {
-        Settlement s = this.getSettlementFromStore();
+    public void towerAction(Hex h, Game g) {
+        Settlement s = this.getSettlementFromStore(g);
         h.setSettlement(s);
         return;
 

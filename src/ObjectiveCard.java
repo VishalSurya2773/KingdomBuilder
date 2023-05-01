@@ -51,15 +51,15 @@ public class ObjectiveCard {
         return cardimage;
     }
 
-    public int getScore(String settlementColor) {
-        if (settlementColor.equals(Game.players.get(0).getColor())) {
-            p = Game.players.get(0);
-        } else if (settlementColor.equals(Game.players.get(1).getColor())) {
-            p = Game.players.get(1);
-        } else if (settlementColor.equals(Game.players.get(2).getColor())) {
-            p = Game.players.get(2);
-        } else if (settlementColor.equals(Game.players.get(3).getColor())) {
-            p = Game.players.get(3);
+    public int getScore(String settlementColor, Game g) {
+        if (settlementColor.equals(g.players.get(0).getColor())) {
+            p = g.players.get(0);
+        } else if (settlementColor.equals(g.players.get(1).getColor())) {
+            p = g.players.get(1);
+        } else if (settlementColor.equals(g.players.get(2).getColor())) {
+            p = g.players.get(2);
+        } else if (settlementColor.equals(g.players.get(3).getColor())) {
+            p = g.players.get(3);
         }
         if (type.equals("citizen")) {
             return citizen(settlementColor);
@@ -74,7 +74,7 @@ public class ObjectiveCard {
         } else if (type.equals("knight")) {
             return knight(settlementColor);
         } else if (type.equals("lord")) {
-            return lord(settlementColor);
+            return lord(settlementColor, g);
         } else if (type.equals("merchant")) {
             return merchant(settlementColor);
         } else if (type.equals("miner")) {
@@ -216,9 +216,9 @@ public class ObjectiveCard {
         return largest * 2;
     }
 
-    public int lord(String settlementColor) {
+    public int lord(String settlementColor, Game g) {
         int pNum = 0;
-        ArrayList<Player> ps = Game.players;
+        ArrayList<Player> ps = g.players;
         if (settlementColor.equals(ps.get(0).getColor())) {
             pNum = ps.get(0).playerNum;
         } else if (settlementColor.equals(ps.get(1).getColor())) {
@@ -229,9 +229,9 @@ public class ObjectiveCard {
             pNum = ps.get(3).playerNum;
         }
 
-        if (lordRankings().get(0).equals("p" + pNum + 1 + "")) {
+        if (lordRankings(g).get(0).equals("p" + pNum + 1 + "")) {
             return 12;
-        } else if (lordRankings().get(1).equals("p" + pNum + 1 + "")) {
+        } else if (lordRankings(g).get(1).equals("p" + pNum + 1 + "")) {
             return 6;
         }
         return 0;
@@ -249,8 +249,8 @@ public class ObjectiveCard {
         return largest;
     }
 
-    public ArrayList<Player> lordRankings() { // highest gets 12, second highest gets 6
-        ArrayList<Player> ps = Game.players;
+    public ArrayList<Player> lordRankings(Game g) { // highest gets 12, second highest gets 6
+        ArrayList<Player> ps = g.players;
         int p1 = getLargestNumSetInSect(ps.get(0).getColor());
         int p2 = getLargestNumSetInSect(ps.get(1).getColor());
         int p3 = getLargestNumSetInSect(ps.get(2).getColor());
