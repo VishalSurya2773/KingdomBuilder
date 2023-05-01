@@ -259,7 +259,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         int[] boards = b.getNumbers();
         BufferedImage temp = null;
         int[] currX = { 543, 1300, 543, 1349 };
-        int[] currY = { 130, 130, 1000, 477 };
+        int[] currY = { 130, 130, 830, 830 };
         for (int i = 0; i < boards.length; i++) {
             if (i <= 1) {
                 if (boards[i] == 1) {
@@ -298,7 +298,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     temp = revSumTavern;
                 }
             }
-            g.drawImage(temp, currX[i], currY[i], null);
+            g.drawImage(temp, currX[i], currY[i], 145, 143, null);
         }
 
     }
