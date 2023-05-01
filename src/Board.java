@@ -186,7 +186,7 @@ public class Board {
         System.out.println("Blanks " + blanks);
     }
 
-    public static Hex[][] getGraph() {
+    public Hex[][] getGraph() {
         return Graph;
     }
 
