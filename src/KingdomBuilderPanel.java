@@ -178,7 +178,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawBoard(g);
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
-                drawSumActionTiles(g);
+                // drawSumActionTiles(g); // imma comment them out bc it's blocking the board - but we can fix the coords later and use it
 
                 gameStates = GameStates.turnStart;
                 // g.drawImage(cardBack, 470, 450,110, 180, null);
@@ -470,15 +470,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
          * 650 283
          */
         ArrayList<Hex> possibleChoices = new ArrayList<>();
-        possibleChoices = p.getPossible();
+        possibleChoices = p.getPossible(b);
         System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
         for (int i = 0; i < possibleChoices.size(); i++) {
             int XCoord = possibleChoices.get(i).getCenterX();
             int YCoord = possibleChoices.get(i).getCenterY();
-            g.setColor(Color.BLACK);
+            System.out.println("RAN");
+            System.out.println(XCoord + " " + YCoord);
             int[] xPoints = new int[] { XCoord - 20, XCoord, XCoord + 20, XCoord + 20, XCoord, XCoord - 20 };
             int[] yPoints = new int[] { YCoord - 10, YCoord - 20, YCoord - 10, YCoord + 10, YCoord + 20, YCoord + 10 };
-            g.setColor(Color.BLACK);
+            g.setColor(Color.RED);
             g.drawPolygon(xPoints, yPoints, 6);
         }
     }

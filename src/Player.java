@@ -86,9 +86,10 @@ public class Player {
         return false;
     }
 
-    public ArrayList<Hex> getPossible() {
+    public ArrayList<Hex> getPossible(Board b) {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
+        System.out.println("Placed: " + placed.size());
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { 
                 // make sure that the of possible hexes doesnt contain already occupied hexes
@@ -104,9 +105,9 @@ public class Player {
         if (empty) {
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 40; j++) {
-                    if (!Board.Graph[i][j].getTerrain().equals("blank")) {
-                        if (Board.Graph[i][j].getTerrain().equals(terrainCard.getTerrain())) {
-                            possible.add(Board.Graph[i][j]);
+                    if (!b.getGraph()[i][j].getTerrain().equals("blank")) {
+                        if (b.getGraph()[i][j].getTerrain().equals(terrainCard.getTerrain())) {
+                            possible.add(b.getGraph()[i][j]);
                         }
                     }
                 }
