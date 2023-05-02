@@ -211,6 +211,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
                 break;
+            case chooseSettlement:
+            System.out.println("chooseSettlement GameState");
         }
 
     }
@@ -594,7 +596,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
     }
 
-    public void drawSettlement(Graphics g) {
+    public void drawSettlement(Player p, Graphics g, int cx, int cy) {
+        BufferedImage setimg = new BufferedImage(getColorModel(), null, gamePhase, null);
+        try{
+        if(p.getColor().equals("blue")) {
+            setimg = settleBlue;
+        }else if(p.getColor().equals("red")) {
+            setimg = settleRed;
+        }else if(p.getColor().equals("yellow")) {
+            setimg = settleYellow;
+        }else if(p.getColor().equals("green")) {
+            setimg = settleGreen;
+        }else if(p.getColor().equals("orange")) {
+            setimg = settleOrange;
+        }else {
+            setimg = settlePurple;
+        }
+        }catch(Exception e) {
+        System.out.println("error");
+    }
+    g.drawImage(setimg, cx, cy, null);
     }
 
     public void drawSpecialHex(Graphics g) {
@@ -687,7 +708,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
                 // get coords of available hexes
             case chooseSettlement:
-                break;
+            drawSettlement(currentPlayer, graphics, clickedX, clickedY);
             case gameOver:
                 break;
 
