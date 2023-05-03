@@ -89,19 +89,17 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
                         int num = a.nextInt();
-                        if(num >= 7){
+                        if (num >= 7) {
                             Graph[r][c] = new SpecialHex(map.get(num));
-                        }
-                        else{
+                        } else {
                             Graph[r][c] = new Hex(map.get(num));
                         }
-                        
+
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
                         coordX += changeX;
                         inputHexes++;
-                    }
-                    else{
+                    } else {
                         Graph[r][c] = new Hex("blank");
                     }
                 }
@@ -118,18 +116,16 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
                         int num = a.nextInt();
-                        if(num >= 7){
+                        if (num >= 7) {
                             Graph[r][c] = new SpecialHex(map.get(num));
-                        }
-                        else{
+                        } else {
                             Graph[r][c] = new Hex(map.get(num));
                         }
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(coordY);
                         scoordX += changeX;
                         inputHexes++;
-                    }
-                    else{
+                    } else {
                         Graph[r][c] = new Hex("blank");
                     }
                 }
@@ -147,18 +143,16 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (a.hasNextInt()) {
                         int num = a.nextInt();
-                        if(num >= 7){
+                        if (num >= 7) {
                             Graph[r][c] = new SpecialHex(map.get(num));
-                        }
-                        else{
+                        } else {
                             Graph[r][c] = new Hex(map.get(num));
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
                         coordX += changeX;
                         inputHexes++;
-                    }
-                    else{
+                    } else {
                         Graph[r][c] = new Hex("blank");
                     }
                 }
@@ -174,21 +168,19 @@ public class Board {
         for (int r = 10; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    // System.out.println(a.hasNextInt());  
+                    // System.out.println(a.hasNextInt());
                     if (a.hasNextInt()) {
                         int num = a.nextInt();
-                        if(num >= 7){
+                        if (num >= 7) {
                             Graph[r][c] = new SpecialHex(map.get(num));
-                        }
-                        else{
+                        } else {
                             Graph[r][c] = new Hex(map.get(num));
                         }
                         Graph[r][c].setX(scoordX);
                         Graph[r][c].setY(scoordY);
                         scoordX += changeX;
                         inputHexes++;
-                    }
-                    else{
+                    } else {
                         Graph[r][c] = new Hex("blank");
                     }
                 }
@@ -197,23 +189,23 @@ public class Board {
             scoordX = 587;
         }
         System.out.println("Sector 4 " + inputHexes);
-        int nulls = 0;
-        int blanks = 0;
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 40; j++) {
-                Graph[i][j].setAdjacent();
-                if (Graph[i][j] == null) {
-                    System.out.println(i + ", " + j + ": N");
-                    nulls++;
-                    
-                } else if (Graph[i][j].getTerrain().equals("blank")) {
-                    blanks++;
-                }
-            }
-        }
-        printGraph();
-        System.out.println("Null " + nulls);
-        System.out.println("Blanks " + blanks);
+        // int nulls = 0;
+        // int blanks = 0;
+        // for (int i = 0; i < 20; i++) {
+        // for (int j = 0; j < 40; j++) {
+        // Graph[i][j].setAdjacent();
+        // if (Graph[i][j] == null) {
+        // System.out.println(i + ", " + j + ": N");
+        // nulls++;
+
+        // } else if (Graph[i][j].getTerrain().equals("blank")) {
+        // blanks++;
+        // }
+        // }
+        // }
+        // printGraph();
+        // System.out.println("Null " + nulls);
+        // System.out.println("Blanks " + blanks);
     }
 
     public Hex[][] getGraph() {
@@ -223,10 +215,9 @@ public class Board {
     public void printGraph() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
-                if(Graph[i][j] == null){
+                if (Graph[i][j] == null) {
                     System.out.print("N "); // null
-                }
-                else if (Graph[i][j].getTerrain().equals("blank")) {
+                } else if (Graph[i][j].getTerrain().equals("blank")) {
                     System.out.print("B "); // blank
                 } else {
                     System.out.print("G "); // good

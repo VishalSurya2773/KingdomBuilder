@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.*;
+
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
@@ -27,8 +28,6 @@ public class Player {
         hand = new ArrayList<>();
         placed = new ArrayList<>();
     }
-
-    
 
     public void setPlayerNum(int pNum) {
         pNumber = pNum;
@@ -91,11 +90,12 @@ public class Player {
         boolean empty = true;
         System.out.println("Placed: " + placed.size());
         for (int i = 0; i < placed.size(); i++) {
-            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) { 
+            if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
                 for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j] != null && hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
+                    if (hexes[j] != null && hexes[j].getTerrain().equals(terrainCard.getTerrain())
+                            && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
                         empty = false;
                     }
@@ -153,7 +153,7 @@ public class Player {
         return score;
     }
 
-    public Card getTerrain() {
+    public Card getTerrainCard() {
         return terrainCard;
     }
 
