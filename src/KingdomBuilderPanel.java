@@ -212,7 +212,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 // gameStates = GameStates.showCard; // next turn
                 break;
             case chooseSettlement:
-            System.out.println("chooseSettlement GameState");
+                System.out.println("chooseSettlement GameState");
         }
 
     }
@@ -514,13 +514,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         ArrayList<Hex> possibleChoices = new ArrayList<>();
         possibleChoices = p.getPossible(b);
         System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
+
         for (int i = 0; i < possibleChoices.size(); i++) {
             int XCoord = possibleChoices.get(i).getCenterX();
             int YCoord = possibleChoices.get(i).getCenterY();
-            System.out.println("RAN");
-            System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " " + XCoord + " " + YCoord);
-            int[] xPoints = new int[] { XCoord - 20, XCoord, XCoord + 20, XCoord + 20, XCoord, XCoord - 20 };
-            int[] yPoints = new int[] { YCoord - 10, YCoord - 20, YCoord - 10, YCoord + 10, YCoord + 20, YCoord + 10 };
+            // System.out.println("RAN");
+            // System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " "+
+            // XCoord + " " + YCoord);
+            int[] xPoints = new int[] { XCoord - 20, XCoord, XCoord + 20, XCoord + 20,
+                    XCoord, XCoord - 20 };
+            int[] yPoints = new int[] { YCoord - 10, YCoord - 22, YCoord - 10, YCoord +
+                    10, YCoord + 22, YCoord + 10 };
             g.setColor(Color.RED);
             g.drawPolygon(xPoints, yPoints, 6);
         }
@@ -598,24 +602,24 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
     public void drawSettlement(Player p, Graphics g, int cx, int cy) {
         BufferedImage setimg = new BufferedImage(getColorModel(), null, gamePhase, null);
-        try{
-        if(p.getColor().equals("blue")) {
-            setimg = settleBlue;
-        }else if(p.getColor().equals("red")) {
-            setimg = settleRed;
-        }else if(p.getColor().equals("yellow")) {
-            setimg = settleYellow;
-        }else if(p.getColor().equals("green")) {
-            setimg = settleGreen;
-        }else if(p.getColor().equals("orange")) {
-            setimg = settleOrange;
-        }else {
-            setimg = settlePurple;
+        try {
+            if (p.getColor().equals("blue")) {
+                setimg = settleBlue;
+            } else if (p.getColor().equals("red")) {
+                setimg = settleRed;
+            } else if (p.getColor().equals("yellow")) {
+                setimg = settleYellow;
+            } else if (p.getColor().equals("green")) {
+                setimg = settleGreen;
+            } else if (p.getColor().equals("orange")) {
+                setimg = settleOrange;
+            } else {
+                setimg = settlePurple;
+            }
+        } catch (Exception e) {
+            System.out.println("error");
         }
-        }catch(Exception e) {
-        System.out.println("error");
-    }
-    g.drawImage(setimg, cx, cy, null);
+        g.drawImage(setimg, cx, cy, null);
     }
 
     public void drawSpecialHex(Graphics g) {
@@ -666,9 +670,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
-                        currentPlayer.drawCard(game);
-                        // String terrainType = currentPlayer.terrainCard.getTerrain();
-                        System.out.println("has drawn card");
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
@@ -700,15 +701,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
-                    players.get(game.turn).drawCard(game);
-                    gameStates = GameStates.turnStart;
+                    currentPlayer.drawCard(game);
+                    System.out.println("has drawn card");
+                    // gameStates = GameStates.turnStart;
                 }
                 break;
             case turnStart:
 
                 // get coords of available hexes
             case chooseSettlement:
-            drawSettlement(currentPlayer, graphics, clickedX, clickedY);
+                drawSettlement(currentPlayer, graphics, clickedX, clickedY);
             case gameOver:
                 break;
 
