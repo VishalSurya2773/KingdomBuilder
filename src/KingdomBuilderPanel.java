@@ -22,7 +22,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.BasicStroke;
 
-public class KingdomBuilderPanel extends JPanel implements MouseListener, ActionListener {
+public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
             b3, b4, b5, b6, b7, b8, firstToken,
             citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
@@ -179,7 +179,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
-
                 drawObjectiveCards(g);
                 gameStates = GameStates.showCard;
                 break;
@@ -187,16 +186,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 System.out.println("showCard GameState");
             case turnStart:
                 System.out.println("turnStart GameState");
-                Player currTurn = game.getPlayers().get(game.getTurn()); // 1 indexed
-                // drawCard(g, currTurn);
                 drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
                         currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
-                drawPossibleHexOutline(g, currTurn);
+                drawPossibleHexOutline(g, currentPlayer);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
-                currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
+                // currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
                 break;
             case chooseSettlement:
                 System.out.println("chooseSettlement GameState");
@@ -517,36 +514,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         }
     }
 
-    public void drawCard(Graphics g, Player p) {
-        BufferedImage cimage = cardBack;
-        Card c1 = game.getCard();
-        try {
-            if (c1.getTerrain().equals("canyon")) {
-                cimage = cardCanyon;
-            } else if (c1.getTerrain().equals("desert")) {
-                cimage = cardDesert;
-            } else if (c1.getTerrain().equals("meadow")) {
-                cimage = cardMeadow;
-            } else if (c1.getTerrain().equals("flower")) {
-                cimage = cardFlower;
-            } else if (c1.getTerrain().equals("forest")) {
-                cimage = cardForest;
-            }
-            if (game.getTurn() == 0)
-                g.drawImage(cimage, 350, 140, 175, 270, null);
-            if (game.getTurn() == 1)
-                g.drawImage(cimage, 1388, 140, 175, 270, null);
-            if (game.getTurn() == 2)
-                g.drawImage(cimage, 1388, 520, 175, 270, null);
-            if (game.getTurn() == 3)
-                g.drawImage(cimage, 350, 520, 175, 270, null);
-            System.out.println(game.getTurn());
-        } catch (Exception E) {
-            System.out.println("error");
-        }
-        // placeholder coordinates
-    }
-
     public void drawPlayerCard(Graphics g, String terrain, int pNum) {
         drawBackCards(g);
         BufferedImage image = cardCanyon;
@@ -607,7 +574,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             System.out.println("error");
         }
         g.drawImage(setimg, cx, cy, null);
-        
+
     }
 
     public void drawSpecialHex(Graphics g) {
@@ -618,25 +585,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
         g.setColor(c);
         g.drawRect(x, y, w, h);
         g.fillRect(x, y, w, h);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("x:" + clickedX + ", y:" + clickedY);
-        // if (e.getSource() == playButton) {
-        // System.out.println("game started");
-        // startPhase = false;
-        // gamePhase = true;
-        // }
-        // if (e.getSource() == guideButton) {
-        // System.out.println("guide button clicked");
-        // // open up pdf of guidebook, have the ability to come back to start screen
-        // }
-        if (startPhase) {
-            // check if play button or guide button are selected
-            // take in coordinates for the num of players selection
-        }
-        repaint();
     }
 
     public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -659,7 +607,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
-                        System.out.println("curr player " + currentPlayer.getOrder());
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
@@ -680,11 +627,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 break;
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
-                    // draw card for that player
                     currentPlayer.drawCard(game);
-                    System.out.println("current card:" + currentPlayer.getOrder() + " "
+                    System.out.println(currentPlayer.getOrder() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
-                    System.out.println("has drawn card");
                     gameStates = GameStates.turnStart;
                 }
                 break;
