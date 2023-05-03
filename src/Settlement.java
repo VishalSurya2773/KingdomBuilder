@@ -7,7 +7,7 @@ public class Settlement {
     private Board board;
     private Hex[][] hexes;
 
-    public Settlement(String color) {
+    public Settlement(String color, Board b) {
         this.color = color;
         // right = new Settlement("");
         // left = new Settlement("");
@@ -16,7 +16,7 @@ public class Settlement {
         // bottomRight = new Settlement("");
         // bottomLeft = new Settlement("");
 
-        board = Game.gameBoard;
+        board = b;
         hexes = board.Graph;
     }
 
