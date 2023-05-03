@@ -180,20 +180,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
 
-                gameStates = GameStates.turnStart;
-                // g.drawImage(cardBack, 470, 450,110, 180, null);
-                // image.png(g);
-
-                // g.drawRect(0, 128, 340, 340);
-                // g.drawRect(1580, 128, 340, 340);
-                // g.drawRect(1580, 480, 340, 340);
-                // g.drawRect(0, 480, 340, 340);
-
-                // g.drawRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-                // g.fillRect(0, HEIGHT - HEIGHT / 18, WIDTH, HEIGHT / 18);
-                // g.drawImage(b_home, WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-                // g.drawImage(b_guide, 2 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
-                // g.drawImage(b_endgame, 3 * WIDTH / 32, HEIGHT - HEIGHT / 18, 50, 50, null);
                 drawObjectiveCards(g);
                 gameStates = GameStates.showCard;
                 break;
@@ -671,6 +657,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                         sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
+                        System.out.println("curr player " + currentPlayer.getOrder());
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
@@ -689,20 +676,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     System.out.println("4p");
                 }
                 break;
-
-            // case objectiveCards:
-            // // card back - 470, 450,110, 180
-            // if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
-            // ObjectiveDeck = game.getObjDeck();
-            // Collections.shuffle(ObjectiveDeck);
-            // gameStates = gameStates.turnStart;
-            // }
-            // break;
-            // 1715, 800, 200, 270
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     // draw card for that player
                     currentPlayer.drawCard(game);
+                    System.out.println("current card:" + currentPlayer.getOrder() + " "
+                            + currentPlayer.getTerrainCard().getTerrain());
                     System.out.println("has drawn card");
                     gameStates = GameStates.turnStart;
                 }

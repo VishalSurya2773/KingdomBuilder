@@ -1,10 +1,8 @@
-enum GameStates{
+enum GameStates {
     startGame,
     objectiveCards,
-    turnStart,
     showCard,
+    turnStart,
     chooseSettlement,
     gameOver
-} 
-
-
+}
