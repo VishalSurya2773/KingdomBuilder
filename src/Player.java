@@ -89,7 +89,6 @@ public class Player {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         System.out.println("Placed: " + placed.size());
-        System.out.println("GP terrain: " + terrainCard.getTerrain());
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
@@ -550,20 +549,6 @@ public class Player {
         h.setSettlement(s);
         return;
 
-    }
-    public Hex findHex(int x, int y) {
-        for(int i = 0; i<20; i++) {
-            for(int j = 0; j<40; j++) {
-                if(Game.gameBoard.getGraph()[i][j].isEmpty()) {
-                    int dist = Game.gameBoard.getGraph()[i][j].getRadius();
-                    int distx = Math.max(x-dist, dist-x);
-                    if(dist> distx) {
-                        return Game.gameBoard.getGraph()[i][j];
-                    }
-                }
-            }
-        }
-        return null;
     }
 
 }
