@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "KingdomBuilderRunner",
+            "request": "launch",
+            "mainClass": "KingdomBuilderRunner",
+            "projectName": "KingdomBuilder_4f138ba8"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
