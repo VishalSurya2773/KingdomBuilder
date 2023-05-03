@@ -607,9 +607,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
             System.out.println("error");
         }
         g.drawImage(setimg, cx, cy, null);
+        
     }
 
     public void drawSpecialHex(Graphics g) {
+
     }
 
     public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
@@ -690,7 +692,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
 
                 // get coords of available hexes
             case chooseSettlement:
-                drawSettlement(currentPlayer, graphics, clickedX, clickedY);
             case gameOver:
                 break;
 
