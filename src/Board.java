@@ -66,13 +66,13 @@ public class Board {
         }
 
         numbers = randBoards;
-        int coordX = 567;
+        int coordX = 562;
         int coordY = 149;
 
-        int scoordX = 587; // for odd rows
+        int scoordX = 582; // for odd rows
 
-        int changeX = 40;
-        int changeY = 35;
+        int changeX = 60;
+        int changeY = 49;
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
@@ -104,7 +104,11 @@ public class Board {
                     }
                 }
             }
-            coordX = 567;
+            if (r % 2 == 0) {
+                coordX = scoordX;
+            } else {
+                coordX = 562;
+            }
             coordY += changeY;
         }
         System.out.println("Sector 1 " + inputHexes);
@@ -130,7 +134,11 @@ public class Board {
                     }
                 }
             }
-            scoordX = 587;
+            if (r % 2 == 0) {
+                scoordX = 582;
+            } else {
+                scoordX = 562;
+            }
             coordY += changeY;
         }
         System.out.println("Sector 2 " + inputHexes);
@@ -157,7 +165,11 @@ public class Board {
                     }
                 }
             }
-            coordX = 567;
+            if (r % 2 == 0) {
+                coordX = scoordX;
+            } else {
+                coordX = 562;
+            }
             scoordY += changeY;
         }
         System.out.println(coordX + " " + coordY);
@@ -185,8 +197,14 @@ public class Board {
                     }
                 }
             }
+            if (r % 2 == 0) {
+                coordX = scoordX;
+            } else {
+                coordX = 562;
+            }
+            // coordY += changeY;
             scoordY += changeY;
-            scoordX = 587;
+            // scoordX = 582;
         }
         System.out.println("Sector 4 " + inputHexes);
         // int nulls = 0;

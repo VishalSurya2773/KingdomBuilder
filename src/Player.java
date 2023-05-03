@@ -89,6 +89,7 @@ public class Player {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         System.out.println("Placed: " + placed.size());
+        System.out.println("GP terrain: " + terrainCard.getTerrain());
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
