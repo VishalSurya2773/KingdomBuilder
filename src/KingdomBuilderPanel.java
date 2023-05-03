@@ -158,18 +158,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     }
                 } else {
                 }
-                System.out.println("Start Game GameState");
+                // System.out.println("Start Game GameState");
                 break;
             case objectiveCards:
-                System.out.println("objectiveCards GameState");
+                // System.out.println("objectiveCards GameState");
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setColor(Color.WHITE);
                 Font ps = new Font("Abril Fatface", Font.BOLD, 76);
                 g.setFont(ps);
                 g.drawString("Player 1", 0, 80);
-                g.drawString("Player 2", 1600, 72);
-                g.drawString("Player 3", 1600, 390);
-                g.drawString("Player 4", 0, 460);
+                g.drawString("Player 2", 1600, 80);
+                g.drawString("Player 3", 1600, 500);
+                g.drawString("Player 4", 0, 500);
 
                 g.setColor(burgundy);
                 drawBackCards(g);
@@ -180,12 +180,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
                 drawObjectiveCards(g);
+                g.drawString("Draw a card from the deck", 720, 20);
                 gameStates = GameStates.showCard;
                 break;
             case showCard: // not needed in the paint class but needed in mouselistener
-                System.out.println("showCard GameState");
+                // System.out.println("showCard GameState");
+                g.drawString("Select a settlement or token to play", 720, 20);
             case turnStart:
-                System.out.println("turnStart GameState");
+                // System.out.println("turnStart GameState");
                 drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(),
                         currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
@@ -196,7 +198,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
                 break;
             case chooseSettlement:
-                System.out.println("chooseSettlement GameState");
+                // System.out.println("chooseSettlement GameState");
         }
 
     }
@@ -439,7 +441,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         // almost complete
         ArrayList<Player> players = game.players;
         int currX = 0;
-        int currY = 150;
+        int currY = 85;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
         for (int i = 0; i < players.size(); i++) {
             ArrayList<SpecialHex> hand = players.get(i).getHand();
@@ -447,14 +449,20 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             hand.add(new SpecialHex("barn"));
             hand.add(new SpecialHex("barn"));
             hand.add(new SpecialHex("barn"));
-            if (i == 1 || i == 2) {
-                currX = 1390;
+            if (i == 1) {
+                currX = 1590;
+                currY = 85;
+            } else if (i == 2) {
+                currX = 1590;
+                currY = 510;
+
             } else if (i == 3) {
+                currX = 0;
                 currY = 510;
             }
             for (int j = 0; j < hand.size(); j++) {
                 SpecialHex x = hand.get(j);
-                BufferedImage temp = null;
+                BufferedImage temp = actionTiles[0];
                 if (x.getType() == "barn") {
                     temp = actionTiles[0];
                 } else if (x.getType() == "farm") {
@@ -472,14 +480,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 } else if (x.getType() == "tower") {
                     temp = actionTiles[7];
                 }
-                g.drawImage(temp, currX, currY, 104, 95, null);
-                currX += 110;
+                g.drawImage(temp, currX, currY, 155, 170, null);
+                currX += 165;
                 // if (temp != null) {
 
                 // }
-                if (j == 3) {
-                    currX -= 110;
-                    currY += 105;
+                if (j == 1) {
+                    currX -= 330;
+                    currY += 175;
                 }
             }
         }
@@ -497,7 +505,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
          */
         ArrayList<Hex> possibleChoices = new ArrayList<>();
         possibleChoices = p.getPossible(b);
-        System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
+        // System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
 
         for (int i = 0; i < possibleChoices.size(); i++) {
             int XCoord = possibleChoices.get(i).getCenterX();
@@ -628,26 +636,74 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     System.out.println("4p");
                 }
                 break;
-
-            // case objectiveCards:
-            // // card back - 470, 450,110, 180
-            // if(clickedX >= 470 && clickedX <= 580 && clickedY >= 450 && clickedY <= 630){
-            // ObjectiveDeck = game.getObjDeck();
-            // Collections.shuffle(ObjectiveDeck);
-            // gameStates = gameStates.turnStart;
-            // }
-            // break;
-            // 1715, 800, 200, 270
             case showCard:
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     currentPlayer.drawCard(game);
                     System.out.println(currentPlayer.getOrder() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
-                    gameStates = GameStates.turnStart;
+                    if (currentPlayer.getTerrainCard().getTerrain().equals("desert"))
+                        gameStates = GameStates.turnStart;
                 }
                 break;
             case turnStart:
+                if (currentPlayer.getOrder() == 1) {
+                    if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120
+                            && currentPlayer.getOrder() == 1) { // settlement button
+                        System.out.println("p1 use settlement");
+                        currentPlayer.placeSettle = true;
+                    } else if (clickedX > 5 && clickedX < 315 && clickedY > 80 && clickedY < 430
+                            && currentPlayer.getHand().size() > 0) { // token area
+                        System.out.println("p1 uses token");
+                        currentPlayer.useToken = true;
+                        // check each individual square in the box 310 x350
+                        if (clickedX > 5 && clickedX < 155 && clickedY > 80 && clickedY < 225) { // first
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(0));
+                            System.out.println("p1 played first token");
+                        } else if (clickedX > 155 && clickedX < 315 && clickedY > 80 && clickedY < 225
+                                && currentPlayer.getHand().size() > 1) { // second
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(1));
+                            System.out.println("p1 played second token");
+                        } else if (clickedX > 5 && clickedX < 155 && clickedY > 225 && clickedY < 430
+                                && currentPlayer.getHand().size() > 2) { // third
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(2));
+                            System.out.println("p1 played third token");
+                        } else if (clickedX > 155 && clickedX < 315 && clickedY > 225 && clickedY < 420
+                                && currentPlayer.getHand().size() > 3) { // fourth
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(3));
+                            System.out.println("p1 played fourth token");
+                        }
+                    }
+                } else if (currentPlayer.getOrder() == 2) {
+                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120
+                            && currentPlayer.getOrder() == 2) {
+                        System.out.println("p2 use settlement");
+                        currentPlayer.placeSettle = true;
+                    } else if (clickedX > 1620 && clickedX < 1920 && clickedY > 80 && clickedY < 430) {
+                        System.out.println("p2 uses token");
+                        currentPlayer.useToken = true;
 
+                    }
+                } else if (currentPlayer.getOrder() == 3) {
+                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520
+                            && currentPlayer.getOrder() == 2) {
+                        System.out.println("p3 use settlement");
+                        currentPlayer.placeSettle = true;
+                    } else if (clickedX > 1620 && clickedX < 1920 && clickedY > 500 && clickedY < 850) {
+                        System.out.println("p3 uses token");
+                        currentPlayer.useToken = true;
+                    }
+                } else if (currentPlayer.getOrder() == 4) {
+                    if (clickedX > 300 && clickedX < 400 && clickedY > 420 && clickedY < 520
+                            && currentPlayer.getOrder() == 4) {
+                        System.out.println("p4 use settlement");
+                        currentPlayer.placeSettle = true;
+                    } else if (clickedX > 5 && clickedX < 315 && clickedY > 500 && clickedY < 850) {
+                        System.out.println("p4 uses token");
+                        currentPlayer.useToken = true;
+                    }
+                }
+
+                // else if(clickedX)
                 // get coords of available hexes
             case chooseSettlement:
             case gameOver:

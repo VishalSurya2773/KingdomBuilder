@@ -17,7 +17,7 @@ public class Player {
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
-    public boolean hasDrawn = false;
+    public boolean hasDrawn = false, placeSettle = false, useToken = false;
 
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;
@@ -88,7 +88,7 @@ public class Player {
     public ArrayList<Hex> getPossible(Board b) {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
-        System.out.println("Placed: " + placed.size());
+        // System.out.println("Placed: " + placed.size());
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
