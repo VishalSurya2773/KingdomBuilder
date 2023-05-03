@@ -210,6 +210,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                 drawPossibleHexOutline(g, currTurn);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
+                currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
                 break;
             case chooseSettlement:
                 System.out.println("chooseSettlement GameState");
@@ -703,7 +704,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener, Action
                     // draw card for that player
                     currentPlayer.drawCard(game);
                     System.out.println("has drawn card");
-                    // gameStates = GameStates.turnStart;
+                    gameStates = GameStates.turnStart;
                 }
                 break;
             case turnStart:

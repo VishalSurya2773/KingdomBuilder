@@ -153,9 +153,11 @@ public class Game {
         }
 
     }
-    public boolean gameOver(){
+
+    public boolean gameOver() {
         return gameOver;
     }
+
     public void endGame() {
         // scores everything
         for (int i = 0; i < players.size(); i++) {
@@ -172,6 +174,14 @@ public class Game {
 
     public void chooseStartingPlayer() {
         players.get(0).setFirst();
+    }
+
+    public int nextPlayer(int p) {
+        if (p < 4) {
+            return p++;
+        } else {
+            return 1;
+        }
     }
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
