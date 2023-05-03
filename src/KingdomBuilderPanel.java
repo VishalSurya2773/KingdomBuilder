@@ -647,8 +647,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
             case turnStart:
                 if (currentPlayer.getOrder() == 1) {
-                    if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120
-                            && currentPlayer.getOrder() == 1) { // settlement button
+                    if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120) { // settlement button
                         System.out.println("p1 use settlement");
                         currentPlayer.placeSettle = true;
                     } else if (clickedX > 5 && clickedX < 315 && clickedY > 80 && clickedY < 430
@@ -674,8 +673,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                     }
                 } else if (currentPlayer.getOrder() == 2) {
-                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120
-                            && currentPlayer.getOrder() == 2) {
+                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120) {
                         System.out.println("p2 use settlement");
                         currentPlayer.placeSettle = true;
                     } else if (clickedX > 1620 && clickedX < 1920 && clickedY > 80 && clickedY < 430) {
@@ -700,22 +698,54 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                     }
                 } else if (currentPlayer.getOrder() == 3) {
-                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520
-                            && currentPlayer.getOrder() == 2) {
+                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520) {
                         System.out.println("p3 use settlement");
                         currentPlayer.placeSettle = true;
                     } else if (clickedX > 1620 && clickedX < 1920 && clickedY > 500 && clickedY < 850) {
                         System.out.println("p3 uses token");
                         currentPlayer.useToken = true;
+                        // check each individual square in the box 310 x350
+                        if (clickedX > 1625 && clickedX < 1780 && clickedY > 500 && clickedY < 675) { // first
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(0));
+                            System.out.println("p2 played first token");
+                        } else if (clickedX > 1780 && clickedX < 1920 && clickedY > 500 && clickedY < 675
+                                && currentPlayer.getHand().size() > 1) { // second
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(1));
+                            System.out.println("p2 played second token");
+                        } else if (clickedX > 1625 && clickedX < 1780 && clickedY > 675 && clickedY < 850
+                                && currentPlayer.getHand().size() > 2) { // third
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(2));
+                            System.out.println("p2 played third token");
+                        } else if (clickedX > 1920 && clickedX < 1920 && clickedY > 675 && clickedY < 850
+                                && currentPlayer.getHand().size() > 3) { // fourth
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(3));
+                            System.out.println("p2 played fourth token");
+                        }
                     }
                 } else if (currentPlayer.getOrder() == 4) {
-                    if (clickedX > 300 && clickedX < 400 && clickedY > 420 && clickedY < 520
-                            && currentPlayer.getOrder() == 4) {
+                    if (clickedX > 300 && clickedX < 400 && clickedY > 420 && clickedY < 520) {
                         System.out.println("p4 use settlement");
                         currentPlayer.placeSettle = true;
                     } else if (clickedX > 5 && clickedX < 315 && clickedY > 500 && clickedY < 850) {
                         System.out.println("p4 uses token");
                         currentPlayer.useToken = true;
+                        // check each individual square in the box 310 x350x
+                        if (clickedX > 5 && clickedX < 155 && clickedY > 500 && clickedY < 675) { // first
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(0));
+                            System.out.println("p1 played first token");
+                        } else if (clickedX > 155 && clickedX < 315 && clickedY > 500 && clickedY < 675
+                                && currentPlayer.getHand().size() > 1) { // second
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(1));
+                            System.out.println("p1 played second token");
+                        } else if (clickedX > 5 && clickedX < 155 && clickedY > 675 && clickedY < 850
+                                && currentPlayer.getHand().size() > 2) { // third
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(2));
+                            System.out.println("p1 played third token");
+                        } else if (clickedX > 155 && clickedX < 315 && clickedY > 675 && clickedY < 850
+                                && currentPlayer.getHand().size() > 3) { // fourth
+                            currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(3));
+                            System.out.println("p1 played fourth token");
+                        }
                     }
                 }
 
