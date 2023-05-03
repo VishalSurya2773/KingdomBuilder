@@ -551,5 +551,19 @@ public class Player {
         return;
 
     }
+    public Hex findHex(int x, int y) {
+        for(int i = 0; i<20; i++) {
+            for(int j = 0; j<40; j++) {
+                if(Game.gameBoard.getGraph()[i][j].isEmpty()) {
+                    int dist = Game.gameBoard.getGraph()[i][j].getRadius();
+                    int distx = Math.max(x-dist, dist-x);
+                    if(dist> distx) {
+                        return Game.gameBoard.getGraph()[i][j];
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
 }
