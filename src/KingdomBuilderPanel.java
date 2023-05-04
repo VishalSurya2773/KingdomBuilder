@@ -200,7 +200,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
                 break;
             case chooseSettlement:
-                drawSettlement(currentPlayer, g, ALLBITS, ABORT);
                 // System.out.println("chooseSettlement GameState");
         }
 
