@@ -641,32 +641,32 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     currentPlayer.drawCard(game);
                     System.out.println(currentPlayer.getOrder() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
-                    if (currentPlayer.getTerrainCard().getTerrain().equals("desert"))
-                        gameStates = GameStates.turnStart;
+                    gameStates = GameStates.turnStart;
                 }
                 break;
             case turnStart:
+                System.out.println("turnstart gamestate");
                 if (currentPlayer.getOrder() == 1) {
                     if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120) { // settlement button
                         System.out.println("p1 use settlement");
                         currentPlayer.placeSettle = true;
-                    } else if (clickedX > 5 && clickedX < 315 && clickedY > 80 && clickedY < 430
+                    } else if (clickedX > 0 && clickedX < 320 && clickedY > 80 && clickedY < 430
                             && currentPlayer.getHand().size() > 0) { // token area
                         System.out.println("p1 uses token");
                         currentPlayer.useToken = true;
-                        // check each individual square in the box 310 x350
-                        if (clickedX > 5 && clickedX < 155 && clickedY > 80 && clickedY < 225) { // first
+                        // check each individual square in the box 320 x 350
+                        if (clickedX > 0 && clickedX < 160 && clickedY > 80 && clickedY < 225) { // first
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(0));
                             System.out.println("p1 played first token");
-                        } else if (clickedX > 155 && clickedX < 315 && clickedY > 80 && clickedY < 225
+                        } else if (clickedX > 160 && clickedX < 320 && clickedY > 80 && clickedY < 225
                                 && currentPlayer.getHand().size() > 1) { // second
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(1));
                             System.out.println("p1 played second token");
-                        } else if (clickedX > 5 && clickedX < 155 && clickedY > 225 && clickedY < 430
+                        } else if (clickedX > 0 && clickedX < 160 && clickedY > 225 && clickedY < 430
                                 && currentPlayer.getHand().size() > 2) { // third
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(2));
                             System.out.println("p1 played third token");
-                        } else if (clickedX > 155 && clickedX < 315 && clickedY > 225 && clickedY < 420
+                        } else if (clickedX > 160 && clickedX < 320 && clickedY > 225 && clickedY < 420
                                 && currentPlayer.getHand().size() > 3) { // fourth
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(3));
                             System.out.println("p1 played fourth token");
@@ -676,14 +676,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120) {
                         System.out.println("p2 use settlement");
                         currentPlayer.placeSettle = true;
-                    } else if (clickedX > 1620 && clickedX < 1920 && clickedY > 80 && clickedY < 430) {
+                    } else if (clickedX > 1620 && clickedX < 1900 && clickedY > 80 && clickedY < 430) {
                         System.out.println("p2 uses token");
                         currentPlayer.useToken = true;
                         // check each individual square in the box 310 x350
                         if (clickedX > 1625 && clickedX < 1780 && clickedY > 80 && clickedY < 225) { // first
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(0));
                             System.out.println("p2 played first token");
-                        } else if (clickedX > 1780 && clickedX < 1920 && clickedY > 80 && clickedY < 225
+                        } else if (clickedX > 1780 && clickedX < 1900 && clickedY > 80 && clickedY < 225
                                 && currentPlayer.getHand().size() > 1) { // second
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(1));
                             System.out.println("p2 played second token");
@@ -691,7 +691,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                                 && currentPlayer.getHand().size() > 2) { // third
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(2));
                             System.out.println("p2 played third token");
-                        } else if (clickedX > 1920 && clickedX < 1920 && clickedY > 225 && clickedY < 420
+                        } else if (clickedX > 1780 && clickedX < 1900 && clickedY > 225 && clickedY < 420
                                 && currentPlayer.getHand().size() > 3) { // fourth
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(3));
                             System.out.println("p2 played fourth token");
@@ -701,14 +701,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520) {
                         System.out.println("p3 use settlement");
                         currentPlayer.placeSettle = true;
-                    } else if (clickedX > 1620 && clickedX < 1920 && clickedY > 500 && clickedY < 850) {
+                    } else if (clickedX > 1620 && clickedX < 1900 && clickedY > 500 && clickedY < 850) {
                         System.out.println("p3 uses token");
                         currentPlayer.useToken = true;
                         // check each individual square in the box 310 x350
                         if (clickedX > 1625 && clickedX < 1780 && clickedY > 500 && clickedY < 675) { // first
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(0));
                             System.out.println("p2 played first token");
-                        } else if (clickedX > 1780 && clickedX < 1920 && clickedY > 500 && clickedY < 675
+                        } else if (clickedX > 1780 && clickedX < 1900 && clickedY > 500 && clickedY < 675
                                 && currentPlayer.getHand().size() > 1) { // second
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(1));
                             System.out.println("p2 played second token");
@@ -716,7 +716,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                                 && currentPlayer.getHand().size() > 2) { // third
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(2));
                             System.out.println("p2 played third token");
-                        } else if (clickedX > 1920 && clickedX < 1920 && clickedY > 675 && clickedY < 850
+                        } else if (clickedX > 1900 && clickedX < 1900 && clickedY > 675 && clickedY < 850
                                 && currentPlayer.getHand().size() > 3) { // fourth
                             currentPlayer.useSpecialHexTile(currentPlayer.getHand().get(3));
                             System.out.println("p2 played fourth token");
@@ -756,12 +756,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
 
         }
-        if (startPhase) {
-            // play button
-
-        }
-
-        // else if(clickedX)
         repaint();
     }
 
