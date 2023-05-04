@@ -146,7 +146,7 @@ public class Board {
 
         a = boardScanners.get(2);
         inputHexes = 0;
-        int scoordY = coordY;
+        int scoordY = coordY - 7;
         coordX = 562;
         scoordX = 582;
         for (int r = 10; r < 20; r++) {
@@ -173,13 +173,13 @@ public class Board {
             } else {
                 coordX = 562;
             }
-            scoordY += (changeY - 5);
+            scoordY += (changeY);
         }
         System.out.println(coordX + " " + coordY);
         System.out.println("Sector 3 " + inputHexes);
         a = boardScanners.get(3);
         inputHexes = 0;
-        scoordY = coordY;
+        scoordY = coordY - 7;
         coordX = 562 + 10 * changeX;
         for (int r = 10; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
@@ -207,7 +207,7 @@ public class Board {
                 coordX = 562 + 10 * changeX;
             }
             // coordY += changeY;
-            scoordY += (changeY - 5);
+            scoordY += (changeY);
             // scoordX = 582;
         }
         System.out.println("Sector 4 " + inputHexes);
