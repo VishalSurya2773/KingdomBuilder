@@ -195,6 +195,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
+                drawMetasettlement(g);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
 
@@ -588,32 +589,40 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             h.setSettlement(p.getSettlementFromStore(game));
         }
     }
-    public void drawMetasettlement(Graphics g) {
-        for(int i  = 0; i<20; i++) {
-            for(int j = 0; j<40; j++) {
-                try{
-                    if(board[i][j].isEmpty() != true) {
-                        if(board[i][j].getSettlement().getColor().equals("Red")) {
-                            g.drawImage(settleRed, board[i][j].getCenterX(), board[i][j].getCenterY(), null);
-                        }else if(board[i][j].getSettlement().getColor().equals("Green")) {
-                            g.drawImage(settleGreen, board[i][j].getCenterX(), board[i][j].getCenterY(), null);
-                        }else if(board[i][j].getSettlement().getColor().equals("Blue")) {
-                            g.drawImage(settleBlue, board[i][j].getCenterX(), board[i][j].getCenterY(), null);
-                        }else if(board[i][j].getSettlement().getColor().equals("Orange")) {
-                            g.drawImage(settleOrange, board[i][j].getCenterX(), board[i][j].getCenterY(), null);
-                        }else if(board[i][j].getSettlement().getColor().equals("Yellow")) {
-                            g.drawImage(settleYellow, board[i][j].getCenterX(), board[i][j].getCenterY(), null);
-                        }else if(board[i][j].getSettlement().getColor().equals("Purple")) {
-                        g.drawImage(settlePurple, board[i][j].getCenterX(), board[i][j].getCenterY(), null);
-                }
-                }
 
-            }catch(Exception E) {
-                System.out.println("Error");
+    public void drawMetasettlement(Graphics g) {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 40; j++) {
+                try {
+                    if (board[i][j].isEmpty() != true) {
+                        if (board[i][j].getSettlement().getColor().equals("Red")) {
+                            g.drawImage(settleRed, board[i][j].getCenterX() - 25, board[i][j].getCenterY() - 25, 40, 40,
+                                    null);
+                        } else if (board[i][j].getSettlement().getColor().equals("Green")) {
+                            g.drawImage(settleGreen, board[i][j].getCenterX() - 25, board[i][j].getCenterY() - 25, 40,
+                                    40, null);
+                        } else if (board[i][j].getSettlement().getColor().equals("Blue")) {
+                            g.drawImage(settleBlue, board[i][j].getCenterX() - 25, board[i][j].getCenterY() - 25, 40,
+                                    40, null);
+                        } else if (board[i][j].getSettlement().getColor().equals("Orange")) {
+                            g.drawImage(settleOrange, board[i][j].getCenterX() - 25, board[i][j].getCenterY() - 25, 40,
+                                    40, null);
+                        } else if (board[i][j].getSettlement().getColor().equals("Yellow")) {
+                            g.drawImage(settleYellow, board[i][j].getCenterX() - 25, board[i][j].getCenterY() - 25, 40,
+                                    40, null);
+                        } else if (board[i][j].getSettlement().getColor().equals("Purple")) {
+                            g.drawImage(settlePurple, board[i][j].getCenterX() - 25, board[i][j].getCenterY() - 25, 40,
+                                    40, null);
+                        }
+                    }
+
+                } catch (Exception E) {
+                    System.out.println("Error");
+                }
             }
-         }
+        }
     }
-    }
+
     public void drawSpecialHex(Graphics g) {
 
     }
