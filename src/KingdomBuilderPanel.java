@@ -565,7 +565,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void drawSettlement(Player p, Graphics g, int cx, int cy) {
-        Hex h = p.findHex(cx, cy);
+        Hex h = p.findHex(cx, cy, game);
         if (h != null) {
             BufferedImage setimg = new BufferedImage(getColorModel(), null, gamePhase, null);
             try {
