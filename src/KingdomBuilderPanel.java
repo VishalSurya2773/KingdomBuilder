@@ -198,6 +198,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
                 break;
             case chooseSettlement:
+            drawSettlement(currentPlayer, g, ALLBITS, ABORT);
                 // System.out.println("chooseSettlement GameState");
         }
 
@@ -567,15 +568,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         if (h != null) {
             BufferedImage setimg = new BufferedImage(getColorModel(), null, gamePhase, null);
             try {
-                if (p.getColor().equals("blue")) {
+                if (p.getColor().equals("Blue")) {
                     setimg = settleBlue;
-                } else if (p.getColor().equals("red")) {
+                } else if (p.getColor().equals("Red")) {
                     setimg = settleRed;
-                } else if (p.getColor().equals("yellow")) {
+                } else if (p.getColor().equals("Yellow")) {
                     setimg = settleYellow;
-                } else if (p.getColor().equals("green")) {
+                } else if (p.getColor().equals("Green")) {
                     setimg = settleGreen;
-                } else if (p.getColor().equals("orange")) {
+                } else if (p.getColor().equals("Orange")) {
                     setimg = settleOrange;
                 } else {
                     setimg = settlePurple;
