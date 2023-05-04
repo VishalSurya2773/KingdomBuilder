@@ -552,18 +552,25 @@ public class Player {
     }
 
     public Hex findHex(int x, int y) {
+        Hex minDist = new Hex();
+        double minDistVal = (double) Integer.MAX_VALUE;
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
                 if (Game.gameBoard.getGraph()[i][j].isEmpty()) {
-                    int dist = Game.gameBoard.getGraph()[i][j].getRadius();
-                    int distx = Math.max(x - dist, dist - x);
-                    int disty = Math.max(y - dist, dist - y);
-                    if (dist > distx && dist > disty) {
-                        return Game.gameBoard.getGraph()[i][j];
+                    double dist = Game.gameBoard.getGraph()[i][j].getRadius();
+                    double distx = Math.max(x - dist, dist - x) * Math.max(x - dist, dist - x);
+                    double disty = Math.max(y - dist, dist - y) *  Math.max(y - dist, dist - y);
+    
+                    dist = Math.sqrt(distx + disty);
+
+                    if(dist < minDistVal){
+                        minDistVal = dist;
+                        minDist = Game.gameBoard.getGraph()[i][j];
                     }
+                    
                 }
             }
         }
-        return null;
+        return minDist;
     }
 }
