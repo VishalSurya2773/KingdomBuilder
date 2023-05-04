@@ -17,7 +17,7 @@ public class Player {
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
-    public boolean hasDrawn = false;
+    public boolean hasDrawn = false, placeSettle = false, useToken = false;
 
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;
