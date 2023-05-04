@@ -24,8 +24,8 @@ import java.awt.BasicStroke;
 
 public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private BufferedImage background, b_play, b_guide_start, mainmenu, b_endgame, b_guide, b_home, b_restart, b1, b2,
-            b3, b4, b5, b6, b7, b8, firstToken,
-            citizen, discoverer, farmer, fisherman, hermit, knight, lord, merchant, miner, worker, settleBlue,
+            b3, b4, b5, b6, b7, b8, firstToken, b_confirm, citizen, discoverer, farmer, fisherman, hermit, knight, lord,
+            merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
             cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
             sumTower, revSumBarn, revSumFarm, revSumHarbor, revSumOasis, revSumOracle, revSumPaddock, revSumTavern,
@@ -58,6 +58,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             b_guide = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_guide.png"));
             b_home = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_home.png"));
             b_restart = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_restart.png"));
+            b_confirm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/button_confirm.png"));
             // boards
             b1 = ImageIO.read(KingdomBuilderPanel.class.getResource("images/Board1.png"));
             b2 = ImageIO.read(KingdomBuilderPanel.class.getResource("images/Board2.png"));
@@ -180,6 +181,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
                 drawObjectiveCards(g);
+                drawConfirmButton(g);
                 g.drawString("Draw a card from the deck", 720, 20);
                 gameStates = GameStates.showCard;
                 break;
@@ -195,10 +197,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawPossibleHexOutline(g, currentPlayer);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
-                // currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
+
                 break;
             case chooseSettlement:
-            drawSettlement(currentPlayer, g, ALLBITS, ABORT);
+                drawSettlement(currentPlayer, g, ALLBITS, ABORT);
                 // System.out.println("chooseSettlement GameState");
         }
 
@@ -207,6 +209,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     public void drawStartScreen(Graphics g) {
         g.drawImage(mainmenu, 0, 0, WIDTH, HEIGHT - 1, null);
         // jbutton stuff
+    }
+
+    public void drawConfirmButton(Graphics g) {
+        g.drawImage(b_confirm, 56, 910, 108, 108, null);
     }
 
     public void drawBoard(Graphics g) {
@@ -235,11 +241,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 g.drawImage(b8, currX[i], currY[i], 426, 363, null);
             }
         }
-
-    }
-
-    public void drawConfirmButton(Graphics g) {
-
     }
 
     public void drawSumActionTiles(Graphics g) {
@@ -749,9 +750,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                     }
                 }
-
-                // else if(clickedX)
-                // get coords of available hexes
+                if (clickedX > 0 && clickedX < 108 && clickedY > 726 && clickedY < 834) { // confirmation button
+                    System.out.println("conf_b clicked");
+                    if (!game.gameOver) {
+                        currentPlayer = players.get(game.nextPlayer(currentPlayer.getOrder()));
+                    } else {
+                        gameStates = gameStates.gameOver;
+                    }
+                }
             case chooseSettlement:
             case gameOver:
                 break;
