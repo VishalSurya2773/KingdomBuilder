@@ -17,7 +17,7 @@ public class Player {
     private String color;
     public int playerNum;
     private Hex chosenLocationForNewHex;
-    public boolean hasDrawn = false, placeSettle = false, useToken = false;
+    public boolean hasDrawn = false;
 
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;
@@ -88,7 +88,7 @@ public class Player {
     public ArrayList<Hex> getPossible(Board b) {
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
-        // System.out.println("Placed: " + placed.size());
+        System.out.println("Placed: " + placed.size());
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
@@ -550,27 +550,16 @@ public class Player {
         return;
 
     }
-
-    public Hex findHex(int x, int y) {
-        Hex minDist = new Hex();
-        double minDistVal = (double) Integer.MAX_VALUE;
+    public Hex findHex(int x, int y, Game g) {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
-                if (Game.gameBoard.getGraph()[i][j].isEmpty()) {
-                    double dist = Game.gameBoard.getGraph()[i][j].getRadius();
-                    double distx = Math.max(x - dist, dist - x) * Math.max(x - dist, dist - x);
-                    double disty = Math.max(y - dist, dist - y) *  Math.max(y - dist, dist - y);
-    
-                    dist = Math.sqrt(distx + disty);
-
-                    if(dist < minDistVal){
-                        minDistVal = dist;
-                        minDist = Game.gameBoard.getGraph()[i][j];
+                if (g.gameBoard.getGraph()[i][j].isEmpty()) {
+                    if(g.gameBoard.getGraph()[i][j].isClicked(x, y)){ // isClicked() isnt implemented
+                        return g.gameBoard.getGraph()[i][j];
                     }
-                    
                 }
             }
         }
-        return minDist;
+        return null;
     }
 }
