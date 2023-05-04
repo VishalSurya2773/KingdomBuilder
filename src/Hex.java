@@ -178,4 +178,9 @@ public class Hex {
     public String toString() {
         return terrain;
     }
+    public boolean isClicked(int mouseX, int mouseY){
+        // if() // stuff
+        return false;
+    }
+
 }
