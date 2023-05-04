@@ -596,22 +596,22 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 try {
                     if (board[i][j].isEmpty() != true) {
                         if (board[i][j].getSettlement().getColor().equals("Red")) {
-                            g.drawImage(settleRed, board[i][j].getCenterX() - 40, board[i][j].getCenterY() - 36, 35, 35,
+                            g.drawImage(settleRed, board[i][j].getCenterX() - 15, board[i][j].getCenterY() - 17, 35, 35,
                                     null);
                         } else if (board[i][j].getSettlement().getColor().equals("Green")) {
-                            g.drawImage(settleGreen, board[i][j].getCenterX() - 40, board[i][j].getCenterY() - 36, 35,
+                            g.drawImage(settleGreen, board[i][j].getCenterX() - 15, board[i][j].getCenterY() - 17, 35,
                                     35, null);
                         } else if (board[i][j].getSettlement().getColor().equals("Blue")) {
-                            g.drawImage(settleBlue, board[i][j].getCenterX() - 40, board[i][j].getCenterY() - 36, 35,
+                            g.drawImage(settleBlue, board[i][j].getCenterX() - 15, board[i][j].getCenterY() - 17, 35,
                                     35, null);
                         } else if (board[i][j].getSettlement().getColor().equals("Orange")) {
-                            g.drawImage(settleOrange, board[i][j].getCenterX() - 40, board[i][j].getCenterY() - 36, 35,
+                            g.drawImage(settleOrange, board[i][j].getCenterX() - 15, board[i][j].getCenterY() - 17, 35,
                                     35, null);
                         } else if (board[i][j].getSettlement().getColor().equals("Yellow")) {
-                            g.drawImage(settleYellow, board[i][j].getCenterX() - 40, board[i][j].getCenterY() - 36, 35,
+                            g.drawImage(settleYellow, board[i][j].getCenterX() - 15, board[i][j].getCenterY() - 17, 35,
                                     35, null);
                         } else if (board[i][j].getSettlement().getColor().equals("Purple")) {
-                            g.drawImage(settlePurple, board[i][j].getCenterX() - 40, board[i][j].getCenterY() - 36, 35,
+                            g.drawImage(settlePurple, board[i][j].getCenterX() - 15, board[i][j].getCenterY() - 17, 35,
                                     35, null);
                         }
                     }
