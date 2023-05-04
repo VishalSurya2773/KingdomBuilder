@@ -557,7 +557,8 @@ public class Player {
                 if (Game.gameBoard.getGraph()[i][j].isEmpty()) {
                     int dist = Game.gameBoard.getGraph()[i][j].getRadius();
                     int distx = Math.max(x - dist, dist - x);
-                    if (dist > distx) {
+                    int disty = Math.max(y - dist, dist - y);
+                    if (dist > distx && dist > disty) {
                         return Game.gameBoard.getGraph()[i][j];
                     }
                 }
