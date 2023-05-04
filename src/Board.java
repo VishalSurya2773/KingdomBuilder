@@ -180,7 +180,7 @@ public class Board {
         a = boardScanners.get(3);
         inputHexes = 0;
         scoordY = coordY;
-        scoordX = 582;
+        scoordX = 582 + 10 * changeX;
         for (int r = 10; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
@@ -202,9 +202,9 @@ public class Board {
                 }
             }
             if (r % 2 == 1) {
-                scoordX = 582;
+                scoordX = 582 + 10 * changeX;
             } else {
-                coordX = 562;
+                coordX = 562 + 10 * changeX;
             }
             // coordY += changeY;
             scoordY += changeY;
