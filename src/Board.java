@@ -173,7 +173,7 @@ public class Board {
             } else {
                 coordX = 562;
             }
-            scoordY += changeY;
+            scoordY += (changeY - 5);
         }
         System.out.println(coordX + " " + coordY);
         System.out.println("Sector 3 " + inputHexes);
@@ -207,7 +207,7 @@ public class Board {
                 coordX = 562 + 10 * changeX;
             }
             // coordY += changeY;
-            scoordY += changeY;
+            scoordY += (changeY - 5);
             // scoordX = 582;
         }
         System.out.println("Sector 4 " + inputHexes);
