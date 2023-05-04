@@ -113,7 +113,7 @@ public class Board {
         }
         System.out.println("Sector 1 " + inputHexes);
         coordY = 151;
-        coordX = 562 + 20 * changeX;
+        coordX = 562 + 10 * changeX;
         inputHexes = 0;
         a = boardScanners.get(1);
         for (int r = 0; r < 10; r++) {
@@ -136,9 +136,9 @@ public class Board {
                 }
             }
             if (r % 2 == 1) {
-                scoordX = 582 + 20 * changeX;
+                scoordX = 582 + 10 * changeX;
             } else {
-                scoordX = 562 + 20 * changeX;
+                scoordX = 562 + 10 * changeX;
             }
             coordY += changeY;
         }
