@@ -126,9 +126,9 @@ public class Board {
                         } else {
                             Graph[r][c] = new Hex(map.get(num));
                         }
-                        Graph[r][c].setX(scoordX);
+                        Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
-                        scoordX += changeX;
+                        coordX += changeX;
                         inputHexes++;
                     } else {
                         Graph[r][c] = new Hex("blank");
@@ -136,9 +136,9 @@ public class Board {
                 }
             }
             if (r % 2 == 1) {
-                scoordX = 582 + 10 * changeX;
+                coordX = 582 + 10 * changeX;
             } else {
-                scoordX = 562 + 10 * changeX;
+                coordX = 562 + 10 * changeX;
             }
             coordY += changeY;
         }
@@ -192,9 +192,9 @@ public class Board {
                         } else {
                             Graph[r][c] = new Hex(map.get(num));
                         }
-                        Graph[r][c].setX(scoordX);
+                        Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
-                        scoordX += changeX;
+                        coordX += changeX;
                         inputHexes++;
                     } else {
                         Graph[r][c] = new Hex("blank");
@@ -202,7 +202,7 @@ public class Board {
                 }
             }
             if (r % 2 == 1) {
-                scoordX = 582 + 10 * changeX;
+                coordX = 582 + 10 * changeX;
             } else {
                 coordX = 562 + 10 * changeX;
             }
