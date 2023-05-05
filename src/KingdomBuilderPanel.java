@@ -646,7 +646,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         b = game.gameBoard;
                         board = b.getGraph();
                         players = game.players;
-                        currentPlayer = game.players.get(game.getTurn());
+                        currentPlayer = game.players.get(game.getTurn() - 1);
                         sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
