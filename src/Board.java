@@ -97,6 +97,7 @@ public class Board {
 
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
+                        Graph[r][c].setArray();
                         coordX += changeX;
                         inputHexes++;
                     } else {
@@ -128,6 +129,7 @@ public class Board {
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
+                        Graph[r][c].setArray();
                         coordX += changeX;
                         inputHexes++;
                     } else {
@@ -161,6 +163,7 @@ public class Board {
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
+                        Graph[r][c].setArray();
                         coordX += changeX;
                         inputHexes++;
                     } else {
@@ -194,6 +197,7 @@ public class Board {
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
+                        Graph[r][c].setArray();
                         coordX += changeX;
                         inputHexes++;
                     } else {
