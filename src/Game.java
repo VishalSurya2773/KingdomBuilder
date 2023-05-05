@@ -57,7 +57,6 @@ public class Game {
         System.out.println("DECK SIZE: " + deck.size());
         Collections.shuffle(deck);
         Collections.shuffle(objDeck);
-        playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
         // gameBoard.printGraph();
         fillObjectiveDeck();
