@@ -61,7 +61,7 @@ public class Game {
         objectives = new ArrayList<ObjectiveCard>();
         // gameBoard.printGraph();
         fillObjectiveDeck();
-        getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
+        setObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
         initializeTurn();
@@ -89,13 +89,17 @@ public class Game {
         return objDeck;
     }
 
-    public void getObjectives() {
+    public void setObjectives() {
         objectives.add(new ObjectiveCard("miner"));
         objectives.add(new ObjectiveCard("fisherman"));
         objectives.add(new ObjectiveCard("knight"));
         // for (int i = 0; i < 3; i++) {
         // objectives.add(objDeck.get(i));
         // }
+    }
+
+    public ArrayList<ObjectiveCard> getObjectives() {
+        return objectives;
     }
 
     public void fillObjectiveDeck() {
