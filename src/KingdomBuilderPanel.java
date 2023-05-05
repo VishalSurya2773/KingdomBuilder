@@ -192,9 +192,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 System.out.println("Game turn: " + game.getTurn());
                 System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");
-                if (players.get(game.getTurn() - 1).terrainCard.getTerrain() == null)
+
+                if (currentPlayer.terrainCard.getTerrain() == null)
                     System.out.println("NULL TERRAIN CARD");
-                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
+                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
@@ -450,10 +451,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
         for (int i = 0; i < players.size(); i++) {
             ArrayList<SpecialHex> hand = players.get(i).getHand();
-            hand.add(new SpecialHex("barn"));
-            hand.add(new SpecialHex("barn"));
-            hand.add(new SpecialHex("barn"));
-            hand.add(new SpecialHex("barn"));
             if (i == 1) {
                 currX = 1590;
                 currY = 85;
