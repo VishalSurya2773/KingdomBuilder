@@ -792,6 +792,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     }
                 }
             case chooseSettlement:
+            
             case gameOver:
                 break;
 
