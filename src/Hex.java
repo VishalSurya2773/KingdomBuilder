@@ -7,6 +7,7 @@ public class Hex {
     private boolean isAvail;
     private int[] xPoints;
     private int[] yPoints;
+
     public Hex() {
         // default constructor
     }
@@ -15,11 +16,12 @@ public class Hex {
         x = xComp;
         y = yComp;
         playerSettlement = null;
-        
+
     }
-    public void setArray(){
-        xPoints = new int[] {x - 20, x, x + 20, x + 20, x, x - 20 };
-        yPoints = new int[] {y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
+
+    public void setArray() {
+        xPoints = new int[] { x - 20, x, x + 20, x + 20, x, x - 20 };
+        yPoints = new int[] { y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
     }
 
     public Hex(int xComp, int yComp, String terrainType) {
@@ -39,12 +41,15 @@ public class Hex {
         // bottomRight = new Hex("");
         // bottomLeft = new Hex("");
     }
-    public int[] getXPoints(){
+
+    public int[] getXPoints() {
         return xPoints;
     }
-    public int[] getYPoints(){
+
+    public int[] getYPoints() {
         return yPoints;
     }
+
     public int compareTo(Hex cmp) {
         if (cmp == null) {
             return Integer.MIN_VALUE;
@@ -77,16 +82,16 @@ public class Hex {
                     if (i == 0) {
                         topLeft = null;
                         topRight = null;
-                    } 
+                    }
                     if (j == 0) {
                         left = null;
                         topLeft = null;
                         bottomLeft = null;
-                    } 
+                    }
                     if (i == 39) {
                         bottomLeft = null;
                         bottomRight = null;
-                    } 
+                    }
                     if (j == 39) {
                         right = null;
                         topRight = null;
@@ -95,19 +100,19 @@ public class Hex {
 
                     if (left != null) {
                         left = board[i][j - 2];
-                    } 
+                    }
                     if (right != null) {
                         right = board[i][j + 2];
-                    } 
+                    }
                     if (topLeft != null) {
                         topLeft = board[i - 1][j - 1];
-                    } 
+                    }
                     if (topRight != null) {
                         topRight = board[i - 1][j + 1];
-                    } 
+                    }
                     if (bottomLeft != null) {
                         bottomLeft = board[i + 1][j - 1];
-                    } 
+                    }
                     if (bottomRight != null) {
                         bottomRight = board[i + 1][j + 1];
                     }
@@ -188,7 +193,8 @@ public class Hex {
     public String toString() {
         return terrain;
     }
-    public boolean isClicked(int mouseX, int mouseY){
+
+    public boolean isClicked(int mouseX, int mouseY) {
         // if() // stuff
         int intersections = 0;
 

@@ -72,7 +72,7 @@ public class Board {
         int scoordX = 582; // for odd rows
 
         int changeX = 40;
-        int changeY = 35;
+        int changeY = 36;
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
@@ -148,7 +148,7 @@ public class Board {
 
         a = boardScanners.get(2);
         inputHexes = 0;
-        int scoordY = coordY - 7;
+        int scoordY = coordY;
         coordX = 562;
         scoordX = 582;
         for (int r = 10; r < 20; r++) {
@@ -182,7 +182,7 @@ public class Board {
         System.out.println("Sector 3 " + inputHexes);
         a = boardScanners.get(3);
         inputHexes = 0;
-        scoordY = coordY - 7;
+        scoordY = coordY;
         coordX = 562 + 10 * changeX;
         for (int r = 10; r < 20; r++) {
             for (int c = 20; c < 40; c++) {
