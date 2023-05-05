@@ -12,7 +12,7 @@ public class Game {
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    public int turn = 0;
+    public int turn = 1;
 
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
@@ -54,13 +54,14 @@ public class Game {
             deck.add(new Card("canyon"));
             deck.add(new Card("desert"));
         }
+        System.out.println("DECK SIZE: " + deck.size());
         Collections.shuffle(deck);
         Collections.shuffle(objDeck);
         playerIndex = (int) Math.random() * 3;
         objectives = new ArrayList<ObjectiveCard>();
         // gameBoard.printGraph();
         fillObjectiveDeck();
-        getObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
+        setObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
         initializeTurn();
@@ -79,17 +80,26 @@ public class Game {
 
     public void nextTurn() {
         turn++;
-        turn %= 4;
+        turn %= 5;
+        if (turn == 0)
+            turn = 1;
     }
 
     public ArrayList<ObjectiveCard> getObjDeck() {
         return objDeck;
     }
 
-    public void getObjectives() {
-        for (int i = 0; i < 3; i++) {
-            objectives.add(objDeck.get(i));
-        }
+    public void setObjectives() {
+        objectives.add(new ObjectiveCard("miner"));
+        objectives.add(new ObjectiveCard("fisherman"));
+        objectives.add(new ObjectiveCard("knight"));
+        // for (int i = 0; i < 3; i++) {
+        // objectives.add(objDeck.get(i));
+        // }
+    }
+
+    public ArrayList<ObjectiveCard> getObjectives() {
+        return objectives;
     }
 
     public void fillObjectiveDeck() {
@@ -176,13 +186,13 @@ public class Game {
         players.get(0).setFirst();
     }
 
-    public int nextPlayer(int p) {
-        if (p < 4) {
-            return p++;
-        } else {
-            return 1;
-        }
-    }
+    // public int nextPlayer(int p) {
+    // if (p < 4) {
+    // return p++;
+    // } else {
+    // return 1;
+    // }
+    // }
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
 

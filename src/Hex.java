@@ -5,7 +5,8 @@ public class Hex {
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
     private int radius;
     private boolean isAvail;
-
+    private int[] xPoints;
+    private int[] yPoints;
     public Hex() {
         // default constructor
     }
@@ -14,7 +15,11 @@ public class Hex {
         x = xComp;
         y = yComp;
         playerSettlement = null;
-        // declare the variable of radius
+        
+    }
+    public void setArray(){
+        xPoints = new int[] {x - 20, x, x + 20, x + 20, x, x - 20 };
+        yPoints = new int[] {y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
     }
 
     public Hex(int xComp, int yComp, String terrainType) {
@@ -34,7 +39,12 @@ public class Hex {
         // bottomRight = new Hex("");
         // bottomLeft = new Hex("");
     }
-
+    public int[] getXPoints(){
+        return xPoints;
+    }
+    public int[] getYPoints(){
+        return yPoints;
+    }
     public int compareTo(Hex cmp) {
         if (cmp == null) {
             return Integer.MIN_VALUE;
@@ -180,7 +190,21 @@ public class Hex {
     }
     public boolean isClicked(int mouseX, int mouseY){
         // if() // stuff
-        return false;
+        int intersections = 0;
+
+        for (int i = 0; i < xPoints.length; i++) {
+            double x1 = xPoints[i];
+            double y1 = yPoints[i];
+            double x2 = xPoints[(i + 1) % xPoints.length];
+            double y2 = yPoints[(i + 1) % yPoints.length];
+
+            if (((y1 > mouseY) != (y2 > mouseY))
+                    && (mouseX < (x2 - x1) * (mouseY - y1) / (y2 - y1) + x1)) {
+                intersections++;
+            }
+        }
+
+        return (intersections % 2 != 0);
     }
 
 }
