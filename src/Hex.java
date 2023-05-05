@@ -5,7 +5,8 @@ public class Hex {
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
     private int radius;
     private boolean isAvail;
-
+    private int[] xPoints;
+    private int[] yPoints;
     public Hex() {
         // default constructor
     }
@@ -14,7 +15,8 @@ public class Hex {
         x = xComp;
         y = yComp;
         playerSettlement = null;
-        // declare the variable of radius
+        xPoints = new int[] {x - 20, x, x + 20, x + 20, x, x - 20 };
+        yPoints = new int[] {y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
     }
 
     public Hex(int xComp, int yComp, String terrainType) {
@@ -34,7 +36,12 @@ public class Hex {
         // bottomRight = new Hex("");
         // bottomLeft = new Hex("");
     }
-
+    public int[] getXPoints(){
+        return xPoints;
+    }
+    public int[] getYPoints(){
+        return yPoints;
+    }
     public int compareTo(Hex cmp) {
         if (cmp == null) {
             return Integer.MIN_VALUE;

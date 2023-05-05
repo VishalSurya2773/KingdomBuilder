@@ -195,7 +195,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
-                drawMetasettlement(g);
+                //drawMetasettlement(g);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
 
@@ -510,15 +510,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         // System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
 
         for (int i = 0; i < possibleChoices.size(); i++) {
-            int XCoord = possibleChoices.get(i).getCenterX();
-            int YCoord = possibleChoices.get(i).getCenterY();
+            int[] xPoints = possibleChoices.get(i).getXPoints();
+            int[] yPoints = possibleChoices.get(i).getYPoints();
             // System.out.println("RAN");
             // System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " "+
             // XCoord + " " + YCoord);
-            int[] xPoints = new int[] { XCoord - 20, XCoord, XCoord + 20, XCoord + 20,
-                    XCoord, XCoord - 20 };
-            int[] yPoints = new int[] { YCoord - 10, YCoord - 22, YCoord - 10, YCoord +
-                    10, YCoord + 22, YCoord + 10 };
+            
             g.setColor(Color.RED);
             g.drawPolygon(xPoints, yPoints, 6);
         }
