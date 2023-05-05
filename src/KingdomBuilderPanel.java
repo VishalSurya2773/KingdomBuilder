@@ -189,13 +189,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // System.out.println("showCard GameState");
                 g.drawString("Select a settlement or token to play", 720, 20);
             case turnStart:
+                System.out.println("Game turn: " + game.getTurn());
+                System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");
-                if(players.get(game.getTurn() - 1).terrainCard.getTerrain() == null) System.out.println("NULL TERRAIN CARD");
-                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
+
+                if (currentPlayer.terrainCard.getTerrain() == null)
+                    System.out.println("NULL TERRAIN CARD");
+                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
-                //drawMetasettlement(g);
+                // drawMetasettlement(g);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
 
@@ -447,10 +451,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
         for (int i = 0; i < players.size(); i++) {
             ArrayList<SpecialHex> hand = players.get(i).getHand();
-            hand.add(new SpecialHex("barn"));
-            hand.add(new SpecialHex("barn"));
-            hand.add(new SpecialHex("barn"));
-            hand.add(new SpecialHex("barn"));
             if (i == 1) {
                 currX = 1590;
                 currY = 85;
@@ -514,7 +514,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             // System.out.println("RAN");
             // System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " "+
             // XCoord + " " + YCoord);
-            
+
             g.setColor(Color.RED);
             g.drawPolygon(xPoints, yPoints, 6);
         }
@@ -522,12 +522,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     public void drawPlayerCard(Graphics g, String terrain, int pNum) {
         drawBackCards(g);
-        BufferedImage image = cardCanyon;
+        BufferedImage image = null;
         if (terrain.equals("canyon")) {
             image = cardCanyon;
         } else if (terrain.equals("desert")) {
             image = cardDesert;
-        } else if (terrain.equals("meadow")) {
+        } else if (terrain.equals("grass")) {
             image = cardMeadow;
         } else if (terrain.equals("flower")) {
             image = cardFlower;
@@ -788,7 +788,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     }
                 }
             case chooseSettlement:
-            
+
             case gameOver:
                 break;
 
