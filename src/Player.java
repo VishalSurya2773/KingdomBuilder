@@ -9,6 +9,7 @@ public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
     private ArrayList<Settlement> stored;
+    private Hex placeOn;
     public Card terrainCard; // the card the player has on the current turn
     private int score;
     private boolean isFirst;
@@ -32,7 +33,12 @@ public class Player {
     public void setPlayerNum(int pNum) {
         pNumber = pNum;
     }
-
+    public void setPlaceOn(Hex h){
+        placeOn = h;
+    }
+    public Hex getPlaceOn(){
+        return placeOn;
+    }
     public int getPlayerNum() {
         return pNumber;
     }
@@ -48,40 +54,22 @@ public class Player {
     }
 
     public void placeSettlement(Settlement s, Hex h, Card chosenCard) {
-        if (canPlace(s, h, chosenCard)) {
-            // need to finish
-            // places it logically on the board
-            // then place it graphically on the board
-            h.setSettlement(s);
-        }
+        
     }
 
-    public boolean canPlace(Settlement s, Hex h, Card chosenCard) { // h is the hex the player clicked on, chosenCard is
+    public boolean canPlace(Hex h, ArrayList<Hex> poss) { // h is the hex the player clicked on, chosenCard is
                                                                     // the terraincard the person chose, idk what s is
                                                                     // but wed can remove it if it's unnecessary
         // checks if the player can place a settlement there
         // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
         // // check possible adjacency
-
-        ArrayList<Hex> possible = new ArrayList<Hex>();
-        boolean empty = true;
-        for (int i = 0; i < placed.size(); i++) {
-            if (placed.get(i).placedOn().getTerrain().equals(chosenCard.getTerrain())) { // make sure that the arraylist
-                                                                                         // of possible hexes doesnt
-                                                                                         // contain already occupied
-                                                                                         // hexes
-                Hex[] hexes = placed.get(i).placedOn().adjacents();
-                for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j].getTerrain().equals(chosenCard.getTerrain()) && hexes[j].getAvail()) {
-                        possible.add(hexes[j]);
-                    }
-                }
+        boolean ans = false;
+        for(int i = 0; i < poss.size(); i++){
+            if(poss.get(i).equals(h)){
+                return true;
             }
         }
-        for (int i = 0; i < possible.size(); i++) {
-            if (possible.get(i).equals(h))
-                return true;
-        }
+        
         return false;
     }
 
@@ -232,12 +220,14 @@ public class Player {
 
     public void barnAction(Game g) {
         Settlement s = getSettlementFromStore(g);
-        if (canPlace(s, chosenTerrainHex(), terrainCard)) {
+        /*
+        if (canPlace(s, chosenTerrainHex(), terrainCard)) { // error cuz parameters - fix later
             placeSettlement(s, chosenTerrainHex(), terrainCard);
             System.out.println("Success");
         } else {
             System.out.println("failed");
         }
+        */
         return;
 
     }
