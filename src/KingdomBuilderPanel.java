@@ -190,7 +190,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 g.drawString("Select a settlement or token to play", 720, 20);
             case turnStart:
                 // System.out.println("turnStart GameState");
-                // if(players.get(game.getTurn() - 1).terrainCard.getTerrain() == null) System.out.println("NULL TERRAIN CARD");
+                if(players.get(game.getTurn() - 1).terrainCard.getTerrain() == null) System.out.println("NULL TERRAIN CARD");
                 drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
@@ -508,7 +508,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         ArrayList<Hex> possibleChoices = new ArrayList<>();
         possibleChoices = p.getPossible(b);
         // System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
-        possibleChoices.add(board[0][0]);
         for (int i = 0; i < possibleChoices.size(); i++) {
             int[] xPoints = possibleChoices.get(i).getXPoints();
             int[] yPoints = possibleChoices.get(i).getYPoints();
