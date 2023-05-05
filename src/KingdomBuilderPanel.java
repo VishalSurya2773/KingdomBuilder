@@ -189,13 +189,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // System.out.println("showCard GameState");
                 g.drawString("Select a settlement or token to play", 720, 20);
             case turnStart:
+                System.out.println("Game turn: " + game.getTurn());
+                System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");
-                // if(players.get(game.getTurn() - 1).terrainCard.getTerrain() == null) System.out.println("NULL TERRAIN CARD");
-                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
+                // if(players.get(game.getTurn() - 1).terrainCard.getTerrain() == null)
+                // System.out.println("NULL TERRAIN CARD");
+                System.out.println("curr player terrain: " + currentPlayer.terrainCard.getTerrain());
+                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
-                //drawMetasettlement(g);
+                // drawMetasettlement(g);
                 // game.nextTurn();
                 // gameStates = GameStates.showCard; // next turn
 
@@ -515,7 +519,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             // System.out.println("RAN");
             // System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " "+
             // XCoord + " " + YCoord);
-            
+
             g.setColor(Color.RED);
             g.drawPolygon(xPoints, yPoints, 6);
         }
@@ -523,12 +527,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     public void drawPlayerCard(Graphics g, String terrain, int pNum) {
         drawBackCards(g);
-        BufferedImage image = cardCanyon;
+        BufferedImage image = null;
         if (terrain.equals("canyon")) {
             image = cardCanyon;
         } else if (terrain.equals("desert")) {
             image = cardDesert;
-        } else if (terrain.equals("meadow")) {
+        } else if (terrain.equals("grass")) {
             image = cardMeadow;
         } else if (terrain.equals("flower")) {
             image = cardFlower;

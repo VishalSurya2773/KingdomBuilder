@@ -64,14 +64,15 @@ public class Game {
         setObjectives(); // fills objective arraylist and draws 3 random objective cards (Make sure to
                          // display them later)
         // startGame();
-        initializeTurn();
+        // initializeTurn();
     }
 
     public void initializeTurn() {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getOrder() == 1)
-                turn = i;
-        }
+        turn = players.get(0).getOrder();
+        // for (int i = 0; i < players.size(); i++) {
+        // if (players.get(i).getOrder() == 1)
+        // turn = i;
+        // }
     }
 
     public int getTurn() {
