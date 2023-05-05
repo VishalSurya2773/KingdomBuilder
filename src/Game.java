@@ -12,7 +12,7 @@ public class Game {
     private int playerIndex; // used when doing the turns (should be randomized on the first turn)
     int amtOfSettlements;
     public static Board gameBoard;
-    public int turn = 0;
+    public int turn = 1;
 
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
@@ -54,6 +54,7 @@ public class Game {
             deck.add(new Card("canyon"));
             deck.add(new Card("desert"));
         }
+        System.out.println("DECK SIZE: " + deck.size());
         Collections.shuffle(deck);
         Collections.shuffle(objDeck);
         playerIndex = (int) Math.random() * 3;
@@ -79,7 +80,8 @@ public class Game {
 
     public void nextTurn() {
         turn++;
-        turn %= 4;
+        turn %= 5;
+        if(turn == 0) turn = 1;
     }
 
     public ArrayList<ObjectiveCard> getObjDeck() {
@@ -176,13 +178,13 @@ public class Game {
         players.get(0).setFirst();
     }
 
-    public int nextPlayer(int p) {
-        if (p < 4) {
-            return p++;
-        } else {
-            return 1;
-        }
-    }
+    // public int nextPlayer(int p) {
+    //     if (p < 4) {
+    //         return p++;
+    //     } else {
+    //         return 1;
+    //     }
+    // }
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
 
