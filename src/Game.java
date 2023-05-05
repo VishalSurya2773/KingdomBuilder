@@ -81,7 +81,8 @@ public class Game {
     public void nextTurn() {
         turn++;
         turn %= 5;
-        if(turn == 0) turn = 1;
+        if (turn == 0)
+            turn = 1;
     }
 
     public ArrayList<ObjectiveCard> getObjDeck() {
@@ -89,9 +90,12 @@ public class Game {
     }
 
     public void getObjectives() {
-        for (int i = 0; i < 3; i++) {
-            objectives.add(objDeck.get(i));
-        }
+        objectives.add(new ObjectiveCard("miner"));
+        objectives.add(new ObjectiveCard("fisherman"));
+        objectives.add(new ObjectiveCard("knight"));
+        // for (int i = 0; i < 3; i++) {
+        // objectives.add(objDeck.get(i));
+        // }
     }
 
     public void fillObjectiveDeck() {
@@ -179,11 +183,11 @@ public class Game {
     }
 
     // public int nextPlayer(int p) {
-    //     if (p < 4) {
-    //         return p++;
-    //     } else {
-    //         return 1;
-    //     }
+    // if (p < 4) {
+    // return p++;
+    // } else {
+    // return 1;
+    // }
     // }
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
