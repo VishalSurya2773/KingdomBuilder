@@ -113,6 +113,7 @@ public class Player {
                 }
             }
         }
+        System.out.println("POSSIBLE SIZE: " + possible.size());
         return possible;
     }
 
