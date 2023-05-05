@@ -27,7 +27,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             b3, b4, b5, b6, b7, b8, firstToken, b_confirm, citizen, discoverer, farmer, fisherman, hermit, knight, lord,
             merchant, miner, worker, settleBlue,
             settleGreen, settleOrange, settlePurple, settleRed, settleYellow, cardBack, cardCanyon, cardDesert,
-            cardFlower, cardForest, cardMeadow, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
+            cardFlower, cardForest, cardGrass, sumBarn, sumFarm, sumHarbor, sumOasis, sumOracle, sumPaddock, sumTavern,
             sumTower, revSumBarn, revSumFarm, revSumHarbor, revSumOasis, revSumOracle, revSumPaddock, revSumTavern,
             revSumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
@@ -92,7 +92,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             cardDesert = ImageIO.read(KingdomBuilderPanel.class.getResource("images/KB-Card-Desert.png"));
             cardFlower = ImageIO.read(KingdomBuilderPanel.class.getResource("images/KB-Card-Flower.png"));
             cardForest = ImageIO.read(KingdomBuilderPanel.class.getResource("images/KB-Card-Forest.png"));
-            cardMeadow = ImageIO.read(KingdomBuilderPanel.class.getResource("images/KB-Card-Meadow.png"));
+            cardGrass = ImageIO.read(KingdomBuilderPanel.class.getResource("images/KB-Card-Grass.png"));
             // summary tiles
             sumBarn = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_barn.png"));
             sumFarm = ImageIO.read(KingdomBuilderPanel.class.getResource("images/summary_farm.png"));
@@ -125,7 +125,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             GameStates gameStates = GameStates.startGame;
 
         } catch (Exception e) {
-            System.out.println("failure");
+            System.out.println("images failure");
         }
 
         numPlayers = 4;
@@ -312,8 +312,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void drawFirstPlayerToken(Graphics g) {
-        // players = game.players;
-        // if(players.size() == 0){System.out.println("PLAYER LIST IS 0"); return;}
+        if (game.players == null) {
+            System.out.println("game players is null");
+        }
         int firstPlayer = 0;
         for (Player i : game.players) {
             if (i.isFirst()) {
@@ -401,12 +402,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     public void drawSpecialCard(Graphics g) throws IOException {
         try {
-            ObjectiveDeck = game.getObjDeck();
+            ObjectiveDeck = game.getObjectives();
             ObjectiveCard c1 = ObjectiveDeck.get(0);
             ObjectiveCard c2 = ObjectiveDeck.get(1);
             ObjectiveCard c3 = ObjectiveDeck.get(2);
-            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null); // coordinates are just placeholders rn
-            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null); // coordinates are just placeholders rn
+            g.drawImage(c1.getImage(c1.getType()), 745, 835, 160, 225, null);
+            g.drawImage(c2.getImage(c2.getType()), 887, 835, 160, 225, null);
             g.drawImage(c3.getImage(c3.getType()), 1027, 835, 160, 225, null);
         } catch (Exception E) {
             System.out.println("error on special card");
@@ -445,6 +446,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     public void drawPlayerTokens(Graphics g) {
         // almost complete
+        if (game.players == null) {
+            System.out.println("game players is null");
+        }
         ArrayList<Player> players = game.players;
         int currX = 0;
         int currY = 85;
@@ -514,9 +518,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             // System.out.println("RAN");
             // System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " "+
             // XCoord + " " + YCoord);
-
-            g.setColor(Color.RED);
+            Color brRed = new Color(255, 45, 0);
+            g.setColor(brRed);
             g.drawPolygon(xPoints, yPoints, 6);
+
         }
     }
 
@@ -528,7 +533,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         } else if (terrain.equals("desert")) {
             image = cardDesert;
         } else if (terrain.equals("grass")) {
-            image = cardMeadow;
+            image = cardGrass;
         } else if (terrain.equals("flower")) {
             image = cardFlower;
         } else if (terrain.equals("forest")) {

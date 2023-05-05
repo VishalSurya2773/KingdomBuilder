@@ -12,7 +12,7 @@ public class Board {
     public Board() {
         Graph = new Hex[20][40];
         map = new TreeMap<Integer, String>();
-        map.put(0, ("sand"));
+        map.put(0, ("desert"));
         map.put(1, ("canyon"));
         map.put(2, ("mountain"));
         map.put(3, ("flower"));
@@ -72,7 +72,7 @@ public class Board {
         int scoordX = 582; // for odd rows
 
         int changeX = 40;
-        int changeY = 36;
+        int changeY = 35;
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {
