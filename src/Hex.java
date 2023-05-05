@@ -187,7 +187,21 @@ public class Hex {
     }
     public boolean isClicked(int mouseX, int mouseY){
         // if() // stuff
-        return false;
+        int intersections = 0;
+
+        for (int i = 0; i < xPoints.length; i++) {
+            double x1 = xPoints[i];
+            double y1 = yPoints[i];
+            double x2 = xPoints[(i + 1) % xPoints.length];
+            double y2 = yPoints[(i + 1) % yPoints.length];
+
+            if (((y1 > mouseY) != (y2 > mouseY))
+                    && (mouseX < (x2 - x1) * (mouseY - y1) / (y2 - y1) + x1)) {
+                intersections++;
+            }
+        }
+
+        return (intersections % 2 != 0);
     }
 
 }
