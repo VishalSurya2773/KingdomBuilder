@@ -245,8 +245,10 @@ public class Board {
         }
         for(int r = 0; r < 20; r++){
             for(int c = 0; c < 40; c++){
-                if(Graph[r][c].getTerrain().equals("blank")){
-                    Graph[r][c].setAdjacent(Graph);
+                if(!Graph[r][c].getTerrain().equals("blank")){
+                    Graph[r][c].setAdjacent(r, c, Graph);
+                    Graph[r][c].setAvail(true);
+                    // Graph[r][c].printAdjacent();
                 }
             }
         }

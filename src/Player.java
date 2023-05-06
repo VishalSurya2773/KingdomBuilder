@@ -84,14 +84,15 @@ public class Player {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
                 System.out.println("Possible Hexes: ");
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
-                
+
                 for(int j = 0; j < hexes.length; j++){
                     if(hexes[j] == null) System.out.print(" Null, ");
                     else System.out.print(hexes[j].getTerrain() + ", ");
                 }
 
                 for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j] != null && hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
+                    System.out.print(hexes[j].getAvail() + " ");
+                    if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
                         System.out.println("POSS HEX UPDATED");
                         empty = false;

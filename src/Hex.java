@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class Hex {
     public Hex left, right, topLeft, topRight, bottomLeft, bottomRight;
     private int x, y;
@@ -67,63 +69,37 @@ public class Hex {
     public boolean getAvail() {
         return isAvail;
     }
-
-    public void setAdjacent(Hex[][] board) {
+    public boolean isValid(int r, int c){
+        if(r < 0 || c < 0 || r >= 20 || c >= 40) return false;
+        return true;
+    }
+    public void setAdjacent(int i, int j, Hex[][] board) {
         /*
          * OXOXOX
          * XOXOXO
          */
-
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 40; j++) {
-                if (x == (board[i][j].getCenterX()) && y == board[i][j].getCenterY()) { // to check if it's the same hex
-
-                    if (i == 0) {
-                        topLeft = null;
-                        topRight = null;
-                    }
-                    if (j == 0) {
-                        left = null;
-                        topLeft = null;
-                        bottomLeft = null;
-                    }
-                    if (i == 39) {
-                        bottomLeft = null;
-                        bottomRight = null;
-                    }
-                    if (j == 39) {
-                        right = null;
-                        topRight = null;
-                        bottomRight = null;
-                    }
-
-                    if (left != null) {
-                        left = board[i][j - 2];
-                    }
-                    if (right != null) {
-                        right = board[i][j + 2];
-                    }
-                    if (topLeft != null) {
-                        topLeft = board[i - 1][j - 1];
-                    }
-                    if (topRight != null) {
-                        topRight = board[i - 1][j + 1];
-                    }
-                    if (bottomLeft != null) {
-                        bottomLeft = board[i + 1][j - 1];
-                    }
-                    if (bottomRight != null) {
-                        bottomRight = board[i + 1][j + 1];
-                    }
-                    return;
-                }
-            }
-        }
+        if(isValid(i, j - 2)) left = board[i][j - 2];
+                
+        if(isValid(i, j + 2)) right = board[i][j + 2];
+                    
+        if(isValid(i - 1, j - 1)) topLeft = board[i - 1][j - 1];
+                    
+        if(isValid(i - 1, j + 1)) topRight = board[i - 1][j + 1];
+                    
+        if(isValid(i + 1, j - 1)) bottomLeft = board[i + 1][j - 1];
+                    
+        if(isValid(i + 1, j + 1)) bottomRight = board[i + 1][j + 1];
+                    
+        
     }
 
     public Hex[] adjacents() {
         Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
         return out;
+    }
+    public void printAdjacent(){
+        Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
+        System.out.println(Arrays.toString(out));
     }
 
     public Hex returnDirection(String dir) {
