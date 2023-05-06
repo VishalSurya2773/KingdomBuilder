@@ -4,5 +4,7 @@ enum GameStates {
     showCard,
     turnStart,
     chooseSettlement,
+    chooseSettlement2,
+    chooseSettlement3,
     gameOver
 }

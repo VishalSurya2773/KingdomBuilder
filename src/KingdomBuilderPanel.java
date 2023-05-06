@@ -230,6 +230,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
                 clearDrawnPolygons(g); // clears the polygons after player chooses hex - the shown polygons will no longer be applicable bc we have to redo possible polygons
                 // System.out.println("chooseSettlement GameState");
+                break;
+            case chooseSettlement2:
         }
 
     }
