@@ -590,7 +590,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     public void drawSettlement(Player p, Graphics g, Hex h) {
         // Hex h = p.findHex(cx, cy, game);
         if (h != null) {
-            BufferedImage setimg = new BufferedImage(getColorModel(), null, gamePhase, null);
+            BufferedImage setimg = null;
             try {
                 if (p.getColor().equals("Blue")) {
                     setimg = settleBlue;
@@ -608,7 +608,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             } catch (Exception e) {
                 System.out.println("error");
             }
-            g.drawImage(setimg, h.getCenterX(), h.getCenterY(), null);
+            g.drawImage(setimg, h.getCenterX(), h.getCenterY(), 30, 30, null);
             h.setSettlement(p.getSettlementFromStore(game));
         }
     }
@@ -706,22 +706,15 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
             case turnStart:
                 System.out.println("turnstart gamestate");
-                if(currentPlayer.useToken){
-                    for(int i = 0; i < possibleChoices.size(); i++){
-                        if(possibleChoices.get(i).isClicked(clickedX, clickedY)){
-                            gameStates = GameStates.chooseSettlement;
-                            System.out.println("CHOOSE SETTLEMENT GAMESTATE");
-                        }
-                    }
-                }
-                else{
+                
 
                 if (game.getTurn() == 1) {
-                    if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120) { // settlement button
-                        System.out.println("p1 use settlement");
-                        currentPlayer.placeSettle = true;
-                        directions = "Choose hex to place settlement in";
-                    } else if (clickedX > 0 && clickedX < 320 && clickedY > 80 && clickedY < 430
+                    // if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120) { // settlement button
+                    //     System.out.println("p1 use settlement");
+                    //     currentPlayer.placeSettle = true;
+                    //     directions = "Choose hex to place settlement in";
+                    // } else 
+                    if (clickedX > 0 && clickedX < 320 && clickedY > 80 && clickedY < 430
                             && currentPlayer.getHand().size() > 0) { // token area
                         System.out.println("p1 uses token");
                         currentPlayer.useToken = true;
@@ -744,12 +737,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                         directions = "Choose settlement in hand or board to play action tile";
                     }
-                } else if (game.getTurn() == 2) {
-                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120) {
-                        System.out.println("p2 use settlement");
+                    else{ // settlement button
+                        System.out.println("p1 use settlement");
                         currentPlayer.placeSettle = true;
                         directions = "Choose hex to place settlement in";
-                    } else if (clickedX > 1620 && clickedX < 1900 && clickedY > 80 && clickedY < 430) {
+                    }
+                } else if (game.getTurn() == 2) {
+                    // if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120) {
+                    //     System.out.println("p2 use settlement");
+                    //     currentPlayer.placeSettle = true;
+                    //     directions = "Choose hex to place settlement in";
+                    // } else 
+                    if (clickedX > 1620 && clickedX < 1900 && clickedY > 80 && clickedY < 430) {
                         System.out.println("p2 uses token");
                         currentPlayer.useToken = true;
                         // check each individual square in the box 310 x350
@@ -771,12 +770,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                         directions = "Choose settlement in hand or board to play action tile";
                     }
-                } else if (game.getTurn() == 3) {
-                    if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520) {
-                        System.out.println("p3 use settlement");
+                    else{
+                        System.out.println("p2 use settlement");
                         currentPlayer.placeSettle = true;
                         directions = "Choose hex to place settlement in";
-                    } else if (clickedX > 1620 && clickedX < 1900 && clickedY > 500 && clickedY < 850) {
+                    }
+                } else if (game.getTurn() == 3) {
+                    // if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520) {
+                    //     System.out.println("p3 use settlement");
+                    //     currentPlayer.placeSettle = true;
+                    //     directions = "Choose hex to place settlement in";
+                    // } else 
+                    if (clickedX > 1620 && clickedX < 1900 && clickedY > 500 && clickedY < 850) {
                         System.out.println("p3 uses token");
                         currentPlayer.useToken = true;
                         // check each individual square in the box 310 x350
@@ -798,12 +803,18 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                         directions = "Choose settlement in hand or board to play action tile";
                     }
-                } else if (game.getTurn() == 4) {
-                    if (clickedX > 300 && clickedX < 400 && clickedY > 420 && clickedY < 520) {
-                        System.out.println("p4 use settlement");
+                    else{
+                        System.out.println("p3 use settlement");
                         currentPlayer.placeSettle = true;
                         directions = "Choose hex to place settlement in";
-                    } else if (clickedX > 5 && clickedX < 315 && clickedY > 500 && clickedY < 850) {
+                    }
+                } else if (game.getTurn() == 4) {
+                    // if (clickedX > 300 && clickedX < 400 && clickedY > 420 && clickedY < 520) {
+                    //     System.out.println("p4 use settlement");
+                    //     currentPlayer.placeSettle = true;
+                    //     directions = "Choose hex to place settlement in";
+                    // } else 
+                    if (clickedX > 5 && clickedX < 315 && clickedY > 500 && clickedY < 850) {
                         System.out.println("p4 uses token");
                         currentPlayer.useToken = true;
                         // check each individual square in the box 310 x350x
@@ -825,6 +836,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                         directions = "Choose settlement in hand or board to play action tile";
                     }
+                    else{
+                        System.out.println("p4 use settlement");
+                        currentPlayer.placeSettle = true;
+                        directions = "Choose hex to place settlement in";
+                    }
                 }
                 if (clickedX > 0 && clickedX < 108 && clickedY > 726 && clickedY < 834) { // confirmation button
                     System.out.println("conf_b clicked");
@@ -836,7 +852,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         gameStates = gameStates.gameOver;
                     }
                 }
-                break;
+                // break;
+                if(currentPlayer.placeSettle){
+                    for(int i = 0; i < possibleChoices.size(); i++){
+                        if(possibleChoices.get(i).isClicked(clickedX, clickedY)){
+                            gameStates = GameStates.chooseSettlement;
+                            currentPlayer.setPlaceOn(possibleChoices.get(i));
+                            System.out.println("CHOOSE SETTLEMENT GAMESTATE");
+                        }
+                    }
+                }
             case chooseSettlement:
                 
 
