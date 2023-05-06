@@ -68,16 +68,15 @@ public class Hex {
         return isAvail;
     }
 
-    public void setAdjacent() {
+    public void setAdjacent(Hex[][] board) {
         /*
          * OXOXOX
          * XOXOXO
          */
 
-        Hex[][] board = Game.gameBoard.getGraph();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (this.compareTo(board[i][j]) == 0) { // to check if it's the same hex
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 40; j++) {
+                if (x == (board[i][j].getCenterX()) && y == board[i][j].getCenterY()) { // to check if it's the same hex
 
                     if (i == 0) {
                         topLeft = null;
@@ -116,8 +115,7 @@ public class Hex {
                     if (bottomRight != null) {
                         bottomRight = board[i + 1][j + 1];
                     }
-
-                    break;
+                    return;
                 }
             }
         }

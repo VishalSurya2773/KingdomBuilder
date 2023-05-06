@@ -8,7 +8,8 @@ import java.util.*;
 public class Player {
     private ArrayList<SpecialHex> hand;
     private ArrayList<Settlement> placed; // placed settlements
-    private ArrayList<Settlement> stored;
+    // private ArrayList<Settlement> stored;
+    private int stored;
     private Hex placeOn;
     public Card terrainCard; // the card the player has on the current turn
     private int score;
@@ -23,8 +24,9 @@ public class Player {
     public Player(boolean first, String clr, int pNum) {
         isFirst = first;
         color = clr;
-        stored = new ArrayList<Settlement>();
-        fillStored();
+        // stored = new ArrayList<Settlement>();
+        stored = 40;
+        // fillStored();
         order = pNum;
         hand = new ArrayList<>();
         placed = new ArrayList<>();
@@ -36,6 +38,7 @@ public class Player {
     public void setPlaceOn(Hex h){
         placeOn = h;
         placed.add(new Settlement(this, placeOn));
+        stored--;
     }
     public Hex getPlaceOn(){
         return placeOn;
@@ -44,18 +47,16 @@ public class Player {
         return pNumber;
     }
 
+    /*
     public void fillStored() {
         for (int i = 0; i < 40; i++) {
             stored.add(new Settlement(this));
         }
     }
+    */
 
     public void setFirst() {
         isFirst = true;
-    }
-
-    public void placeSettlement(Settlement s, Hex h, Card chosenCard) {
-        
     }
 
     public boolean canPlace(Hex h, ArrayList<Hex> poss) { // h is the hex the player clicked on, chosenCard is
@@ -81,11 +82,18 @@ public class Player {
         for (int i = 0; i < placed.size(); i++) {
             if (placed.get(i).placedOn().getTerrain().equals(terrainCard.getTerrain())) {
                 // make sure that the of possible hexes doesnt contain already occupied hexes
+                System.out.println("Possible Hexes: ");
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
+                
+                for(int j = 0; j < hexes.length; j++){
+                    if(hexes[j] == null) System.out.print(" Null, ");
+                    else System.out.print(hexes[j].getTerrain() + ", ");
+                }
+
                 for (int j = 0; j < hexes.length; j++) {
-                    if (hexes[j] != null && hexes[j].getTerrain().equals(terrainCard.getTerrain())
-                            && hexes[j].getAvail()) {
+                    if (hexes[j] != null && hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         possible.add(hexes[j]);
+                        System.out.println("POSS HEX UPDATED");
                         empty = false;
                     }
                 }
@@ -111,6 +119,7 @@ public class Player {
         return placed.get(0);
     }
 
+    /* 
     public Settlement getSettlementFromStore(Game g) {
         if (stored.size() > 0) {
             return stored.remove(0);
@@ -118,6 +127,7 @@ public class Player {
         g.gameOver = true;
         return null;
     }
+    */
 
     public boolean isFirst() {
         return isFirst;
@@ -128,7 +138,7 @@ public class Player {
     }
 
     public int numSettlements() {
-        return stored.size();
+        return stored;
     }
 
     public int getOrder() {
@@ -220,7 +230,7 @@ public class Player {
     }
 
     public void barnAction(Game g) {
-        Settlement s = getSettlementFromStore(g);
+        // Settlement s = getSettlementFromStore(g);
         /*
         if (canPlace(s, chosenTerrainHex(), terrainCard)) { // error cuz parameters - fix later
             placeSettlement(s, chosenTerrainHex(), terrainCard);
@@ -271,7 +281,7 @@ public class Player {
     }
 
     public void farmAction(Hex h, Game g) {
-        h.setSettlement(getSettlementFromStore(g));
+        // h.setSettlement(getSettlementFromStore(g));
         return;
     }
 
@@ -389,8 +399,8 @@ public class Player {
     }
 
     public void oasisAction(Hex h, Game g) {
-        Settlement s = getSettlementFromStore(g);
-        h.setSettlement(s);
+        // Settlement s = getSettlementFromStore(g);
+        // h.setSettlement(s);
         return;
     }
 
@@ -434,14 +444,14 @@ public class Player {
     }
 
     public void oracleAction(Hex h, Game g) {
-        Settlement s = getSettlementFromStore(g);
-        h.setSettlement(s);
+        // Settlement s = getSettlementFromStore(g);
+        // h.setSettlement(s);
         return;
 
     }
 
     public boolean tav(int r, int c) {
-
+        /*
         if (Game.gameBoard.getGraph()[r][c].isEmpty()
                 && Game.gameBoard.getGraph()[r][c - 1].getSettlement().equals(stored.get(0))
                 && Game.gameBoard.getGraph()[r][c - 2].getSettlement().equals(stored.get(0))
@@ -454,6 +464,8 @@ public class Player {
                 && Game.gameBoard.getGraph()[r][c + 3].getSettlement().equals(stored.get(0))) {
             return true;
         }
+         */
+        
         return false;
         /*
          * if (Game.gameBoard.getGraph()[r][c].isEmpty()) {
@@ -478,8 +490,8 @@ public class Player {
     }
 
     public void tavernAction(Hex h, Game g) {
-        Settlement s = getSettlementFromStore(g);
-        h.setSettlement(s);
+        // Settlement s = getSettlementFromStore(g);
+        // h.setSettlement(s);
         return;
     }
 
@@ -537,8 +549,8 @@ public class Player {
     }
 
     public void towerAction(Hex h, Game g) {
-        Settlement s = this.getSettlementFromStore(g);
-        h.setSettlement(s);
+        // Settlement s = this.getSettlementFromStore(g);
+        // h.setSettlement(s);
         return;
 
     }

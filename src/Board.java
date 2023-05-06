@@ -243,23 +243,13 @@ public class Board {
                 }
             }
         }
-        // int nulls = 0;
-        // int blanks = 0;
-        // for (int i = 0; i < 20; i++) {
-        // for (int j = 0; j < 40; j++) {
-        // Graph[i][j].setAdjacent();
-        // if (Graph[i][j] == null) {
-        // System.out.println(i + ", " + j + ": N");
-        // nulls++;
-
-        // } else if (Graph[i][j].getTerrain().equals("blank")) {
-        // blanks++;
-        // }
-        // }
-        // }
-        // printGraph();
-        // System.out.println("Null " + nulls);
-        // System.out.println("Blanks " + blanks);
+        for(int r = 0; r < 20; r++){
+            for(int c = 0; c < 40; c++){
+                if(Graph[r][c].getTerrain().equals("blank")){
+                    Graph[r][c].setAdjacent(Graph);
+                }
+            }
+        }
     }
 
     public Hex[][] getGraph() {

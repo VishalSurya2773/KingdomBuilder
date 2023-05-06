@@ -180,6 +180,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawAmtSettle(g);
                 drawDeck(g);
                 drawBoard(g);
+                drawPolygonOutlineForAll(g);
                 drawFirstPlayerToken(g);
                 drawPlayerTokens(g);
                 drawSumActionTiles(g);
@@ -230,8 +231,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
                 clearDrawnPolygons(g); // clears the polygons after player chooses hex - the shown polygons will no longer be applicable bc we have to redo possible polygons
                 // System.out.println("chooseSettlement GameState");
+                drawPossibleHexOutline(g, currentPlayer);
                 break;
             case chooseSettlement2:
+                drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
+                clearDrawnPolygons(g);
+                drawPossibleHexOutline(g, currentPlayer);
+                break;
+            case chooseSettlement3:
+                drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
+                clearDrawnPolygons(g);
         }
 
     }
@@ -524,7 +533,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             }
         }
     }
-
+    public void drawPolygonOutlineForAll(Graphics g){
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 40; j++){
+                if(board[i][j].getTerrain().equals("blank")) continue;
+                int[] xPoints = board[i][j].getXPoints();
+                int[] yPoints = board[i][j].getYPoints();
+                g.setColor(Color.BLACK);
+                g.drawPolygon(xPoints, yPoints, 6);
+            }
+        }
+    }
     public void drawPossibleHexOutline(Graphics g, Player p) { // placed = 0 for some of them - remember to fix
         // Hex1 - center: 567 149
         /*
@@ -561,6 +580,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
     public void clearDrawnPolygons(Graphics g){
 
+        for (int i = 0; i < possibleChoices.size(); i++) {
+            int[] xPoints = possibleChoices.get(i).getXPoints();
+            int[] yPoints = possibleChoices.get(i).getYPoints();
+            // System.out.println("RAN");
+            // System.out.println("TERRAIN: " + possibleChoices.get(i).getTerrain() + " "+
+            // XCoord + " " + YCoord);   
+            g.setColor(Color.BLACK);         
+            g.drawPolygon(xPoints, yPoints, 6);
+        }
+            
     }
     public void drawPlayerCard(Graphics g, String terrain, int pNum) {
         drawBackCards(g);
@@ -624,7 +653,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 System.out.println("error");
             }
             g.drawImage(setimg, h.getCenterX() - 15, h.getCenterY() - 15, 30, 30, null);
-            h.setSettlement(p.getSettlementFromStore(game));
+            // h.setSettlement(p.getSettlementFromStore(game));
         }
     }
 
@@ -873,13 +902,35 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         if(possibleChoices.get(i).isClicked(clickedX, clickedY)){
                             gameStates = GameStates.chooseSettlement;
                             currentPlayer.setPlaceOn(possibleChoices.get(i));
+                            possibleChoices.get(i).setAvail(false);
                             System.out.println("CHOOSE SETTLEMENT GAMESTATE");
                         }
                     }
                 }
+                break;
             case chooseSettlement:
-                
-
+                for(int i = 0; i < possibleChoices.size(); i++){
+                    if(possibleChoices.get(i).isClicked(clickedX, clickedY)){
+                        gameStates = GameStates.chooseSettlement2;
+                        currentPlayer.setPlaceOn(possibleChoices.get(i));
+                        possibleChoices.get(i).setAvail(false);
+                        System.out.println("CHOOSE SETTLEMENT2 GAMESTATE");
+                    }
+                }
+                break;
+            case chooseSettlement2:
+                for(int i = 0; i < possibleChoices.size(); i++){
+                    if(possibleChoices.get(i).isClicked(clickedX, clickedY)){
+                        gameStates = GameStates.chooseSettlement3;
+                        currentPlayer.setPlaceOn(possibleChoices.get(i));
+                        possibleChoices.get(i).setAvail(false);
+                        System.out.println("CHOOSE SETTLEMENT3 GAMESTATE");
+                    }
+                }
+                break;
+            case chooseSettlement3:
+                // implement if the player clicks the confirm button
+                break;
             case gameOver:
                 break;
 
