@@ -19,9 +19,13 @@ public class Settlement {
         board = b;
         hexes = board.Graph;
     }
-
-    public Settlement(Player player) {
+    public Settlement(Player player){
         p = player;
+        color = player.getColor();
+    }
+    public Settlement(Player player, Hex h) {
+        p = player;
+        placedOn = h;
         color = player.getColor();
     }
 

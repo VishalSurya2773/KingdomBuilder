@@ -71,8 +71,8 @@ public class Board {
 
         int scoordX = 582; // for odd rows
 
-        int changeX = 40;
-        int changeY = 36;
+        int changeX = 41;
+        int changeY = 35;
 
         for (int r = 0; r < Graph.length; r++) {
             for (int c = 0; c < Graph[r].length; c++) {

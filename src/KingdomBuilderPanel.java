@@ -215,8 +215,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");
                 // g.setColor(COLOR.WHITE);
-                if (currentPlayer.terrainCard.getTerrain() == null)
-                    System.out.println("NULL TERRAIN CARD");
+                // if (currentPlayer.terrainCard.getTerrain() == null)
+                //     System.out.println("NULL TERRAIN CARD");
                 drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), currentPlayer.getOrder());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
@@ -228,6 +228,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
             case chooseSettlement:
                 drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
+                clearDrawnPolygons(g); // clears the polygons after player chooses hex - the shown polygons will no longer be applicable bc we have to redo possible polygons
                 // System.out.println("chooseSettlement GameState");
         }
 
@@ -246,26 +247,26 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
         int[] nums = b.getNumbers();
-        int[] currX = { 543, 946, 543, 946 };
+        int[] currX = { 543, 952, 543, 952 };
         int[] currY = { 130, 130, 482, 482 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
             if (nums[i] == 1) {
-                g.drawImage(b1, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b1, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 2) {
-                g.drawImage(b2, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b2, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 3) {
-                g.drawImage(b3, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b3, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 4) {
-                g.drawImage(b4, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b4, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 5) {
-                g.drawImage(b5, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b5, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 6) {
-                g.drawImage(b6, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b6, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 7) {
-                g.drawImage(b7, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b7, currX[i], currY[i], 430, 363, null);
             } else if (nums[i] == 8) {
-                g.drawImage(b8, currX[i], currY[i], 426, 363, null);
+                g.drawImage(b8, currX[i], currY[i], 430, 363, null);
             }
         }
     }
@@ -533,6 +534,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
          * 650 283
          */
         possibleChoices = p.getPossible(b);
+        
+        /* (FOR TESTING)
+        for(int i = 0; i < 20; i++){
+            for(int j = 0; j < 40; j++){
+                if(board[i][j].getTerrain().equals("blank")) continue;
+                possibleChoices.add(board[i][j]);
+            }
+        }
+        */
+
         // System.out.println("POSSIBLE CHOICES " + possibleChoices.size());
         for (int i = 0; i < possibleChoices.size(); i++) {
             int[] xPoints = possibleChoices.get(i).getXPoints();
@@ -546,7 +557,9 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
         }
     }
+    public void clearDrawnPolygons(Graphics g){
 
+    }
     public void drawPlayerCard(Graphics g, String terrain, int pNum) {
         drawBackCards(g);
         BufferedImage image = null;
@@ -608,7 +621,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             } catch (Exception e) {
                 System.out.println("error");
             }
-            g.drawImage(setimg, h.getCenterX(), h.getCenterY(), 30, 30, null);
+            g.drawImage(setimg, h.getCenterX() - 15, h.getCenterY() - 15, 30, 30, null);
             h.setSettlement(p.getSettlementFromStore(game));
         }
     }

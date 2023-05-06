@@ -35,6 +35,7 @@ public class Player {
     }
     public void setPlaceOn(Hex h){
         placeOn = h;
+        placed.add(new Settlement(this, placeOn));
     }
     public Hex getPlaceOn(){
         return placeOn;
