@@ -8,7 +8,7 @@ public class Board {
     private TreeMap<Integer, String> map;
     private ArrayList<Scanner> boardScanners;
     public static int[] numbers, boards;
-
+    private String[] boardStrings;
     public Board() {
         Graph = new Hex[20][40];
         map = new TreeMap<Integer, String>();
@@ -30,42 +30,68 @@ public class Board {
         map.put(15, ("oasis"));
         boardScanners = new ArrayList<Scanner>();
         numbers = new int[4];
+        boardStrings = new String[8];
+        String board1 = "1 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 1 0 2 2 2 0 2 2 11 0 0 1 1 2 2 2 2 2 3 3 1 1 1 1 1 2 2 5 3 3 3 1 6 1 1 1 2 3 3 5 4 1 6 6 11 4 3 3 5 3 3 4 6 6 4 4 3 3 6 14 4 4 6 6 6 4 4 5 6 6 4 4 6 6 6 4 5 6 6 4 4 4";
+        String board2 = "0 0 1 5 5 4 4 4 6 6 0 14 1 5 4 4 4 8 6 6 1 1 1 3 3 3 4 1 3 3 1 1 3 3 5 0 0 1 1 3 1 6 6 5 3 3 0 0 1 1 6 6 8 3 5 3 5 0 0 1 6 6 6 4 3 3 5 5 0 0 6 6 4 4 2 5 5 5 0 5 6 2 4 4 5 5 5 5 5 5 4 4 4 5 5 5 5 5 5 5";
+        String board3 = "6 6 6 4 4 5 6 4 4 4 6 6 6 14 4 5 6 4 4 4 6 3 3 6 4 4 5 6 6 4 3 3 1 6 4 5 3 7 4 4 3 3 3 1 1 5 3 3 5 5 2 2 1 6 6 5 5 5 0 0 1 1 1 2 6 3 3 3 0 0 1 1 14 0 2 0 3 3 1 1 5 5 5 0 0 0 0 2 1 1 5 5 5 5 0 0 0 0 0 1";
+        String board4 = "6 6 4 4 4 5 6 4 4 3 6 3 4 4 5 6 4 4 3 3 6 3 3 4 5 6 6 3 3 3 3 3 4 4 5 6 2 3 0 0 1 3 14 4 5 6 0 0 0 0 1 1 4 5 6 6 2 2 0 0 1 1 5 5 5 6 0 0 0 1 5 5 6 6 5 5 12 1 2 1 5 0 12 6 5 2 5 1 1 1 5 0 0 5 5 5 5 1 1 1";
+        String board5 = "4 4 4 4 2 2 6 2 1 1 4 2 4 4 3 6 2 2 2 1 3 3 4 3 3 3 6 6 5 2 0 3 3 3 5 9 6 5 2 2 0 0 0 0 3 5 6 5 1 1 0 1 0 0 0 5 5 1 6 1 0 0 1 0 0 5 3 12 6 1 1 1 9 0 5 3 3 3 6 6 0 1 5 5 5 4 4 3 6 6 0 1 1 5 4 4 4 6 6 6";
+        String board6 = "0 0 1 5 5 4 4 6 6 6 0 1 5 3 3 4 4 4 6 6 0 0 5 3 3 4 4 15 3 6 5 5 5 3 6 4 3 3 3 3 5 5 5 5 6 6 6 6 3 3 5 4 4 5 6 6 1 1 0 1 5 4 1 4 5 6 1 1 0 1 5 12 1 3 5 15 0 0 1 5 5 5 1 3 5 5 5 0 0 5 5 5 5 5 5 5 5 5 5 5";
+        String board7 = "1 1 1 0 0 5 0 0 0 0 2 2 1 0 0 5 0 0 0 0 2 2 1 2 2 5 0 0 13 3 2 1 2 2 5 2 0 3 3 3 1 1 4 4 5 2 2 1 3 3 1 4 4 5 1 1 1 2 3 3 1 13 4 4 5 3 3 3 3 3 6 6 4 5 6 14 6 3 6 4 6 6 4 4 5 6 6 6 6 4 6 6 4 4 5 6 6 6 4 4";
+        String board8 = "3 0 0 2 2 0 0 1 1 1 3 3 0 0 0 2 2 1 1 1 3 3 3 3 3 3 3 2 2 2 5 5 3 12 6 6 4 4 2 2 3 3 5 5 6 6 6 4 4 1 3 1 1 5 6 4 4 1 1 1 0 3 10 1 5 4 4 10 1 6 0 0 1 5 4 4 6 6 6 6 0 0 0 5 4 4 4 6 6 6 0 0 5 5 4 4 4 6 6 6";
+        // System.out.println(board1.length());
+        // System.out.println(board2.length());
+        // System.out.println(board3.length());
+        // System.out.println(board4.length());
+        // System.out.println(board5.length());
+        // System.out.println(board6.length());
+        // System.out.println(board7.length());
+        // System.out.println(board8.length());
+
+        boardStrings[0] = board1;
+        boardStrings[1] = board2;
+        boardStrings[2] = board3;
+        boardStrings[3] = board4;
+        boardStrings[4] = board5;
+        boardStrings[5] = board6;
+        boardStrings[6] = board7;
+        boardStrings[7] = board8;
     }
 
     public void makeGraph() throws IOException {
-        int[] randBoards = new int[4];
+        String[] randBoards = new String[4];
         for (int i = 0; i < randBoards.length; i++) {
             boolean added = false;
             while (!added) {
-                int r = (int) (Math.random() * 8) + 1;
+                int r = (int) (Math.random() * 8);
                 boolean contains = false;
-                for (int j : randBoards) {
-                    if (r == j) {
+                for (String j : randBoards) {
+                    if (boardStrings[r].equals(j)) {
                         contains = true;
                     }
                 }
                 if (!contains) {
-                    randBoards[i] = r;
+                    randBoards[i] = boardStrings[r];
                     added = true;
                 }
             }
         }
         System.out.print("Boards: ");
-        for (int i : randBoards) {
+        for (String i : randBoards) {
             System.out.print(i);
         }
         System.out.println();
-        boards = randBoards;
-        try {
-            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0] + ".txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[1] + ".txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[2] + ".txt")));
-            boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[3] + ".txt")));
-        } catch (IOException e) {
-            System.out.println("Scanner reading failure");
-        }
+        // boards = randBoards;
+        // try {
+        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0] + ".txt")));
+        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[1] + ".txt")));
+        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[2] + ".txt")));
+        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[3] + ".txt")));
+        // } catch (IOException e) {
+        //     System.out.println("Scanner reading failure");
+        // }
 
-        numbers = randBoards;
+        // numbers = randBoards;
         int coordX = 562;
         int coordY = 151;
 
@@ -82,17 +108,23 @@ public class Board {
             }
         }
 
-        Scanner a = boardScanners.get(0);
+        // Scanner a = boardScanners.get(0);
         int inputHexes = 0;
+        int idx = 0;
+        int count = 0;
         for (int r = 0; r < 10; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    if (a.hasNextInt()) {
-                        int num = a.nextInt();
-                        if (num >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(num));
+                    if (count < 100) {
+                        String num = "";
+                        if(idx + 1 < randBoards[0].length() && randBoards[0].charAt(idx + 1) != ' ') {num = randBoards[0].substring(idx, idx + 2); idx++;}
+                        else num = randBoards[0].substring(idx, idx + 1);
+                        idx += 2;
+                        count++;
+                        if (Integer.parseInt(num) >= 7) {
+                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
                         } else {
-                            Graph[r][c] = new Hex(map.get(num));
+                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
                         }
 
                         Graph[r][c].setX(coordX);
@@ -116,16 +148,21 @@ public class Board {
         coordY = 151;
         coordX = 562 + 10 * changeX;
         inputHexes = 0;
-        a = boardScanners.get(1);
+        idx = 0;
+        count = 0;
         for (int r = 0; r < 10; r++) {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    if (a.hasNextInt()) {
-                        int num = a.nextInt();
-                        if (num >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(num));
+                    if (count < 100) {
+                        String num = "";
+                        if(idx + 1 < randBoards[1].length() && randBoards[1].charAt(idx + 1) != ' ') {num = randBoards[1].substring(idx, idx + 2); idx++;}
+                        else num = randBoards[1].substring(idx, idx + 1);
+                        idx += 2;
+                        count++;
+                        if (Integer.parseInt(num) >= 7) {
+                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
                         } else {
-                            Graph[r][c] = new Hex(map.get(num));
+                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
@@ -146,7 +183,8 @@ public class Board {
         }
         System.out.println("Sector 2 " + inputHexes);
 
-        a = boardScanners.get(2);
+        idx = 0;
+        count = 0;
         inputHexes = 0;
         int scoordY = coordY;
         coordX = 562;
@@ -154,12 +192,16 @@ public class Board {
         for (int r = 10; r < 20; r++) {
             for (int c = 0; c < 20; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
-                    if (a.hasNextInt()) {
-                        int num = a.nextInt();
-                        if (num >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(num));
+                    if (count < 100) {
+                        String num = "";
+                        if(idx + 1 < randBoards[2].length() && randBoards[2].charAt(idx + 1) != ' ') {num = randBoards[2].substring(idx, idx + 2); idx++;}
+                        else num = randBoards[2].substring(idx, idx + 1);
+                        idx += 2;
+                        count++;
+                        if (Integer.parseInt(num) >= 7) {
+                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
                         } else {
-                            Graph[r][c] = new Hex(map.get(num));
+                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
@@ -180,7 +222,8 @@ public class Board {
         }
         System.out.println(coordX + " " + coordY);
         System.out.println("Sector 3 " + inputHexes);
-        a = boardScanners.get(3);
+        idx = 0;
+        count = 0;
         inputHexes = 0;
         scoordY = coordY;
         coordX = 562 + 10 * changeX;
@@ -188,12 +231,16 @@ public class Board {
             for (int c = 20; c < 40; c++) {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     // System.out.println(a.hasNextInt());
-                    if (a.hasNextInt()) {
-                        int num = a.nextInt();
-                        if (num >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(num));
+                    if (count < 100) {
+                        String num = "";
+                        if(idx + 1 < randBoards[3].length() && randBoards[3].charAt(idx + 1) != ' ') {num = randBoards[3].substring(idx, idx + 2); idx++;}
+                        else num = randBoards[3].substring(idx, idx + 1);
+                        idx += 2;
+                        count++;
+                        if (Integer.parseInt(num) >= 7) {
+                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
                         } else {
-                            Graph[r][c] = new Hex(map.get(num));
+                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
                         }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
@@ -243,8 +290,10 @@ public class Board {
                 }
             }
         }
+        printGraph();
         for(int r = 0; r < 20; r++){
             for(int c = 0; c < 40; c++){
+                if(Graph[r][c].getTerrain() == null) System.out.println("NULL AT " + r + " " + c);
                 if(!Graph[r][c].getTerrain().equals("blank")){
                     Graph[r][c].setAdjacent(r, c, Graph);
                     Graph[r][c].setAvail(true);
@@ -261,7 +310,7 @@ public class Board {
     public void printGraph() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
-                if (Graph[i][j] == null) {
+                if (Graph[i][j].getTerrain() == null) {
                     System.out.print("N "); // null
                 } else if (Graph[i][j].getTerrain().equals("blank")) {
                     System.out.print("B "); // blank
