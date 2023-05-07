@@ -257,26 +257,35 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     public void drawBoard(Graphics g) {
         // find and use variable to store the specific board and then reference the
         // BufferedImage[] imgs = { b1, b2, b3, b4, b5, b6, b7, b8 };
-        int[] nums = b.getNumbers();
+        String[] randBoards = b.getRandBoards();
+        String board1 = "1 0 0 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 1 0 2 2 2 0 2 2 11 0 0 1 1 2 2 2 2 2 3 3 1 1 1 1 1 2 2 5 3 3 3 1 6 1 1 1 2 3 3 5 4 1 6 6 11 4 3 3 5 3 3 4 6 6 4 4 3 3 6 14 4 4 6 6 6 4 4 5 6 6 4 4 6 6 6 4 5 6 6 4 4 4";
+        String board2 = "0 0 1 5 5 4 4 4 6 6 0 14 1 5 4 4 4 8 6 6 1 1 1 3 3 3 4 1 3 3 1 1 3 3 5 0 0 1 1 3 1 6 6 5 3 3 0 0 1 1 6 6 8 3 5 3 5 0 0 1 6 6 6 4 3 3 5 5 0 0 6 6 4 4 2 5 5 5 0 5 6 2 4 4 5 5 5 5 5 5 4 4 4 5 5 5 5 5 5 5";
+        String board3 = "6 6 6 4 4 5 6 4 4 4 6 6 6 14 4 5 6 4 4 4 6 3 3 6 4 4 5 6 6 4 3 3 1 6 4 5 3 7 4 4 3 3 3 1 1 5 3 3 5 5 2 2 1 6 6 5 5 5 0 0 1 1 1 2 6 3 3 3 0 0 1 1 14 0 2 0 3 3 1 1 5 5 5 0 0 0 0 2 1 1 5 5 5 5 0 0 0 0 0 1";
+        String board4 = "6 6 4 4 4 5 6 4 4 3 6 3 4 4 5 6 4 4 3 3 6 3 3 4 5 6 6 3 3 3 3 3 4 4 5 6 2 3 0 0 1 3 14 4 5 6 0 0 0 0 1 1 4 5 6 6 2 2 0 0 1 1 5 5 5 6 0 0 0 1 5 5 6 6 5 5 12 1 2 1 5 0 12 6 5 2 5 1 1 1 5 0 0 5 5 5 5 1 1 1";
+        String board5 = "4 4 4 4 2 2 6 2 1 1 4 2 4 4 3 6 2 2 2 1 3 3 4 3 3 3 6 6 5 2 0 3 3 3 5 9 6 5 2 2 0 0 0 0 3 5 6 5 1 1 0 1 0 0 0 5 5 1 6 1 0 0 1 0 0 5 3 12 6 1 1 1 9 0 5 3 3 3 6 6 0 1 5 5 5 4 4 3 6 6 0 1 1 5 4 4 4 6 6 6";
+        String board6 = "0 0 1 5 5 4 4 6 6 6 0 1 5 3 3 4 4 4 6 6 0 0 5 3 3 4 4 15 3 6 5 5 5 3 6 4 3 3 3 3 5 5 5 5 6 6 6 6 3 3 5 4 4 5 6 6 1 1 0 1 5 4 1 4 5 6 1 1 0 1 5 12 1 3 5 15 0 0 1 5 5 5 1 3 5 5 5 0 0 5 5 5 5 5 5 5 5 5 5 5";
+        String board7 = "1 1 1 0 0 5 0 0 0 0 2 2 1 0 0 5 0 0 0 0 2 2 1 2 2 5 0 0 13 3 2 1 2 2 5 2 0 3 3 3 1 1 4 4 5 2 2 1 3 3 1 4 4 5 1 1 1 2 3 3 1 13 4 4 5 3 3 3 3 3 6 6 4 5 6 14 6 3 6 4 6 6 4 4 5 6 6 6 6 4 6 6 4 4 5 6 6 6 4 4";
+        String board8 = "3 0 0 2 2 0 0 1 1 1 3 3 0 0 0 2 2 1 1 1 3 3 3 3 3 3 3 2 2 2 5 5 3 12 6 6 4 4 2 2 3 3 5 5 6 6 6 4 4 1 3 1 1 5 6 4 4 1 1 1 0 3 10 1 5 4 4 10 1 6 0 0 1 5 4 4 6 6 6 6 0 0 0 5 4 4 4 6 6 6 0 0 5 5 4 4 4 6 6 6";
+
         int[] currX = { 543, 952, 543, 952 };
         int[] currY = { 130, 130, 482, 482 };
         for (int i = 0; i < 4; i++) { // 620 x 528
 
-            if (nums[i] == 1) {
+            if (randBoards[i].equals(board1)) {
                 g.drawImage(b1, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 2) {
+            } else if (randBoards[i].equals(board2)) {
                 g.drawImage(b2, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 3) {
+            } else if (randBoards[i].equals(board3)) {
                 g.drawImage(b3, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 4) {
+            } else if (randBoards[i].equals(board4)) {
                 g.drawImage(b4, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 5) {
+            } else if (randBoards[i].equals(board5)) {
                 g.drawImage(b5, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 6) {
+            } else if (randBoards[i].equals(board6)) {
                 g.drawImage(b6, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 7) {
+            } else if (randBoards[i].equals(board7)) {
                 g.drawImage(b7, currX[i], currY[i], 430, 363, null);
-            } else if (nums[i] == 8) {
+            } else if (randBoards[i].equals(board8)) {
                 g.drawImage(b8, currX[i], currY[i], 430, 363, null);
             }
         }

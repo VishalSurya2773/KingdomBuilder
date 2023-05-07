@@ -9,6 +9,7 @@ public class Board {
     private ArrayList<Scanner> boardScanners;
     public static int[] numbers, boards;
     private String[] boardStrings;
+    private String[] randBoards;
     public Board() {
         Graph = new Hex[20][40];
         map = new TreeMap<Integer, String>();
@@ -57,9 +58,11 @@ public class Board {
         boardStrings[6] = board7;
         boardStrings[7] = board8;
     }
-
+    public String[] getRandBoards(){
+        return randBoards;
+    }
     public void makeGraph() throws IOException {
-        String[] randBoards = new String[4];
+        randBoards = new String[4];
         for (int i = 0; i < randBoards.length; i++) {
             boolean added = false;
             while (!added) {
