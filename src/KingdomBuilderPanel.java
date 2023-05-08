@@ -199,6 +199,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 } else if (currentPlayer.getOrder() == 4) {
                     highLightRect(g, 0, 440, 290, 85, highlight);
                 }
+
+                drawPlayerTokens(g);
                 System.out.println("Game turn: " + game.getTurn());
                 System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");
@@ -524,16 +526,20 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             System.out.println("game players is null");
         }
         ArrayList<Player> players = game.players;
+        // players.get(0).addSpecialHexTile(new Hex("barn"));
+        // players.get(1).addSpecialHexTile(new Hex("paddock"));
+        // players.get(2).addSpecialHexTile(new Hex("oasis"));
+        // players.get(3).addSpecialHexTile(new Hex("farm"));
         int currX = 0;
         int currY = 85;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
         for (int i = 0; i < players.size(); i++) {
             ArrayList<Hex> hand = players.get(i).getHand();
             if (i == 1) {
-                currX = 1590;
+                currX = 1640;
                 currY = 85;
             } else if (i == 2) {
-                currX = 1590;
+                currX = 1640;
                 currY = 510;
 
             } else if (i == 3) {
@@ -542,7 +548,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             }
             for (int j = 0; j < hand.size(); j++) {
                 Hex x = hand.get(j);
-                BufferedImage temp = actionTiles[0];
+                BufferedImage temp = null;
                 if (x.getTerrain() == "barn") {
                     temp = actionTiles[0];
                 } else if (x.getTerrain() == "farm") {
@@ -560,14 +566,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 } else if (x.getTerrain() == "tower") {
                     temp = actionTiles[7];
                 }
-                g.drawImage(temp, currX, currY, 155, 170, null);
-                currX += 165;
+                g.drawImage(temp, currX, currY, 123, 141, null);
+                currX += 140;
                 // if (temp != null) {
 
                 // }
                 if (j == 1) {
-                    currX -= 330;
-                    currY += 175;
+                    currX -= 280;
+                    currY += 150;
                 }
             }
         }
@@ -952,7 +958,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                             gameStates = GameStates.chooseSettlement;
                             currentPlayer.setPlaceOn(possibleChoices.get(i));
                             possibleChoices.get(i).setAvail(false);
-                            currentPlayer.findTokens();
+                            currentPlayer.findTokens(possibleChoices.get(i));
                             System.out.println("CHOOSE SETTLEMENT GAMESTATE");
                         }
                     }
@@ -965,7 +971,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         gameStates = GameStates.chooseSettlement2;
                         currentPlayer.setPlaceOn(possibleChoices.get(i));
                         possibleChoices.get(i).setAvail(false);
-                        currentPlayer.findTokens();
+                        currentPlayer.findTokens(possibleChoices.get(i));
                         System.out.println("CHOOSE SETTLEMENT2 GAMESTATE");
                     }
                 }
@@ -977,7 +983,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         gameStates = GameStates.chooseSettlement3;
                         currentPlayer.setPlaceOn(possibleChoices.get(i));
                         possibleChoices.get(i).setAvail(false);
-                        currentPlayer.findTokens();
+                        currentPlayer.findTokens(possibleChoices.get(i));
                         System.out.println("CHOOSE SETTLEMENT3 GAMESTATE");
                     }
                 }
