@@ -3,6 +3,9 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
+
 import java.util.*;
 
 public class Player {
@@ -97,20 +100,21 @@ public class Player {
 
                 for (int j = 0; j < hexes.length; j++) {
                     // System.out.print(hexes[j].getAvail() + " ");
-                    if(hexes[j] == null) continue;
+                    if (hexes[j] == null)
+                        continue;
                     if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         boolean Equal = false;
-                        for(int sz = 0; sz < possible.size(); sz++){
-                            if(possible.get(sz).equals(hexes[j])){
+                        for (int sz = 0; sz < possible.size(); sz++) {
+                            if (possible.get(sz).equals(hexes[j])) {
                                 Equal = true;
                             }
                         }
-                    if(!Equal){
-                        possible.add(hexes[j]);
-                        System.out.println("POSS HEX UPDATED");
-                        empty = false;
-                    }
-                        
+                        if (!Equal) {
+                            possible.add(hexes[j]);
+                            System.out.println("POSS HEX UPDATED");
+                            empty = false;
+                        }
+
                     }
                 }
             }
@@ -145,22 +149,50 @@ public class Player {
      * }
      */
 
-    public void findTokens() {
-        ArrayList<Hex> temp = new ArrayList<>();
-        for (Settlement i : placed) {
-            Hex[] adjs = i.placedOn().adjacents();
-            for (Hex j : adjs) {
-                if (j != null && j.isSpecialHex()) {
-                    for (Hex x : temp) {
-                        if (j.getTerrain().equals(x.getTerrain())) {
-                            if (j.compareTo(x) != 0) {
-                                hand.add(j);
-                            }
+    // public void findTokens() {
+    // ArrayList<Hex> temp = new ArrayList<>();
+    // for (Settlement i : placed) {
+    // Hex[] adjs = i.placedOn().adjacents();
+    // for (Hex j : adjs) {
+    // if (j != null && j.isSpecialHex()) {
+    // for (Hex x : adjs) {
+    // if (j.getTerrain().equals(x.getTerrain())) {
+    // if (j.compareTo(x) != 0) {
+    // hand.add(j);
+    // }
+    // }
+    // }
+    // }
+    // }
+    // }
+    // }
+
+    public void findTokens(Hex x) {
+        // if (placed.contains(x.getSettlement())) {
+        Hex[] adjs = x.adjacents();
+        boolean dbl = false;
+        boolean added = false;
+        for (Hex j : adjs) {
+            if (j != null && j.isSpecialHex()) {
+                for (Hex i : adjs) {
+                    if (j.getTerrain().equals(i.getTerrain())) { // finding same token in hand
+                        if (j.compareTo(i) != 0) {
+                            hand.add(j);
+                            dbl = true;
+                            added = true;
                         }
                     }
                 }
+                if (!dbl && !added) {
+                    hand.add(j);
+                    added = true;
+                }
             }
         }
+        if (added) {
+            System.out.println("token added to player hand correctly");
+        }
+        // }
     }
 
     public boolean isFirst() {
