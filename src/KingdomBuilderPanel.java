@@ -201,6 +201,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 }
 
                 drawPlayerTokens(g);
+                drawAmtSettle(g);
                 System.out.println("Game turn: " + game.getTurn());
                 System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");

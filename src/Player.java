@@ -168,29 +168,28 @@ public class Player {
     // }
 
     public void findTokens(Hex x) {
-        // if (placed.contains(x.getSettlement())) {
+        // if (placed.contains(x.getSettlement()))
         Hex[] adjs = x.adjacents();
-        boolean dbl = false;
-        boolean added = false;
+
         for (Hex j : adjs) {
-            if (j != null && j.isSpecialHex()) {
-                for (Hex i : adjs) {
+            boolean dbl = false;
+            boolean added = false;
+            if (j != null && j.isSpecialHex() && !j.isCastle()) {
+                for (Hex i : hand) {
                     if (j.getTerrain().equals(i.getTerrain())) { // finding same token in hand
-                        if (j.compareTo(i) != 0) {
-                            hand.add(j);
-                            dbl = true;
-                            added = true;
-                        }
+                        dbl = true;
+                        // if (j.compareTo(i) != 0) {
+                        // hand.add(j);
+                        // dbl = true; //can be used to track users with two of the same tokens
+                        // added = true;
+                        // }
                     }
                 }
-                if (!dbl && !added) {
+                if (!added && !dbl) {
                     hand.add(j);
                     added = true;
                 }
             }
-        }
-        if (added) {
-            System.out.println("token added to player hand correctly");
         }
         // }
     }
