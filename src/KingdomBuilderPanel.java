@@ -172,7 +172,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
             case showCard: // not needed in the paint class but needed in mouselistener
                 System.out.println("p#: " + currentPlayer.getOrder() + "drawing card");
-                g.drawString(directions, 720, 60);
+                g.setColor(new Color(255, 165, 0));
+                g.fillRect(700, 20, 500, 100);
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("Abril Fatface", Font.PLAIN, 20));
+                g.drawString("Draw card and place settlements/use tokens", 700, 50);
+                g.drawString("Click check button when finished", 700, 70);
+                g.drawString("Draw deck to start new turn", 700, 90);
             case turnStart:
                 // highlighting the current player turn
                 int alpha = 127; // 50% transparent
@@ -248,7 +254,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         g.fillRect(700, 20, 500, 100);
         g.setColor(Color.WHITE);
         g.setFont(new Font("Abril Fatface", Font.PLAIN, 20));
-        g.drawString(directions, 700, 60);
+        g.setColor(new Color(255, 165, 0));
+        g.fillRect(700, 20, 500, 100);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Abril Fatface", Font.PLAIN, 20));
+        g.drawString("Draw card and place settlements/use tokens", 700, 50);
+        g.drawString("Click check button when finished", 700, 70);
+        g.drawString("Draw deck to start new turn", 700, 90);
         drawMetasettlement(g);
     }
 
@@ -651,14 +663,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             g.drawImage(cardBack, 1388, 520, 175, 270, null);
             g.drawImage(image, 350, 520, 175, 270, null);
         }
-    }
-
-    public void drawDirections(Graphics g) {
-        g.setColor(new Color(255, 165, 0));
-        g.fillRect(700, 20, 500, 100);
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Abril Fatface", Font.PLAIN, 20));
-        g.drawString(directions, 700, 60);
     }
 
     public void drawScore(Graphics g) {
