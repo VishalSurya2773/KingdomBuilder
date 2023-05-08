@@ -198,8 +198,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
-                // drawMetasettlement(g);
-
+                drawMetasettlement(g);
                 break;
             case chooseSettlement:
                 drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
@@ -250,6 +249,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         g.fillRect(700, 20, 500, 100);
         g.setColor(Color.WHITE);
         g.drawString(directions, 700, 60);
+        drawMetasettlement(g);
     }
 
     public void drawStartScreen(Graphics g) {
