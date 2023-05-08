@@ -98,9 +98,18 @@ public class Player {
                 for (int j = 0; j < hexes.length; j++) {
                     System.out.print(hexes[j].getAvail() + " ");
                     if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
+                        boolean Equal = false;
+                        for(int sz = 0; sz < possible.size(); sz++){
+                            if(possible.get(sz).equals(hexes[j])){
+                                Equal = true;
+                            }
+                        }
+                    if(!Equal){
                         possible.add(hexes[j]);
                         System.out.println("POSS HEX UPDATED");
                         empty = false;
+                    }
+                        
                     }
                 }
             }
