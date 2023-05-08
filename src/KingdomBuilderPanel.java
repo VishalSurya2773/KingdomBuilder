@@ -184,6 +184,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 int alpha = 127; // 50% transparent
                 highlight = new Color(255, 255, 255, alpha);
                 g.setColor(highlight);
+
+                clearHighlightRect(g, 0, 15, 290, 85);
+                clearHighlightRect(g, 1600, 15, 290, 85);
+                clearHighlightRect(g, 1600, 440, 290, 85);
+                clearHighlightRect(g, 0, 440, 290, 85);
+                drawPlayerNames(g);
                 if (currentPlayer.getOrder() == 1) {
                     highLightRect(g, 0, 15, 290, 85, highlight);
                 } else if (currentPlayer.getOrder() == 2) {
@@ -226,14 +232,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     public void setBoard(Graphics g) {
         g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
-        g.setColor(Color.WHITE);
-        Font ps = new Font("Abril Fatface", Font.BOLD, 76);
-        g.setFont(ps);
-        g.drawString("Player 1", 0, 80);
-        g.drawString("Player 2", 1600, 80);
-        g.drawString("Player 3", 1600, 500);
-        g.drawString("Player 4", 0, 500);
-
+        drawPlayerNames(g);
         g.setColor(burgundy);
         drawBackCards(g);
         drawAmtSettle(g);
@@ -262,6 +261,16 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         g.drawString("Click check button when finished", 700, 70);
         g.drawString("Draw deck to start new turn", 700, 90);
         drawMetasettlement(g);
+    }
+
+    public void drawPlayerNames(Graphics g) {
+        g.setColor(Color.WHITE);
+        Font ps = new Font("Abril Fatface", Font.BOLD, 76);
+        g.setFont(ps);
+        g.drawString("Player 1", 0, 80);
+        g.drawString("Player 2", 1600, 80);
+        g.drawString("Player 3", 1600, 500);
+        g.drawString("Player 4", 0, 500);
     }
 
     public void drawStartScreen(Graphics g) {
@@ -745,6 +754,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
         g.setColor(c);
         g.drawRect(x, y, w, h);
+        g.fillRect(x, y, w, h);
+    }
+
+    public void clearHighlightRect(Graphics g, int x, int y, int w, int h) {
+        g.clearRect(x, y, w, h);
+        g.setColor(new Color(218, 91, 45));
         g.fillRect(x, y, w, h);
     }
 
