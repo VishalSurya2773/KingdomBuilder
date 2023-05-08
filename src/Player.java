@@ -96,7 +96,7 @@ public class Player {
                 }
 
                 for (int j = 0; j < hexes.length; j++) {
-                    System.out.print(hexes[j].getAvail() + " ");
+                    // System.out.print(hexes[j].getAvail() + " ");
                     if(hexes[j] == null) continue;
                     if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         boolean Equal = false;
