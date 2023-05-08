@@ -78,6 +78,7 @@ public class Board {
                 }
                 if (!contains) {
                     randBoards[i] = boardStrings[r];
+                    numbers[i] = r;
                     added = true;
                 }
             }

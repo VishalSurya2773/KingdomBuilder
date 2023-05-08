@@ -140,7 +140,7 @@ public class Player {
         for (Settlement i : placed) {
             Hex[] adjs = i.placedOn().adjacents();
             for (Hex j : adjs) {
-                if (j.isSpecialHex()) {
+                if (j != null && j.isSpecialHex()) {
                     for (Hex x : temp) {
                         if (j.getTerrain().equals(x.getTerrain())) {
                             if (j.compareTo(x) != 0) {

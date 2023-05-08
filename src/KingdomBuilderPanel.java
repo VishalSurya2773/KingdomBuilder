@@ -169,13 +169,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // System.out.println("objectiveCards GameState");
                 setBoard(g);
                 gameStates = GameStates.showCard;
-                // g.drawString("Player 1", 0, 80);
-                // g.drawString("Player 2", 1600, 80);
-                // g.drawString("Player 3", 1600, 500);
-                // g.drawString("Player 4", 0, 500);
-
-                // g.setColor(highlight);
-
                 break;
             case showCard: // not needed in the paint class but needed in mouselistener
                 System.out.println("p#: " + currentPlayer.getOrder() + "drawing card");
@@ -245,7 +238,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         drawPolygonOutlineForAll(g);
         drawFirstPlayerToken(g);
         drawPlayerTokens(g);
-        drawSumActionTiles(g);
+        try {
+            drawSumActionTiles(g);
+        } catch (IOException e) {
+            System.out.println("sumaction draw failed");
+        }
+
         drawObjectiveCards(g);
         drawConfirmButton(g);
         g.setColor(new Color(255, 165, 0));
@@ -300,12 +298,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         }
     }
 
-    public void drawSumActionTiles(Graphics g) {
-        // find boards and correlate them w a specialaction tile
-        // add each to edge of board -> idk how to rotate them tho
+    public void drawSumActionTiles(Graphics g) throws IOException {
         int[] boards = b.getNumbers();
+        System.out.print("boards for usmac ");
+        for (int i : boards) {
+            System.out.print(i);
+        }
         BufferedImage temp = null;
-        int[] currX = { 563, 1209, 581, 1229 };
+        int[] currX = { 563, 1220, 581, 1240 };
         int[] currY = { 25, 25, 830, 830 };
         for (int i = 0; i < boards.length; i++) {
             if (i <= 1) {
@@ -756,7 +756,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
-                        directions = "Draw a card from the deck";
+                        directions = "Draw from deck and choose settlement/token";
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
@@ -930,6 +930,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         }
                     }
                 }
+                repaint();
                 break;
             case chooseSettlement:
                 for (int i = 0; i < possibleChoices.size(); i++) {
@@ -941,6 +942,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         System.out.println("CHOOSE SETTLEMENT2 GAMESTATE");
                     }
                 }
+                // repaint();
                 break;
             case chooseSettlement2:
                 for (int i = 0; i < possibleChoices.size(); i++) {
@@ -952,6 +954,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         System.out.println("CHOOSE SETTLEMENT3 GAMESTATE");
                     }
                 }
+                // repaint();
                 break;
             case chooseSettlement3:
                 // implement if the player clicks the confirm button
@@ -961,10 +964,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         game.nextTurn();
                         currentPlayer = players.get(game.getTurn() - 1);
                         gameStates = GameStates.showCard;
+                        // repaint();
                     } else {
                         gameStates = gameStates.gameOver;
                     }
                 }
+                repaint();
                 break;
             case gameOver:
                 break;
