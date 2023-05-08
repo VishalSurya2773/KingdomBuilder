@@ -10,6 +10,7 @@ public class Board {
     public static int[] numbers, boards;
     private String[] boardStrings;
     private String[] randBoards;
+
     public Board() {
         Graph = new Hex[20][40];
         map = new TreeMap<Integer, String>();
@@ -58,9 +59,11 @@ public class Board {
         boardStrings[6] = board7;
         boardStrings[7] = board8;
     }
-    public String[] getRandBoards(){
+
+    public String[] getRandBoards() {
         return randBoards;
     }
+
     public void makeGraph() throws IOException {
         randBoards = new String[4];
         for (int i = 0; i < randBoards.length; i++) {
@@ -86,12 +89,16 @@ public class Board {
         System.out.println();
         // boards = randBoards;
         // try {
-        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0] + ".txt")));
-        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[1] + ".txt")));
-        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[2] + ".txt")));
-        //     boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[3] + ".txt")));
+        // boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0]
+        // + ".txt")));
+        // boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[1]
+        // + ".txt")));
+        // boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[2]
+        // + ".txt")));
+        // boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[3]
+        // + ".txt")));
         // } catch (IOException e) {
-        //     System.out.println("Scanner reading failure");
+        // System.out.println("Scanner reading failure");
         // }
 
         // numbers = randBoards;
@@ -120,15 +127,19 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (count < 100) {
                         String num = "";
-                        if(idx + 1 < randBoards[0].length() && randBoards[0].charAt(idx + 1) != ' ') {num = randBoards[0].substring(idx, idx + 2); idx++;}
-                        else num = randBoards[0].substring(idx, idx + 1);
+                        if (idx + 1 < randBoards[0].length() && randBoards[0].charAt(idx + 1) != ' ') {
+                            num = randBoards[0].substring(idx, idx + 2);
+                            idx++;
+                        } else
+                            num = randBoards[0].substring(idx, idx + 1);
                         idx += 2;
                         count++;
-                        if (Integer.parseInt(num) >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
-                        } else {
-                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
-                        }
+                        Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
+                        // if (Integer.parseInt(num) >= 7) {
+                        // Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
+                        // } else {
+
+                        // }
 
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
@@ -158,15 +169,19 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (count < 100) {
                         String num = "";
-                        if(idx + 1 < randBoards[1].length() && randBoards[1].charAt(idx + 1) != ' ') {num = randBoards[1].substring(idx, idx + 2); idx++;}
-                        else num = randBoards[1].substring(idx, idx + 1);
+                        if (idx + 1 < randBoards[1].length() && randBoards[1].charAt(idx + 1) != ' ') {
+                            num = randBoards[1].substring(idx, idx + 2);
+                            idx++;
+                        } else
+                            num = randBoards[1].substring(idx, idx + 1);
                         idx += 2;
                         count++;
-                        if (Integer.parseInt(num) >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
-                        } else {
-                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
-                        }
+                        Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
+                        // if (Integer.parseInt(num) >= 7) {
+                        // Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
+                        // } else {
+
+                        // }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(coordY);
                         Graph[r][c].setArray();
@@ -197,15 +212,19 @@ public class Board {
                 if (!((r % 2 == 0 && c % 2 == 1) || (r % 2 == 1 && c % 2 == 0))) {
                     if (count < 100) {
                         String num = "";
-                        if(idx + 1 < randBoards[2].length() && randBoards[2].charAt(idx + 1) != ' ') {num = randBoards[2].substring(idx, idx + 2); idx++;}
-                        else num = randBoards[2].substring(idx, idx + 1);
+                        if (idx + 1 < randBoards[2].length() && randBoards[2].charAt(idx + 1) != ' ') {
+                            num = randBoards[2].substring(idx, idx + 2);
+                            idx++;
+                        } else
+                            num = randBoards[2].substring(idx, idx + 1);
                         idx += 2;
                         count++;
-                        if (Integer.parseInt(num) >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
-                        } else {
-                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
-                        }
+                        Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
+                        // if (Integer.parseInt(num) >= 7) {
+                        // Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
+                        // } else {
+
+                        // }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
                         Graph[r][c].setArray();
@@ -236,15 +255,19 @@ public class Board {
                     // System.out.println(a.hasNextInt());
                     if (count < 100) {
                         String num = "";
-                        if(idx + 1 < randBoards[3].length() && randBoards[3].charAt(idx + 1) != ' ') {num = randBoards[3].substring(idx, idx + 2); idx++;}
-                        else num = randBoards[3].substring(idx, idx + 1);
+                        if (idx + 1 < randBoards[3].length() && randBoards[3].charAt(idx + 1) != ' ') {
+                            num = randBoards[3].substring(idx, idx + 2);
+                            idx++;
+                        } else
+                            num = randBoards[3].substring(idx, idx + 1);
                         idx += 2;
                         count++;
-                        if (Integer.parseInt(num) >= 7) {
-                            Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
-                        } else {
-                            Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
-                        }
+                        Graph[r][c] = new Hex(map.get(Integer.parseInt(num)));
+                        // if (Integer.parseInt(num) >= 7) {
+                        // Graph[r][c] = new SpecialHex(map.get(Integer.parseInt(num)));
+                        // } else {
+
+                        // }
                         Graph[r][c].setX(coordX);
                         Graph[r][c].setY(scoordY);
                         Graph[r][c].setArray();
@@ -265,39 +288,44 @@ public class Board {
             // scoordX = 582;
         }
         System.out.println("Sector 4 " + inputHexes);
-        for (int r = 0; r < 10; r++) {
-            for (int c = 0; c < 20; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-                    Graph[r][c].setSettlement(new Settlement("Red", this)); // basically just a null pointer
-                }
-            }
-        }
-        for (int r = 0; r < 10; r++) {
-            for (int c = 20; c < 40; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-                    Graph[r][c].setSettlement(new Settlement("Blue", this)); // basically just a null pointer
-                }
-            }
-        }
-        for (int r = 10; r < 20; r++) {
-            for (int c = 0; c < 20; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-                    Graph[r][c].setSettlement(new Settlement("Green", this)); // basically just a null pointer
-                }
-            }
-        }
-        for (int r = 10; r < 20; r++) {
-            for (int c = 20; c < 40; c++) {
-                if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-                    Graph[r][c].setSettlement(new Settlement("Purple", this)); // basically just a null pointer
-                }
-            }
-        }
+        // for (int r = 0; r < 10; r++) {
+        // for (int c = 0; c < 20; c++) {
+        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
+        // Graph[r][c].setSettlement(new Settlement("Red", this)); // basically just a
+        // null pointer
+        // }
+        // }
+        // }
+        // for (int r = 0; r < 10; r++) {
+        // for (int c = 20; c < 40; c++) {
+        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
+        // Graph[r][c].setSettlement(new Settlement("Blue", this)); // basically just a
+        // null pointer
+        // }
+        // }
+        // }
+        // for (int r = 10; r < 20; r++) {
+        // for (int c = 0; c < 20; c++) {
+        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
+        // Graph[r][c].setSettlement(new Settlement("Green", this)); // basically just a
+        // null pointer
+        // }
+        // }
+        // }
+        // for (int r = 10; r < 20; r++) {
+        // for (int c = 20; c < 40; c++) {
+        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
+        // Graph[r][c].setSettlement(new Settlement("Purple", this)); // basically just
+        // a null pointer
+        // }
+        // }
+        // }
         printGraph();
-        for(int r = 0; r < 20; r++){
-            for(int c = 0; c < 40; c++){
-                if(Graph[r][c].getTerrain() == null) System.out.println("NULL AT " + r + " " + c);
-                if(!Graph[r][c].getTerrain().equals("blank")){
+        for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 40; c++) {
+                if (Graph[r][c].getTerrain() == null)
+                    System.out.println("NULL AT " + r + " " + c);
+                if (!Graph[r][c].getTerrain().equals("blank")) {
                     Graph[r][c].setAdjacent(r, c, Graph);
                     Graph[r][c].setAvail(true);
                     // Graph[r][c].printAdjacent();

@@ -48,6 +48,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private Player currentPlayer;
     private String directions;
     private ArrayList<Hex> possibleChoices;
+    private Color burgundy, highlight;
 
     public KingdomBuilderPanel() {
         try {
@@ -144,7 +145,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     // settlements r 36x36
     public void paint(Graphics g) {
         graphics = g;
-        Color burgundy = new Color(128, 0, 32);
+        burgundy = new Color(128, 0, 32);
 
         switch (gameStates) {
             // System.out.println("this is being reached");
@@ -152,7 +153,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawStartScreen(g);
                 if (playAmtClicked) {
                     int alpha = 127; // 50% transparent
-                    Color highlight = new Color(255, 0, 0, alpha);
+                    highlight = new Color(255, 0, 0, alpha);
                     if (numPlayers == 2) {
                         highLightRect(g, 925, 960, 85, 80, highlight);
                     } else if (numPlayers == 3) {
@@ -166,30 +167,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
             case objectiveCards:
                 // System.out.println("objectiveCards GameState");
-                g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
-                g.setColor(Color.WHITE);
-                Font ps = new Font("Abril Fatface", Font.BOLD, 76);
-                g.setFont(ps);
-                g.drawString("Player 1", 0, 80);
-                g.drawString("Player 2", 1600, 80);
-                g.drawString("Player 3", 1600, 500);
-                g.drawString("Player 4", 0, 500);
-
-                g.setColor(burgundy);
-                drawBackCards(g);
-                drawAmtSettle(g);
-                drawDeck(g);
-                drawBoard(g);
-                drawPolygonOutlineForAll(g);
-                drawFirstPlayerToken(g);
-                drawPlayerTokens(g);
-                drawSumActionTiles(g);
-                drawObjectiveCards(g);
-                drawConfirmButton(g);
-                g.setColor(new Color(255, 165, 0));
-                g.fillRect(700, 20, 500, 100);
-                g.setColor(Color.WHITE);
-                g.drawString(directions, 700, 60);
+                setBoard(g);
                 gameStates = GameStates.showCard;
                 // g.drawString("Player 1", 0, 80);
                 // g.drawString("Player 2", 1600, 80);
@@ -200,13 +178,13 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
                 break;
             case showCard: // not needed in the paint class but needed in mouselistener
-                // System.out.println("showCard GameState");
-                // g.drawString("Select a settlement or token to play", 720, 20);
+                System.out.println("p#: " + currentPlayer.getOrder() + "drawing card");
                 g.drawString(directions, 720, 60);
             case turnStart:
                 // highlighting the current player turn
+                setBoard(g);
                 int alpha = 127; // 50% transparent
-                Color highlight = new Color(255, 255, 255, alpha);
+                highlight = new Color(255, 255, 255, alpha);
                 g.setColor(highlight);
                 if (currentPlayer.getOrder() == 1) {
                     highLightRect(g, 0, 15, 290, 85, highlight);
@@ -228,8 +206,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
                 // drawMetasettlement(g);
-                // game.nextTurn();
-                // gameStates = GameStates.showCard; // next turn
 
                 break;
             case chooseSettlement:
@@ -249,6 +225,33 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 clearDrawnPolygons(g);
         }
 
+    }
+
+    public void setBoard(Graphics g) {
+        g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
+        g.setColor(Color.WHITE);
+        Font ps = new Font("Abril Fatface", Font.BOLD, 76);
+        g.setFont(ps);
+        g.drawString("Player 1", 0, 80);
+        g.drawString("Player 2", 1600, 80);
+        g.drawString("Player 3", 1600, 500);
+        g.drawString("Player 4", 0, 500);
+
+        g.setColor(burgundy);
+        drawBackCards(g);
+        drawAmtSettle(g);
+        drawDeck(g);
+        drawBoard(g);
+        drawPolygonOutlineForAll(g);
+        drawFirstPlayerToken(g);
+        drawPlayerTokens(g);
+        drawSumActionTiles(g);
+        drawObjectiveCards(g);
+        drawConfirmButton(g);
+        g.setColor(new Color(255, 165, 0));
+        g.fillRect(700, 20, 500, 100);
+        g.setColor(Color.WHITE);
+        g.drawString(directions, 700, 60);
     }
 
     public void drawStartScreen(Graphics g) {
@@ -504,7 +507,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         int currY = 85;
         BufferedImage[] actionTiles = { t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower };
         for (int i = 0; i < players.size(); i++) {
-            ArrayList<SpecialHex> hand = players.get(i).getHand();
+            ArrayList<Hex> hand = players.get(i).getHand();
             if (i == 1) {
                 currX = 1590;
                 currY = 85;
@@ -517,23 +520,23 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 currY = 510;
             }
             for (int j = 0; j < hand.size(); j++) {
-                SpecialHex x = hand.get(j);
+                Hex x = hand.get(j);
                 BufferedImage temp = actionTiles[0];
-                if (x.getType() == "barn") {
+                if (x.getTerrain() == "barn") {
                     temp = actionTiles[0];
-                } else if (x.getType() == "farm") {
+                } else if (x.getTerrain() == "farm") {
                     temp = actionTiles[1];
-                } else if (x.getType() == "harbor") {
+                } else if (x.getTerrain() == "harbor") {
                     temp = actionTiles[2];
-                } else if (x.getType() == "oasis") {
+                } else if (x.getTerrain() == "oasis") {
                     temp = actionTiles[3];
-                } else if (x.getType() == "oracle") {
+                } else if (x.getTerrain() == "oracle") {
                     temp = actionTiles[4];
-                } else if (x.getType() == "paddock") {
+                } else if (x.getTerrain() == "paddock") {
                     temp = actionTiles[5];
-                } else if (x.getType() == "tavern") {
+                } else if (x.getTerrain() == "tavern") {
                     temp = actionTiles[6];
-                } else if (x.getType() == "tower") {
+                } else if (x.getTerrain() == "tower") {
                     temp = actionTiles[7];
                 }
                 g.drawImage(temp, currX, currY, 155, 170, null);
@@ -629,11 +632,23 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
         if (pNum == 1) {
             g.drawImage(image, 350, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 520, 175, 270, null);
+            g.drawImage(cardBack, 350, 520, 175, 270, null);
         } else if (pNum == 2) {
+            g.drawImage(cardBack, 350, 140, 175, 270, null);
             g.drawImage(image, 1388, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 520, 175, 270, null);
+            g.drawImage(cardBack, 350, 520, 175, 270, null);
         } else if (pNum == 3) {
+            g.drawImage(cardBack, 350, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 140, 175, 270, null);
             g.drawImage(image, 1388, 520, 175, 270, null);
+            g.drawImage(cardBack, 350, 520, 175, 270, null);
         } else if (pNum == 4) {
+            g.drawImage(cardBack, 350, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 520, 175, 270, null);
             g.drawImage(image, 350, 520, 175, 270, null);
         }
     }
@@ -766,24 +781,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                     currentPlayer.drawCard(game);
                     System.out.println(game.getTurn() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
-                    directions = "Choose to place settlement or use token tiles";
                 }
                 break;
             case turnStart:
 
                 System.out.println("turnstart gamestate");
-                if (clickedX > 55 && clickedX < 150 && clickedY > 910 && clickedY < 1014) { // confirmation button
-                    System.out.println("conf_b clicked");
-
-                    if (!game.gameOver) {
-                        game.nextTurn();
-                        gameStates = GameStates.chooseSettlement3;
-                        currentPlayer = players.get(game.getTurn() - 1);
-                    } else {
-                        gameStates = gameStates.gameOver;
-                    }
-                }
-
                 if (game.getTurn() == 1) {
                     // if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120) { //
                     // settlement button
@@ -923,6 +925,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                             gameStates = GameStates.chooseSettlement;
                             currentPlayer.setPlaceOn(possibleChoices.get(i));
                             possibleChoices.get(i).setAvail(false);
+                            currentPlayer.findTokens();
                             System.out.println("CHOOSE SETTLEMENT GAMESTATE");
                         }
                     }
@@ -934,6 +937,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         gameStates = GameStates.chooseSettlement2;
                         currentPlayer.setPlaceOn(possibleChoices.get(i));
                         possibleChoices.get(i).setAvail(false);
+                        currentPlayer.findTokens();
                         System.out.println("CHOOSE SETTLEMENT2 GAMESTATE");
                     }
                 }
@@ -944,12 +948,23 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         gameStates = GameStates.chooseSettlement3;
                         currentPlayer.setPlaceOn(possibleChoices.get(i));
                         possibleChoices.get(i).setAvail(false);
+                        currentPlayer.findTokens();
                         System.out.println("CHOOSE SETTLEMENT3 GAMESTATE");
                     }
                 }
                 break;
             case chooseSettlement3:
                 // implement if the player clicks the confirm button
+                if (clickedX > 55 && clickedX < 150 && clickedY > 910 && clickedY < 1014) { // confirmation button
+                    System.out.println("conf_b clicked");
+                    if (!game.gameOver) {
+                        game.nextTurn();
+                        currentPlayer = players.get(game.getTurn() - 1);
+                        gameStates = GameStates.showCard;
+                    } else {
+                        gameStates = gameStates.gameOver;
+                    }
+                }
                 break;
             case gameOver:
                 break;

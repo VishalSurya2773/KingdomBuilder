@@ -6,7 +6,7 @@ import java.util.TreeSet;
 import java.util.*;
 
 public class Player {
-    private ArrayList<SpecialHex> hand;
+    private ArrayList<Hex> hand;
     private ArrayList<Settlement> placed; // placed settlements
     // private ArrayList<Settlement> stored;
     private int stored;
@@ -35,43 +35,46 @@ public class Player {
     public void setPlayerNum(int pNum) {
         pNumber = pNum;
     }
-    public void setPlaceOn(Hex h){
+
+    public void setPlaceOn(Hex h) {
         placeOn = h;
         placed.add(new Settlement(this, placeOn));
         stored--;
     }
-    public Hex getPlaceOn(){
+
+    public Hex getPlaceOn() {
         return placeOn;
     }
+
     public int getPlayerNum() {
         return pNumber;
     }
 
     /*
-    public void fillStored() {
-        for (int i = 0; i < 40; i++) {
-            stored.add(new Settlement(this));
-        }
-    }
-    */
+     * public void fillStored() {
+     * for (int i = 0; i < 40; i++) {
+     * stored.add(new Settlement(this));
+     * }
+     * }
+     */
 
     public void setFirst() {
         isFirst = true;
     }
 
     public boolean canPlace(Hex h, ArrayList<Hex> poss) { // h is the hex the player clicked on, chosenCard is
-                                                                    // the terraincard the person chose, idk what s is
-                                                                    // but wed can remove it if it's unnecessary
+                                                          // the terraincard the person chose, idk what s is
+                                                          // but wed can remove it if it's unnecessary
         // checks if the player can place a settlement there
         // if (h.isEmpty() && h.getTerrain().equals(chosenCard.getTerrain())) {
         // // check possible adjacency
         boolean ans = false;
-        for(int i = 0; i < poss.size(); i++){
-            if(poss.get(i).equals(h)){
+        for (int i = 0; i < poss.size(); i++) {
+            if (poss.get(i).equals(h)) {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -85,9 +88,11 @@ public class Player {
                 System.out.println("Possible Hexes: ");
                 Hex[] hexes = placed.get(i).placedOn().adjacents();
 
-                for(int j = 0; j < hexes.length; j++){
-                    if(hexes[j] == null) System.out.print(" Null, ");
-                    else System.out.print(hexes[j].getTerrain() + ", ");
+                for (int j = 0; j < hexes.length; j++) {
+                    if (hexes[j] == null)
+                        System.out.print(" Null, ");
+                    else
+                        System.out.print(hexes[j].getTerrain() + ", ");
                 }
 
                 for (int j = 0; j < hexes.length; j++) {
@@ -120,21 +125,39 @@ public class Player {
         return placed.get(0);
     }
 
-    /* 
-    public Settlement getSettlementFromStore(Game g) {
-        if (stored.size() > 0) {
-            return stored.remove(0);
+    /*
+     * public Settlement getSettlementFromStore(Game g) {
+     * if (stored.size() > 0) {
+     * return stored.remove(0);
+     * }
+     * g.gameOver = true;
+     * return null;
+     * }
+     */
+
+    public void findTokens() {
+        ArrayList<Hex> temp = new ArrayList<>();
+        for (Settlement i : placed) {
+            Hex[] adjs = i.placedOn().adjacents();
+            for (Hex j : adjs) {
+                if (j.isSpecialHex()) {
+                    for (Hex x : temp) {
+                        if (j.getTerrain().equals(x.getTerrain())) {
+                            if (j.compareTo(x) != 0) {
+                                hand.add(j);
+                            }
+                        }
+                    }
+                }
+            }
         }
-        g.gameOver = true;
-        return null;
     }
-    */
 
     public boolean isFirst() {
         return isFirst;
     }
 
-    public ArrayList<SpecialHex> getHand() {
+    public ArrayList<Hex> getHand() {
         return hand;
     }
 
@@ -190,8 +213,8 @@ public class Player {
         terrainCard = g.getCard();
     }
 
-    public void useSpecialHexTile(SpecialHex sh) { // should be clicked
-        String type = sh.getType();
+    public void useSpecialHexTile(Hex sh) { // should be clicked
+        String type = sh.getTerrain();
         if (type.equals("barn")) { // Player p, Hex h, Settlement s (s.getPlayer(), h, s)
             // code after you find out which settlement they choose
         } else if (type.equals("paddock")) {
@@ -217,13 +240,13 @@ public class Player {
         return chosenTerrainHex().getTerrain().equals(terrainCard.getTerrain());
     }
 
-    public void addSpecialHexTile(SpecialHex x) {
+    public void addSpecialHexTile(Hex x) {
         hand.add(x);
-        if (x.getTerrain().equals("barn")) {
-        }
+        // if (x.getTerrain().equals("barn")) {
+        // }
     }
 
-    public void removeSpecialHexTile(SpecialHex x) {
+    public void removeSpecialHexTile(Hex x) {
         int pl = hand.indexOf(x);
         if (pl >= 0) {
             hand.remove(pl);
@@ -233,13 +256,14 @@ public class Player {
     public void barnAction(Game g) {
         // Settlement s = getSettlementFromStore(g);
         /*
-        if (canPlace(s, chosenTerrainHex(), terrainCard)) { // error cuz parameters - fix later
-            placeSettlement(s, chosenTerrainHex(), terrainCard);
-            System.out.println("Success");
-        } else {
-            System.out.println("failed");
-        }
-        */
+         * if (canPlace(s, chosenTerrainHex(), terrainCard)) { // error cuz parameters -
+         * fix later
+         * placeSettlement(s, chosenTerrainHex(), terrainCard);
+         * System.out.println("Success");
+         * } else {
+         * System.out.println("failed");
+         * }
+         */
         return;
 
     }
@@ -453,20 +477,22 @@ public class Player {
 
     public boolean tav(int r, int c) {
         /*
-        if (Game.gameBoard.getGraph()[r][c].isEmpty()
-                && Game.gameBoard.getGraph()[r][c - 1].getSettlement().equals(stored.get(0))
-                && Game.gameBoard.getGraph()[r][c - 2].getSettlement().equals(stored.get(0))
-                && Game.gameBoard.getGraph()[r][c - 3].getSettlement().equals(stored.get(0))) {
-            return true;
-        }
-        if (Game.gameBoard.getGraph()[r][c].isEmpty()
-                && Game.gameBoard.getGraph()[r][c + 1].getSettlement().equals(stored.get(0))
-                && Game.gameBoard.getGraph()[r][c + 2].getSettlement().equals(stored.get(0))
-                && Game.gameBoard.getGraph()[r][c + 3].getSettlement().equals(stored.get(0))) {
-            return true;
-        }
+         * if (Game.gameBoard.getGraph()[r][c].isEmpty()
+         * && Game.gameBoard.getGraph()[r][c - 1].getSettlement().equals(stored.get(0))
+         * && Game.gameBoard.getGraph()[r][c - 2].getSettlement().equals(stored.get(0))
+         * && Game.gameBoard.getGraph()[r][c - 3].getSettlement().equals(stored.get(0)))
+         * {
+         * return true;
+         * }
+         * if (Game.gameBoard.getGraph()[r][c].isEmpty()
+         * && Game.gameBoard.getGraph()[r][c + 1].getSettlement().equals(stored.get(0))
+         * && Game.gameBoard.getGraph()[r][c + 2].getSettlement().equals(stored.get(0))
+         * && Game.gameBoard.getGraph()[r][c + 3].getSettlement().equals(stored.get(0)))
+         * {
+         * return true;
+         * }
          */
-        
+
         return false;
         /*
          * if (Game.gameBoard.getGraph()[r][c].isEmpty()) {
@@ -555,11 +581,12 @@ public class Player {
         return;
 
     }
+
     public Hex findHex(int x, int y, Game g) {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 40; j++) {
                 if (g.gameBoard.getGraph()[i][j].isEmpty()) {
-                    if(g.gameBoard.getGraph()[i][j].isClicked(x, y)){ // isClicked() isnt implemented
+                    if (g.gameBoard.getGraph()[i][j].isClicked(x, y)) { // isClicked() isnt implemented
                         return g.gameBoard.getGraph()[i][j];
                     }
                 }

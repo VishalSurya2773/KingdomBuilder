@@ -1,12 +1,13 @@
 import java.util.*;
 import java.io.*;
+
 public class Hex {
     public Hex left, right, topLeft, topRight, bottomLeft, bottomRight;
-    private int x, y;
+    private int x, y, numSpecialTilesLeft;
     private String terrain;
     private Settlement playerSettlement; // stores the settlement (if it's been placed on this specific hex)
     private int radius;
-    private boolean isAvail;
+    private boolean isAvail, isSpecialHex, isCastle;
     private int[] xPoints;
     private int[] yPoints;
 
@@ -21,27 +22,50 @@ public class Hex {
 
     }
 
-    public void setArray() {
-        xPoints = new int[] { x - 20, x, x + 20, x + 20, x, x - 20 };
-        yPoints = new int[] { y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
-    }
-
     public Hex(int xComp, int yComp, String terrainType) {
         x = xComp;
         y = yComp;
         terrain = terrainType;
+        if (terrain.equals("castle")) {
+            isCastle = true;
+        } else {
+            isCastle = false;
+        }
+        findSpecialHex(terrainType);
+
     }
 
     public Hex(String terrainType) {
         terrain = terrainType;
         x = 0;
         y = 0;
+        if (terrain.equals("castle")) {
+            isCastle = true;
+        } else {
+            isCastle = false;
+        }
+        findSpecialHex(terrainType);
         // left = null;
         // right = new Hex("");
         // topRight = new Hex("");
         // topLeft = new Hex("");
         // bottomRight = new Hex("");
         // bottomLeft = new Hex("");
+    }
+
+    public void setArray() {
+        xPoints = new int[] { x - 20, x, x + 20, x + 20, x, x - 20 };
+        yPoints = new int[] { y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
+    }
+
+    public void findSpecialHex(String x) {
+        if (x.equals("oracle") || x.equals("farm") || x.equals("tower") || x.equals("tavern") || x.equals("barn")
+                || x.equals("harbor") || x.equals("paddock") || x.equals("oasis")) {
+            isSpecialHex = true;
+            numSpecialTilesLeft = 2;
+        } else {
+            isSpecialHex = false;
+        }
     }
 
     public int[] getXPoints() {
@@ -69,35 +93,55 @@ public class Hex {
     public boolean getAvail() {
         return isAvail;
     }
-    public boolean isValid(int r, int c){
-        if(r < 0 || c < 0 || r >= 20 || c >= 40) return false;
+
+    public boolean isValid(int r, int c) {
+        if (r < 0 || c < 0 || r >= 20 || c >= 40)
+            return false;
         return true;
     }
+
+    public Hex giveSpecialTile(Player p) {
+        if (!isSpecialHex) {
+            return null;
+        }
+        numSpecialTilesLeft--;
+        if (numSpecialTilesLeft < 0) {
+            return null;
+        }
+        return this;
+    }
+
     public void setAdjacent(int i, int j, Hex[][] board) {
         /*
          * OXOXOX
          * XOXOXO
          */
-        if(isValid(i, j - 2)) left = board[i][j - 2];
-                
-        if(isValid(i, j + 2)) right = board[i][j + 2];
-                    
-        if(isValid(i - 1, j - 1)) topLeft = board[i - 1][j - 1];
-                    
-        if(isValid(i - 1, j + 1)) topRight = board[i - 1][j + 1];
-                    
-        if(isValid(i + 1, j - 1)) bottomLeft = board[i + 1][j - 1];
-                    
-        if(isValid(i + 1, j + 1)) bottomRight = board[i + 1][j + 1];
-                    
-        
+        if (isValid(i, j - 2))
+            left = board[i][j - 2];
+
+        if (isValid(i, j + 2))
+            right = board[i][j + 2];
+
+        if (isValid(i - 1, j - 1))
+            topLeft = board[i - 1][j - 1];
+
+        if (isValid(i - 1, j + 1))
+            topRight = board[i - 1][j + 1];
+
+        if (isValid(i + 1, j - 1))
+            bottomLeft = board[i + 1][j - 1];
+
+        if (isValid(i + 1, j + 1))
+            bottomRight = board[i + 1][j + 1];
+
     }
 
     public Hex[] adjacents() {
         Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
         return out;
     }
-    public void printAdjacent(){
+
+    public void printAdjacent() {
         Hex[] out = { bottomLeft, left, topLeft, topRight, right, bottomRight };
         System.out.println(Arrays.toString(out));
     }
@@ -164,6 +208,10 @@ public class Hex {
         return terrain;
     }
 
+    public boolean isSpecialHex() {
+        return isSpecialHex;
+    }
+
     public String toString() {
         return terrain;
     }
@@ -187,4 +235,12 @@ public class Hex {
         return (intersections % 2 != 0);
     }
 
+}
+
+class sortHex implements Comparator<Hex> {
+    // Used for sorting in ascending order of
+    // roll number
+    public int compare(Hex a, Hex b) {
+        return a.getCenterX() - b.getCenterX();
+    }
 }
