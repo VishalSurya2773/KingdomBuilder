@@ -175,7 +175,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 g.drawString(directions, 720, 60);
             case turnStart:
                 // highlighting the current player turn
-                setBoard(g);
                 int alpha = 127; // 50% transparent
                 highlight = new Color(255, 255, 255, alpha);
                 g.setColor(highlight);
@@ -248,6 +247,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         g.setColor(new Color(255, 165, 0));
         g.fillRect(700, 20, 500, 100);
         g.setColor(Color.WHITE);
+        g.setFont(new Font("Abril Fatface", Font.PLAIN, 20));
         g.drawString(directions, 700, 60);
         drawMetasettlement(g);
     }
@@ -651,6 +651,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             g.drawImage(cardBack, 1388, 520, 175, 270, null);
             g.drawImage(image, 350, 520, 175, 270, null);
         }
+    }
+
+    public void drawDirections(Graphics g) {
+        g.setColor(new Color(255, 165, 0));
+        g.fillRect(700, 20, 500, 100);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Abril Fatface", Font.PLAIN, 20));
+        g.drawString(directions, 700, 60);
     }
 
     public void drawScore(Graphics g) {
