@@ -403,16 +403,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             System.out.println("game players is null");
         }
         int firstPlayer = 0;
-        for (Player i : game.players) {
-            if (i.isFirst()) {
-                firstPlayer = i.getOrder();
-            }
-        }
-        if (firstPlayer == 1) {
+        // for (Player i : game.players) {
+        //     if (i.isFirst()) {
+        //         firstPlayer = i.getOrder();
+        //     }
+        // }
+        
+        if (game.getTurn() == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
-        } else if (firstPlayer == 2) {
+        } else if (game.getTurn() == 2) {
             g.drawImage(firstToken, 1380, 31, 100, 85, null);
-        } else if (firstPlayer == 3) {
+        } else if (game.getTurn() == 3) {
             g.drawImage(firstToken, 1380, 418, 100, 85, null);
         } else {
             g.drawImage(firstToken, 405, 418, 100, 85, null);
