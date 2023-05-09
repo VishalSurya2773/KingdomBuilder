@@ -289,50 +289,17 @@ public class Board {
             // scoordX = 582;
         }
         // System.out.println("Sector 4 " + inputHexes);
-        // for (int r = 0; r < 10; r++) {
-        // for (int c = 0; c < 20; c++) {
-        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-        // Graph[r][c].setSettlement(new Settlement("Red", this)); // basically just a
-        // null pointer
-        // }
-        // }
-        // }
-        // for (int r = 0; r < 10; r++) {
-        // for (int c = 20; c < 40; c++) {
-        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-        // Graph[r][c].setSettlement(new Settlement("Blue", this)); // basically just a
-        // null pointer
-        // }
-        // }
-        // }
-        // for (int r = 10; r < 20; r++) {
-        // for (int c = 0; c < 20; c++) {
-        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-        // Graph[r][c].setSettlement(new Settlement("Green", this)); // basically just a
-        // null pointer
-        // }
-        // }
-        // }
-        // for (int r = 10; r < 20; r++) {
-        // for (int c = 20; c < 40; c++) {
-        // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
-        // Graph[r][c].setSettlement(new Settlement("Purple", this)); // basically just
-        // a null pointer
-        // }
-        // }
-        // }
-        // printGraph();
-        // for (int r = 0; r < 20; r++) {
-        // for (int c = 0; c < 40; c++) {
-        // if (Graph[r][c].getTerrain() == null)
-        // System.out.println("NULL AT " + r + " " + c);
-        // if (!Graph[r][c].getTerrain().equals("blank")) {
-        // Graph[r][c].setAdjacent(r, c, Graph);
-        // Graph[r][c].setAvail(true);
-        // // Graph[r][c].printAdjacent();
-        // }
-        // }
-        // }
+        for (int r = 0; r < 20; r++) {
+            for (int c = 0; c < 40; c++) {
+                if (Graph[r][c].getTerrain() == null)
+                System.out.println("NULL AT " + r + " " + c);
+                if (!Graph[r][c].getTerrain().equals("blank")) {
+                    Graph[r][c].setAdjacent(r, c, Graph);
+                    Graph[r][c].setAvail(true);
+                    Graph[r][c].printAdjacent();
+                }
+            }
+        }
     }
 
     public Hex[][] getGraph() {
