@@ -72,11 +72,11 @@ public class Game {
     }
 
     public void initializeTurn() {
-        turn = players.get(0).getOrder();
-        // for (int i = 0; i < players.size(); i++) {
-        // if (players.get(i).getOrder() == 1)
-        // turn = i;
-        // }
+        // turn = players.get(0).getOrder();
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getOrder() == 1)
+            turn = i;
+            }
     }
 
     public int getTurn() {
