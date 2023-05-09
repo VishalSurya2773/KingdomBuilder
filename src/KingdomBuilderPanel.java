@@ -205,13 +205,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 drawAmtSettle(g);
                 // System.out.println("Game turn: " + game.getTurn());
                 System.out.println("Game turn: " + game.getTurn());
-                System.out.println("Current player #: " + players.get(game.getTurn()).getOrder());
                 // System.out.println("turnStart GameState");
                 // g.setColor(COLOR.WHITE);
                 if (currentPlayer == null) {
                     System.out.println("NULLL");
                 }
-                if (currentPlayer.terrainCard.getTerrain() == null)
+                if (currentPlayer.terrainCard == null)
                     System.out.println("NULL TERRAIN CARD");
 
                 drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
@@ -806,7 +805,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         b = game.gameBoard;
                         board = b.getGraph();
                         players = game.getPlayers();
-                        currentPlayer = game.getNextPlayer();
+                        currentPlayer = players.get(game.getTurn() - 1);
                         sortedPlayers = players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
