@@ -53,6 +53,10 @@ public class Hex {
         // bottomLeft = new Hex("");
     }
 
+    public boolean isCastle() {
+        return isCastle;
+    }
+
     public void setArray() {
         xPoints = new int[] { x - 20, x, x + 20, x + 20, x, x - 20 };
         yPoints = new int[] { y - 10, y - 22, y - 10, y + 10, y + 22, y + 10 };
