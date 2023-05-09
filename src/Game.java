@@ -32,12 +32,15 @@ public class Game {
         clrs.add("Purple");
         clrs.add("Red");
         clrs.add("Yellow");
-        for (int i = 1; i <= playerAmount; i++) {
+        for (int i = 1; i <= 4; i++) {
             int temp = (int) (Math.random() * clrs.size()) + 1;
             players.add(new Player(false, clrs.get(temp - 1), i));
             clrs.remove(clrs.get(temp - 1));
         }
         Collections.shuffle(players);
+        Collections.shuffle(players);
+        Collections.shuffle(players);
+
         for (Player p : players) {
             System.out.print(p.getOrder() + ", " + p.getColor() + "; ");
         }
