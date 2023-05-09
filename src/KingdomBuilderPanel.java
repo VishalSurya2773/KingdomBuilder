@@ -785,29 +785,32 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         game = new Game(numPlayers);
                         b = game.gameBoard;
                         board = b.getGraph();
-                        players = game.players;
+                        players = game.getPlayers();
                         currentPlayer = game.players.get(game.getTurn() - 1);
                         sortedPlayers = game.players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
-                        directions = "Draw from deck and choose settlement/token";
                     } catch (IOException a) {
                         System.out.println("Game creation failure");
                     }
-                } else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY < 1040) { // 2 player select
-                    playAmtClicked = true;
-                    numPlayers = 2;
-                    System.out.println("2p");
-
-                } else if (clickedX > 1030 && clickedX < 1120 && clickedY > 960 && clickedY < 1040) { // 3 player select
-                    playAmtClicked = true;
-                    numPlayers = 3;
-                    System.out.println("3p");
-                } else if (clickedX > 1140 && clickedX < 1230 && clickedY > 960 && clickedY < 1040) { // 4 player select
-                    playAmtClicked = true;
-                    numPlayers = 4;
-                    System.out.println("4p");
                 }
+                // else if (clickedX > 925 && clickedX < 1010 && clickedY > 960 && clickedY <
+                // 1040) { // 2 player select
+                // playAmtClicked = true;
+                // numPlayers = 2;
+                // System.out.println("2p");
+
+                // } else if (clickedX > 1030 && clickedX < 1120 && clickedY > 960 && clickedY <
+                // 1040) { // 3 player select
+                // playAmtClicked = true;
+                // numPlayers = 3;
+                // System.out.println("3p");
+                // } else if (clickedX > 1140 && clickedX < 1230 && clickedY > 960 && clickedY <
+                // 1040) { // 4 player select
+                // playAmtClicked = true;
+                // numPlayers = 4;
+                // System.out.println("4p");
+                // }
                 break;
             case showCard:
                 gameStates = GameStates.turnStart;
