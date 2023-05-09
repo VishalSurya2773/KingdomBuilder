@@ -173,6 +173,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 break;
             case showCard: // not needed in the paint class but needed in mouselistener
                 System.out.println("p#: " + game.getTurn() + "drawing card");
+                drawBackCards(g);
                 g.setColor(new Color(255, 165, 0));
                 g.fillRect(700, 20, 500, 100);
                 g.setColor(Color.WHITE);
@@ -832,11 +833,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // }
                 break;
             case showCard:
-                gameStates = GameStates.turnStart;
+                
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     currentPlayer.drawCard(game);
                     System.out.println(game.getTurn() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
+                    gameStates = GameStates.turnStart;
                 }
                 break;
             case turnStart:
@@ -1022,7 +1024,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         gameStates = GameStates.showCard;
                         // repaint();
                     } else {
-                        gameStates = gameStates.gameOver;
+                        gameStates = GameStates.gameOver;
                     }
                 }
                 repaint();
