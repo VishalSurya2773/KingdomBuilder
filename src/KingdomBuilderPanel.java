@@ -32,7 +32,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             revSumTower, t_barn, t_farm, t_harbor, t_oasis, t_oracle, t_paddock, t_tavern, t_tower;
     public Player p1, p2, p3, p4;
     private int clickedX, clickedY;
-    public int numPlayers;
+    public int numPlayers, turn;
     private ArrayList<Hex> chosenHex; // ??
     private ArrayList<ObjectiveCard> ObjectiveDeck;
     private ArrayList<Player> players, sortedPlayers;
@@ -140,6 +140,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         gamePhase = false;
         scoringPhase = false;
         addMouseListener(this);
+        turn = 1;
     }
 
     // settlements r 36x36
@@ -202,7 +203,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
                 drawPlayerTokens(g);
                 drawAmtSettle(g);
-                System.out.println("Game turn: " + game.getTurn());
+                // System.out.println("Game turn: " + game.getTurn());
+                System.out.println("Game turn: " + turn);
                 System.out.println("Current player #: " + currentPlayer.getOrder());
                 // System.out.println("turnStart GameState");
                 // g.setColor(COLOR.WHITE);
@@ -231,6 +233,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 clearDrawnPolygons(g);
         }
 
+    }
+
+    public void nextTurn() {
+        turn++;
+        turn %= 5;
+        if (turn == 0)
+            turn = 1;
+        System.out.println("next turn is " + turn);
     }
 
     public void setBoard(Graphics g) {
@@ -778,7 +788,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
         switch (gameStates) {
             case startGame:
-                if (clickedX > 850 && clickedX < 1100 && clickedY > 670 && clickedY < 850) {
+                if (clickedX > 780 && clickedX < 1200 && clickedY > 690 && clickedY < 970) {
                     startPhase = false;
                     gamePhase = true;
                     try {
@@ -786,8 +796,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         b = game.gameBoard;
                         board = b.getGraph();
                         players = game.getPlayers();
-                        currentPlayer = game.players.get(game.getTurn() - 1);
-                        sortedPlayers = game.players;
+                        currentPlayer = players.get(turn - 1);
+                        sortedPlayers = players;
                         Collections.sort(sortedPlayers, new sortPlayer());
                         gameStates = GameStates.objectiveCards;
                     } catch (IOException a) {
@@ -816,14 +826,14 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 gameStates = GameStates.turnStart;
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     currentPlayer.drawCard(game);
-                    System.out.println(game.getTurn() + " has drawn card: "
+                    System.out.println(currentPlayer.getOrder() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
                 }
                 break;
             case turnStart:
 
                 System.out.println("turnstart gamestate");
-                if (game.getTurn() == 1) {
+                if (turn == 1) {
                     // if (clickedX > 300 && clickedX < 400 && clickedY > 20 && clickedY < 120) { //
                     // settlement button
                     // System.out.println("p1 use settlement");
@@ -857,7 +867,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         currentPlayer.placeSettle = true;
                         directions = "Choose hex to place settlement in";
                     }
-                } else if (game.getTurn() == 2) {
+                } else if (turn == 2) {
                     // if (clickedX > 1500 && clickedX < 1600 && clickedY > 20 && clickedY < 120) {
                     // System.out.println("p2 use settlement");
                     // currentPlayer.placeSettle = true;
@@ -889,7 +899,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         currentPlayer.placeSettle = true;
                         directions = "Choose hex to place settlement in";
                     }
-                } else if (game.getTurn() == 3) {
+                } else if (turn == 3) {
                     // if (clickedX > 1500 && clickedX < 1600 && clickedY > 420 && clickedY < 520) {
                     // System.out.println("p3 use settlement");
                     // currentPlayer.placeSettle = true;
@@ -921,7 +931,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         currentPlayer.placeSettle = true;
                         directions = "Choose hex to place settlement in";
                     }
-                } else if (game.getTurn() == 4) {
+                } else if (turn == 4) {
                     // if (clickedX > 300 && clickedX < 400 && clickedY > 420 && clickedY < 520) {
                     // System.out.println("p4 use settlement");
                     // currentPlayer.placeSettle = true;
@@ -998,8 +1008,8 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 if (clickedX > 55 && clickedX < 150 && clickedY > 910 && clickedY < 1014) { // confirmation button
                     System.out.println("conf_b clicked");
                     if (!game.gameOver) {
-                        game.nextTurn();
-                        currentPlayer = players.get(game.getTurn() - 1);
+                        nextTurn();
+                        currentPlayer = players.get(turn - 1);
                         gameStates = GameStates.showCard;
                         // repaint();
                     } else {

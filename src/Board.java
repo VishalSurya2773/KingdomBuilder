@@ -83,11 +83,11 @@ public class Board {
                 }
             }
         }
-        System.out.print("Boards: ");
-        for (String i : randBoards) {
-            System.out.print(i);
-        }
-        System.out.println();
+        // System.out.print("Boards: ");
+        // for (String i : randBoards) {
+        // System.out.print(i);
+        // }
+        // System.out.println();
         // boards = randBoards;
         // try {
         // boardScanners.add(new Scanner(new File("src/text_files/Board" + randBoards[0]
@@ -159,7 +159,7 @@ public class Board {
             }
             coordY += changeY;
         }
-        System.out.println("Sector 1 " + inputHexes);
+        // System.out.println("Sector 1 " + inputHexes);
         coordY = 151;
         coordX = 562 + 10 * changeX;
         inputHexes = 0;
@@ -200,7 +200,7 @@ public class Board {
             }
             coordY += changeY;
         }
-        System.out.println("Sector 2 " + inputHexes);
+        // System.out.println("Sector 2 " + inputHexes);
 
         idx = 0;
         count = 0;
@@ -243,8 +243,8 @@ public class Board {
             }
             scoordY += (changeY);
         }
-        System.out.println(coordX + " " + coordY);
-        System.out.println("Sector 3 " + inputHexes);
+        // System.out.println(coordX + " " + coordY);
+        // System.out.println("Sector 3 " + inputHexes);
         idx = 0;
         count = 0;
         inputHexes = 0;
@@ -288,7 +288,7 @@ public class Board {
             scoordY += (changeY);
             // scoordX = 582;
         }
-        System.out.println("Sector 4 " + inputHexes);
+        // System.out.println("Sector 4 " + inputHexes);
         // for (int r = 0; r < 10; r++) {
         // for (int c = 0; c < 20; c++) {
         // if (!((r % 2 == 0 && c % 2 == 1) && (r % 2 == 1 && c % 2 == 0))) {
@@ -321,18 +321,18 @@ public class Board {
         // }
         // }
         // }
-        printGraph();
-        for (int r = 0; r < 20; r++) {
-            for (int c = 0; c < 40; c++) {
-                if (Graph[r][c].getTerrain() == null)
-                    System.out.println("NULL AT " + r + " " + c);
-                if (!Graph[r][c].getTerrain().equals("blank")) {
-                    Graph[r][c].setAdjacent(r, c, Graph);
-                    Graph[r][c].setAvail(true);
-                    // Graph[r][c].printAdjacent();
-                }
-            }
-        }
+        // printGraph();
+        // for (int r = 0; r < 20; r++) {
+        // for (int c = 0; c < 40; c++) {
+        // if (Graph[r][c].getTerrain() == null)
+        // System.out.println("NULL AT " + r + " " + c);
+        // if (!Graph[r][c].getTerrain().equals("blank")) {
+        // Graph[r][c].setAdjacent(r, c, Graph);
+        // Graph[r][c].setAvail(true);
+        // // Graph[r][c].printAdjacent();
+        // }
+        // }
+        // }
     }
 
     public Hex[][] getGraph() {
