@@ -208,12 +208,12 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 System.out.println("Current player #: " + players.get(game.getTurn()).getOrder());
                 // System.out.println("turnStart GameState");
                 // g.setColor(COLOR.WHITE);
-                if(currentPlayer == null){
+                if (currentPlayer == null) {
                     System.out.println("NULLL");
                 }
                 if (currentPlayer.terrainCard.getTerrain() == null)
-                 System.out.println("NULL TERRAIN CARD");
-                
+                    System.out.println("NULL TERRAIN CARD");
+
                 drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
@@ -408,11 +408,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         }
         int firstPlayer = 0;
         // for (Player i : game.players) {
-        //     if (i.isFirst()) {
-        //         firstPlayer = i.getOrder();
-        //     }
+        // if (i.isFirst()) {
+        // firstPlayer = i.getOrder();
         // }
-        
+        // }
+
         if (game.getTurn() == 1) {
             g.drawImage(firstToken, 405, 31, 100, 85, null);
         } else if (game.getTurn() == 2) {
@@ -774,17 +774,19 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
-        g.setColor(c);
-        g.setColor(Color.RED);
-        g.drawRect(x, y, w, h);
+        int alpha = 127; // 50% transparent
+        highlight = new Color(255, 255, 255, alpha);
+        g.setColor(highlight);
+        g.fillRect(x, y, w, h);
         // g.fillRect(x, y, w, h);
     }
 
     public void clearHighlightRect(Graphics g, int x, int y, int w, int h) {
         // g.clearRect(x, y, w, h);
-        g.setColor(Color.BLACK);
-        g.drawRect(x, y, w, h);
-        // g.setColor(new Color(218, 91, 45));
+        // g.setColor(Color.BLACK);
+        g.setColor(new Color(218, 91, 45));
+        g.fillRect(x, y, w, h);
+        //
         // g.fillRect(x, y, w, h);
     }
 
