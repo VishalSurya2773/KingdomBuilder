@@ -211,10 +211,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 if(currentPlayer == null){
                     System.out.println("NULLL");
                 }
-                if (currentPlayer.terrainCard.getTerrain() == null)
+                if (currentPlayer.getTerrainCard() == null)
                  System.out.println("NULL TERRAIN CARD");
                 
-                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
+                drawPlayerCard(g, currentPlayer.getTerrainCard().getTerrain(), game.getTurn());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
