@@ -71,7 +71,7 @@ public class Game {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getOrder() == 1)
                 turn = i + 1;
-            }
+        }
     }
 
     public int getTurn() {
@@ -87,6 +87,10 @@ public class Game {
 
     public ArrayList<ObjectiveCard> getObjDeck() {
         return objDeck;
+    }
+
+    public Player getNextPlayer() {
+        return players.get(turn - 1);
     }
 
     public void setObjectives() {
