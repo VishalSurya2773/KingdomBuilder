@@ -771,14 +771,17 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     public void highLightRect(Graphics g, int x, int y, int w, int h, Color c) {
         g.setColor(c);
+        g.setColor(Color.RED);
         g.drawRect(x, y, w, h);
-        g.fillRect(x, y, w, h);
+        // g.fillRect(x, y, w, h);
     }
 
     public void clearHighlightRect(Graphics g, int x, int y, int w, int h) {
-        g.clearRect(x, y, w, h);
-        g.setColor(new Color(218, 91, 45));
-        g.fillRect(x, y, w, h);
+        // g.clearRect(x, y, w, h);
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, w, h);
+        // g.setColor(new Color(218, 91, 45));
+        // g.fillRect(x, y, w, h);
     }
 
     public void mouseClicked(java.awt.event.MouseEvent e) {
