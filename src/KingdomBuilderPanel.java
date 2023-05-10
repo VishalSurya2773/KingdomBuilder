@@ -241,6 +241,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setFont(new Font("Abril Fatface", Font.PLAIN, 50));
                 g.drawString("GAME OVER", 627, 0);
+                drawRanks(g);
 
         }
 
