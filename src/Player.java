@@ -15,7 +15,7 @@ public class Player {
     private int stored;
     private Hex placeOn;
     public Card terrainCard; // the card the player has on the current turn
-    private int score;
+    public int score;
     private boolean isFirst;
     private int order;
     private int pNumber;

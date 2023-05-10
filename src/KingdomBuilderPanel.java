@@ -235,7 +235,51 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
             case chooseSettlement3:
                 drawSettlement(currentPlayer, g, currentPlayer.getPlaceOn());
                 clearDrawnPolygons(g);
+                break;
+            case gameOver:
+                g.setColor(Color.white);
+                g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
+                g.setFont(new Font("Abril Fatface", Font.PLAIN, 50));
+                g.drawString("GAME OVER", 627, 0);
+
         }
+
+    }
+
+    public void drawRanks(Graphics g){
+        g.setColor(Color.gray);
+        g.drawRect(142, 216, 1596, 764);
+        ArrayList<ArrayList<Integer>> rankings = game.rankings();
+
+        g.setFont(new Font("Abril Fatface", Font.PLAIN, 50));
+
+        // top row
+        g.drawString("Rank", 170, 238);
+        g.drawString("Score", 477, 238);
+        g.drawString("Miner", 749, 238);
+        g.drawString("Fisherman", 993, 238);
+        g.drawString("Knight", 1261, 238);
+        g.drawString("City", 1531, 238);
+
+        // actual ranks
+
+        g.drawString("Player " +players.get(rankings.get(0).get(0)).getPlayerNum(), 180, 378);
+        g.drawString("Player " +players.get(rankings.get(1).get(0)).getPlayerNum(), 180, 540);
+        g.drawString("Player " +players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 672);
+        g.drawString("Player " +players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 799);
+
+
+       // scores
+       
+       g.drawString("Player " +players.get(rankings.get(0).get(1)).getPlayerNum(), 460, 371);
+       g.drawString("Player " +players.get(rankings.get(1).get(1)).getPlayerNum(), 460, 540);
+       g.drawString("Player " +players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 672);
+       g.drawString("Player " +players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 799);
+        
+        
+       // obj 1
+
+       g.drawString( , )
 
     }
 
