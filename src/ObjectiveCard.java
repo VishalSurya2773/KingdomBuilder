@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 
 public class ObjectiveCard {
-
+    // just miner, fisherman, knight
     private String type;
     private Player p;
     private BufferedImage cardimage;
@@ -164,9 +164,9 @@ public class ObjectiveCard {
         return 0;
     }
 
-    public int fisherman(String settlementColor) {
+    public int fisherman(String settlementColor, Game g, Player p) {
         int total = 0;
-        Hex[][] b = Game.gameBoard.getGraph();
+        Hex[][] b = g.gameBoard.getGraph();
         for (int r = 0; r < b.length; r++) {
             for (int c = 0; c < b[r].length; c++) {
                 if (b[r][c].getSettlement().getColor().equals(settlementColor) && isAdjToWater(b[r][c].adjacents())) {
