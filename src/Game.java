@@ -14,6 +14,8 @@ public class Game {
     public static Board gameBoard;
     public int turn = 1;
 
+    private int endTurn = 0; // the turn the player ends their settlements on
+
     public Game(int playerAmount) throws IOException { // remember to show the discard pile
         objDeck = new ArrayList<>();
         gameBoard = new Board();
@@ -65,7 +67,13 @@ public class Game {
         // startGame();
         // initializeTurn();
     }
-
+    public void setendTurn(int idx){
+        endTurn = idx;
+    }
+    public boolean gameFinished(int count){
+        if(count == endTurn) return true;
+        return false;
+    }
     public void initializeTurn() {
         // turn = players.get(0).getOrder();
         for (int i = 0; i < players.size(); i++) {
