@@ -200,6 +200,7 @@ public class Game {
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
 
+        
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
