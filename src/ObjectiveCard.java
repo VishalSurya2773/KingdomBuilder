@@ -9,6 +9,11 @@ import javax.imageio.ImageIO;
 
 public class ObjectiveCard {
     // just miner, fisherman, knight
+    /*
+     miner - 1 gold for each settlement adjacent to mountain hex
+     knight - gives 2 gold for each settlement for the longest horizontal line 
+     fisherman - 1 gold for each settlement adjacent to water hex
+     */
     private String type;
     private Player p;
     private BufferedImage cardimage;
@@ -164,7 +169,7 @@ public class ObjectiveCard {
         return 0;
     }
 
-    public int fisherman(String settlementColor, Game g, Player p) {
+    public int fisherman(String settlementColor, Game g) {
         int total = 0;
         Hex[][] b = g.gameBoard.getGraph();
         for (int r = 0; r < b.length; r++) {
