@@ -72,9 +72,9 @@ public class ObjectiveCard {
             return discoverer(settlementColor);
         } else if (type.equals("farmer")) {
             return farmer(settlementColor);
-        } else if (type.equals("fisherman")) {
-            return fisherman(settlementColor);
-        } else if (type.equals("hermit")) {
+        } //else if (type.equals("fisherman")) {
+         //   return fisherman(settlementColor, game);
+         else if (type.equals("hermit")) {
             return hermit(settlementColor);
         } else if (type.equals("knight")) {
             return knight(settlementColor);
@@ -206,12 +206,12 @@ public class ObjectiveCard {
         return s;
     }
 
-    public int knight(String settlementColor) {
+    public int knight(String settlementColor, Game g) {
         int temp = 0;
         int largest = 0;
-        for (int r = 0; r < Game.gameBoard.getGraph().length; r++) {
-            for (int c = 0; c < Game.gameBoard.getGraph()[r].length; c++) {
-                if (Game.gameBoard.getGraph()[r][c].getSettlement().getColor().equals(settlementColor))
+        for (int r = 0; r < g.gameBoard.getGraph().length; r++) {
+            for (int c = 0; c < g.gameBoard.getGraph()[r].length; c++) {
+                if (g.gameBoard.getGraph()[r][c].getSettlement().getColor().equals(settlementColor))
                     temp++;
             }
             if (temp > largest) {
@@ -301,9 +301,9 @@ public class ObjectiveCard {
         return ans;
     }
 
-    public int miner(String settlementColor) {
+    public int miner(String settlementColor, Game g) {
         int total = 0;
-        Hex[][] b = Game.gameBoard.getGraph();
+        Hex[][] b = g.gameBoard.getGraph();
         for (int r = 0; r < b.length; r++) {
             for (int c = 0; c < b[r].length; c++) {
                 if (b[r][c].getSettlement().getColor().equals(settlementColor) && isAdjToWater(b[r][c].adjacents())) {

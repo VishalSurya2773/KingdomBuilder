@@ -293,12 +293,27 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
        // obj 2:
 
-       int Fisherman1 = game.getObjectives().get(1).fisherman(players.get(rankings.get(0).get(0)).getColor());
-       int Fisherman2 = game.getObjectives().get(1).miner(players.get(rankings.get(1).get(0)).getColor());
-       int Fisherman3 = game.getObjectives().get(1).miner(players.get(rankings.get(2).get(0)).getColor());
-       int Fisherman4 = game.getObjectives().get(1).miner(players.get(rankings.get(3).get(0)).getColor());
+       int Fisherman1 = game.getObjectives().get(1).fisherman(players.get(rankings.get(0).get(0)).getColor(), game);
+       int Fisherman2 = game.getObjectives().get(1).fisherman(players.get(rankings.get(1).get(0)).getColor(), game);
+       int Fisherman3 = game.getObjectives().get(1).fisherman(players.get(rankings.get(2).get(0)).getColor(), game);
+       int Fisherman4 = game.getObjectives().get(1).fisherman(players.get(rankings.get(3).get(0)).getColor(), game);
 
-       
+       g.drawString("" + Fisherman1, 993, 378);
+       g.drawString("" + Fisherman2, 993, 540);
+       g.drawString("" + Fisherman3, 993, 672);
+       g.drawString("" + Fisherman4, 993, 799);
+
+
+       // obj 3
+       int Knight1 = game.getObjectives().get(2).knight(players.get(rankings.get(0).get(0)).getColor(), game);
+       int Knight2 = game.getObjectives().get(2).knight(players.get(rankings.get(1).get(0)).getColor(), game);
+       int Knight3 = game.getObjectives().get(2).knight(players.get(rankings.get(2).get(0)).getColor(), game);
+       int Knight4 = game.getObjectives().get(2).knight(players.get(rankings.get(3).get(0)).getColor(), game);
+
+
+
+
+
       // g.drawString(miner(players.get(rankings.get(0).get(0)).get ))
 
     }
