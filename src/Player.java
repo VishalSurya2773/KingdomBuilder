@@ -105,14 +105,14 @@ public class Player {
                     if (hexes[j].getTerrain().equals(terrainCard.getTerrain()) && hexes[j].getAvail()) {
                         // boolean Equal = false;
                         // for (int sz = 0; sz < possible.size(); sz++) {
-                        //     if (possible.get(sz).equals(hexes[j])) {
-                        //         Equal = true;
-                        //     }
+                        // if (possible.get(sz).equals(hexes[j])) {
+                        // Equal = true;
+                        // }
                         // }
                         // if (!Equal) {
-                            possible.add(hexes[j]);
-                            System.out.println("POSS HEX UPDATED");
-                            empty = false;
+                        possible.add(hexes[j]);
+                        System.out.println("POSS HEX UPDATED");
+                        empty = false;
                         // }
 
                     }
@@ -214,7 +214,8 @@ public class Player {
         return color;
     }
 
-    public int getScore() {
+    public int getScore(Game game) {
+        calculateScore(game);
         return score;
     }
 

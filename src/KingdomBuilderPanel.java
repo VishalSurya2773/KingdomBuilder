@@ -247,7 +247,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     }
 
-    public void drawRanks(Graphics g){
+    public void drawRanks(Graphics g) {
         g.setColor(Color.gray);
         g.drawRect(142, 216, 1596, 764);
         ArrayList<ArrayList<Integer>> rankings = game.rankings();
@@ -264,62 +264,54 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
         // actual ranks
 
-        g.drawString("Player " +players.get(rankings.get(0).get(0)).getPlayerNum(), 180, 378);
-        g.drawString("Player " +players.get(rankings.get(1).get(0)).getPlayerNum(), 180, 540);
-        g.drawString("Player " +players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 672);
-        g.drawString("Player " +players.get(rankings.get(3).get(0)).getPlayerNum(), 180, 799);
+        g.drawString("Player " + players.get(rankings.get(0).get(0)).getPlayerNum(), 180, 378);
+        g.drawString("Player " + players.get(rankings.get(1).get(0)).getPlayerNum(), 180, 540);
+        g.drawString("Player " + players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 672);
+        g.drawString("Player " + players.get(rankings.get(3).get(0)).getPlayerNum(), 180, 799);
 
+        // scores
 
-       // scores
-       
-       g.drawString("Player " +players.get(rankings.get(0).get(1)).getPlayerNum(), 460, 371);
-       g.drawString("Player " +players.get(rankings.get(1).get(1)).getPlayerNum(), 460, 540);
-       g.drawString("Player " +players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 672);
-       g.drawString("Player " +players.get(rankings.get(3).get(1)).getPlayerNum(), 460, 799);
-        
-        
-       // obj 1
+        g.drawString("Player " + players.get(rankings.get(0).get(1)).getPlayerNum(), 460, 371);
+        g.drawString("Player " + players.get(rankings.get(1).get(1)).getPlayerNum(), 460, 540);
+        g.drawString("Player " + players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 672);
+        g.drawString("Player " + players.get(rankings.get(3).get(1)).getPlayerNum(), 460, 799);
 
-       int Miner1 = game.getObjectives().get(0).miner(players.get(rankings.get(0).get(0)).getColor(), game);
-       int Miner2 = game.getObjectives().get(0).miner(players.get(rankings.get(1).get(0)).getColor(), game);
-       int Miner3 = game.getObjectives().get(0).miner(players.get(rankings.get(2).get(0)).getColor(), game);
-       int Miner4 = game.getObjectives().get(0).miner(players.get(rankings.get(3).get(0)).getColor(), game);
+        // obj 1
 
+        int Miner1 = game.getObjectives().get(0).miner(players.get(rankings.get(0).get(0)).getColor(), game);
+        int Miner2 = game.getObjectives().get(0).miner(players.get(rankings.get(1).get(0)).getColor(), game);
+        int Miner3 = game.getObjectives().get(0).miner(players.get(rankings.get(2).get(0)).getColor(), game);
+        int Miner4 = game.getObjectives().get(0).miner(players.get(rankings.get(3).get(0)).getColor(), game);
 
-       g.drawString("" + Miner1, 749, 378);
-       g.drawString("" + Miner2, 749, 540);
-       g.drawString("" + Miner3, 749, 672);
-       g.drawString("" + Miner4, 749, 799);
+        g.drawString("" + Miner1, 749, 378);
+        g.drawString("" + Miner2, 749, 540);
+        g.drawString("" + Miner3, 749, 672);
+        g.drawString("" + Miner4, 749, 799);
 
+        // obj 2:
 
-       // obj 2:
+        int Fisherman1 = game.getObjectives().get(1).fisherman(players.get(rankings.get(0).get(0)).getColor(), game);
+        int Fisherman2 = game.getObjectives().get(1).fisherman(players.get(rankings.get(1).get(0)).getColor(), game);
+        int Fisherman3 = game.getObjectives().get(1).fisherman(players.get(rankings.get(2).get(0)).getColor(), game);
+        int Fisherman4 = game.getObjectives().get(1).fisherman(players.get(rankings.get(3).get(0)).getColor(), game);
 
-       int Fisherman1 = game.getObjectives().get(1).fisherman(players.get(rankings.get(0).get(0)).getColor(), game);
-       int Fisherman2 = game.getObjectives().get(1).fisherman(players.get(rankings.get(1).get(0)).getColor(), game);
-       int Fisherman3 = game.getObjectives().get(1).fisherman(players.get(rankings.get(2).get(0)).getColor(), game);
-       int Fisherman4 = game.getObjectives().get(1).fisherman(players.get(rankings.get(3).get(0)).getColor(), game);
+        g.drawString("" + Fisherman1, 993, 378);
+        g.drawString("" + Fisherman2, 993, 540);
+        g.drawString("" + Fisherman3, 993, 672);
+        g.drawString("" + Fisherman4, 993, 799);
 
-       g.drawString("" + Fisherman1, 993, 378);
-       g.drawString("" + Fisherman2, 993, 540);
-       g.drawString("" + Fisherman3, 993, 672);
-       g.drawString("" + Fisherman4, 993, 799);
+        // obj 3
+        int Knight1 = game.getObjectives().get(2).knight(players.get(rankings.get(0).get(0)).getColor(), game);
+        int Knight2 = game.getObjectives().get(2).knight(players.get(rankings.get(1).get(0)).getColor(), game);
+        int Knight3 = game.getObjectives().get(2).knight(players.get(rankings.get(2).get(0)).getColor(), game);
+        int Knight4 = game.getObjectives().get(2).knight(players.get(rankings.get(3).get(0)).getColor(), game);
 
+        g.drawString("" + Knight1, 1261, 378);
+        g.drawString("" + Knight2, 1261, 540);
+        g.drawString("" + Knight3, 1261, 672);
+        g.drawString("" + Knight4, 1261, 799);
 
-       // obj 3
-       int Knight1 = game.getObjectives().get(2).knight(players.get(rankings.get(0).get(0)).getColor(), game);
-       int Knight2 = game.getObjectives().get(2).knight(players.get(rankings.get(1).get(0)).getColor(), game);
-       int Knight3 = game.getObjectives().get(2).knight(players.get(rankings.get(2).get(0)).getColor(), game);
-       int Knight4 = game.getObjectives().get(2).knight(players.get(rankings.get(3).get(0)).getColor(), game);
-
-       g.drawString("" + Knight1, 1261, 378);
-       g.drawString("" + Knight2, 1261, 540);
-       g.drawString("" + Knight3, 1261, 672);
-       g.drawString("" + Knight4, 1261, 799);
-
-
-
-
-      // g.drawString(miner(players.get(rankings.get(0).get(0)).get ))
+        // g.drawString(miner(players.get(rankings.get(0).get(0)).get ))
 
     }
 
@@ -593,29 +585,33 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     }
 
     public void drawEndScreen(Graphics g) {
-        g.drawImage(background, 0, 0, null);
+        g.drawImage(background, 0, 0, 1915, 1075, null);
         BufferedImage settlement = null;
         Font disp = new Font("Abril Fatface", Font.PLAIN, 34);
         g.setFont(disp);
+        drawScore(g);
         // p1
         settlement = settleImage(sortedPlayers.get(0));
         g.drawImage(settlement, 47, 58, 270, 262, null);
-        g.drawString("Player 1 Score", 75, 175);
+        g.drawString("Player 1 Score", 850, 175);
+        g.drawString("" + sortedPlayers.get(0).getScore(game), 175, 175);
 
         // p2
         settlement = settleImage(sortedPlayers.get(1));
         g.drawImage(settlement, 56, 773, 270, 262, null);
-        g.drawString("Player 1 Score", 75, 898);
+        g.drawString("Player 2 Score", 850, 275);
+        g.drawString("" + sortedPlayers.get(1).getScore(game), 175, 275);
         // p3
         settlement = settleImage(sortedPlayers.get(2));
         g.drawImage(settlement, 1591, 58, 270, 262, null);
-        g.drawString("Player 1 Score", 1608, 180);
-
+        g.drawString("Player 3 Score", 850, 350);
+        g.drawString("" + sortedPlayers.get(2).getScore(game), 175, 350);
         // p4
         settlement = settleImage(sortedPlayers.get(3));
-        g.drawImage(settlement, 1591, 430, 773, 80, null);
-        g.drawString("Player 1 Score", 1608, 885);
-
+        g.drawImage(settlement, 1591, 430, 270, 262, null);
+        g.drawString("Player 4 Score", 850, 425);
+        g.drawString("" + sortedPlayers.get(3).getScore(game), 175, 425);
+        g.setColor(Color.WHITE);
         g.drawRect(514, 235, 912, 773);
         // rankings
     }
@@ -786,7 +782,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         int[] s = new int[length];
         String[] s2 = new String[length];
         for (int i = 0; i < length; i++) {
-            s[i] = p.get(i).getScore();
+            s[i] = p.get(i).getScore(game);
             s2[i] = Integer.toString(s[i]);
         }
         for (String x : s2) {
@@ -917,7 +913,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // }
                 break;
             case showCard:
-                
+
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     currentPlayer.drawCard(game);
                     System.out.println(game.getTurn() + " has drawn card: "
@@ -1059,7 +1055,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         directions = "Choose hex to place settlement in";
                     }
                 }
-
                 // break;
                 if (currentPlayer.placeSettle) {
                     for (int i = 0; i < possibleChoices.size(); i++) {
