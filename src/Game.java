@@ -67,13 +67,17 @@ public class Game {
         // startGame();
         // initializeTurn();
     }
-    public void setendTurn(int idx){
+
+    public void setendTurn(int idx) {
         endTurn = idx;
     }
-    public boolean gameFinished(int count){
-        if(count == endTurn) return true;
+
+    public boolean gameFinished(int count) {
+        if (count == endTurn)
+            return true;
         return false;
     }
+
     public void initializeTurn() {
         // turn = players.get(0).getOrder();
         for (int i = 0; i < players.size(); i++) {
@@ -208,12 +212,11 @@ public class Game {
 
     public ArrayList<ArrayList<Integer>> rankings() { // could be wrong
 
-        
         ArrayList<ArrayList<Integer>> rankings = new ArrayList<ArrayList<Integer>>();
         for (int i = 0; i < 4; i++) {
             ArrayList<Integer> arr = new ArrayList<>();
             arr.add(i);
-            arr.add(players.get(i).getScore());
+            arr.add(players.get(i).getScore(this));
             rankings.add(arr);
         }
 
