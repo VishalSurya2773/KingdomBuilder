@@ -246,7 +246,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     }
 
-    public void drawRanks(Graphics g){
+    public void drawRanks(Graphics g) {
         g.setColor(Color.gray);
         g.drawRect(142, 216, 1596, 764);
         ArrayList<ArrayList<Integer>> rankings = game.rankings();
@@ -263,23 +263,21 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
         // actual ranks
 
-        g.drawString("Player " +players.get(rankings.get(0).get(0)).getPlayerNum(), 180, 378);
-        g.drawString("Player " +players.get(rankings.get(1).get(0)).getPlayerNum(), 180, 540);
-        g.drawString("Player " +players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 672);
-        g.drawString("Player " +players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 799);
+        g.drawString("Player " + players.get(rankings.get(0).get(0)).getPlayerNum(), 180, 378);
+        g.drawString("Player " + players.get(rankings.get(1).get(0)).getPlayerNum(), 180, 540);
+        g.drawString("Player " + players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 672);
+        g.drawString("Player " + players.get(rankings.get(2).get(0)).getPlayerNum(), 180, 799);
 
+        // scores
 
-       // scores
-       
-       g.drawString("Player " +players.get(rankings.get(0).get(1)).getPlayerNum(), 460, 371);
-       g.drawString("Player " +players.get(rankings.get(1).get(1)).getPlayerNum(), 460, 540);
-       g.drawString("Player " +players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 672);
-       g.drawString("Player " +players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 799);
-        
-        
-       // obj 1
+        g.drawString("Player " + players.get(rankings.get(0).get(1)).getPlayerNum(), 460, 371);
+        g.drawString("Player " + players.get(rankings.get(1).get(1)).getPlayerNum(), 460, 540);
+        g.drawString("Player " + players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 672);
+        g.drawString("Player " + players.get(rankings.get(2).get(1)).getPlayerNum(), 460, 799);
 
-       g.drawString( , )
+        // obj 1
+
+        // g.drawString( , )
 
     }
 
@@ -877,7 +875,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // }
                 break;
             case showCard:
-                
+
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     currentPlayer.drawCard(game);
                     System.out.println(game.getTurn() + " has drawn card: "
