@@ -82,6 +82,7 @@ public class Player {
     }
 
     public ArrayList<Hex> getPossible(Board b) {
+        checkAvail(b);
         ArrayList<Hex> possible = new ArrayList<Hex>();
         boolean empty = true;
         System.out.println("Placed: " + placed.size());
@@ -132,6 +133,16 @@ public class Player {
         }
         System.out.println("POSSIBLE SIZE: " + possible.size());
         return possible;
+    }
+
+    public void checkAvail(Board b) {
+        for (Hex[] t : b.getGraph()) {
+            for (Hex r : t) {
+                if (r.getSettlement() != null) {
+                    r.setAvail(false);
+                }
+            }
+        }
     }
 
     public Settlement getSettlementFromBoard() {
