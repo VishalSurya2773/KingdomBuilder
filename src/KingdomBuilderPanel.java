@@ -241,6 +241,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 g.drawImage(background, 0, 0, WIDTH, HEIGHT - 1, null);
                 g.setFont(new Font("Abril Fatface", Font.PLAIN, 50));
                 g.drawString("GAME OVER", 627, 0);
+                drawRanks(g);
 
         }
 
@@ -310,6 +311,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
        int Knight3 = game.getObjectives().get(2).knight(players.get(rankings.get(2).get(0)).getColor(), game);
        int Knight4 = game.getObjectives().get(2).knight(players.get(rankings.get(3).get(0)).getColor(), game);
 
+       g.drawString("" + Knight1, 1261, 378);
+       g.drawString("" + Knight2, 1261, 540);
+       g.drawString("" + Knight3, 1261, 672);
+       g.drawString("" + Knight4, 1261, 799);
 
 
 
