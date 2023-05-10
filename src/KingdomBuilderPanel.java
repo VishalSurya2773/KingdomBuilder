@@ -1093,6 +1093,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                         currentPlayer.setPlaceOn(possibleChoices.get(i));
                         possibleChoices.get(i).setAvail(false);
                         currentPlayer.findTokens(possibleChoices.get(i));
+                        b.printGraph();
                         System.out.println("CHOOSE SETTLEMENT3 GAMESTATE");
                     }
                 }

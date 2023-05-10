@@ -111,7 +111,6 @@ public class Player {
                         // }
                         // if (!Equal) {
                             possible.add(hexes[j]);
-                            hexes[j].setAvail(false);
                             System.out.println("POSS HEX UPDATED");
                             empty = false;
                         // }
