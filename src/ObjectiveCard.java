@@ -77,13 +77,13 @@ public class ObjectiveCard {
          else if (type.equals("hermit")) {
             return hermit(settlementColor);
         } else if (type.equals("knight")) {
-            return knight(settlementColor);
+            return knight(settlementColor, g);
         } else if (type.equals("lord")) {
             return lord(settlementColor, g);
         } else if (type.equals("merchant")) {
             return merchant(settlementColor);
         } else if (type.equals("miner")) {
-            return miner(settlementColor);
+            return miner(settlementColor, g);
         } else if (type.equals("worker")) {
             return worker(settlementColor);
         }

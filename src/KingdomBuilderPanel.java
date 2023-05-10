@@ -280,10 +280,10 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         
        // obj 1
 
-       int Miner1 = game.getObjectives().get(0).miner(players.get(rankings.get(0).get(0)).getColor());
-       int Miner2 = game.getObjectives().get(0).miner(players.get(rankings.get(1).get(0)).getColor());
-       int Miner3 = game.getObjectives().get(0).miner(players.get(rankings.get(2).get(0)).getColor());
-       int Miner4 = game.getObjectives().get(0).miner(players.get(rankings.get(3).get(0)).getColor());
+       int Miner1 = game.getObjectives().get(0).miner(players.get(rankings.get(0).get(0)).getColor(), game);
+       int Miner2 = game.getObjectives().get(0).miner(players.get(rankings.get(1).get(0)).getColor(), game);
+       int Miner3 = game.getObjectives().get(0).miner(players.get(rankings.get(2).get(0)).getColor(), game);
+       int Miner4 = game.getObjectives().get(0).miner(players.get(rankings.get(3).get(0)).getColor(), game);
 
 
        g.drawString("" + Miner1, 749, 378);
