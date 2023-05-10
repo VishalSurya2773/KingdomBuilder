@@ -36,7 +36,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
     private ArrayList<Hex> chosenHex; // ??
     private ArrayList<ObjectiveCard> ObjectiveDeck;
     private ArrayList<Player> players, sortedPlayers;
-    private boolean pickHex, startPhase, gamePhase, scoringPhase, playAmtClicked; // ???
+    private boolean drawCards; // ???
     private JButton playButton, guideButton;
     private JTextField textField;
     private Game game;
@@ -135,10 +135,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         WIDTH = KingdomBuilderFrame.WIDTH;
         HEIGHT = KingdomBuilderFrame.HEIGHT;
         possibleChoices = new ArrayList<>();
-
-        startPhase = true;
-        gamePhase = false;
-        scoringPhase = false;
+        drawCards = false;
         addMouseListener(this);
         turn = 1;
     }
@@ -170,6 +167,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 // System.out.println("objectiveCards GameState");
                 setBoard(g);
                 gameStates = GameStates.showCard;
+
                 break;
             case showCard: // not needed in the paint class but needed in mouselistener
                 System.out.println("p#: " + game.getTurn() + "drawing card");
@@ -181,6 +179,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 g.drawString("Draw card and place settlements/use tokens", 700, 50);
                 g.drawString("Click check button when finished", 700, 70);
                 g.drawString("Draw deck to start new turn", 700, 90);
+                drawCards = false;
             case turnStart:
                 // highlighting the current player turn
                 int alpha = 127; // 50% transparent
@@ -213,8 +212,11 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
                 }
                 if (currentPlayer.terrainCard == null)
                     System.out.println("NULL TERRAIN CARD");
+                drawBackCards(g);
+                if (drawCards) {
+                    drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
+                }
 
-                drawPlayerCard(g, currentPlayer.terrainCard.getTerrain(), game.getTurn());
                 // ************ two cases: starts with specialHex actions, starts with choosing
                 // tile ************
                 drawPossibleHexOutline(g, currentPlayer);
@@ -478,6 +480,43 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     }
 
+    public void drawPlayerCard(Graphics g, String terrain, int pNum) {
+        BufferedImage image = null;
+        if (terrain.equals("canyon")) {
+            image = cardCanyon;
+        } else if (terrain.equals("desert")) {
+            image = cardDesert;
+        } else if (terrain.equals("grass")) {
+            image = cardGrass;
+        } else if (terrain.equals("flower")) {
+            image = cardFlower;
+        } else if (terrain.equals("forest")) {
+            image = cardForest;
+        }
+
+        if (pNum == 1) {
+            g.drawImage(image, 350, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 520, 175, 270, null);
+            g.drawImage(cardBack, 350, 520, 175, 270, null);
+        } else if (pNum == 2) {
+            g.drawImage(cardBack, 350, 140, 175, 270, null);
+            g.drawImage(image, 1388, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 520, 175, 270, null);
+            g.drawImage(cardBack, 350, 520, 175, 270, null);
+        } else if (pNum == 3) {
+            g.drawImage(cardBack, 350, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 140, 175, 270, null);
+            g.drawImage(image, 1388, 520, 175, 270, null);
+            g.drawImage(cardBack, 350, 520, 175, 270, null);
+        } else if (pNum == 4) {
+            g.drawImage(cardBack, 350, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 140, 175, 270, null);
+            g.drawImage(cardBack, 1388, 520, 175, 270, null);
+            g.drawImage(image, 350, 520, 175, 270, null);
+        }
+    }
+
     public void drawFirstPlayerToken(Graphics g) {
         if (game.players == null) {
             System.out.println("game players is null");
@@ -738,44 +777,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
     }
 
-    public void drawPlayerCard(Graphics g, String terrain, int pNum) {
-        drawBackCards(g);
-        BufferedImage image = null;
-        if (terrain.equals("canyon")) {
-            image = cardCanyon;
-        } else if (terrain.equals("desert")) {
-            image = cardDesert;
-        } else if (terrain.equals("grass")) {
-            image = cardGrass;
-        } else if (terrain.equals("flower")) {
-            image = cardFlower;
-        } else if (terrain.equals("forest")) {
-            image = cardForest;
-        }
-
-        if (pNum == 1) {
-            g.drawImage(image, 350, 140, 175, 270, null);
-            g.drawImage(cardBack, 1388, 140, 175, 270, null);
-            g.drawImage(cardBack, 1388, 520, 175, 270, null);
-            g.drawImage(cardBack, 350, 520, 175, 270, null);
-        } else if (pNum == 2) {
-            g.drawImage(cardBack, 350, 140, 175, 270, null);
-            g.drawImage(image, 1388, 140, 175, 270, null);
-            g.drawImage(cardBack, 1388, 520, 175, 270, null);
-            g.drawImage(cardBack, 350, 520, 175, 270, null);
-        } else if (pNum == 3) {
-            g.drawImage(cardBack, 350, 140, 175, 270, null);
-            g.drawImage(cardBack, 1388, 140, 175, 270, null);
-            g.drawImage(image, 1388, 520, 175, 270, null);
-            g.drawImage(cardBack, 350, 520, 175, 270, null);
-        } else if (pNum == 4) {
-            g.drawImage(cardBack, 350, 140, 175, 270, null);
-            g.drawImage(cardBack, 1388, 140, 175, 270, null);
-            g.drawImage(cardBack, 1388, 520, 175, 270, null);
-            g.drawImage(image, 350, 520, 175, 270, null);
-        }
-    }
-
     public void drawScore(Graphics g) {
         ArrayList<Player> p = game.getPlayers();
         int length = p.size();
@@ -879,8 +880,6 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
         switch (gameStates) {
             case startGame:
                 if (clickedX > 780 && clickedX < 1200 && clickedY > 690 && clickedY < 970) {
-                    startPhase = false;
-                    gamePhase = true;
                     try {
                         game = new Game(numPlayers);
                         b = game.gameBoard;
@@ -916,6 +915,7 @@ public class KingdomBuilderPanel extends JPanel implements MouseListener {
 
                 if (clickedX >= 1715 && clickedX <= 1915 && clickedY >= 800 && clickedY <= 1070) {
                     currentPlayer.drawCard(game);
+                    drawCards = true;
                     System.out.println(game.getTurn() + " has drawn card: "
                             + currentPlayer.getTerrainCard().getTerrain());
                     gameStates = GameStates.turnStart;
